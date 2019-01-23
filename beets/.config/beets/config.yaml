@@ -1,0 +1,55 @@
+library: ~/.local/share/beets/library.db
+directory: ~/audios/music
+plugins: edit mbsync fetchart info
+ignore: lost+found _MACOSX .DS_Store
+ignore_hidden: yes
+replace:
+    '[\\/]': _
+    '^\.': _
+    '[\x00-\x1f]': _
+    '[<>:"\?\*\|]': _
+    '\.$': _
+    '\s+$': ''
+    '^\s+': ''
+    '^-': _
+ascify_paths: no
+art_filename: cover
+threaded: yes
+format_item: $artist - $album - $title
+format_album: $albumartist - $album
+sort_item: artist+ album+ disc+ track+
+sort_album: albumartist+ album+
+sort_case_insensitive: yes
+clutter: Thumbs.DB _MACOSX .DS_Store
+ui:
+    color: yes
+    colors:
+        text_success: green
+        text_warning: yellow
+        text_error: red
+        text_highlight: red
+        text_highlight_minor: lightgray
+        action_default: turquoise
+        action: blue
+import:
+    write: yes
+    copy: yes
+    move: no
+    link: no
+    hardlink: no
+    resume: ask
+match:
+    preferred:
+        countries: ['JP', 'US', 'GB|UK']
+paths:
+    default: $albumartist/$album%aunique{}/$track $title
+edit:
+    albumfields: album artist albumartist
+    itemfields: track title album artist albumartist day month year genre comment
+fetchart:
+    auto: yes
+    cautious: yes
+    cover_names: cover Cover folder Folder
+    enforce_ratio: no
+    sources: filesystem coverart itunes amazon albumart wikipedia google
+    store_source: no

@@ -1,0 +1,1 @@
+set terminal x11

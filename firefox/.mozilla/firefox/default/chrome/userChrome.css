@@ -1,0 +1,143 @@
+@namespace xul url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+:root 
+{
+    --bg-1: #2f2b2a;
+    --bg-2: #0b0806;
+    --fg-1: #c1ab83;
+    --fg-2: #a19782;
+    --font-size: 12px;
+    --font: "lucy tewi", "Efont Biwidth", "Misc Fixed", "Misc Fixed Wide", "Noto Sans";
+    --height: 24px;
+    --icon-size: 15px;
+    --text-align: left;
+}
+
+@-moz-document url(chrome://browser/content/browser.xul)
+{
+    #PanelUI-button,
+    #pageActionButton,
+    #pageActionSeparator,
+    #reload-button,
+    #userContext-indicator,
+    #userContext-label,
+    .tab-close-button,
+    .tab-icon-sound,
+    .tab-line,
+    .tabbrowser-tab:not([busy="true"]):not([pinned]) .tab-icon-image,
+    .tabs-newtab-button
+    {
+        display: none !important;
+    }
+
+    :root
+    {
+        --toolbarbutton-border-radius: 0px !important;
+        --tabs-border: transparent !important;
+    }
+
+    .tabbrowser-tab
+    {
+        background-color: var(--bg-2) !important;
+        color: var(--fg-2) !important;
+        font-family: var(--font) !important;
+        font-size: var(--font-size) !important;
+        max-height: var(--tab-min-height) !important;
+    }
+
+    .tabbrowser-tab[visuallyselected="true"]
+    {
+        color: var(--fg-1) !important;
+        background-color: var(--bg-1) !important;
+    }
+
+    .tabbrowser-tab::after,
+    .tabbrowser-tab::before
+    {
+        border-left: none !important;
+    }
+
+    .tab-background[selected=true]
+    {
+        background-color: transparent !important;
+    }
+
+    tab .tab-icon,
+    .tab-icon-image
+    {
+        filter: grayscale(1) brightness(0.3) contrast(0.3) invert(1);
+    }
+
+    #urlbar
+    {
+        background-color: var(--bg-2) !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: var(--fg-2) !important;
+    }
+
+    /*** autohide navigation toolbar ***/
+    :root[uidensity=compact] #navigator-toolbox
+    {
+        --nav-bar-height: 33px;
+    }
+
+    :root:not([uidensity]) #navigator-toolbox
+    {
+        --nav-bar-height: 39px;
+    }
+
+    :root[uidensity=touch] #navigator-toolbox
+    {
+        --nav-bar-height: 41px;
+    }
+    
+    #navigator-toolbox
+    {
+        --extra-height: 2px;
+        --tabbar-height: calc(var(--tab-min-height) + var(--space-above-tabbar) - var(--tab-toolbar-navbar-overlap));
+        --trigger-area-height: 5px;
+    }
+
+    #toolbar-menubar
+    {
+        background-color: var(--bg-2) !important;
+        color: var(--fg-2) !important;
+        margin-top: 0px !important;
+    }
+
+    :root:not([customizing]) #nav-bar
+    {
+        background-color: var(--bg-2) !important;
+        color: var(--fg-2) !important;
+        max-height:0;
+        min-height:0 !important;
+        opacity: 0;
+        overflow-y: hidden;
+        padding-bottom:0 !important;
+        padding-top:0 !important;
+    }
+
+    :root:not([customizing]) :hover > #nav-bar,
+    :root:not([customizing]) #nav-bar:focus-within
+    {
+        max-height: var(--nav-bar-height);
+        opacity: 1;
+        transition: opacity 0.15s ease-in, max-height 0.15s linear;
+    }
+
+    :root:not([customizing]) #navigator-toolbox
+    {
+        max-height: calc(var(--tabbar-height) + var(--trigger-area-height) + var(--extra-height));
+        min-height: var(--tabbar-height);
+        margin-bottom: calc(-1 * var(--trigger-area-height));
+    }
+
+    :root:not([customizing]) #navigator-toolbox:hover,
+    :root:not([customizing]) #navigator-toolbox:focus-within
+    {
+        max-height: calc(var(--tabbar-height) + var(--nav-bar-height) + var(--extra-height));
+        margin-bottom: calc(1px - var(--nav-bar-height));
+    }
+    /*** ***/
+}

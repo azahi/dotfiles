@@ -1,0 +1,5 @@
+resolver: lts-12.12
+
+packages: []
+
+extra-deps:

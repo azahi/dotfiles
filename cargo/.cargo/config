@@ -1,0 +1,19 @@
+[cargo-new]
+name = "azahi"
+email = "azahi@teknik.io"
+vcs = "git"
+
+[http]
+timeout = 60000
+
+[build]
+jobs = 5
+
+[term]
+verbose = true
+color = 'always'
+
+[net]
+retry = 5
+
+# vim:filetype=toml

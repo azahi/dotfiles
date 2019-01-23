@@ -1,0 +1,9 @@
+(use readline)
+
+(parse-and-bind "set editing-mode vi")
+
+(current-input-port (make-readline-port))
+
+(install-history-file #f "/.csi_history")
+
+; vim:filetype=scheme

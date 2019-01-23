@@ -1,0 +1,12 @@
+OPTIONS=name:Koi,dogname:Dogmeat,pettype:dog,fruit:lemon,
+OPTIONS=runmode:walk
+OPTIONS=autopickup
+OPTIONS=sortloot:full
+OPTIONS=showexp,showscore
+OPTIONS=msg_window:r,msghistory:100
+OPTIONS=menustyle:full
+OPTIONS=hilite_pet,hilite_pile
+OPTIONS=mention_walls
+OPTIONS=dark_room,lit_corridor
+OPTIONS=color,menucolors,statushilites
+OPTIONS=standout

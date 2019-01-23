@@ -1,0 +1,23 @@
+set colored-completion-prefix on
+set colored-stats on
+set completion-ignore-case on
+set mark-symlinked-directories on
+set show-all-if-ambiguous on
+set show-all-if-ambiguous on
+
+set editing-mode vi
+
+set keymap vi-command
+
+"p": "i !!*\r"
+
+"\e\e[A": history-search-backward
+"\e\e[B": history-search-forward
+
+set keymap vi-insert
+
+"\e[Z": menu-complete-backward
+"\e\e[A": history-search-backward
+"\e\e[B": history-search-forward
+
+"p": self-insert

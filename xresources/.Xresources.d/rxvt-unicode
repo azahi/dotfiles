@@ -1,0 +1,40 @@
+URxvt.internalBorder:       6
+URxvt.letterSpace:          0
+URxvt.lineSpace:            0
+
+URxvt.termName:             rxvt-256color
+URxvt.imLocate:             en_US.UTF-8
+
+URxvt.buffered:             true
+
+URxvt.cursorUnderline:      false
+URxvt.cursorBlink:          true
+
+URxvt.loginShell:           true
+
+URxvt.perl-ext-common:      default,clipboard,matcher
+
+URxvt.matcher.pattern.0:    \\b(http|https):\/\/[\\w\\-\\@;\\/?:&=%\\$.+!*\x27,~#]+
+URxvt.matcher.launcher.0:   qutebrowser
+
+!URxvt.matcher.pattern.0:    \\b(http|https):\/\/www\.youtube\.com/watch\\?v=([\\w-&=]+)
+!URxvt.matcher.launcher.0:   streamlink
+
+!URxvt.matcher.pattern.1:    \\b(http|https):\/\/(?!www\\.youtube.*)[\\w\\-\\@;\\/?:&=%\\$.+!*\x27,~#]+
+!URxvt.matcher.launcher.1:   qutebrowser
+
+URxvt.matcher.button:       1
+URxvt.matcher.rend.0:       Uline fg5
+
+URxvt.jumpScroll:           true
+
+URxvt.saveLines:            4096
+
+URxvt.scrollBar:            false
+URxvt.scrollTtyKeypress:    true
+URxvt.scrollTtyOutput:      false
+URxvt.scrollWidthBuffer:    true
+URxvt.scrollstyle:          plain
+
+URxvt.urgentOnBell:         true
+URxvt.visualBell:           false

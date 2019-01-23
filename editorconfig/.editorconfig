@@ -1,0 +1,45 @@
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{sh,bash,zsh}]
+indent_style = space
+indent_size = 4
+
+[*.{lisp,cl,el,scm}]
+indent_style = space
+
+[*.ebuild]
+indent_style = space
+indent_size = 4
+
+[*.{hs,lhs,cabal}]
+indent_style = space
+indent_size = 4
+
+[{Makefile,*.mk}]
+indent_style = space
+
+[*.nix]
+indent_style = space
+indent_size = 4
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.rs]
+indent_style = space
+indent_size = 4
+
+[*.toml]
+indent_style = space
+indent_size = 4
+
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 4
