@@ -1,19 +1,17 @@
 root = true
 
 [*]
-end_of_line = lf
 charset = utf-8
-trim_trailing_whitespace = true
+end_of_line = lf
 insert_final_newline = true
+trim_trailing_whitespace = true
 
-[*.{sh,bash,zsh}]
-indent_style = space
-indent_size = 4
+[*.{c,cxx,cpp,cs,h,hpp}]
 
 [*.{lisp,cl,el,scm}]
 indent_style = space
 
-[*.ebuild]
+[*.py]
 indent_style = space
 indent_size = 4
 
@@ -21,14 +19,19 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-[{Makefile,*.mk}]
-indent_style = space
-
-[*.nix]
+[*.{sh,bash,zsh}]
 indent_style = space
 indent_size = 4
 
-[*.py]
+[*.ebuild]
+indent_style = space
+indent_size = 4
+
+[{Makefile,*.mk}]
+indent_style = space
+indent_size = 4
+
+[*.nix]
 indent_style = space
 indent_size = 4
 

@@ -16,10 +16,4 @@ set ftp:anon-pass anonymous
 set ftp:anon-user anonymous
 set ftp:sync-mode false
 
-set ssl:verify-certificate false
-
-alias less more
-alias zless zmore
-alias bzless bzmore
-
 # vim:filetype=lftp

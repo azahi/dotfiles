@@ -44,7 +44,7 @@ export ZSH_PLUGINS_ALIAS_TIPS_TEXT="Alias: "
 zplug "akz92/clean", as:theme
 
 
-if ! zplug check --verbose
+if ! zplug check
 then
     printf "Install? [y/N]: "
     if read -q
