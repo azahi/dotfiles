@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+path-prepend "$HOME/.emacs.d/bin"
 path-prepend "$HOME/.cargo/bin"
 path-prepend "$HOME/.go/bin"
 path-prepend "$HOME/.cabal/bin"

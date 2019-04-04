@@ -23,7 +23,7 @@ c.confirm_quit = ['never']
 c.history_gap_interval = 30
 
 # When to find text on a page case-insensitively.
-# Type: String
+# Type: IgnoreCase
 # Valid values:
 #   - always: Search case-insensitively.
 #   - never: Search case-sensitively.
@@ -482,7 +482,7 @@ c.tabs.indicator.padding = {'top': 6, 'bottom': 6, 'left': 0, 'right': 0}
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'file:///home/free/work/startpage/index.html'
+c.url.default_page = 'file:///home/free/code/startpage/index.html'
 
 # Search engines which can be used via the address bar. Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -497,7 +497,7 @@ c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'file:///home/free/work/startpage/index.html'
+c.url.start_pages = 'file:///home/free/code/startpage/index.html'
 
 # URL parameters to strip with `:yank url`.
 # Type: List of String

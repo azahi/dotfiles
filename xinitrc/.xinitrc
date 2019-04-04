@@ -19,7 +19,7 @@ xset fp rehash
 
 urxvtd -q -o -f
 
-setxkbmap -layout "us, ru" -option "grp:win_space_toggle"
+setxkbmap -layout "us, ru" -option "grp:win_space_toggle" -option "compose:menu"
 
 [[ -f "${HOME}/.xmodmaprc" ]] && \
     xmodmap "${HOME}/.xmodmaprc"
