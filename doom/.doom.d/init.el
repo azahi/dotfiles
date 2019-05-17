@@ -1,50 +1,51 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
-(doom! :feature
-       debugger
-       eval
-       (evil
-         +everywhere)
-       file-templates
-       lookup
-       snippets
-       workspaces
-
-       :completion
-       company
-       helm
+(doom! :completion
+       (company
+        +auto
+        -childframe
+        +tng)
+       (helm
+        -childframe
+        +fuzzy)
 
        :ui
        deft
        doom
-       doom-dashboard
-       doom-quit
-       evil-goggles
+       fill-column
        hl-todo
        indent-guides
        modeline
        nav-flash
+       ophints
        (popup
-         +all
-         +defaults)
+        +all
+        +defaults)
        pretty-code
        treemacs
        vc-gutter
        vi-tilde-fringe
-       window-select
+       (window-select
+        +ace-window)
+       workspaces
 
        :editor
+       (evil
+        +everywhere)
+       file-templates
        fold
-       (format +onsave)
+       (format
+        +onsave)
        lispy
        multiple-cursors
        parinfer
        rotate-text
+       snippets
 
        :emacs
        (dired
-         +ranger
-         +icons)
+        +ranger
+        +icons)
        electric
        eshell
        imenu
@@ -52,11 +53,16 @@
        vc
 
        :tools
+       debugger
+       direnv
+       eval
        docker
        editorconfig
+       ein
        flycheck
        flyspell
        gist
+       lookup
        lsp
        magit
        make
@@ -67,21 +73,24 @@
        tmux
        upload
        wakatime
-       vterm
 
        :lang
        assembly
        (cc
-         +irony
-         +rtags)
+        +lsp
+        -irony
+        -rtags)
        common-lisp
        csharp
        data
        emacs-lisp
        ess
-       go
-       (haskell +intero)
-       (java +meghanada)
+       (go
+        +lsp)
+       (haskell
+        +intero)
+       (java
+        +meghanada)
        javascript
        latex
        ledger
@@ -91,27 +100,36 @@
         +babel
         +capture
         +export
-        +present)
+        +habit
+        +ipython
+        +present
+        +protocol)
        plantuml
        python
        qt
        racket
        rest
-       rust
-       sh
-       web
+       (sh
+        +lsp)
+       (web
+        -lsp)
+
+       :email
+       (mu4e
+        +gmail)
+       notmuch
 
        :app
-       (email
-         +gmail)
+       calendar
        irc
        (rss
-         +org)
+        +org)
+       twitter
        (write
         +wordnut
         +langtool)
 
        :config
        (default
-         +bindings
-         +smartparens))
+        +bindings
+        +smartparens))
