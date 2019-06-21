@@ -1,17 +1,21 @@
-URxvt.font:                 xft:lucy tewi:style=Regular:size=8,\
-                            xft:Efont Biwidth,\
-                            xft:Misc Fixed Wide
+URxvt.font:             xft:tewi:style=Regular:size=8,  \
+                        xft:Biwidth,                    \
+                        xft:Fixed,                      \
+                        xft:Misc Fixed Wide
 
-URxvt.boldFont:             xft:lucy tewi:style=Bold:size=8,\
-                            xft:lucy tewi:style=Regular:size=8,\
-                            xft:Efont Biwidth,\
-                            xft:Misc Fixed Wide
+URxvt.boldFont:         xft:tewi:style=Bold:size=8,     \
+                        xft:tewi:style=Regular:size=8,  \
+                        xft:Biwidth,                    \
+                        xft:Fixed,                      \
+                        xft:Misc Fixed Wide
 
-URxvt.italicFont:           xft:lucy tewi:style=Regular:size=8,\
-                            xft:Efont Biwidth,\
-                            xft:Misc Fixed Wide
+URxvt.italicFont:       xft:tewi:style=Regular:size=8,  \
+                        xft:Biwidth,                    \
+                        xft:Fixed,                      \
+                        xft:Misc Fixed Wide
 
-URxvt.boldItalicFont:       xft:lucy tewi:style=Bold:size=8,\
-                            xft:lucy tewi:style=Regular:size=8,\
-                            xft:Efont Biwidth,\
-                            xft:Misc Fixed Wide
+URxvt.boldItalicFont:   xft:tewi:style=Bold:size=8,     \
+                        xft:tewi:style=Regular:size=8,  \
+                        xft:Biwidth,                    \
+                        xft:Fixed,                      \
+                        xft:Misc Fixed Wide

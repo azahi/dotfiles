@@ -18,11 +18,11 @@ export XDG_TEMPLATES_DIR="${HOME}/documents"
 export XDG_VIDEOS_DIR="${HOME}/videos"
 
 export WINEARCH="win32"
-export WINEPREFIX="${HOME}/.wine32"
+export WINEPREFIX="${HOME}/.wine"
 export WINEDEBUG="-all"
 export WINEDLLOVERRIDES="winemenubuilder.exe=d"
 
-export NNN_BMS="d:~/downloads;w:~/work;p:/etc/portage"
+export NNN_BMS="d:~/downloads;c:~/code;p:/etc/portage"
 export NNN_COPIER="IFS= ; echo -n $1 | xclip"
 export NNN_IDLE_TIMEOUT=0
 export NNN_MULTISCRIPT=1

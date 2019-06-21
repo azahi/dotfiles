@@ -1,10 +1,10 @@
-#!env zsh
+#!/usr/bin/env zsh
 
 alias beet="beet -c $XDG_CONFIG_HOME/beets/config.yaml"
 alias cal="cal --three --monday"
 alias cp="cp --verbose"
 alias crypto="curl rate.sx"
-alias d="doom run"
+alias d="doom run -nw"
 alias disk="lsblk -o NAME,TYPE,FSTYPE,LABEL,UUID,SIZE,MOUNTPOINT"
 alias e="emacs --no-window-system"
 alias ec="emacsclient --no-window-system"

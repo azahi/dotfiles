@@ -44,7 +44,7 @@ c.search.ignore_case = 'smart'
 c.new_instance_open_target = 'tab'
 
 # Which window to choose when opening links as new tabs. When
-# `new_instance_open_target` is not set to `window`, this is ignored.
+# `new_instance_open_target` is set to `window`, this is ignored.
 # Type: String
 # Valid values:
 #   - first-opened: Open new tabs in the first (oldest) opened window.
@@ -59,6 +59,13 @@ c.new_instance_open_target_window = 'last-focused'
 # list) will work.
 # Type: List of String
 c.qt.args = []
+
+# Turn on Qt HighDPI scaling. This is equivalent to setting
+# QT_AUTO_SCREEN_SCALE_FACTOR=1 in the environment. It's off by default
+# as it can cause issues with some bitmap fonts. As an alternative to
+# this, it's possible to set font sizes and the `zoom.default` setting.
+# Type: Bool
+c.qt.highdpi = False
 
 # Store cookies. Note this option needs a restart with QtWebEngine on Qt
 # < 5.9.
@@ -81,7 +88,7 @@ c.content.geolocation = False
 # Value to send in the `Accept-Language` header. Note that the value
 # read from JavaScript is always the global value.
 # Type: String
-c.content.headers.accept_language = 'en-US,en'
+c.content.headers.accept_language = 'en-US,en,ru-RU,ru,ja-JP,ja'
 
 # Custom headers for qutebrowser HTTP requests.
 # Type: Dict
@@ -235,14 +242,15 @@ c.completion.scrollbar.width = 0
 # Type: Int
 c.completion.scrollbar.padding = 0
 
-# Format of timestamps (e.g. for the history completion).
-# Type: TimestampTemplate
+# Format of timestamps (e.g. for the history completion). See
+# https://sqlite.org/lang_datefunc.html for allowed substitutions.
+# Type: String
 c.completion.timestamp_format = '%Y-%m-%d'
 
 # Directory to save downloads to. If unset, a sensible OS-specific
 # default is used.
 # Type: Directory
-c.downloads.location.directory = '${HOME}/downloads/qutebrowser'
+c.downloads.location.directory = '~/downloads/qutebrowser'
 
 # Prompt the user for the download location. If set to false,
 # `downloads.location.directory` will be used.
@@ -273,7 +281,7 @@ c.downloads.remove_finished = 0
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
-c.editor.command = ['/usr/bin/urxvtc', '-e', '/usr/bin/vim', '-f', '{}']
+c.editor.command = ['urxvtc', '-e', 'vim', '-f', '{}']
 
 # When a hint can be automatically followed without pressing Enter.
 # Type: String
@@ -370,7 +378,7 @@ c.scrolling.smooth = False
 #   - tr-TR: Turkish (Turkey)
 #   - uk-UA: Ukrainian (Ukraine)
 #   - vi-VN: Vietnamese (Viet Nam)
-c.spellcheck.languages = ['en-US', 'ru-RU']
+c.spellcheck.languages = ['en-US', 'ru-RU', 'de-DE']
 
 # Padding (in pixels) for the statusbar.
 # Type: Padding
@@ -458,22 +466,26 @@ c.tabs.title.alignment = 'left'
 
 # Format to use for the tab title. The following placeholders are
 # defined:  * `{perc}`: Percentage as a string like `[10%]`. *
-# `{perc_raw}`: Raw percentage, e.g. `10`. * `{title}`: Title of the
-# current web page. * `{title_sep}`: The string ` - ` if a title is set,
-# empty otherwise. * `{index}`: Index of this tab. * `{id}`: Internal
-# tab ID of this tab. * `{scroll_pos}`: Page scroll position. *
+# `{perc_raw}`: Raw percentage, e.g. `10`. * `{current_title}`: Title of
+# the current web page. * `{title_sep}`: The string ` - ` if a title is
+# set, empty otherwise. * `{index}`: Index of this tab. * `{id}`:
+# Internal tab ID of this tab. * `{scroll_pos}`: Page scroll position. *
 # `{host}`: Host of the current web page. * `{backend}`: Either
 # ''webkit'' or ''webengine'' * `{private}`: Indicates when private mode
 # is enabled. * `{current_url}`: URL of the current web page. *
 # `{protocol}`: Protocol (http/https/...) of the current web page. *
 # `{audio}`: Indicator for audio/mute status.
 # Type: FormatString
-c.tabs.title.format = '{title}'
+c.tabs.title.format = '{current_title}'
 
 # Format to use for the tab title for pinned tabs. The same placeholders
 # like for `tabs.title.format` are defined.
 # Type: FormatString
 c.tabs.title.format_pinned = '{index}'
+
+# Width (in pixels) of the progress indicator (0 to disable).
+# Type: Int
+c.tabs.indicator.width = 0
 
 # Padding (in pixels) for tab indicators.
 # Type: Padding
@@ -502,11 +514,6 @@ c.url.start_pages = 'file:///home/free/code/startpage/index.html'
 # URL parameters to strip with `:yank url`.
 # Type: List of String
 c.url.yank_ignored_parameters = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
-
-# Format to use for the window title. The same placeholders like for
-# `tabs.title.format` are defined.
-# Type: FormatString
-c.window.title_format = '{perc}{title}{title_sep}qutebrowser'
 
 # Background color of the completion widget for odd rows.
 # Type: QssColor
@@ -540,7 +547,7 @@ c.colors.completion.item.selected.fg = '#0B0806'
 # Type: QssColor
 c.colors.completion.item.selected.bg = '#A19782'
 
-# Top border color of the completion widget category headers.
+# Top border color of the selected completion item.
 # Type: QssColor
 c.colors.completion.item.selected.border.top = '#A19782'
 
@@ -579,7 +586,7 @@ c.colors.statusbar.insert.bg = '#57553A'
 c.colors.statusbar.url.success.https.fg = 'white'
 
 # Background color of the tab bar.
-# Type: QtColor
+# Type: QssColor
 c.colors.tabs.bar.bg = '#2F2B2A'
 
 # Foreground color of unselected odd tabs.
@@ -617,31 +624,67 @@ c.colors.tabs.selected.even.bg = '#0B0806'
 # Default monospace fonts. Whenever "monospace" is used in a font
 # setting, it's replaced with the fonts listed here.
 # Type: Font
-c.fonts.monospace = '"lucy tewi", "Efont Biwidth", "Misc Fixed", "Misc Fixed Wide"'
+c.fonts.monospace = 'tewi, Biwidth, Fixed, "Misc Fixed Wide"'
+
+# Font used in the completion widget.
+# Type: Font
+c.fonts.completion.entry = '8pt monospace'
 
 # Font used in the completion categories.
 # Type: Font
 c.fonts.completion.category = '8pt monospace'
 
+# Font used for the debugging console.
+# Type: QtFont
+c.fonts.debug_console = '8pt monospace'
+
+# Font used for the downloadbar.
+# Type: Font
+c.fonts.downloads = '8pt monospace'
+
 # Font used for the hints.
 # Type: Font
 c.fonts.hints = '8pt monospace'
+
+# Font used in the keyhint widget.
+# Type: Font
+c.fonts.keyhint = '8pt monospace'
+
+# Font used for error messages.
+# Type: Font
+c.fonts.messages.error = '8pt monospace'
+
+# Font used for info messages.
+# Type: Font
+c.fonts.messages.info = '8pt monospace'
+
+# Font used for warning messages.
+# Type: Font
+c.fonts.messages.warning = '8pt monospace'
 
 # Font used for prompts.
 # Type: Font
 c.fonts.prompts = '8pt monospace'
 
+# Font used in the statusbar.
+# Type: Font
+c.fonts.statusbar = '8pt monospace'
+
+# Font used in the tab bar.
+# Type: QtFont
+c.fonts.tabs = '8pt monospace'
+
 # Font family for standard fonts.
 # Type: FontFamily
-c.fonts.web.family.standard = '"MigMix 1P", "DejaVu Sans", "Noto Sans"'
+c.fonts.web.family.standard = 'MigMix 1P'
 
 # Font family for fixed fonts.
 # Type: FontFamily
-c.fonts.web.family.fixed = None
+c.fonts.web.family.fixed = 'Source Code Pro'
 
 # Font family for serif fonts.
 # Type: FontFamily
-c.fonts.web.family.serif = '"MigMix 1P", "DejaVu Serif", "Noto Serif"'
+c.fonts.web.family.serif = None
 
 # Font family for sans-serif fonts.
 # Type: FontFamily

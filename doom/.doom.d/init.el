@@ -1,6 +1,10 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
-(doom! :completion
+(doom! :input
+       chinese
+       japanese
+
+       :completion
        (company
         +auto
         -childframe
@@ -12,19 +16,15 @@
        :ui
        deft
        doom
-       fill-column
        hl-todo
        indent-guides
-       modeline
        nav-flash
        ophints
        (popup
         +all
         +defaults)
-       pretty-code
        treemacs
        vc-gutter
-       vi-tilde-fringe
        (window-select
         +ace-window)
        workspaces
@@ -47,10 +47,11 @@
         +ranger
         +icons)
        electric
-       eshell
-       imenu
-       term
        vc
+
+       :term
+       eshell
+       term
 
        :tools
        debugger
@@ -66,7 +67,7 @@
        lsp
        magit
        make
-       password-store
+       pass
        pdf
        prodigy
        rgb
@@ -133,3 +134,7 @@
        (default
         +bindings
         +smartparens))
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:

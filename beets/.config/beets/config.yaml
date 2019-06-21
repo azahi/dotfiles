@@ -51,5 +51,5 @@ fetchart:
     cautious: yes
     cover_names: cover Cover folder Folder
     enforce_ratio: no
-    sources: filesystem coverart itunes amazon albumart wikipedia google
+    sources: filesystem coverart itunes amazon albumart
     store_source: no

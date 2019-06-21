@@ -1,15 +1,15 @@
 [user]
-	name            = azahi
-	email           = azahi@teknik.io
+    name            = azahi
+    email           = azahi@teknik.io
 [credential]
-	helper          = cache
+    helper          = cache
 [color]
-	branch          = auto
-	diff            = auto
-	interactive     = auto
-	status          = auto
+    branch          = auto
+    diff            = auto
+    interactive     = auto
+    status          = auto
 [core]
-	excludesfile    = ~/.gitignore_global
+    excludesfile    = ~/.gitignore_global
     quotepath       = false
 [branch]
     autoSetupMerge  = always
@@ -17,23 +17,23 @@
 [merge]
     ff              = only
     log             = true
-	tool            = /usr/bin/colordiff
+    tool            = /usr/bin/colordiff
 [mergetool]
-	prompt          = false
-	keepBackup      = false
+    prompt          = false
+    keepBackup      = false
 [diff]
-	submodule       = log
-	tool            = /usr/bin/colordiff
+    submodule       = log
+    tool            = /usr/bin/colordiff
 [difftool]
-	prompt          = false
+    prompt          = false
 [push]
-	default         = current
+    default         = current
 [pull]
-	rebase          = true
+    rebase          = true
 [fetch]
-	prune           = true
+    prune           = true
 [submodule]
-	fetchJobs       = 4
+    fetchJobs       = 4
 [alias]
     clone           = clone --recursive
     fetch           = fetch --all
@@ -49,6 +49,6 @@
     recommit        = commit --amend
     wc              = whatchanged -p --abbrev-commit --pretty=medium
     gud             = commit --message=\"git gud\"
-	rng             = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+    rng             = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
 [github]
-	user = azahi
+    user            = azahi

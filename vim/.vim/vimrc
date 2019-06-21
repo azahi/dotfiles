@@ -81,7 +81,19 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/ruscmd'
 
 
-Plug 'LnL7/vim-nix'
+Plug 'airblade/vim-gitgutter'
+
+
+Plug 'scrooloose/syntastic'
+
+
+Plug 'junegunn/fzf'
+
+
+Plug 'shougo/neocomplete.vim'
+
+
+Plug 'ntpeters/vim-better-whitespace'
 
 
 
