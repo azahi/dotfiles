@@ -3,46 +3,7 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
+indent_size = 4
+indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
-
-[*.{c,cxx,cpp,cs,h,hpp}]
-
-[*.{lisp,cl,el,scm}]
-indent_style = space
-
-[*.py]
-indent_style = space
-indent_size = 4
-
-[*.{hs,lhs,cabal}]
-indent_style = space
-indent_size = 4
-
-[*.{sh,bash,zsh}]
-indent_style = space
-indent_size = 4
-
-[*.ebuild]
-indent_style = space
-indent_size = 4
-
-[{Makefile,*.mk}]
-indent_style = space
-indent_size = 4
-
-[*.nix]
-indent_style = space
-indent_size = 4
-
-[*.rs]
-indent_style = space
-indent_size = 4
-
-[*.toml]
-indent_style = space
-indent_size = 4
-
-[*.{yaml,yml}]
-indent_style = space
-indent_size = 4

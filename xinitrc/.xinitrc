@@ -37,6 +37,8 @@ export QT_IM_MODULE="fcitx"
 
 fcitx -r -d -s 0 &
 
+compton -b
+
 #oneko -neko -tofocus -speed 25 -bg "#a19782" -fg "#0b0806" &
 
 exec xmonad

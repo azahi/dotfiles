@@ -73,7 +73,6 @@
        rgb
        tmux
        upload
-       wakatime
 
        :lang
        assembly

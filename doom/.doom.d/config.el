@@ -1,14 +1,11 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+(setq custom-file (concat doom-etc-dir "custom.el"))
+
 (setq doom-theme 'doom-tomorrow-night)
 
-;;(setq doom-font (font-spec :family "Source Code Pro" :size 12)
-;;      doom-variable-pitch-font (font-spec :family "DejaVu Sans")
-;;      doom-unicode-font (font-spec :family "DejaVu Sans Mono")
-;;      doom-big-font (font-spec :family "Source Code Pro" :size 19))
-
-;;(when (display-graphic-p)
-;; (prettify-symbols-mode -1))
+(setq doom-font (font-spec :family "Source Code Pro" :size 12)
+      doom-big-font (font-spec :family "Source Code Pro" :size 19))
 
 (with-eval-after-load 'flycheck
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
