@@ -1,0 +1,8 @@
+\set PROMPT1 '%[%033[31;5m%]%M %[%033[32;1m%]%n@%/%R%[%033[0m%]%# '
+\set PROMPT2 '[more] %R > '
+\pset null '[NULL]'
+\x auto
+\set VERBOSITY verbose
+\set HISTFILE ~/.psql_history- :HOST - :DBNAME
+\set HISTCONTROL ignoredups
+\set COMP_KEYWORD_CASE upper

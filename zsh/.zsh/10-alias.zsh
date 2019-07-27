@@ -44,7 +44,7 @@ alias tewisay="$GOPATH/bin/tewisay -f $GOPATH/src/github.com/lucy/tewisay/cows/t
 alias torrentinfo="torrentinfo --everything"
 alias units="units --history=$XDG_DATA_HOME/units_history"
 alias v="vim"
-alias weather="curl wttr.in/Moscow"
+alias weather="curl -H \"Accept-Language: ${LANG%_*}\" wttr.in/${1:-Moscow}"
 alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
 alias wine-play="wine explorer.exe /desktop=default,1600x900"
 alias xsel="xsel --logfile $XDG_DATA_HOME/xsel.log"

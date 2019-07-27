@@ -4,8 +4,8 @@ local({
     options(repos = r)
 })
 
-options(continue="    … ")
 options(prompt="λ ")
+options(continue="    … ")
 
 options("digits.secs" = 3)
 options(browserNLdisabled = TRUE)

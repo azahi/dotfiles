@@ -1,4 +1,4 @@
-OPTIONS=name:Azacchi,dogname:Pochi,catname:Garfield,pettype:cat,fruit:lemon,
+OPTIONS=name:Azacchi,dogname:Pochi,pettype:dog,fruit:lemon
 OPTIONS=runmode:walk
 OPTIONS=autopickup
 OPTIONS=sortloot:full

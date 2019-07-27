@@ -35,7 +35,7 @@
        file-templates
        fold
        (format
-        +onsave)
+        -onsave)
        lispy
        multiple-cursors
        parinfer
@@ -51,6 +51,7 @@
 
        :term
        eshell
+       shell
        term
 
        :tools
@@ -78,8 +79,8 @@
        assembly
        (cc
         +lsp
-        -irony
-        -rtags)
+        +irony
+        +rtags)
        common-lisp
        csharp
        data
@@ -109,6 +110,7 @@
        qt
        racket
        rest
+       scheme
        (sh
         +lsp)
        (web

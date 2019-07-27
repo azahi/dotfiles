@@ -1,44 +1,56 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-[[ -f "${HOME}/.Xresources" ]] && \
+[ "$(command -v xrdb)" ] && [ -f "${HOME}/.Xresources" ] && \
     xrdb "${HOME}/.Xresources"
 
-xset b off
+if [ "$(command -v xset)" ]
+then
+    xset b off
 
-xset mouse 0 0
+    xset mouse 0 0
 
-xset r rate 200 50
+    xset r rate 250 50
 
-xset dpms force on
-xset s default
+    xset dpms force on
+    xset s default
 
-xset fp rehash
+    xset fp rehash
+fi
 
+#[ "$(command -v urxvtd)" ] && \
 urxvtd -q -o -f
 
-setxkbmap -layout "us, ru" -option "grp:win_space_toggle" -option "compose:menu"
+[ "$(command -v setxkbmap)" ] && \
+    setxkbmap -layout "us, ru" -option "grp:win_space_toggle" -option "compose:menu"
 
-[[ -f "${HOME}/.xmodmaprc" ]] && \
-    xmodmap "${HOME}/.xmodmaprc"
+#[ "$(command -v xmodmap)" ] && [ -f "${HOME}/.xmodmaprc" ] && \
+#    xmodmap "${HOME}/.xmodmaprc"
 
-xsetroot -cursor_name left_ptr
+#if [ "$(command -v xsetroot)" ] && xsetroot -cursor_name left_ptr
 
-#hsetroot -center "${HOME}/pictures/wallpapers/mill.png"
-hsetroot -cover "${HOME}/pictures/wallpapers/danish_soldiers_return_to_copenhagen.jpg"
+if [ "$(command -v hsetroot)" ]
+then
+    #hsetroot -center "${HOME}/pictures/wallpapers/mill.png"
+    hsetroot -cover "${HOME}/pictures/wallpapers/danish_soldiers_return_to_copenhagen.jpg"
+fi
 
-unclutter --fork --ignore-scrolling
+[ "$(command -v unclutter)" ] && unclutter --fork --ignore-scrolling
 
-autocutsel -fork
-autocutsel -fork -selection PRIMARY
+if [ "$(command -v autocutsel)" ]
+then
+    autocutsel -fork
+    autocutsel -fork -selection PRIMARY
+fi
 
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE="fcitx"
-export QT_IM_MODULE="fcitx"
+if [ "$(command -v fcitx)" ]
+then
+    export XMODIFIERS="@im=fcitx"
+    export GTK_IM_MODULE="fcitx"
+    export QT_IM_MODULE="fcitx"
 
-fcitx -r -d -s 0 &
+    fcitx -r -d -s 0 &
+fi
 
-compton -b
-
-#oneko -neko -tofocus -speed 25 -bg "#a19782" -fg "#0b0806" &
+[ "$(command -v compton)" ] && compton -b
 
 exec xmonad

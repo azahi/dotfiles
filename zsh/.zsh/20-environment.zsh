@@ -1,9 +1,10 @@
 #!/usr/bin/env zsh
 
 path-prepend "$HOME/.emacs.d/bin"
+path-prepend "$HOME/.dotnet/tools"
+path-prepend "$HOME/.cabal/bin"
 path-prepend "$HOME/.cargo/bin"
 path-prepend "$HOME/.go/bin"
-path-prepend "$HOME/.cabal/bin"
 path-prepend "$HOME/.local/bin"
 path-prepend "$HOME/.bin"
 

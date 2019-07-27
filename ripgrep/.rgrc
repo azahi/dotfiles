@@ -1,0 +1,6 @@
+--hidden
+--smart-case
+--glob=!.git/*
+--glob=!.stack-work
+--glob=!Debug
+--glob=!Release

@@ -12,23 +12,30 @@
 
 (setq org-log-into-drawer "LOGBOOK")
 
-(set-irc-server! "znc-rizon"
-  `(:host "systemd.club"
-    :port 1550
-    :use-tls t
-    :user "azahi/rizon"
-    :pass (lambda (&rest _) (+pass-get-secret "servers/remilia/services/znc/azahi"))))
+(setq-default c-default-style "linux")
 
-(set-irc-server! "znc-freenode"
-  `(:host "systemd.club"
-    :port 1550
-    :use-tls t
-    :user "azahi/freenode"
-    :pass (lambda (&rest _) (+pass-get-secret "servers/remilia/services/znc/azahi"))))
+(setq langtool-language-tool-jar "language-tool")
 
-(set-irc-server! "bitlbee"
-  `(:host "localhost"
-    :port 6667))
+(set-irc-server!
+ "znc-rizon"
+ `(:host "systemd.club"
+         :port 1550
+         :use-tls t
+         :user "azahi/rizon"
+         :pass (lambda (&rest _) (+pass-get-secret "servers/remilia/services/znc/azahi"))))
+
+(set-irc-server!
+ "znc-freenode"
+ `(:host "systemd.club"
+         :port 1550
+         :use-tls t
+         :user "azahi/freenode"
+         :pass (lambda (&rest _) (+pass-get-secret "servers/remilia/services/znc/azahi"))))
+
+(set-irc-server!
+ "bitlbee"
+ `(:host "localhost"
+         :port 6667))
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)

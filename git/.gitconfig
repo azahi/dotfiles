@@ -1,54 +1,128 @@
 [user]
     name            = azahi
     email           = azahi@teknik.io
+
 [credential]
     helper          = cache
+
 [color]
     branch          = auto
     diff            = auto
     interactive     = auto
     status          = auto
+    ui              = true
+
 [core]
     excludesfile    = ~/.gitignore_global
     quotepath       = false
+    commitgraph     = true
+    untrackedcache  = true
+
+[commit]
+    verbose = true
+
 [branch]
-    autoSetupMerge  = always
-    autoSetupRebase = always
+    autosetupmerge  = always
+    autosetuprebase = always
+
+[branch "master"]
+    rebase          = true
+
 [merge]
     ff              = only
     log             = true
-    tool            = /usr/bin/colordiff
+
 [mergetool]
     prompt          = false
-    keepBackup      = false
+    keepbackup      = false
+
 [diff]
     submodule       = log
-    tool            = /usr/bin/colordiff
+    renames         = copies
+
 [difftool]
     prompt          = false
+    trustexitcode   = true
+
+[log]
+    decorate        = short
+    date            = local
+
+[status]
+    color           = true
+
+[apply]
+    whitespace      = nowarn
+
 [push]
-    default         = current
+    default         = simple
+    followTags      = true
+
 [pull]
     rebase          = true
+
 [fetch]
     prune           = true
-[submodule]
-    fetchJobs       = 4
+
+[rebase]
+    autosquash      = true
+    autstash        = true
+
 [alias]
     clone           = clone --recursive
+    conflicts       = diff --name-only --diff-filter=U
+    contributors    = --no-pager shortlog --numbered --summary
+    ec              = diff HEAD^ --name-only --diff-filter=ACMR
+    ed              = diff HEAD --name-only --diff-filter=ACMR
+    et              = conflicts
     fetch           = fetch --all
-    pull            = pull --all
-    spull           = submodule foreach git pull
-    l               = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-    ls              = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
+    gud             = commit --message=\"git gud\"
     ignore          = update-index --assume-unchanged
+    lg              = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    lgs             = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
+    pull            = pull --all
+    recommit        = commit --amend
+    wtc             = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+    spull           = submodule foreach git pull
+    ss              = !git status --porcelain | awk '{print $2}'
+    st              = diff --staged --name-only --diff-filter=ACMR
+    uncommit        = reset --soft HEAD^
     unignore        = update-index --un-assume-unchanged
     unpush          = push --force-with-lease origin HEAD^:master
     unstage         = reset HEAD
-    uncommit        = reset --soft HEAD^
-    recommit        = commit --amend
     wc              = whatchanged -p --abbrev-commit --pretty=medium
-    gud             = commit --message=\"git gud\"
-    rng             = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+
 [github]
     user            = azahi
+
+[url "git@github.com:"]
+    insteadOf = "gh:"
+    pushInsteadOf = "github:"
+    pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+    insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+    insteadOf = "gst:"
+    pushInsteadOf = "gist:"
+    pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+    insteadOf = "gist:"
+
+[url "git@gitlab.com:"]
+    insteadOf = gl:
+    pushInsteadOf = gitlab:
+    pushInsteadOf = git://gitlab.com/
+
+[url "git://gitlab.com/"]
+    insteadOf = gitlab:
+
+[url "git@bitbucket.org:"]
+    insteadOf = bb:
+    pushInsteadOf = bitbucket:
+    pushInsteadOf = git://bitbucket.org/
+
+[url "git://bitbucket.org/"]
+    insteadOf = bitbucket:
