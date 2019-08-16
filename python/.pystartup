@@ -11,21 +11,19 @@ readline.parse_and_bind("bind ^I rl_complete")
 
 class Completer(object):
     def __init__(self):
-        self.HISTFILE = os.path.expanduser(
+        self.histfile = os.path.expanduser(
             "%s/python/history" % os.environ["XDG_DATA_HOME"])
-
-        if os.path.exists(self.HISTFILE):
-            readline.read_history_file(self.HISTFILE)
-
+        if os.path.exists(self.histfile):
+            readline.read_history_file(self.histfile)
         readline.set_history_length(300)
         atexit.register(self.savehist)
 
     def savehist(self):
-        readline.write_history_file(self.HISTFILE)
+        readline.write_history_file(self.histfile)
 
 
 class TermColors(dict):
-    COLOR_TEMPLATES = (
+    colorTemplates = (
         ("Black", "0;30"),
         ("Blue", "0;34"),
         ("Brown", "0;33"),
@@ -42,35 +40,32 @@ class TermColors(dict):
         ("Purple", "0;35"),
         ("Red", "0;31"),
         ("White", "1;37"),
-        ("Yellow", "1;33"),
-    )
-
-    NoColor = ''
-    _base = '\001\033[%sm\002'
+        ("Yellow", "1;33"))
+    noColor = ''
+    baseColor = '\001\033[%sm\002'
 
     def __init__(self):
         if os.environ.get('TERM') in (
-                'xterm-color',
-                'xterm-256color',
                 'linux',
-                'screen',
+                'rxvt-256color',
                 'screen-256color',
-                'screen-bce'):
+                'st-256color',
+                'xterm-256color'):
             self.update(dict(
-                [(k, self._base % v) for k, v in self.COLOR_TEMPLATES]))
+                [(k, self.baseColor % v) for k, v in self.colorTemplates]))
         else:
             self.update(dict(
-                [(k, self.NoColor) for k, v in self.COLOR_TEMPLATES]))
+                [(k, self.noColor) for k, v in self.colorTemplates]))
 
 
-_c = TermColors()
+TC = TermColors()
+sys.ps1 = '%sλ%s %s>%s ' % (TC['Blue'], TC['Normal'],
+                            TC['White'], TC['Normal'])
+sys.ps2 = '    %s…%s %s>%s ' % (TC['Blue'], TC['Normal'],
+                                TC['White'], TC['Normal'])
 
 
-sys.ps1 = '%s>>> %s' % (_c['Green'], _c['Normal'])
-sys.ps2 = '%s... %s' % (_c['Red'], _c['Normal'])
-
-
-def my_displayhook(value):
+def DisplayHook(value):
     if value is not None:
         try:
             import __builtin__
@@ -83,10 +78,10 @@ def my_displayhook(value):
         del pprint
 
 
-sys.displayhook = my_displayhook
+sys.displayhook = DisplayHook
 
 EDITOR = os.environ.get('EDITOR', 'vim')
-EDIT_CMD = '\e'
+EDIT_CMD = ':e'
 
 
 class EditableBufferInteractiveConsole(InteractiveConsole):

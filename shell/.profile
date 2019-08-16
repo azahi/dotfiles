@@ -1,44 +1,43 @@
-#!/bin/sh
-
-export HISTSIZE=100000
-export SAVEHIST=100000
-
-appendpath () {
+appendpath ()
+{
 	[ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
 	[ -d "$1" ] || return
 	eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
 	eval export $PATHVAR="\$$PATHVAR:$1"
 }
-prependpath () {
+prependpath ()
+{
 	[ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
 	[ -d "$1" ] || return
 	eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
 	eval export $PATHVAR="$1:\$$PATHVAR"
 }
-
-prependpath "$HOME/.emacs.d/bin"
-prependpath "$HOME/.cabal/bin"
-prependpath "$HOME/.cargo/bin"
 prependpath "$HOME/.local/bin"
 prependpath "$HOME/.bin"
-prependpath "/usr/lib/go/bin"
 prependpath "/usr/lib/plan9/bin"
-prependpath "/usr/share/languagetool/lib"
-prependpath "/usr/local/bin"
-prependpath "/usr/bin"
-prependpath "/bin"
 prependpath "/usr/local/sbin"
+prependpath "/usr/local/bin"
 prependpath "/usr/sbin"
+prependpath "/usr/bin"
 prependpath "/sbin"
+prependpath "/bin"
 
 for i in vim vi emacs nano
 do
-    command -v "$i" >/dev/null 2>&1 && export EDITOR="$i" && break
+    command -v "$i" >/dev/null 2>&1 && export EDITOR="$i" VISUAL="$i" && break
 done
-export VISUAL="$EDITOR"
-export PAGER="less"
-export DIFF="colordiff"
-for i in qutebrowser palemoon firefox w3m lynx elinks links
+
+for i in bat less
+do
+    command -v "$i" >/dev/null 2>&1 && export PAGER="$i" && break
+done
+
+for i in ediff cdiff cwdiff wdiff colordiff diff
+do
+    command -v "$i" >/dev/null 2>&1 && export DIFF="$i" && break
+done
+
+for i in qutebrowser palemoon firefox chromium chrome safari w3m lynx elinks links
 do
     command -v "$i" >/dev/null 2>&1 && export BROWSER="$i" && break
 done
@@ -66,24 +65,25 @@ export XDG_VIDEOS_DIR="$HOME/videos"
 [ ! -d "$XDG_TEMPLATES_DIR" ]   && mkdir -p "$XDG_TEMPLATES_DIR"
 [ ! -d "$XDG_VIDEOS_DIR" ]      && mkdir -p "$XDG_VIDEOS_DIR"
 
-if [ "$(command -v wine)" ]
+if [ "$(command -v emacs)" ]
 then
-    export WINEARCH="win32"
-    export WINEPREFIX="${HOME}/.wine"
-    export WINEDEBUG="-all"
-    export WINEDLLOVERRIDES="mscoree,mshtml=;winemenubuilder.exe=d"
+    alias e="emacs -t"
+    alias ec="emacsclient -t"
+
+    if [ -d "$HOME/.doom.d" ]
+    then
+        prependpath "$HOME/.emacs.d/bin"
+
+        alias d="doom run -nw"
+    fi
+
 fi
 
-if [ "$(command -v nnn)" ]
-then
-    export NNN_IDLE_TIMEOUT=0
-    export NNN_MULTISCRIPT=1
-    export NNN_NO_AUTOSELECT=1
-    export NNN_QUOTE_ON=1
-    export NNN_SHOW_HIDDEN=0
-    export NNN_USE_EDITOR=1
-    export NNN_TMPFILE="${XDG_CACHE_HOME}/nnn"
-fi
+for i in python python2 python3
+do
+    command -v >/dev/null 2>&1 "$i" && [ -f "$HOME/.pystartup" ] && \
+        export PYTHONSTARTUP="$HOME/.pystartup" && break
+done
 
 if [ "$(command -v dotnet)" ]
 then
@@ -102,6 +102,47 @@ then
     fi
 fi
 
+if [ "$(command -v cargo)" ]
+then
+    prependpath "$HOME/.cargo/bin"
+
+    export CARGO_HOME="$HOME/.cargo"
+    export CARGO_CACHE_RUSTC_INFO=0
+fi
+
+if [ "$(command -v go)" ]
+then
+    export GOPATH="$HOME/.go"
+
+    prependpath "$HOME/.go/bin"
+fi
+
+[ "$(command -v cabal)" ] && \
+    prependpath "$HOME/.cabal/bin"
+
+if [ "$(command -v wine)" ]
+then
+    export WINEARCH="win32"
+    export WINEPREFIX="$HOME/.wine"
+    export WINEDEBUG="-all"
+    export WINEDLLOVERRIDES="mscoree,mshtml=;winemenubuilder.exe=d"
+
+    alias wine-play="wine explorer.exe /desktop=default,1600x900"
+fi
+
+if [ "$(command -v nnn)" ]
+then
+    export NNN_IDLE_TIMEOUT=0
+    export NNN_MULTISCRIPT=1
+    export NNN_NO_AUTOSELECT=1
+    export NNN_QUOTE_ON=1
+    export NNN_SHOW_HIDDEN=0
+    export NNN_USE_EDITOR=1
+    export NNN_TMPFILE="$XDG_CACHE_HOME/nnn"
+
+    alias n="nnn"
+fi
+
 if [ "$(command -v fzf)" ]
 then
     export FZF_DEFAULT_COMMAND=""
@@ -111,51 +152,86 @@ fi
 [ "$(command -v ranger)" ] && [ -d "$XDG_CONFIG_DIR/ranger" ] && \
     export RANGER_LOAD_DEFAULT_RC="false"
 
-[ "$(command -v beets)" ] && export BEETSDIR="${XDG_DATA_HOME}/beets"
-
-if [ "$(command -v rust)" ] || [ "$(command -v rust-bin)" ]
+if [ "$(command -v beets)" ]
 then
-    export CARGO_HOME="${HOME}/.cargo"
-    export CARGO_CACHE_RUSTC_INFO=0
+    export BEETSDIR="$XDG_DATA_HOME/beets"
+
+    alias beet="beet -c \$XDG_CONFIG_HOME/beets/config.yaml"
 fi
 
-[ "$(command -v ccache)" ] && export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
+[ "$(command -v dbus-daemon)" ] && [ "$(uname -o)" = "GNU/Linux" ] && \
+    export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 
-if [ "$(command -v dbus-daemon)" ] && [ "$(uname -o)" = "GNU/Linux" ]
-then
-    export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
-fi
-
-[ "$(command -v gpg)" ] && export GNUPGHOME="${HOME}/.gnupg"
-
-if [ "$(command -v go)" ]
-then
-    export GOPATH="${HOME}/.go"
-
-    prependpath "$HOME/.go/bin"
-fi
+[ "$(command -v gpg)" ] && \
+    export GNUPGHOME="$HOME/.gnupg"
 
 for i in pass gopass
 do
-    command -v "$i" >/dev/null 2>&1 && \
-        export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/pass" && break
+    command -v "$i" >/dev/null 2>&1 && export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass" && break
 done
 
-export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk2/settings.ini"
-export GTK_RC_FILES="${XDG_CONFIG_HOME}/gtk/settings.ini"
-
-for i in python python2 python3
-do
-    command -v >/dev/null 2>&1 "$i" && export PYTHONSTARTUP="${HOME}/.pystartup" && break
-done
-
-export LESSHISTFILE="-"
 
 if [ "$(command -v weechat)" ]
 then
-    export WEECHAT_HOME="${HOME}/.weechat"
-    export WEECHAT_PASSPHRASE="${HOME}/.weechat/pass"
+    export WEECHAT_HOME="$HOME/.weechat"
+    export WEECHAT_PASSPHRASE="$HOME/.weechat/pass"
 fi
 
 [ "$HOST" = "tp-gentoo" ] && \
-    export XAUTHORITY="${XDG_DATA_HOME}/xorg/Xauthority"
+    export XAUTHORITY="$XDG_DATA_HOME/xorg/Xauthority"
+
+if [ "$(uname -o)" = "GNU/Linux" ]
+then
+    alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
+    alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
+    alias la="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
+
+    alias cal="cal --three --monday"
+
+    alias o="xdg-open"
+
+    [ "$(command -v startx)" ] && \
+        alias sx="startx -- vt1 -nolisten tcp"
+fi
+
+if [ "$(command -v rsync)" ]
+then
+    alias rsync-cp="rsync --archive --compress --verbose --progress --human-readable"
+    alias rsync-mv="rsync --archive --compress --verbose --progress --human-readable --remove-source-files"
+    alias rsync-sync="rsync --archive --compress --verbose --progress --human-readable --update --delete"
+    alias rsync-update="rsync --archive --compress --verbose --progress --human-readable --update"
+fi
+
+[ -f "$GOPATH/bin/tewisay" ] && \
+    alias tewisay="\$GOPATH/bin/tewisay \
+        -f \$GOPATH/src/github.com/lucy/tewisay/cows/tes.cow"
+
+[ "$(command -v torrentinfo)" ] && \
+    alias torrentinfo="torrentinfo --everything"
+
+[ "$(command -v units)" ] && \
+    alias units="units --history=\$XDG_DATA_HOME/units_history"
+
+[ "$(command -v ag)" ] && \
+    alias ag="ag --color"
+
+if [ "$(command -v less)" ]
+then
+    alias less="less --quit-if-one-screen --no-init"
+
+    export LESSHISTFILE="-"
+fi
+
+if [ "$(command -v ccache)" ]
+then
+    export CCACHE_DIR="/var/tmp/ccache"
+    export CCACHE_PATH="$PATH"
+
+    prependpath "/usr/lib/ccache/bin"
+fi
+
+alias cp="cp --verbose"
+alias mkdir="mkdir --verbose --parents"
+alias mv="mv --verbose"
+alias rm="rm --verbose --interactive=once"
+alias rmdir="rmdir --verbose --parents"

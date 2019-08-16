@@ -1,14 +1,7 @@
 ; -*- mode: Lisp -*-
 
-(setf sb-impl::*default-external-format* :utf-8)
-
-(sb-ext:restrict-compiler-policy 'debug 3)
-
 (when (probe-file #p"/etc/common-lisp/gentoo-init.lisp")
   (load #p"/etc/common-lisp/gentoo-init.lisp"))
-
-(require 'asdf)
-(asdf:initialize-source-registry)
 
 #-quicklisp
 (let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp" (user-homedir-pathname))))

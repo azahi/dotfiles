@@ -1,0 +1,48 @@
+set bell-style none
+set bind-tty-special-chars off
+set blink-matching-paren on
+set colored-completion-prefix on
+set colored-stats on
+set completion-ignore-case on
+set completion-map-case on
+set convert-meta off
+set echo-control-characters on
+set editing-mode vi
+set enable-keypad off
+set enable-meta-key on
+set horizontal-scroll-mode off
+set input-meta on
+set keymap vi
+set mark-directories on
+set mark-modified-lines off
+set mark-symlinked-directories on
+set match-hidden-files on
+set menu-complete-display-prefix on
+set meta-flag on
+set output-meta on
+set page-completions on
+set print-completions-horizontally on
+set revert-all-at-newline off
+set revert-all-at-newline on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set skip-completed-text on
+set visible-stats on
+
+$if Bash
+    set keyseq-timeout 200
+$endif
+
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+"^P": history-search-backward
+"^N": history-search-forward
+
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\eOC": forward-word
+"\eOD": backward-word
+
+"\e[2~": overwrite-mode
+
+TAB: menu-complete

@@ -4,7 +4,7 @@
 
 (setq doom-theme 'doom-tomorrow-night)
 
-(setq doom-font (font-spec :family "Source Code Pro" :size 12)
+(setq doom-font     (font-spec :family "Source Code Pro" :size 12)
       doom-big-font (font-spec :family "Source Code Pro" :size 19))
 
 (with-eval-after-load 'flycheck
@@ -14,28 +14,27 @@
 
 (setq-default c-default-style "linux")
 
-(setq langtool-language-tool-jar "language-tool")
+(setq haskell-process-type 'cabal-new-repl)
 
-(set-irc-server!
- "znc-rizon"
+(setq ranger-show-hidden 'format)
+
+(set-irc-server! "znc-freenode"
  `(:host "systemd.club"
-         :port 1550
-         :use-tls t
-         :user "azahi/rizon"
-         :pass (lambda (&rest _) (+pass-get-secret "servers/remilia/services/znc/azahi"))))
+   :port 1550
+   :use-tls t
+   :user "azahi/freenode"
+   :pass (lambda (&rest _) (+pass-get-secret "servers/remilia/services/znc/azahi"))))
 
-(set-irc-server!
- "znc-freenode"
+(set-irc-server! "znc-rizon"
  `(:host "systemd.club"
-         :port 1550
-         :use-tls t
-         :user "azahi/freenode"
-         :pass (lambda (&rest _) (+pass-get-secret "servers/remilia/services/znc/azahi"))))
+   :port 1550
+   :use-tls t
+   :user "azahi/rizon"
+   :pass (lambda (&rest _) (+pass-get-secret "servers/remilia/services/znc/azahi"))))
 
-(set-irc-server!
- "bitlbee"
+(set-irc-server! "bitlbee"
  `(:host "localhost"
-         :port 6667))
+   :port 6667))
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)

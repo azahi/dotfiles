@@ -1,1 +1,2 @@
-e scr.color=true
+e scr.color = true
+e scr.utf8 = true

@@ -19,7 +19,7 @@
     untrackedcache  = true
 
 [commit]
-    verbose = true
+    verbose         = false
 
 [branch]
     autosetupmerge  = always
@@ -44,6 +44,9 @@
     prompt          = false
     trustexitcode   = true
 
+[diff "bin"]
+    textconv        = hexdump -v -C
+
 [log]
     decorate        = short
     date            = local
@@ -52,7 +55,7 @@
     color           = true
 
 [apply]
-    whitespace      = nowarn
+    whitespace      = fix
 
 [push]
     default         = simple
@@ -67,6 +70,9 @@
 [rebase]
     autosquash      = true
     autstash        = true
+
+[help]
+    autocorrect     = 1
 
 [alias]
     clone           = clone --recursive

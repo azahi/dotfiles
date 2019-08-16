@@ -1,13 +1,12 @@
-*_archive
+*.sock
 *~
+.DS_Store
+.Trash*
 .\#*
-.cabal-sandbox/
+.gdb_history
 .netrwhist
-.org-id-locations
-.stack-work/
-/.emacs.desktop
-/.emacs.desktop.lock
 TAGS
+Thumbs.db
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
 [._]*.un~
@@ -15,5 +14,4 @@ TAGS
 [._]ss[a-gi-z]
 [._]sw[a-p]
 \#*\#
-cabal.sandbox.config
-dist/
+desktop.ini

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ "$(command -v xrdb)" ] && [ -f "${HOME}/.Xresources" ] && \
-    xrdb "${HOME}/.Xresources"
+[ "$(command -v xrdb)" ] && [ -f "$HOME/.Xresources" ] && \
+    xrdb "$HOME/.Xresources"
 
 if [ "$(command -v xset)" ]
 then
@@ -17,30 +17,29 @@ then
     xset fp rehash
 fi
 
-#[ "$(command -v urxvtd)" ] && \
-urxvtd -q -o -f
+[ "$(command -v urxvtd)" ] && \
+    urxvtd -q -o -f
 
 [ "$(command -v setxkbmap)" ] && \
     setxkbmap -layout "us, ru" -option "grp:win_space_toggle" -option "compose:menu"
 
-#[ "$(command -v xmodmap)" ] && [ -f "${HOME}/.xmodmaprc" ] && \
-#    xmodmap "${HOME}/.xmodmaprc"
-
-#if [ "$(command -v xsetroot)" ] && xsetroot -cursor_name left_ptr
-
-if [ "$(command -v hsetroot)" ]
+if [ "$(command -v xmodmap)" ] && [ -f "$HOME/.xmodmaprc" ]
 then
-    #hsetroot -center "${HOME}/pictures/wallpapers/mill.png"
-    hsetroot -cover "${HOME}/pictures/wallpapers/danish_soldiers_return_to_copenhagen.jpg"
+    xmodmap "$HOME/.xmodmaprc"
 fi
 
-[ "$(command -v unclutter)" ] && unclutter --fork --ignore-scrolling
+[ "$(command -v xsetroot)" ] && \
+    xsetroot -cursor_name left_ptr
 
-if [ "$(command -v autocutsel)" ]
-then
-    autocutsel -fork
-    autocutsel -fork -selection PRIMARY
-fi
+PAPE="$HOME/pictures/wallpapers/danish_soldiers_return_to_copenhagen.jpg"
+[ "$(command -v hsetroot)" ] && [ -f "$PAPE" ] && \
+    hsetroot -cover "$PAPE"
+
+[ "$(command -v unclutter)" ] && \
+    unclutter --fork --ignore-scrolling
+
+[ "$(command -v autocutsel)" ] && \
+    autocutsel -fork && autocutsel -fork -selection PRIMARY
 
 if [ "$(command -v fcitx)" ]
 then
@@ -53,4 +52,7 @@ fi
 
 [ "$(command -v compton)" ] && compton -b
 
-exec xmonad
+for i in xmonad stumpwm bspwm 2bwm dwm twm
+do
+    command -v "$i" >/dev/null 2>&1 && exec "$i"
+done

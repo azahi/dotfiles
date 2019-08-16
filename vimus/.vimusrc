@@ -6,6 +6,9 @@ color ruler green black
 color songstatus blue black
 color suggestions green black
 color tab green black
+
 map q :quit<CR>
+
 set-library-path ~/audios/music
+
 song-format (%artist% - %album% - %title%|%directory%/%filename%)
