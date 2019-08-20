@@ -7,10 +7,10 @@
        :completion
        (company
         +auto
-        +childframe
+        -childframe
         +tng)
        (helm
-        +childframe
+        -childframe
         +fuzzy)
 
        :ui

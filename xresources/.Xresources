@@ -1,3 +1,100 @@
-#include ".Xresources.d/colors"
-#include ".Xresources.d/fonts"
-#include ".Xresources.d/rxvt-unicode"
+! special
+URxvt.foreground:           #a19782
+URxvt.background:           #0b0806
+URxvt.cursorColor:          #844d2c
+URxvt.underlineColor:       #c1ab83
+
+! black
+URxvt.color0:               #0b0806
+URxvt.color8:               #2f2b2a
+
+! red
+URxvt.color1:               #844d2c
+URxvt.color9:               #a64848
+
+! green
+URxvt.color2:               #57553a
+URxvt.color10:              #897f5a
+
+! yellow
+URxvt.color3:               #a17c38
+URxvt.color11:              #c8b38d
+
+! blue
+URxvt.color4:               #41434f
+URxvt.color12:              #526274
+
+! magenta
+URxvt.color5:               #6b4444
+URxvt.color13:              #755c47
+
+! cyan
+URxvt.color6:               #59664c
+URxvt.color14:              #718062
+
+! white
+URxvt.color7:               #a19782
+URxvt.color15:              #c1ab83
+
+URxvt.font:                 xft:tewi:style=Regular:size=8,  \
+                            xft:Biwidth,                    \
+                            xft:Fixed,                      \
+                            xft:Misc Fixed Wide
+
+URxvt.boldFont:             xft:tewi:style=Bold:size=8,     \
+                            xft:tewi:style=Regular:size=8,  \
+                            xft:Biwidth,                    \
+                            xft:Fixed,                      \
+                            xft:Misc Fixed Wide
+
+URxvt.italicFont:           xft:tewi:style=Regular:size=8,  \
+                            xft:Biwidth,                    \
+                            xft:Fixed,                      \
+                            xft:Misc Fixed Wide
+
+URxvt.boldItalicFont:       xft:tewi:style=Bold:size=8,     \
+                            xft:tewi:style=Regular:size=8,  \
+                            xft:Biwidth,                    \
+                            xft:Fixed,                      \
+                            xft:Misc Fixed Wide
+
+URxvt.internalBorder:       6
+URxvt.letterSpace:          0
+URxvt.lineSpace:            0
+
+URxvt.termName:             rxvt-256color
+URxvt.imLocate:             en_US.UTF-8
+
+URxvt.buffered:             true
+
+URxvt.cursorUnderline:      false
+URxvt.cursorBlink:          true
+
+URxvt.loginShell:           true
+
+URxvt.perl-ext-common:      default,clipboard,matcher
+
+URxvt.matcher.pattern.0:    \\b(http|https):\/\/[\\w\\-\\@;\\/?:&=%\\$.+!*\x27,~#]+
+URxvt.matcher.launcher.0:   qutebrowser
+
+!URxvt.matcher.pattern.0:    \\b(http|https):\/\/www\.youtube\.com/watch\\?v=([\\w-&=]+)
+!URxvt.matcher.launcher.0:   streamlink
+
+!URxvt.matcher.pattern.1:    \\b(http|https):\/\/(?!www\\.youtube.*)[\\w\\-\\@;\\/?:&=%\\$.+!*\x27,~#]+
+!URxvt.matcher.launcher.1:   qutebrowser
+
+URxvt.matcher.button:       1
+URxvt.matcher.rend.0:       Uline fg5
+
+URxvt.jumpScroll:           true
+
+URxvt.saveLines:            4096
+
+URxvt.scrollBar:            false
+URxvt.scrollTtyKeypress:    true
+URxvt.scrollTtyOutput:      false
+URxvt.scrollWidthBuffer:    true
+URxvt.scrollstyle:          plain
+
+URxvt.urgentOnBell:         true
+URxvt.visualBell:           false
