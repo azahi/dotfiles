@@ -1,3 +1,6 @@
+export HISTFILE="$HOME/.shell.d/.history"
+export HISTSIZE=10000
+
 appendpath ()
 {
 	[ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
@@ -165,7 +168,7 @@ fi
 [ "$(command -v gpg)" ] && \
     export GNUPGHOME="$HOME/.gnupg"
 
-for i in pass gopass
+for i in gopass pass
 do
     command -v "$i" >/dev/null 2>&1 && export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass" && break
 done
@@ -174,11 +177,11 @@ done
 if [ "$(command -v weechat)" ]
 then
     export WEECHAT_HOME="$HOME/.weechat"
-    export WEECHAT_PASSPHRASE="$HOME/.weechat/pass"
+    export WEECHAT_PASSPHRASE="$WEECHAT_HOME/pass"
 fi
 
 [ "$HOST" = "tp-gentoo" ] && \
-    export XAUTHORITY="$XDG_DATA_HOME/xorg/Xauthority"
+    export XAUTHORITY="$XDG_DATA_HOME/xorg/.Xauthority"
 
 if [ "$(uname -o)" = "GNU/Linux" ]
 then

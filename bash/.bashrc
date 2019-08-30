@@ -17,9 +17,7 @@ shopt -s cmdhist
 shopt -s histappend
 shopt -s histreedit
 HISTCONTROL=ignoredups:ignorespace
-HISTFILE="$XDG_DATA_HOME/bash_history"
-HISTFILESIZE=10000
-HISTSIZE=10000
+HISTFILESIZE=$HISTSIZE
 
 complete -A directory cd
 

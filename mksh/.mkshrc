@@ -1,0 +1,17 @@
+set -o vi
+
+HOSTNAME="$(builtin print -r -- "$(hostname 2>/dev/null)")"
+builtin export HOSTNAME
+
+USER="$(id -un 2>/dev/null)"
+builtin export USER
+
+MKSH="$(builtin whence -p mksh)"
+builtin export SHELL="$MKSH"
+
+if [ -d "$HOME/.shell.d" ]
+then
+    builtin source "$HOME/.shell.d/"*.sh
+fi
+
+# vim: filetype=sh
