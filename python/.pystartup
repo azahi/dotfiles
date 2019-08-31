@@ -115,4 +115,4 @@ c.interact(banner='')
 
 sys.exit()
 
-# vim:filetype=python
+# vim: filetype=python

@@ -1,3 +1,3 @@
-; -*- mode: Lisp -*-
+;;; -*- mode: Lisp -*-
 
 (load "~/.sbclrc")

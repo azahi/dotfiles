@@ -102,33 +102,13 @@
     user            = azahi
 
 [url "git@github.com:"]
-    insteadOf = "gh:"
-    pushInsteadOf = "github:"
-    pushInsteadOf = "git://github.com/"
-
-[url "git://github.com/"]
-    insteadOf = "github:"
-
-[url "git@gist.github.com:"]
-    insteadOf = "gst:"
-    pushInsteadOf = "gist:"
-    pushInsteadOf = "git://gist.github.com/"
-
-[url "git://gist.github.com/"]
-    insteadOf = "gist:"
+    pushInsteadOf   = "github:"
+    pushInsteadOf   = "git://github.com/"
 
 [url "git@gitlab.com:"]
-    insteadOf = gl:
-    pushInsteadOf = gitlab:
-    pushInsteadOf = git://gitlab.com/
-
-[url "git://gitlab.com/"]
-    insteadOf = gitlab:
+    pushInsteadOf   = "gitlab:"
+    pushInsteadOf   = "git://gitlab.com/"
 
 [url "git@bitbucket.org:"]
-    insteadOf = bb:
-    pushInsteadOf = bitbucket:
-    pushInsteadOf = git://bitbucket.org/
-
-[url "git://bitbucket.org/"]
-    insteadOf = bitbucket:
+    pushInsteadOf   = "bitbucket:"
+    pushInsteadOf   = "git://bitbucket.org/"

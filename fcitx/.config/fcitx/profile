@@ -20,4 +20,3 @@ EnabledIMList=fcitx-keyboard-us:True,mozc:True
 # True False
 #PreeditStringInClientWindow=True
 
-# vim:filetype=cfg

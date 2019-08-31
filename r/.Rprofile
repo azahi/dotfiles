@@ -68,4 +68,4 @@ if (Sys.getenv("TERM") == "xterm-256color")
 
 attach(.env)
 
-# vim:filetype=r
+# vim: filetype=r

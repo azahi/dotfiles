@@ -40,7 +40,7 @@ import:
     resume: ask
 match:
     preferred:
-        countries: ['JP', 'US', 'GB|UK']
+        countries: ['JP', 'US', 'GB|UK', 'RU']
 paths:
     default: $albumartist/$album%aunique{}/$track $title
 edit:

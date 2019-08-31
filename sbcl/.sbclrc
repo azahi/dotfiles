@@ -1,4 +1,4 @@
-; -*- mode: Lisp -*-
+;;; -*- mode: Lisp -*-
 
 (when (probe-file #p"/etc/common-lisp/gentoo-init.lisp")
   (load #p"/etc/common-lisp/gentoo-init.lisp"))
