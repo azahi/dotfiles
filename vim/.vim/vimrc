@@ -5,7 +5,6 @@ set clipboard=unnamedplus,autoselect
 set cmdheight=1
 set completeopt=menuone,menu,longest
 set encoding=utf-8
-set expandtab
 set exrc
 set fileencodings=utf-8
 set fileformat=unix
@@ -32,11 +31,8 @@ set showmatch
 set showmode
 set smartcase
 set smartindent
-set smarttab
-set softtabstop=4
 set t_Co=256
 set t_vb=
-set tabstop=4
 set tm=512
 set ttimeoutlen=10
 set undolevels=1024
@@ -95,6 +91,8 @@ Plug 'shougo/neocomplete.vim'
 
 Plug 'ntpeters/vim-better-whitespace'
 
+
+Plug 'dracula/vim', { 'as': 'dracula'  }
 
 
 call plug#end()

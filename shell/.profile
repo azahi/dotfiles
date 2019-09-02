@@ -45,17 +45,32 @@ do
     command -v "$i" >/dev/null 2>&1 && export BROWSER="$i" && break
 done
 
-export XDG_CACHE_HOME="/tmp/.private/$USER"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_DESKTOP_DIR="$HOME/documents"
-export XDG_DOCUMENTS_DIR="$HOME/documents"
-export XDG_DOWNLOAD_DIR="$HOME/downloads"
-export XDG_MUSIC_DIR="$HOME/audios"
-export XDG_PICTURES_DIR="$HOME/pictures"
-export XDG_PUBLICSHARE_DIR="$HOME/documents"
-export XDG_TEMPLATES_DIR="$HOME/documents"
-export XDG_VIDEOS_DIR="$HOME/videos"
+if [ ! "$(uname)" = "Darwin" ]
+then
+    export XDG_CACHE_HOME="/tmp/.private/$USER"
+    export XDG_CONFIG_HOME="$HOME/.config"
+    export XDG_DATA_HOME="$HOME/.local/share"
+    export XDG_DESKTOP_DIR="$HOME/documents"
+    export XDG_DOCUMENTS_DIR="$HOME/documents"
+    export XDG_DOWNLOAD_DIR="$HOME/downloads"
+    export XDG_MUSIC_DIR="$HOME/audios"
+    export XDG_PICTURES_DIR="$HOME/pictures"
+    export XDG_PUBLICSHARE_DIR="$HOME/documents"
+    export XDG_TEMPLATES_DIR="$HOME/documents"
+    export XDG_VIDEOS_DIR="$HOME/videos"
+else
+    export XDG_CACHE_HOME="/tmp/$USER"
+    export XDG_CONFIG_HOME="$HOME/.config"
+    export XDG_DATA_HOME="$HOME/.local/share"
+    export XDG_DESKTOP_DIR="$HOME/Desktop"
+    export XDG_DOCUMENTS_DIR="$HOME/Documents"
+    export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+    export XDG_MUSIC_DIR="$HOME/Music"
+    export XDG_PICTURES_DIR="$HOME/Pictures"
+    export XDG_PUBLICSHARE_DIR="$HOME/Documents"
+    export XDG_TEMPLATES_DIR="$HOME/Documents"
+    export XDG_VIDEOS_DIR="$HOME/Documents"
+fi
 
 [ ! -d "$XDG_CONFIG_HOME" ]     && mkdir -p "$XDG_CONFIG_HOME"
 [ ! -d "$XDG_DATA_HOME" ]       && mkdir -p "$XDG_DATA_HOME"
@@ -162,7 +177,7 @@ then
     alias beet="beet -c \$XDG_CONFIG_HOME/beets/config.yaml"
 fi
 
-[ "$(command -v dbus-daemon)" ] && [ "$(uname -o)" = "GNU/Linux" ] && \
+[ "$(command -v dbus-daemon)" ] && [ ! "$(uname)" = "Darwin" ] && \
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 
 [ "$(command -v gpg)" ] && \
@@ -183,7 +198,7 @@ fi
 [ "$HOST" = "tp-gentoo" ] && \
     export XAUTHORITY="$XDG_DATA_HOME/xorg/.Xauthority"
 
-if [ "$(uname -o)" = "GNU/Linux" ]
+if [ ! "$(uname)" = "Darwin" ]
 then
     alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
     alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
@@ -233,8 +248,28 @@ then
     prependpath "/usr/lib/ccache/bin"
 fi
 
-alias cp="cp --verbose"
-alias mkdir="mkdir --verbose --parents"
-alias mv="mv --verbose"
-alias rm="rm --verbose --interactive=once"
-alias rmdir="rmdir --verbose --parents"
+if [ -d $HOME/.brew ]
+then
+    prependpath "$HOME/.brew/bin"
+
+    export HOMEBREW_CACHE=$XDG_CACHE_HOME/homebrew/cache
+    export HOMEBREW_TEMP=$XDG_CACHE_HOME/homebrew/temp
+
+    mkdir -p $HOMEBREW_CACHE
+    mkdir -p $HOMEBREW_TEMP
+
+    if df -T autofs,nfs $HOME 1>/dev/null
+    then
+        HOMEBREW_LOCKS_TARGET=$XDG_CACHE_HOME/homebrew/locks
+        HOMEBREW_LOCKS_FOLDER=$HOME/.brew/var/homebrew
+
+        mkdir -p $HOMEBREW_LOCKS_TARGET
+        mkdir -p $HOMEBREW_LOCKS_FOLDER
+
+        if [ ! -L $HOMEBREW_LOCKS_FOLDER ] || [ ! -d $HOMEBREW_LOCKS_FOLDER ]
+        then
+            rm -rf $HOMEBREW_LOCKS_FOLDER
+            ln -s $HOMEBREW_LOCKS_TARGET $HOMEBREW_LOCKS_FOLDER
+        fi
+    fi
+fi

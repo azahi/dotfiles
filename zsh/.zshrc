@@ -34,9 +34,9 @@ zplug "hlissner/zsh-autopair", defer:1
 zplug "softmoth/zsh-vim-mode"
 zplug "wting/autojump", if:"[ $(command -v autojump) ]"
 zplug "zpm-zsh/colors"
-zplug "zpm-zsh/ls", defer:2
 zplug "zsh-users/zsh-autosuggestions"
 bindkey '^ ' autosuggest-accept
+zplug "win0err/aphrodite-terminal-theme", as:theme
 
 if ! zplug check
 then

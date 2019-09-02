@@ -66,6 +66,7 @@
        gist
        lookup
        lsp
+       macos
        magit
        make
        pass
