@@ -66,33 +66,15 @@ endif
 
 call plug#begin('~/.vim/plug')
 
-
-
-Plug 'farmergreg/vim-lastplace'
-
-
-Plug 'jiangmiao/auto-pairs'
-
-
-Plug 'vim-scripts/ruscmd'
-
-
 Plug 'airblade/vim-gitgutter'
-
-
-Plug 'scrooloose/syntastic'
-
-
-Plug 'junegunn/fzf'
-
-
-Plug 'shougo/neocomplete.vim'
-
-
-Plug 'ntpeters/vim-better-whitespace'
-
-
 Plug 'dracula/vim', { 'as': 'dracula'  }
-
+Plug 'farmergreg/vim-lastplace'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'pbondoer/vim-42header'
+Plug 'scrooloose/syntastic'
+Plug 'shougo/neocomplete.vim'
+Plug 'vim-scripts/ruscmd'
 
 call plug#end()

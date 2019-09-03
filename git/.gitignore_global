@@ -1,11 +1,26 @@
+*.bak
 *.sock
+*.tmp
+*_archive
 *~
+.*-V100
+.Apple*
 .DS_Store
+.LSOverride
+.TemporaryItems
 .Trash*
+.VolumeIcon.icns
 .\#*
+._*
+.apdisk
+.fseventsd
+.fuse_hidden*
 .gdb_history
 .netrwhist
+Icon
+Network Trash Folder
 TAGS
+Temporary Items
 Thumbs.db
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]

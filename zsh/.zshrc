@@ -37,6 +37,8 @@ zplug "zpm-zsh/colors"
 zplug "zsh-users/zsh-autosuggestions"
 bindkey '^ ' autosuggest-accept
 zplug "win0err/aphrodite-terminal-theme", as:theme
+zplug "zsh-users/zsh-completions"
+zplug "ninrod/pass-zsh-completion"
 
 if ! zplug check
 then

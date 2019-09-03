@@ -40,7 +40,7 @@ do
     command -v "$i" >/dev/null 2>&1 && export DIFF="$i" && break
 done
 
-for i in qutebrowser palemoon firefox chromium chrome safari w3m lynx elinks links
+for i in qutebrowser palemoon firefox chromium chrome safari open w3m lynx elinks links
 do
     command -v "$i" >/dev/null 2>&1 && export BROWSER="$i" && break
 done
@@ -83,7 +83,7 @@ fi
 [ ! -d "$XDG_TEMPLATES_DIR" ]   && mkdir -p "$XDG_TEMPLATES_DIR"
 [ ! -d "$XDG_VIDEOS_DIR" ]      && mkdir -p "$XDG_VIDEOS_DIR"
 
-if [ "$(command -v emacs)" ]
+if command -v emacs >/dev/null 2>&1
 then
     alias e="emacs -t"
     alias ec="emacsclient -t"
@@ -103,14 +103,14 @@ do
         export PYTHONSTARTUP="$HOME/.pystartup" && break
 done
 
-if [ "$(command -v dotnet)" ]
+if command -v dotnet >/dev/null 2>&1
 then
     prependpath "$HOME/.dotnet/tools"
 
     export DOTNET_CLI_TELEMETRY_OPTOUT=1
     export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
 
-    if [ "$(command -v nuget)" ]
+    if command -v nuget >/dev/null 2>&1
     then
         export NUGET_CERT_REVOCATION_MODE="online"
         export NUGET_PERSIST_DG="false"
@@ -120,7 +120,7 @@ then
     fi
 fi
 
-if [ "$(command -v cargo)" ]
+if command -v cargo >/dev/null 2>&1
 then
     prependpath "$HOME/.cargo/bin"
 
@@ -128,27 +128,29 @@ then
     export CARGO_CACHE_RUSTC_INFO=0
 fi
 
-if [ "$(command -v go)" ]
+if command -v go >/dev/null 2>&1
 then
     export GOPATH="$HOME/.go"
 
     prependpath "$HOME/.go/bin"
 fi
 
-[ "$(command -v cabal)" ] && \
+if command -v cabal >/dev/null 2>&1
+then
     prependpath "$HOME/.cabal/bin"
+fi
 
-if [ "$(command -v wine)" ]
+if command -v wine >/dev/null 2>&1
 then
     export WINEARCH="win32"
     export WINEPREFIX="$HOME/.wine"
     export WINEDEBUG="-all"
     export WINEDLLOVERRIDES="mscoree,mshtml=;winemenubuilder.exe=d"
 
-    alias wine-play="wine explorer.exe /desktop=default,1600x900"
+    alias winep="wine explorer.exe /desktop=default,1600x900"
 fi
 
-if [ "$(command -v nnn)" ]
+if command -v nnn >/dev/null 2>&1
 then
     export NNN_IDLE_TIMEOUT=0
     export NNN_MULTISCRIPT=1
@@ -161,42 +163,49 @@ then
     alias n="nnn"
 fi
 
-if [ "$(command -v fzf)" ]
+if command -v fzf >/dev/null 2>&1
 then
     export FZF_DEFAULT_COMMAND=""
     export FZF_DEFAULT_OPTS="--height 20% --reverse --border"
 fi
 
-[ "$(command -v ranger)" ] && [ -d "$XDG_CONFIG_DIR/ranger" ] && \
+if command -v ranger >/dev/null 2>&1 && [ -d "$XDG_CONFIG_HOME/ranger" ]
+then
     export RANGER_LOAD_DEFAULT_RC="false"
+fi
 
-if [ "$(command -v beets)" ]
+if command -v beets >/dev/null 2>&1
 then
     export BEETSDIR="$XDG_DATA_HOME/beets"
 
     alias beet="beet -c \$XDG_CONFIG_HOME/beets/config.yaml"
 fi
 
-[ "$(command -v dbus-daemon)" ] && [ ! "$(uname)" = "Darwin" ] && \
+if command -v dbus-daemon >/dev/null 2>&1 && [ ! "$(uname)" = "Darwin" ]
+then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+fi
 
-[ "$(command -v gpg)" ] && \
+if command -v gpg >/dev/null 2>&1
+then
     export GNUPGHOME="$HOME/.gnupg"
+fi
 
-for i in gopass pass
-do
-    command -v "$i" >/dev/null 2>&1 && export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass" && break
-done
+if command -v pass >/dev/null 2>&1
+then
+    export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+fi
 
-
-if [ "$(command -v weechat)" ]
+if command -v weechat >/dev/null 2>&1
 then
     export WEECHAT_HOME="$HOME/.weechat"
     export WEECHAT_PASSPHRASE="$WEECHAT_HOME/pass"
 fi
 
-[ "$HOST" = "tp-gentoo" ] && \
+if [ "$HOST" = "tp-gentoo" ]
+then
     export XAUTHORITY="$XDG_DATA_HOME/xorg/.Xauthority"
+fi
 
 if [ ! "$(uname)" = "Darwin" ]
 then
@@ -208,11 +217,11 @@ then
 
     alias o="xdg-open"
 
-    [ "$(command -v startx)" ] && \
+    command -v startx >/dev/null 2>&1 && \
         alias sx="startx -- vt1 -nolisten tcp"
 fi
 
-if [ "$(command -v rsync)" ]
+if command -v rsync >/dev/null 2>&1
 then
     alias rsync-cp="rsync --archive --compress --verbose --progress --human-readable"
     alias rsync-mv="rsync --archive --compress --verbose --progress --human-readable --remove-source-files"
@@ -220,27 +229,34 @@ then
     alias rsync-update="rsync --archive --compress --verbose --progress --human-readable --update"
 fi
 
-[ -f "$GOPATH/bin/tewisay" ] && \
-    alias tewisay="\$GOPATH/bin/tewisay \
-        -f \$GOPATH/src/github.com/lucy/tewisay/cows/tes.cow"
+if [ -f "$GOPATH/bin/tewisay" ]
+then
+    alias tewisay="\$GOPATH/bin/tewisay -f \$GOPATH/src/github.com/lucy/tewisay/cows/tes.cow"
+fi
 
-[ "$(command -v torrentinfo)" ] && \
+if command -v torrentinfo >/dev/null 2>&1
+then
     alias torrentinfo="torrentinfo --everything"
+fi
 
-[ "$(command -v units)" ] && \
+if command -v units >/dev/null 2>&1
+then
     alias units="units --history=\$XDG_DATA_HOME/units_history"
+fi
 
-[ "$(command -v ag)" ] && \
+if command -v ag >/dev/null 2>&1
+then
     alias ag="ag --color"
+fi
 
-if [ "$(command -v less)" ]
+if command -v less >/dev/null 2>&1
 then
     alias less="less --quit-if-one-screen --no-init"
 
     export LESSHISTFILE="-"
 fi
 
-if [ "$(command -v ccache)" ]
+if command -v ccache >/dev/null 2>&1
 then
     export CCACHE_DIR="/var/tmp/ccache"
     export CCACHE_PATH="$PATH"
@@ -248,28 +264,28 @@ then
     prependpath "/usr/lib/ccache/bin"
 fi
 
-if [ -d $HOME/.brew ]
+if command -v brew >/dev/null 2>&1 || [ -d "$HOME/.brew" ]
 then
     prependpath "$HOME/.brew/bin"
 
-    export HOMEBREW_CACHE=$XDG_CACHE_HOME/homebrew/cache
-    export HOMEBREW_TEMP=$XDG_CACHE_HOME/homebrew/temp
+    export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew/cache"
+    export HOMEBREW_TEMP="$XDG_CACHE_HOME/homebrew/temp"
 
-    mkdir -p $HOMEBREW_CACHE
-    mkdir -p $HOMEBREW_TEMP
+    [ ! -d "$HOMEBREW_CACHE" ] && mkdir -p "$HOMEBREW_CACHE"
+    [ ! -d "$HOMEBREW_TEMP" ] && mkdir -p "$HOMEBREW_TEMP"
 
-    if df -T autofs,nfs $HOME 1>/dev/null
+    if df -T autofs,nfs "$HOME" 1>/dev/null
     then
-        HOMEBREW_LOCKS_TARGET=$XDG_CACHE_HOME/homebrew/locks
-        HOMEBREW_LOCKS_FOLDER=$HOME/.brew/var/homebrew
+        HOMEBREW_LOCKS_TARGET="$XDG_CACHE_HOME/homebrew/locks"
+        HOMEBREW_LOCKS_FOLDER="$HOME/.brew/var/homebrew"
 
-        mkdir -p $HOMEBREW_LOCKS_TARGET
-        mkdir -p $HOMEBREW_LOCKS_FOLDER
+        [ ! -d "$HOMEBREW_LOCKS_TARGET" ] && mkdir -p "$HOMEBREW_LOCKS_TARGET"
+        [ ! -d "$HOMEBREW_LOCKS_FOLDER" ] && mkdir -p "$HOMEBREW_LOCKS_FOLDER"
 
-        if [ ! -L $HOMEBREW_LOCKS_FOLDER ] || [ ! -d $HOMEBREW_LOCKS_FOLDER ]
+        if [ ! -L "$HOMEBREW_LOCKS_FOLDER" ] || [ ! -d "$HOMEBREW_LOCKS_FOLDER" ]
         then
-            rm -rf $HOMEBREW_LOCKS_FOLDER
-            ln -s $HOMEBREW_LOCKS_TARGET $HOMEBREW_LOCKS_FOLDER
+            rm -rf "$HOMEBREW_LOCKS_FOLDER"
+            ln -s "$HOMEBREW_LOCKS_TARGET" "$HOMEBREW_LOCKS_FOLDER"
         fi
     fi
 fi
