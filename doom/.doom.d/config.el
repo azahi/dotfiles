@@ -2,10 +2,9 @@
 
 (setq custom-file (concat doom-etc-dir "custom.el"))
 
-(setq doom-theme 'doom-tomorrow-night)
-
-(setq doom-font     (font-spec :family "Source Code Pro" :size 12)
-      doom-big-font (font-spec :family "Source Code Pro" :size 19))
+(when (string-equal (system-name) "tp-gentoo")
+  (setq doom-font     (font-spec :family "Source Code Pro" :size 12)
+        doom-big-font (font-spec :family "Source Code Pro" :size 19)))
 
 (with-eval-after-load 'flycheck
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
