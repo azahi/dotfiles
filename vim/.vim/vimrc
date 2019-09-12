@@ -8,7 +8,7 @@ set encoding=utf-8
 set exrc
 set fileencodings=utf-8
 set fileformat=unix
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 set hidden
 set history=512
 set hlsearch
@@ -20,6 +20,7 @@ set matchtime=2
 set mouse=
 set nocompatible
 set noerrorbells
+set expandtab
 set norelativenumber
 set noswapfile
 set number
@@ -31,6 +32,7 @@ set showmatch
 set showmode
 set smartcase
 set smartindent
+set softtabstop=4
 set t_Co=256
 set t_vb=
 set tm=512
@@ -76,5 +78,6 @@ Plug 'pbondoer/vim-42header'
 Plug 'scrooloose/syntastic'
 Plug 'shougo/neocomplete.vim'
 Plug 'vim-scripts/ruscmd'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
