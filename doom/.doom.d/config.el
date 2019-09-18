@@ -2,6 +2,9 @@
 
 (setq custom-file (concat doom-etc-dir "custom.el"))
 
+(setq doom-font     (font-spec :family "Fira Code Retina" :size 12)
+      doom-big-font (font-spec :family "Fira Code Retina" :size 19))
+
 (when (string-equal (system-name) "tp-gentoo")
   (setq doom-font     (font-spec :family "Source Code Pro" :size 12)
         doom-big-font (font-spec :family "Source Code Pro" :size 19)))

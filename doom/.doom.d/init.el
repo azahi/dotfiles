@@ -26,7 +26,6 @@
           +defaults)
          treemacs
          vc-gutter
-         vi-tilde-fringe
          (window-select
           +ace-window)
          workspaces
@@ -163,12 +162,12 @@
           +defaults)
          treemacs
          vc-gutter
-         vi-tilde-fringe
          (window-select
           +ace-window)
          workspaces
 
          :editor
+         ft-header
          (evil
           +everywhere)
          file-templates
@@ -227,6 +226,7 @@
           +protocol)
          (sh
           -lsp)
+         plantuml
 
          :email
 
