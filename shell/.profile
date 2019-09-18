@@ -152,13 +152,16 @@ fi
 
 if command -v nnn >/dev/null 2>&1
 then
-    export NNN_IDLE_TIMEOUT=0
     export NNN_MULTISCRIPT=1
     export NNN_NO_AUTOSELECT=1
     export NNN_QUOTE_ON=1
-    export NNN_SHOW_HIDDEN=0
-    export NNN_USE_EDITOR=1
     export NNN_TMPFILE="$XDG_CACHE_HOME/nnn"
+    export NNN_TRASH=0
+    export NNN_USE_EDITOR=1
+    command -v open >/dev/null 2>&1 && \
+        export NNN_OPENER="open"
+    command -v xdg-open >/dev/null 2>&1 && \
+        export NNN_OPENER="xdg-open"
 
     alias n="nnn"
 fi
@@ -207,18 +210,18 @@ then
     export XAUTHORITY="$XDG_DATA_HOME/xorg/.Xauthority"
 fi
 
-if [ ! "$(uname)" = "Darwin" ]
+# shellcheck disable=2010
+if ls --version | grep -q "GNU"
 then
     alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
     alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
     alias la="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
 
-    alias cal="cal --three --monday"
+fi
 
-    alias o="xdg-open"
-
-    command -v startx >/dev/null 2>&1 && \
-        alias sx="startx -- vt1 -nolisten tcp"
+if command -v startx >/dev/null 2>&1
+then
+    alias sx="startx -- vt1 -nolisten tcp"
 fi
 
 if command -v rsync >/dev/null 2>&1

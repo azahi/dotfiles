@@ -1,71 +1,76 @@
-import atexit
 import os
 import readline
-import sys
-from code import InteractiveConsole
-from tempfile import mkstemp
+import rlcompleter
+import atexit
 
 readline.parse_and_bind("tab: complete")
-readline.parse_and_bind("bind ^I rl_complete")
 
 
 class Completer(object):
     def __init__(self):
-        self.histfile = os.path.expanduser(
-            "%s/python/history" % os.environ["XDG_DATA_HOME"])
-        if os.path.exists(self.histfile):
-            readline.read_history_file(self.histfile)
-        readline.set_history_length(300)
+        self.python_dir = os.path.expanduser("%s/python" % os.environ["XDG_DATA_HOME"])
+        if not os.path.exists(self.python_dir):
+            os.mkdir(self.python_dir)
+        self.python_histfile = os.path.expanduser("%s/history" % self.python_dir)
+        if os.path.exists(self.python_histfile):
+            readline.read_history_file(self.python_histfile)
+        readline.set_history_length(1000)
         atexit.register(self.savehist)
 
     def savehist(self):
-        readline.write_history_file(self.histfile)
+        import readline
+        readline.write_history_file(self.python_histfile)
+
+
+C = Completer()
 
 
 class TermColors(dict):
-    colorTemplates = (
-        ("Black", "0;30"),
-        ("Blue", "0;34"),
-        ("Brown", "0;33"),
-        ("Cyan", "0;36"),
-        ("DarkGray", "1;30"),
-        ("Green", "0;32"),
-        ("LightBlue", "1;34"),
-        ("LightCyan", "1;36"),
-        ("LightGray", "0;37"),
-        ("LightGreen", "1;32"),
+    color_templates = (
+        ("Normal",      "0"),
+        ("Black",       "0;30"),
+        ("Red",         "0;31"),
+        ("Green",       "0;32"),
+        ("Brown",       "0;33"),
+        ("Blue",        "0;34"),
+        ("Purple",      "0;35"),
+        ("Cyan",        "0;36"),
+        ("LightGray",   "0;37"),
+        ("DarkGray",    "1;30"),
+        ("LightRed",    "1;31"),
+        ("LightGreen",  "1;32"),
+        ("Yellow",      "1;33"),
+        ("LightBlue",   "1;34"),
         ("LightPurple", "1;35"),
-        ("LightRed", "1;31"),
-        ("Normal", "0"),
-        ("Purple", "0;35"),
-        ("Red", "0;31"),
-        ("White", "1;37"),
-        ("Yellow", "1;33"))
-    noColor = ''
-    baseColor = '\001\033[%sm\002'
+        ("LightCyan",   "1;36"),
+        ("White",       "1;37")
+    )
+    color_default = ''
+    color_base = '\001\033[%sm\002'
 
     def __init__(self):
         if os.environ.get('TERM') in (
                 'linux',
+                'rxvt',
                 'rxvt-256color',
+                'screen',
                 'screen-256color',
-                'st-256color',
-                'xterm-256color'):
-            self.update(dict(
-                [(k, self.baseColor % v) for k, v in self.colorTemplates]))
+                'xterm',
+                'xterm-256color'
+            ):
+            self.update(dict([(k, self.color_base % v) for k, v in self.color_templates]))
         else:
-            self.update(dict(
-                [(k, self.noColor) for k, v in self.colorTemplates]))
+            self.update(dict([(k, self.color_default) for k, v in self.color_templates]))
 
 
+import sys
 TC = TermColors()
-sys.ps1 = '%sλ%s %s>%s ' % (TC['Blue'], TC['Normal'],
+sys.ps1 = "%sλ%s %s>%s " % (TC['Blue'], TC['Normal'],
                             TC['White'], TC['Normal'])
-sys.ps2 = '    %s…%s %s>%s ' % (TC['Blue'], TC['Normal'],
+sys.ps2 = "    %s…%s %s>%s " % (TC['Blue'], TC['Normal'],
                                 TC['White'], TC['Normal'])
 
-
-def DisplayHook(value):
+def display_hook(value):
     if value is not None:
         try:
             import __builtin__
@@ -77,11 +82,14 @@ def DisplayHook(value):
         pprint.pprint(value)
         del pprint
 
+sys.displayhook = display_hook
 
-sys.displayhook = DisplayHook
 
 EDITOR = os.environ.get('EDITOR', 'vim')
 EDIT_CMD = ':e'
+
+from tempfile import mkstemp
+from code import InteractiveConsole
 
 
 class EditableBufferInteractiveConsole(InteractiveConsole):
@@ -90,19 +98,19 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
         InteractiveConsole.__init__(self, *args, **kwargs)
 
     def runsource(self, source, *args):
-        self.last_buffer = [source.encode('latin-1')]
+        self.last_buffer = [source.encode('utf-8')]
         return InteractiveConsole.runsource(self, source, *args)
 
     def raw_input(self, *args):
         line = InteractiveConsole.raw_input(self, *args)
         if line == EDIT_CMD:
-            fd, tmpfl = mkstemp('.py')
-            os.write(fd, b'\n'.join(self.last_buffer))
-            os.close(fd)
-            os.system('%s %s' % (EDITOR, tmpfl))
-            line = open(tmpfl).read()
-            os.unlink(tmpfl)
-            tmpfl = ''
+            tmp_fd, tmp_file = mkstemp('.py')
+            os.write(tmp_fd, b'\n'.join(self.last_buffer))
+            os.close(tmp_fd)
+            os.system('%s %s' % (EDITOR, tmp_file))
+            line = open(tmp_file).read()
+            os.unlink(tmp_file)
+            tmp_file = ''
             lines = line.split('\n')
             for i in range(len(lines) - 1):
                 self.push(lines[i])
@@ -110,9 +118,13 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
         return line
 
 
-c = EditableBufferInteractiveConsole(locals=locals())
-c.interact(banner='')
+del sys
 
+C = EditableBufferInteractiveConsole(locals=locals())
+C.interact(banner="")
+
+import sys
 sys.exit()
 
+# flake8: noqa
 # vim: filetype=python
