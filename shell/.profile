@@ -211,12 +211,11 @@ then
 fi
 
 # shellcheck disable=2010
-if ls --version | grep -q "GNU"
+if ls --version >/dev/null 2>&1 | grep -q "GNU"
 then
     alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
     alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
     alias la="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
-
 fi
 
 if command -v startx >/dev/null 2>&1
