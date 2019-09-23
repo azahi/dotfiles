@@ -1,51 +1,71 @@
-set autoindent
 set autoread
-set backspace=indent,eol,start
-set clipboard=unnamedplus,autoselect
 set cmdheight=1
 set completeopt=menuone,menu,longest
 set encoding=utf-8
 set exrc
-set fileencodings=utf-8
-set fileformat=unix
-set fillchars+=vert:\
 set hidden
 set history=512
-set hlsearch
-set ignorecase
-set incsearch
 set lazyredraw
 set magic
 set matchtime=2
 set mouse=
-set nocompatible
-set noerrorbells
-set expandtab
-set norelativenumber
-set noswapfile
-set number
-set scrolloff=10
 set secure
 set shiftround
-set shiftwidth=4
 set showmatch
 set showmode
-set smartcase
-set smartindent
-set softtabstop=4
 set t_Co=256
+set t_ut=
 set t_vb=
 set tm=512
 set ttimeoutlen=10
 set undolevels=1024
 set updatetime=256
-set viminfo+=n~/.vim/viminfo
-set visualbell
-set wildmenu
-set wildmode=full
-set wrap
 
-colorscheme pablo
+set nocompatible
+
+set noerrorbells
+set visualbell
+
+set viminfo+=n~/.vim/viminfo
+set noswapfile
+
+set fillchars+=vert:\
+
+set clipboard=unnamedplus,autoselect
+
+set ruler
+set number
+set scrolloff=10
+set laststatus=0
+set hidden
+
+set backspace=indent,eol,start
+
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+set ttyfast
+
+set wildmenu
+set wildmode=list:longest,list:full
+
+set nowrap
+
+set autoindent
+set expandtab
+set shiftwidth=4
+set smartindent
+set smarttab
+set softtabstop=0
+
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase
+
+set fileformats=unix,dos,mac
+
+colorscheme default
 
 syntax on
 
@@ -57,27 +77,53 @@ let mapleader = ','
 nnoremap j gj
 nnoremap k gk
 
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+                \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     autocmd VimEnter * PlugInstall --sync | source ~/.vim/vimrc
 endif
 
 
 call plug#begin('~/.vim/plug')
 
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+
 Plug 'airblade/vim-gitgutter'
-Plug 'dracula/vim', { 'as': 'dracula'  }
-Plug 'farmergreg/vim-lastplace'
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'pbondoer/vim-42header'
-Plug 'scrooloose/syntastic'
-Plug 'shougo/neocomplete.vim'
-Plug 'vim-scripts/ruscmd'
+
 Plug 'editorconfig/editorconfig-vim'
+
+Plug 'farmergreg/vim-lastplace'
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'junegunn/fzf.vim'
+
+Plug 'ntpeters/vim-better-whitespace'
+
+Plug 'pbondoer/vim-42header'
+
+Plug 'raimon49/requirements.txt.vim', { 'for': 'requirements' }
+
+Plug 'scrooloose/syntastic'
+
+Plug 'shougo/neocomplete.vim'
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+Plug 'tpope/vim-commentary'
+
+Plug 'vim-scripts/c.vim', { 'for': ['c', 'cpp', 'cxx', 'h'] }
+
+Plug 'vim-scripts/grep.vim'
+
+Plug 'vim-scripts/ruscmd'
+
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+
 
 call plug#end()

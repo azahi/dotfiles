@@ -133,8 +133,8 @@
 
          :config
          (default
-           +bindings
-           +smartparens)))
+          +bindings
+          +smartparens)))
 
 (when (eq system-type 'darwin)
   (doom! :input
@@ -229,6 +229,8 @@
          plantuml
 
          :email
+         mu4e
+         notmuch
 
          :app
          calendar
@@ -238,8 +240,8 @@
 
          :config
          (default
-           +bindings
-           +smartparens)))
+          +bindings
+          +smartparens)))
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
