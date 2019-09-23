@@ -1,3 +1,0 @@
-set verbose on
-set history filename ~/.local/share/gdb_history
-set history save
