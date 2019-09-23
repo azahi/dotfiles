@@ -8,10 +8,12 @@ readline.parse_and_bind("tab: complete")
 
 class Completer(object):
     def __init__(self):
-        self.python_dir = os.path.expanduser("%s/python" % os.environ["XDG_DATA_HOME"])
+        self.python_dir = os.path.expanduser(
+            "%s/python" % os.environ["XDG_DATA_HOME"])
         if not os.path.exists(self.python_dir):
             os.mkdir(self.python_dir)
-        self.python_histfile = os.path.expanduser("%s/history" % self.python_dir)
+        self.python_histfile = os.path.expanduser(
+            "%s/history" % self.python_dir)
         if os.path.exists(self.python_histfile):
             readline.read_history_file(self.python_histfile)
         readline.set_history_length(1000)
@@ -58,9 +60,11 @@ class TermColors(dict):
                 'xterm',
                 'xterm-256color'
             ):
-            self.update(dict([(k, self.color_base % v) for k, v in self.color_templates]))
+            self.update(dict(
+                [(k, self.color_base % v) for k, v in self.color_templates]))
         else:
-            self.update(dict([(k, self.color_default) for k, v in self.color_templates]))
+            self.update(dict(
+                [(k, self.color_default) for k, v in self.color_templates]))
 
 
 import sys

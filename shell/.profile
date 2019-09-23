@@ -291,3 +291,9 @@ then
         fi
     fi
 fi
+
+for i in "$HOME/.shell.d/"*.sh
+do
+    # shellcheck disable=SC1090
+    source "$i"
+done
