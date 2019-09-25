@@ -99,8 +99,15 @@ fi
 
 for i in python python2 python3
 do
-    command -v >/dev/null 2>&1 "$i" && [ -f "$HOME/.pystartup" ] && \
-        export PYTHONSTARTUP="$HOME/.pystartup" && break
+    if command -v "$i" >/dev/null 2>&1
+    then
+        [ -f "$HOME/.pystartup" ] && \
+            export PYTHONSTARTUP="$HOME/.pystartup"
+
+        prependpath "$HOME/Library/Python/2.7/bin"
+        prependpath "$HOME/Library/Python/3.7/bin"
+        break
+    fi
 done
 
 if command -v dotnet >/dev/null 2>&1
@@ -211,7 +218,7 @@ then
 fi
 
 # shellcheck disable=2010
-if ls --version | grep -q "GNU" >/dev/null 2>&1
+if ls --version 2>&1 | grep -q "GNU" >/dev/null
 then
     alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
     alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
