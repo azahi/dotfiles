@@ -74,6 +74,7 @@
          rgb
          tmux
          upload
+         wakatime
 
          :lang
          assembly
@@ -206,6 +207,7 @@
          rgb
          tmux
          upload
+         wakatime
 
          :lang
          assembly

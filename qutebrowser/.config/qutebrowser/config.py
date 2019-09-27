@@ -494,7 +494,7 @@ c.tabs.indicator.padding = {'top': 6, 'bottom': 6, 'left': 0, 'right': 0}
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'file:///home/free/code/startpage/index.html'
+c.url.default_page = 'https://start.duckduckgo.com/'
 
 # Search engines which can be used via the address bar. Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`

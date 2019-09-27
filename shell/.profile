@@ -27,22 +27,30 @@ prependpath "/bin"
 
 for i in vim vi emacs nano
 do
-    command -v "$i" >/dev/null 2>&1 && export EDITOR="$i" VISUAL="$i" && break
+    command -v "$i" >/dev/null 2>&1 && \
+        export EDITOR="$i" VISUAL="$i" && \
+        break
 done
 
 for i in bat less
 do
-    command -v "$i" >/dev/null 2>&1 && export PAGER="$i" && break
+    command -v "$i" >/dev/null 2>&1 && \
+        export PAGER="$i" && \
+        break
 done
 
 for i in ediff cdiff cwdiff wdiff colordiff diff
 do
-    command -v "$i" >/dev/null 2>&1 && export DIFF="$i" && break
+    command -v "$i" >/dev/null 2>&1 && \
+        export DIFF="$i" && \
+        break
 done
 
 for i in qutebrowser palemoon firefox chromium chrome safari open w3m lynx elinks links
 do
-    command -v "$i" >/dev/null 2>&1 && export BROWSER="$i" && break
+    command -v "$i" >/dev/null 2>&1 && \
+        export BROWSER="$i" && \
+        break
 done
 
 if [ ! "$(uname)" = "Darwin" ]
@@ -96,6 +104,15 @@ then
     fi
 
 fi
+
+for i in neovim vim vim
+do
+    # shellcheck disable=SC2139
+    command -v "$i" >/dev/null 2>&1 && \
+        alias vim="$i" && \
+        alias v="$i" && \
+        break
+done
 
 for i in python python2 python3
 do
@@ -165,10 +182,13 @@ then
     export NNN_TMPFILE="$XDG_CACHE_HOME/nnn"
     export NNN_TRASH=0
     export NNN_USE_EDITOR=1
-    command -v open >/dev/null 2>&1 && \
+    if command -v open >/dev/null 2>&1
+    then
         export NNN_OPENER="open"
-    command -v xdg-open >/dev/null 2>&1 && \
+    elif command -v xdg-open >/dev/null 2>&1
+    then
         export NNN_OPENER="xdg-open"
+    fi
 
     alias n="nnn"
 fi
@@ -236,11 +256,6 @@ then
     alias rsync-mv="rsync --archive --compress --verbose --progress --human-readable --remove-source-files"
     alias rsync-sync="rsync --archive --compress --verbose --progress --human-readable --update --delete"
     alias rsync-update="rsync --archive --compress --verbose --progress --human-readable --update"
-fi
-
-if [ -f "$GOPATH/bin/tewisay" ]
-then
-    alias tewisay="\$GOPATH/bin/tewisay -f \$GOPATH/src/github.com/lucy/tewisay/cows/tes.cow"
 fi
 
 if command -v torrentinfo >/dev/null 2>&1
