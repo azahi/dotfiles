@@ -1,5 +1,18 @@
 #!/bin/sh
 
+if command -v open >/dev/null 2>&1
+then
+    o()
+    {
+        if [ $# -eq 0 ]
+        then
+            open .
+        else
+            open "$@"
+        fi
+    }
+fi
+
 if command -v jot >/dev/null 2>&1
 then
     hr()
@@ -15,7 +28,7 @@ strstrip_s()
 
 strstrip_e()
 {
-    printf "%s\n" "${1##$2}"
+    printf "%s\n" "${1%%$2}"
 }
 
 strtrim()

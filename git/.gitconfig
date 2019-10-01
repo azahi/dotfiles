@@ -13,10 +13,11 @@
     ui              = true
 
 [core]
+    commitgraph     = true
     excludesfile    = ~/.gitignore_global
     quotepath       = false
-    commitgraph     = true
     untrackedcache  = true
+    whitespace      = space-before-tab,-indent-with-non-tab,trailing-space
 
 [commit]
     verbose         = false
@@ -33,23 +34,23 @@
     log             = true
 
 [mergetool]
-    prompt          = false
     keepbackup      = false
+    prompt          = false
 
 [diff]
-    submodule       = log
     renames         = copies
+    submodule       = log
+
+[diff "bin"]
+    textconv        = hexdump -v -C
 
 [difftool]
     prompt          = false
     trustexitcode   = true
 
-[diff "bin"]
-    textconv        = hexdump -v -C
-
 [log]
-    decorate        = short
     date            = local
+    decorate        = short
 
 [status]
     color           = true
@@ -59,7 +60,7 @@
 
 [push]
     default         = simple
-    followTags      = true
+    followtags      = true
 
 [pull]
     rebase          = true
@@ -75,9 +76,16 @@
     autocorrect     = 1
 
 [alias]
+    aliases         = config --get-regexp alias
+    b               = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\" } ; f"
+    bs              = branch -a
+    c               = clone --recursive
+    ca              = !git add -A && git commit -av
     clone           = clone --recursive
     conflicts       = diff --name-only --diff-filter=U
-    contributors    = --no-pager shortlog --numbered --summary
+    credit          = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; } ; f"
+    d               = !"git diff-index --quiet HEAD -- || clear ; git --no-pager diff --patch-with-stat"
+    di              = !"d() { git diff --patch-with-stat HEAD~$1 } ; git diff-index --quiet HEAD -- || clear ; d"
     ec              = diff HEAD^ --name-only --diff-filter=ACMR
     ed              = diff HEAD --name-only --diff-filter=ACMR
     et              = conflicts
@@ -86,29 +94,35 @@
     ignore          = update-index --assume-unchanged
     lg              = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     lgs             = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
+    p               = git pull --recurse-submodules
     pull            = pull --all
     recommit        = commit --amend
-    wtc             = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+    rs              = remote -v
     spull           = submodule foreach git pull
     ss              = !git status --porcelain | awk '{print $2}'
     st              = diff --staged --name-only --diff-filter=ACMR
+    ts              = tag -l
     uncommit        = reset --soft HEAD^
     unignore        = update-index --un-assume-unchanged
     unpush          = push --force-with-lease origin HEAD^:master
     unstage         = reset HEAD
     wc              = whatchanged -p --abbrev-commit --pretty=medium
+    wtc             = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
 
 [github]
     user            = azahi
 
 [url "git@github.com:"]
+    insteadOf       = "gh:"
     pushInsteadOf   = "github:"
     pushInsteadOf   = "git://github.com/"
 
 [url "git@gitlab.com:"]
+    insteadOf       = "gl:"
     pushInsteadOf   = "gitlab:"
     pushInsteadOf   = "git://gitlab.com/"
 
 [url "git@bitbucket.org:"]
+    insteadOf       = "bb:"
     pushInsteadOf   = "bitbucket:"
     pushInsteadOf   = "git://bitbucket.org/"

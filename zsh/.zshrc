@@ -11,8 +11,7 @@ SAVEHIST=$HISTSIZE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_BY_COPY
 
-autoload -Uz compinit
-compinit -d "$XDG_CACHE_HOME/zcompdump"
+autoload -Uz compinit && compinit -d "$XDG_CACHE_HOME/zcompdump"
 
 zstyle ':completion:*' format '%d'
 zstyle ':completion:*' list-colors ''
@@ -27,17 +26,15 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 
 source $HOME/.zplug/init.zsh
 
-zplug "Tarrasch/zsh-functional"
 zplug "ael-code/zsh-colored-man-pages"
+zplug "azahi/zsh-lambda", as:theme
 zplug "chrissicool/zsh-256color"
 zplug "hlissner/zsh-autopair", defer:1
+zplug "ninrod/pass-zsh-completion"
 zplug "softmoth/zsh-vim-mode"
-zplug "wting/autojump", if:"[ $(command -v autojump) ]"
 zplug "zsh-users/zsh-autosuggestions"
 bindkey '^ ' autosuggest-accept
-zplug "win0err/aphrodite-terminal-theme", as:theme
 zplug "zsh-users/zsh-completions"
-zplug "ninrod/pass-zsh-completion"
 
 if ! zplug check
 then

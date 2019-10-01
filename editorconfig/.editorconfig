@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 [*.{c,h}]
 indent_style = tab
 
-[Makefile]
+[Makefile,*.{ac,am)]
 indent_style = tab
 
 [*.cs]

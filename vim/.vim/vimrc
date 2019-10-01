@@ -1,110 +1,117 @@
-set autoread
-set cmdheight=1
-set completeopt=menuone,menu,longest
-set encoding=utf-8
-set exrc
-set hidden
-set history=512
-set lazyredraw
-set magic
-set matchtime=2
-set mouse=
-set secure
-set shiftround
-set showmatch
-set showmode
-set t_Co=256
-set t_ut=
-set t_vb=
-set tm=512
-set ttimeoutlen=10
-set undolevels=1024
-set updatetime=256
-
 set nocompatible
 
-set noerrorbells
-set visualbell
-
-set viminfo+=n~/.vim/viminfo
 set noswapfile
-
-set fillchars+=vert:\
+set viminfo+=n~/.vim/viminfo
 
 set clipboard=unnamedplus,autoselect
-
-set ruler
-set number
-set scrolloff=10
-set laststatus=0
+set cmdheight=1
+set completeopt=menuone,menu,longest
 set hidden
-
-set backspace=indent,eol,start
+set laststatus=2
+set lazyredraw
+set mouse=
+set noerrorbells
+set number
+set ruler
+set scrolloff=10
+set showcmd
+set showmatch
+set showmode
+set visualbell
 
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
-set ttyfast
 
 set wildmenu
 set wildmode=list:longest,list:full
-
-set nowrap
+set wildignore+=,*~,*.swp,
+set wildignore+=*.o,*.a,*.out,
 
 set autoindent
-set expandtab
+set backspace=indent,eol,start
+set formatoptions=qrn1lr
+set noexpandtab
+set nowrap
+set shiftround
 set shiftwidth=4
 set smartindent
 set smarttab
-set softtabstop=0
+set softtabstop=4
+set tabstop=4
+set whichwrap=b,s,h,l,<,>,[,]
 
 set hlsearch
 set ignorecase
 set incsearch
 set smartcase
 
+set background=dark
+colorscheme pablo
+
 set fileformats=unix,dos,mac
 
-colorscheme default
-
 syntax on
-
-filetype plugin on
 filetype indent on
+filetype plugin on
 
 let mapleader = ','
+let maplocalleader = '\'
 
 nnoremap j gj
 nnoremap k gk
 
-nnoremap n nzzzv
-nnoremap N Nzzzv
+inoremap jk <esc>
+inoremap kj <esc>
 
+nnoremap N Nzzzv
+nnoremap n nzzzv
+
+vnoremap < <gv
+vnoremap > >gv
+
+vmap . :normal .<cr>
+
+nnoremap ]b :<C-u>bnext<cr>
+nnoremap [b :<C-u>bprevious<cr>
+
+noremap <LEADER>/ :nohlsearch<cr>
+
+com! -bang -nargs=* -complete=file E e<bang> <args>
+com! -bang -nargs=* -complete=file W w<bang> <args>
+com! -bang Q q<bang>
+
+com! WW w !sudo tree % >/dev/null
+
+cnoremap ;/ <C-R>=expand('%:p:h').'/'<CR>
+cnoremap ;; <C-R>=expand("%:t")<CR>
+cnoremap ;. <C-R>=expand("%:p:r")<CR>
+
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
+nnoremap zx :Bdelete<CR>
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    autocmd VimEnter * PlugInstall --sync | source ~/.vim/vimrc
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+call plug#begin('~/.vim/plugged')
 
-call plug#begin('~/.vim/plug')
-
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'airblade/vim-gitgutter'
+Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'farmergreg/vim-lastplace'
+Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf.vim'
-Plug 'ntpeters/vim-better-whitespace'
+Plug 'justinmk/vim-sneak'
 Plug 'pbondoer/vim-42header'
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'raimon49/requirements.txt.vim', { 'for': 'requirements' }
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-commentary'
-Plug 'vim-scripts/c.vim', { 'for': ['c', 'cpp', 'cxx', 'h'] }
-Plug 'vim-scripts/grep.vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'vim-scripts/ruscmd'
 
-
 call plug#end()
+
+let g:sneak#label = 1

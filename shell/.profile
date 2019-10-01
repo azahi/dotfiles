@@ -27,33 +27,44 @@ prependpath "/bin"
 
 for i in vim vi emacs nano
 do
-    command -v "$i" >/dev/null 2>&1 && \
+    command -v "$i" > /dev/null 2>&1 && \
         export EDITOR="$i" VISUAL="$i" && \
         break
 done
 
 for i in bat less
 do
-    command -v "$i" >/dev/null 2>&1 && \
+    command -v "$i" > /dev/null 2>&1 && \
         export PAGER="$i" && \
         break
 done
 
-for i in ediff cdiff cwdiff wdiff colordiff diff
+for i in cdiff cwdiff wdiff colordiff diff
 do
-    command -v "$i" >/dev/null 2>&1 && \
+    command -v "$i" > /dev/null 2>&1 && \
         export DIFF="$i" && \
         break
 done
 
 for i in qutebrowser palemoon firefox chromium chrome safari open w3m lynx elinks links
 do
-    command -v "$i" >/dev/null 2>&1 && \
+    command -v "$i" > /dev/null 2>&1 && \
         export BROWSER="$i" && \
         break
 done
 
-if [ ! "$(uname)" = "Darwin" ]
+if [ ! "$(uname -s)" = "Darwin" ]
+then
+    if grep -q Microsoft /proc/version
+    then
+        alias open="explorer.exe"
+    elif command -v xdg-open > /dev/null 2>&1
+    then
+        alias open="xdg-open"
+    fi
+fi
+
+if [ ! "$(uname -s)" = "Darwin" ]
 then
     export XDG_CACHE_HOME="/tmp/.private/$USER"
     export XDG_CONFIG_HOME="$HOME/.config"
@@ -91,10 +102,10 @@ fi
 [ ! -d "$XDG_TEMPLATES_DIR" ]   && mkdir -p "$XDG_TEMPLATES_DIR"
 [ ! -d "$XDG_VIDEOS_DIR" ]      && mkdir -p "$XDG_VIDEOS_DIR"
 
-if command -v emacs >/dev/null 2>&1
+if command -v emacs > /dev/null 2>&1
 then
-    alias e="emacs -t"
-    alias ec="emacsclient -t"
+    alias e="emacs --no-window-system"
+    alias ec="emacsclient --no-window-system"
 
     if [ -d "$HOME/.doom.d" ]
     then
@@ -108,7 +119,7 @@ fi
 for i in neovim vim vim
 do
     # shellcheck disable=SC2139
-    command -v "$i" >/dev/null 2>&1 && \
+    command -v "$i" > /dev/null 2>&1 && \
         alias vim="$i" && \
         alias v="$i" && \
         break
@@ -116,25 +127,29 @@ done
 
 for i in python python2 python3
 do
-    if command -v "$i" >/dev/null 2>&1
+    if command -v "$i" > /dev/null 2>&1
     then
         [ -f "$HOME/.pystartup" ] && \
             export PYTHONSTARTUP="$HOME/.pystartup"
 
         prependpath "$HOME/Library/Python/2.7/bin"
         prependpath "$HOME/Library/Python/3.7/bin"
+
+		alias pip-upgrade="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+		alias pip3-upgrade="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
+
         break
     fi
 done
 
-if command -v dotnet >/dev/null 2>&1
+if command -v dotnet > /dev/null 2>&1
 then
     prependpath "$HOME/.dotnet/tools"
 
     export DOTNET_CLI_TELEMETRY_OPTOUT=1
     export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
 
-    if command -v nuget >/dev/null 2>&1
+    if command -v nuget > /dev/null 2>&1
     then
         export NUGET_CERT_REVOCATION_MODE="online"
         export NUGET_PERSIST_DG="false"
@@ -144,7 +159,7 @@ then
     fi
 fi
 
-if command -v cargo >/dev/null 2>&1
+if command -v cargo > /dev/null 2>&1
 then
     prependpath "$HOME/.cargo/bin"
 
@@ -152,19 +167,19 @@ then
     export CARGO_CACHE_RUSTC_INFO=0
 fi
 
-if command -v go >/dev/null 2>&1
+if command -v go > /dev/null 2>&1
 then
     export GOPATH="$HOME/.go"
 
     prependpath "$HOME/.go/bin"
 fi
 
-if command -v cabal >/dev/null 2>&1
+if command -v cabal > /dev/null 2>&1
 then
     prependpath "$HOME/.cabal/bin"
 fi
 
-if command -v wine >/dev/null 2>&1
+if command -v wine > /dev/null 2>&1
 then
     export WINEARCH="win32"
     export WINEPREFIX="$HOME/.wine"
@@ -174,7 +189,7 @@ then
     alias winep="wine explorer.exe /desktop=default,1600x900"
 fi
 
-if command -v nnn >/dev/null 2>&1
+if command -v nnn > /dev/null 2>&1
 then
     export NNN_MULTISCRIPT=1
     export NNN_NO_AUTOSELECT=1
@@ -182,51 +197,45 @@ then
     export NNN_TMPFILE="$XDG_CACHE_HOME/nnn"
     export NNN_TRASH=0
     export NNN_USE_EDITOR=1
-    if command -v open >/dev/null 2>&1
-    then
-        export NNN_OPENER="open"
-    elif command -v xdg-open >/dev/null 2>&1
-    then
-        export NNN_OPENER="xdg-open"
-    fi
+    export NNN_OPENER="open"
 
     alias n="nnn"
 fi
 
-if command -v fzf >/dev/null 2>&1
+if command -v fzf > /dev/null 2>&1
 then
     export FZF_DEFAULT_COMMAND=""
     export FZF_DEFAULT_OPTS="--height 20% --reverse --border"
 fi
 
-if command -v ranger >/dev/null 2>&1 && [ -d "$XDG_CONFIG_HOME/ranger" ]
+if command -v ranger > /dev/null 2>&1 && [ -d "$XDG_CONFIG_HOME/ranger" ]
 then
     export RANGER_LOAD_DEFAULT_RC="false"
 fi
 
-if command -v beets >/dev/null 2>&1
+if command -v beets > /dev/null 2>&1
 then
     export BEETSDIR="$XDG_DATA_HOME/beets"
 
     alias beet="beet -c \$XDG_CONFIG_HOME/beets/config.yaml"
 fi
 
-if command -v dbus-daemon >/dev/null 2>&1 && [ ! "$(uname)" = "Darwin" ]
+if command -v dbus-daemon > /dev/null 2>&1 && [ ! "$(uname -s)" = "Darwin" ]
 then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 fi
 
-if command -v gpg >/dev/null 2>&1
+if command -v gpg > /dev/null 2>&1
 then
     export GNUPGHOME="$HOME/.gnupg"
 fi
 
-if command -v pass >/dev/null 2>&1
+if command -v pass > /dev/null 2>&1
 then
     export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 fi
 
-if command -v weechat >/dev/null 2>&1
+if command -v weechat > /dev/null 2>&1
 then
     export WEECHAT_HOME="$HOME/.weechat"
     export WEECHAT_PASSPHRASE="$WEECHAT_HOME/pass"
@@ -237,20 +246,12 @@ then
     export XAUTHORITY="$XDG_DATA_HOME/xorg/.Xauthority"
 fi
 
-# shellcheck disable=2010
-if ls --version 2>&1 | grep -q "GNU" >/dev/null
-then
-    alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
-    alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
-    alias la="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
-fi
-
-if command -v startx >/dev/null 2>&1
+if command -v startx > /dev/null 2>&1
 then
     alias sx="startx -- vt1 -nolisten tcp"
 fi
 
-if command -v rsync >/dev/null 2>&1
+if command -v rsync > /dev/null 2>&1
 then
     alias rsync-cp="rsync --archive --compress --verbose --progress --human-readable"
     alias rsync-mv="rsync --archive --compress --verbose --progress --human-readable --remove-source-files"
@@ -258,29 +259,29 @@ then
     alias rsync-update="rsync --archive --compress --verbose --progress --human-readable --update"
 fi
 
-if command -v torrentinfo >/dev/null 2>&1
+if command -v torrentinfo > /dev/null 2>&1
 then
     alias torrentinfo="torrentinfo --everything"
 fi
 
-if command -v units >/dev/null 2>&1
+if command -v units > /dev/null 2>&1
 then
     alias units="units --history=\$XDG_DATA_HOME/units_history"
 fi
 
-if command -v ag >/dev/null 2>&1
+if command -v ag > /dev/null 2>&1
 then
     alias ag="ag --color"
 fi
 
-if command -v less >/dev/null 2>&1
+if command -v less > /dev/null 2>&1
 then
     alias less="less --quit-if-one-screen --no-init"
 
     export LESSHISTFILE="-"
 fi
 
-if command -v ccache >/dev/null 2>&1
+if command -v ccache > /dev/null 2>&1
 then
     export CCACHE_DIR="/var/tmp/ccache"
     export CCACHE_PATH="$PATH"
@@ -288,7 +289,7 @@ then
     prependpath "/usr/lib/ccache/bin"
 fi
 
-if command -v brew >/dev/null 2>&1 || [ -d "$HOME/.brew" ]
+if command -v brew > /dev/null 2>&1 || [ -d "$HOME/.brew" ]
 then
     prependpath "$HOME/.brew/bin"
 
@@ -298,7 +299,7 @@ then
     [ ! -d "$HOMEBREW_CACHE" ] && mkdir -p "$HOMEBREW_CACHE"
     [ ! -d "$HOMEBREW_TEMP" ] && mkdir -p "$HOMEBREW_TEMP"
 
-    if df -T autofs,nfs "$HOME" 1>/dev/null
+    if df -T autofs,nfs "$HOME" > /dev/null 2>&1
     then
         HOMEBREW_LOCKS_TARGET="$XDG_CACHE_HOME/homebrew/locks"
         HOMEBREW_LOCKS_FOLDER="$HOME/.brew/var/homebrew"
@@ -313,6 +314,43 @@ then
         fi
     fi
 fi
+
+if ! command -v hd > /dev/null 2>&1 && command -v hexdump > /dev/null 2>&1
+then
+    alias hd="hexdump -C"
+fi
+
+if ! command -v md5sum > /dev/null 2>&1 && command -v md5 > /dev/null 2>&1
+then
+    alias md5sum="md5"
+fi
+
+if ! command -v sha1sum > /dev/null 2>&1 && command -v shasum > /dev/null 2>&1
+then
+    alias sha1sum="shasum"
+fi
+
+if ls --color > /dev/null 2>&1
+then
+    alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
+    alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
+    alias la="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
+else
+    alias ls="ls -G"
+    alias ll="ls -G -l"
+    alias la="ls -G -l -a"
+fi
+
+alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+alias week="date +%V"
+
+alias path='echo -e ${PATH//:/\\n} | sort'
 
 for i in "$HOME/.shell.d/"*.sh
 do
