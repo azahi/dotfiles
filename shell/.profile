@@ -174,6 +174,15 @@ then
     prependpath "$HOME/.go/bin"
 fi
 
+if command -v ruby > /dev/null 2>&1
+then
+    prependpath "$HOME/.rvm/bin"
+
+    # shellcheck disable=SC1090
+    [ -s "$HOME/.rvm/scripts/rvm" ] \
+        && source "$HOME/.rvm/scripts/rvm"
+fi
+
 if command -v cabal > /dev/null 2>&1
 then
     prependpath "$HOME/.cabal/bin"

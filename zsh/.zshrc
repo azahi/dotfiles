@@ -24,6 +24,11 @@ zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
+if [ ! -d ~/.zplug ]
+then
+    git clone https://github.com/zplug/zplug $HOME/.zplug
+    source $HOME/.zplug/init.zsh && zplug update --self
+fi
 source $HOME/.zplug/init.zsh
 
 zplug "ael-code/zsh-colored-man-pages"
@@ -38,12 +43,7 @@ zplug "zsh-users/zsh-completions"
 
 if ! zplug check
 then
-    printf "Install? [y/N]: "
-    if read -q
-    then
-        echo
-        zplug install
-    fi
+    zplug install
 fi
 
 zplug load
