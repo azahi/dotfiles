@@ -11,12 +11,12 @@ trim_trailing_whitespace = true
 [*.{c,h}]
 indent_style = tab
 
-[Makefile,*.{ac,am)]
+[Makefile]
+indent_style = tab
+
+[*.{ac,am,m4)]
 indent_style = tab
 
 [*.cs]
 charset = utf-8-bom
 end_of_line = crlf
-
-[*.sln]
-indent_style = tab
