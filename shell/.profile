@@ -3,17 +3,17 @@ export HISTSIZE=10000
 
 appendpath ()
 {
-	[ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
-	[ -d "$1" ] || return
-	eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
-	eval export $PATHVAR="\$$PATHVAR:$1"
+    [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
+    [ -d "$1" ] || return
+    eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
+    eval export $PATHVAR="\$$PATHVAR:$1"
 }
 prependpath ()
 {
-	[ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
-	[ -d "$1" ] || return
-	eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
-	eval export $PATHVAR="$1:\$$PATHVAR"
+    [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
+    [ -d "$1" ] || return
+    eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
+    eval export $PATHVAR="$1:\$$PATHVAR"
 }
 prependpath "$HOME/.local/bin"
 prependpath "$HOME/.bin"
@@ -135,8 +135,8 @@ do
         prependpath "$HOME/Library/Python/2.7/bin"
         prependpath "$HOME/Library/Python/3.7/bin"
 
-		alias pip-upgrade="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
-		alias pip3-upgrade="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
+        alias pip-upgrade="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+        alias pip3-upgrade="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 
         break
     fi
@@ -345,9 +345,16 @@ then
     alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
     alias la="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
 else
-    alias ls="ls -G"
-    alias ll="ls -G -l"
-    alias la="ls -G -l -a"
+    alias ls="ls -G -p"
+    alias ll="ls -G -p -l"
+    alias la="ls -G -p -l -a"
+fi
+
+if command -v gls > /dev/null 2>&1
+then
+    alias gls="gls --color=auto --group-directories-first --human-readable --indicator-style=classify"
+    alias gll="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
+    alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
 fi
 
 alias ~="cd ~"
