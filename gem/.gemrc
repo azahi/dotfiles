@@ -1,0 +1,9 @@
+gem: --no-ri --no-rdoc --no-document --user-install
+benchmark: false
+verbose: true
+update_sources: true
+sources:
+    - http://gems.rubyforge.org/
+    - http://rubygems.org/
+backtrace: true
+buld_threshold: 1000

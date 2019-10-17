@@ -132,8 +132,10 @@ do
         [ -f "$HOME/.pystartup" ] && \
             export PYTHONSTARTUP="$HOME/.pystartup"
 
-        prependpath "$HOME/Library/Python/2.7/bin"
-        prependpath "$HOME/Library/Python/3.7/bin"
+        for j in "$HOME/Library/Python/"*
+        do
+            [ -d "$j/bin" ] && prependpath "$j/bin"
+        done
 
         alias pip-upgrade="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
         alias pip3-upgrade="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
@@ -181,6 +183,11 @@ then
     # shellcheck disable=SC1090
     [ -s "$HOME/.rvm/scripts/rvm" ] \
         && source "$HOME/.rvm/scripts/rvm"
+
+    for i in "$HOME/.gem/ruby/"*
+    do
+        [ -d "$i/bin" ] && prependpath "$i/bin"
+    done
 fi
 
 if command -v cabal > /dev/null 2>&1
