@@ -1,13 +1,13 @@
 {
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.iconTheme": "vscode-icons",
+    "breadcrumbs.enabled": false,
+    "editor.cursorStyle": "block",
+    "editor.fontFamily": "'Fira Code', 'Source Code Pro', 'DejaVu Sans Mono', Consolas, monospace",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "all",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
     "vsicons.dontShowNewVersionMessage": true,
     "workbench.activityBar.visible": false,
-    "editor.minimap.enabled": false,
-    "breadcrumbs.enabled": false,
-    "editor.fontFamily": "'Fira Code', 'Source Code Pro', 'DejaVu Sans Mono', Consolas, monospace",
-    "editor.renderWhitespace": "all",
-    "editor.cursorStyle": "block",
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.startupEditor": "newUntitledFile"
 }
