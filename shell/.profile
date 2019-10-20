@@ -1,5 +1,11 @@
+if [ "$(uname -s)" = "Darwin" ]
+then
+    export LANG="en_US.UTF-8"
+    export LC_ALL="$LANG"
+fi
+
 export HISTFILE="$HOME/.shell.d/.history"
-export HISTSIZE=10000
+export HISTSIZE=100000
 
 appendpath ()
 {
@@ -362,6 +368,11 @@ then
     alias gls="gls --color=auto --group-directories-first --human-readable --indicator-style=classify"
     alias gll="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
     alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
+fi
+
+if command -v less > /dev/null 2>&1
+then
+    export MANPAGER="less -X"
 fi
 
 alias ~="cd ~"

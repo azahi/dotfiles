@@ -20,6 +20,7 @@
     whitespace      = space-before-tab,-indent-with-non-tab,trailing-space
 
 [commit]
+    gpgsign         = true
     verbose         = false
 
 [branch]
