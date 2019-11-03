@@ -45,7 +45,7 @@ strtrim_quotes()
     old_ifs=$IFS
     IFS=\"\'
     # shellcheck disable=2086
-    set -- $1
+    set -- "$1"
     IFS=
     printf "%s\n" "$*"
     IFS=$old_ifs
@@ -66,7 +66,7 @@ strsplit() {
     old_ifs=$IFS
     IFS=$2
     # shellcheck disable=2086
-    set -- $1
+    set -- "$1"
     printf "%s\n" "$@"
     IFS=$old_ifs
     set +f
@@ -132,7 +132,7 @@ fi
 
 isfloat()
 {
-    case $1 in
+    case "$1" in
         *.*.*|*[!-.0-9]*)
             ;;
         *[0-9].[0-9]*)
@@ -144,10 +144,20 @@ isfloat()
 
 isint()
 {
-    case $1 in
+    case "$1" in
         *[!-0-9]*|'')
             return 1
             ;;
         *[0-9]*)
     esac
+}
+
+dec2hex()
+{
+    printf "0x%X\n" "$1"
+}
+
+hex2dec()
+{
+    printf "%d\n" "0x$1"
 }
