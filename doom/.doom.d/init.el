@@ -7,9 +7,12 @@
 
          :completion
          (company
+          +chilframe
           +auto
           +tng)
-         (helm
+         (ivy
+          +childframe
+          +prescient
           +fuzzy)
 
          :ui
@@ -17,6 +20,7 @@
          doom
          doom-dashboard
          hl-todo
+         hydra
          indent-guides
          modeline
          nav-flash
@@ -25,6 +29,7 @@
           +all
           +defaults)
          treemacs
+         unicode
          vc-gutter
          (window-select
           +ace-window)
@@ -39,33 +44,36 @@
           -onsave)
          lispy
          multiple-cursors
+         objed
          parinfer
          rotate-text
          snippets
+         word-wrap
 
          :emacs
-         (dired
-          +ranger
-          +icons)
+         dired
          electric
+         ibuffer
          vc
 
          :term
          eshell
+         shell
 
          :tools
+         ansible
          debugger
          direnv
-         eval
          docker
          editorconfig
          ein
+         (eval
+          +overlay)
          flycheck
          flyspell
          gist
          lookup
          lsp
-         macos
          magit
          make
          pass
@@ -79,43 +87,38 @@
          :lang
          assembly
          (cc
-          +lsp
-          +irony
-          +rtags)
+          +lsp)
          common-lisp
          csharp
          data
          emacs-lisp
-         ess
+         (java
+          +meghanada)
+         javascript
          (go
           +lsp)
          (haskell
           +intero)
-         (java
-          +meghanada)
-         javascript
          latex
          ledger
          markdown
+         ocaml
          (org
-          +attach
-          +babel
-          +capture
-          +export
-          +habit
+          +dragndrop
+          +gnuplot
           +ipython
-          +present
-          +protocol)
+          +pandoc
+          +present)
+         perl
          plantuml
          python
          qt
          racket
          rest
+         ruby
          scheme
-         (sh
-          +lsp)
-         (web
-          -lsp)
+         sh
+         web
 
          :email
          (mu4e
@@ -127,10 +130,6 @@
          irc
          (rss
           +org)
-         twitter
-         (write
-          +wordnut
-          +langtool)
 
          :config
          (default
@@ -138,15 +137,14 @@
           +smartparens)))
 
 (when (eq system-type 'darwin)
-  (doom! :input
-
-         :completion
+  (doom! :completion
          (company
+          -childframe
           +auto
-          -childframe
           +tng)
-         (helm
+         (ivy
           -childframe
+          +prescient
           +fuzzy)
 
          :ui
@@ -154,6 +152,7 @@
          doom
          doom-dashboard
          hl-todo
+         hydra
          indent-guides
          modeline
          nav-flash
@@ -168,7 +167,6 @@
          workspaces
 
          :editor
-         ft-header
          (evil
           +everywhere)
          file-templates
@@ -177,32 +175,34 @@
           -onsave)
          lispy
          multiple-cursors
+         objed
          parinfer
          rotate-text
          snippets
+         word-wrap
 
          :emacs
-         (dired
-          +ranger
-          +icons)
+         dired
          electric
+         ibuffer
          vc
 
          :term
          eshell
+         shell
 
          :tools
+         debugger
          direnv
-         eval
+         docker
          editorconfig
+         (eval +overlay)
          flycheck
          lookup
          lsp
-         macos
          magit
          make
          pass
-         pdf
          prodigy
          rgb
          tmux
@@ -212,27 +212,14 @@
          :lang
          assembly
          (cc
-          +lsp
-          +irony
-          +rtags)
+          -lsp)
          data
          emacs-lisp
-         (org
-          +attach
-          +babel
-          +capture
-          +export
-          +habit
-          +ipython
-          +present
-          +protocol)
-         (sh
-          -lsp)
-         plantuml
+         org
+         python
+         sh
 
          :email
-         mu4e
-         notmuch
 
          :app
          calendar

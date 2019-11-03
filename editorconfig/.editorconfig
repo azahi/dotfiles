@@ -8,15 +8,18 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{c,h}]
+[*.{c,cc,cpp,cxx,c++,h,hpp,hxx,h++}]
 indent_style = tab
 
 [Makefile]
 indent_style = tab
 
-[*.{ac,am,m4)]
+[*.{ac,am,m4,in)]
 indent_style = tab
 
 [*.cs]
 charset = utf-8-bom
 end_of_line = crlf
+
+[*.ebuild]
+indent_style = tab

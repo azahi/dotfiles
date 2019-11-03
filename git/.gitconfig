@@ -1,6 +1,7 @@
 [user]
     name            = azahi
     email           = azahi@teknik.io
+	signingkey = B40FCB6608BBE3B6
 
 [credential]
     helper          = cache
@@ -20,7 +21,7 @@
     whitespace      = space-before-tab,-indent-with-non-tab,trailing-space
 
 [commit]
-    gpgsign         = true
+    gpgsign         = false
     verbose         = false
 
 [branch]

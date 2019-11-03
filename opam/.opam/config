@@ -1,0 +1,21 @@
+opam-version: "2.0"
+repositories: "default"
+installed-switches: "default"
+switch: "default"
+jobs: 5
+download-jobs: 5
+eval-variables: [
+  sys-ocaml-version
+  ["ocamlc" "-vnum"]
+  "OCaml version present on your system independently of opam, if any"
+]
+default-compiler: [
+  "ocaml-system" {>= "4.02.3"}
+  "ocaml-base-compiler"
+]
+wrap-build-commands:
+  ["%{hooks}%/sandbox.sh" "build"] {os = "linux" | os = "macos"}
+wrap-install-commands:
+  ["%{hooks}%/sandbox.sh" "install"] {os = "linux" | os = "macos"}
+wrap-remove-commands:
+  ["%{hooks}%/sandbox.sh" "remove"] {os = "linux" | os = "macos"}

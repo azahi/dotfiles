@@ -187,13 +187,22 @@ then
     prependpath "$HOME/.rvm/bin"
 
     # shellcheck disable=SC1090
-    [ -s "$HOME/.rvm/scripts/rvm" ] \
-        && source "$HOME/.rvm/scripts/rvm"
+    [ -s "$HOME/.rvm/scripts/rvm" ] && \
+        source "$HOME/.rvm/scripts/rvm"
 
     for i in "$HOME/.gem/ruby/"*
     do
         [ -d "$i/bin" ] && prependpath "$i/bin"
     done
+fi
+
+if command -v opam > /dev/null 2>&1
+then
+    [ -f "$HOME/.opam/opam-init/init.sh" ] && \
+        . $HOME/.opam/opam-init/init.sh > /dev/null 2>&1
+
+    prependpath "$HOME/.opam/default/bin"
+    prependpath "$HOME/.opam/default/sbin"
 fi
 
 if command -v cabal > /dev/null 2>&1
@@ -239,7 +248,8 @@ if command -v beets > /dev/null 2>&1
 then
     export BEETSDIR="$XDG_DATA_HOME/beets"
 
-    alias beet="beet -c \$XDG_CONFIG_HOME/beets/config.yaml"
+    [ -f "$XDG_CONFIG_HOME/beets/config.yaml" ] && \
+        alias beet="beet -c \$XDG_CONFIG_HOME/beets/config.yaml"
 fi
 
 if command -v dbus-daemon > /dev/null 2>&1 && [ ! "$(uname -s)" = "Darwin" ]
@@ -263,7 +273,7 @@ then
     export WEECHAT_PASSPHRASE="$WEECHAT_HOME/pass"
 fi
 
-if [ "$HOST" = "tp-gentoo" ]
+if command -v xauth > /dev/null 2>&1
 then
     export XAUTHORITY="$XDG_DATA_HOME/xorg/.Xauthority"
 fi
@@ -288,7 +298,7 @@ fi
 
 if command -v units > /dev/null 2>&1
 then
-    alias units="units --history=\$XDG_DATA_HOME/units_history"
+    alias units="units --history=$XDG_DATA_HOME/units_history"
 fi
 
 if command -v ag > /dev/null 2>&1
@@ -300,15 +310,19 @@ if command -v less > /dev/null 2>&1
 then
     alias less="less --quit-if-one-screen --no-init"
 
+    export LESS="-R"
     export LESSHISTFILE="-"
 fi
 
 if command -v ccache > /dev/null 2>&1
 then
-    export CCACHE_DIR="/var/tmp/ccache"
-    export CCACHE_PATH="$PATH"
-
-    prependpath "/usr/lib/ccache/bin"
+    export CCACHE_DIR="$HOME/.ccache"
+    if [ -f "/usr/lib/ccache/bin" ]
+    then
+        export CCACHE_PATH="/usr/lib/ccache/bin:$PATH"
+    else
+        export CCACHE_PATH="$PATH"
+    fi
 fi
 
 if command -v brew > /dev/null 2>&1 || [ -d "$HOME/.brew" ]
@@ -362,12 +376,14 @@ else
     alias ll="ls -G -p -l"
     alias la="ls -G -p -l -a"
 fi
+alias l="ls"
 
 if command -v gls > /dev/null 2>&1
 then
     alias gls="gls --color=auto --group-directories-first --human-readable --indicator-style=classify"
     alias gll="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
     alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
+    alias gl="gls"
 fi
 
 if command -v less > /dev/null 2>&1
