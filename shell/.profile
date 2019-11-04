@@ -7,69 +7,6 @@ fi
 export HISTFILE="$HOME/.shell.d/.history"
 export HISTSIZE=100000
 
-appendpath ()
-{
-    [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
-    [ -d "$1" ] || return
-    eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
-    eval export $PATHVAR="\$$PATHVAR:$1"
-}
-prependpath ()
-{
-    [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
-    [ -d "$1" ] || return
-    eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
-    eval export $PATHVAR="$1:\$$PATHVAR"
-}
-prependpath "$HOME/.local/bin"
-prependpath "$HOME/.bin"
-prependpath "/usr/lib/plan9/bin"
-prependpath "/usr/local/sbin"
-prependpath "/usr/local/bin"
-prependpath "/usr/sbin"
-prependpath "/usr/bin"
-prependpath "/sbin"
-prependpath "/bin"
-
-for i in vim vi emacs nano
-do
-    command -v "$i" > /dev/null 2>&1 && \
-        export EDITOR="$i" VISUAL="$i" && \
-        break
-done
-
-for i in bat less
-do
-    command -v "$i" > /dev/null 2>&1 && \
-        export PAGER="$i" && \
-        break
-done
-
-for i in cdiff cwdiff wdiff colordiff diff
-do
-    command -v "$i" > /dev/null 2>&1 && \
-        export DIFF="$i" && \
-        break
-done
-
-for i in qutebrowser palemoon firefox chromium chrome safari open w3m lynx elinks links
-do
-    command -v "$i" > /dev/null 2>&1 && \
-        export BROWSER="$i" && \
-        break
-done
-
-if [ ! "$(uname -s)" = "Darwin" ]
-then
-    if grep -q Microsoft /proc/version
-    then
-        alias open="explorer.exe"
-    elif command -v xdg-open > /dev/null 2>&1
-    then
-        alias open="xdg-open"
-    fi
-fi
-
 if [ ! "$(uname -s)" = "Darwin" ]
 then
     export XDG_CACHE_HOME="/tmp/.private/$USER"
@@ -108,43 +45,135 @@ fi
 [ ! -d "$XDG_TEMPLATES_DIR" ]   && mkdir -p "$XDG_TEMPLATES_DIR"
 [ ! -d "$XDG_VIDEOS_DIR" ]      && mkdir -p "$XDG_VIDEOS_DIR"
 
+appendpath ()
+{
+    [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
+    [ -d "$1" ] || return
+    eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
+    eval export $PATHVAR="\$$PATHVAR:$1"
+}
+prependpath ()
+{
+    [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
+    [ -d "$1" ] || return
+    eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
+    eval export $PATHVAR="$1:\$$PATHVAR"
+}
+prependpath "$HOME/.local/bin"
+prependpath "$HOME/.bin"
+prependpath "/usr/lib/plan9/bin"
+prependpath "/usr/local/sbin"
+prependpath "/usr/local/bin"
+prependpath "/usr/sbin"
+prependpath "/usr/bin"
+prependpath "/sbin"
+prependpath "/bin"
+
+if command -v brew > /dev/null 2>&1 || [ -d "$HOME/.brew" ]
+then
+    prependpath "$HOME/.brew/bin"
+
+    export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew/cache"
+    export HOMEBREW_TEMP="$XDG_CACHE_HOME/homebrew/temp"
+
+    [ ! -d "$HOMEBREW_CACHE" ] && mkdir -p "$HOMEBREW_CACHE"
+    [ ! -d "$HOMEBREW_TEMP" ] && mkdir -p "$HOMEBREW_TEMP"
+
+    if df -T autofs,nfs "$HOME" > /dev/null 2>&1
+    then
+        HOMEBREW_LOCKS_TARGET="$XDG_CACHE_HOME/homebrew/locks"
+        HOMEBREW_LOCKS_FOLDER="$HOME/.brew/var/homebrew"
+
+        [ ! -d "$HOMEBREW_LOCKS_TARGET" ] && mkdir -p "$HOMEBREW_LOCKS_TARGET"
+        [ ! -d "$HOMEBREW_LOCKS_FOLDER" ] && mkdir -p "$HOMEBREW_LOCKS_FOLDER"
+
+        if [ ! -L "$HOMEBREW_LOCKS_FOLDER" ] || [ ! -d "$HOMEBREW_LOCKS_FOLDER" ]
+        then
+            rm -rf "$HOMEBREW_LOCKS_FOLDER"
+            ln -s "$HOMEBREW_LOCKS_TARGET" "$HOMEBREW_LOCKS_FOLDER"
+        fi
+    fi
+fi
+
+if [ ! "$(uname -s)" = "Darwin" ]
+then
+    if grep -q Microsoft /proc/version
+    then
+        alias open="explorer.exe"
+    elif command -v xdg-open > /dev/null 2>&1
+    then
+        alias open="xdg-open"
+    fi
+fi
+
+for i in vim vi emacs nano
+do
+    command -v "$i" > /dev/null 2>&1 && \
+        export EDITOR="$i" VISUAL="$i" && \
+        break
+done
+
+for i in bat less
+do
+    if command -v "$i" > /dev/null 2>&1
+    then
+        export PAGER="$i"
+        export MANPAGER="$i"
+        [ "$i" = "bat" ] && \
+            export MANPAGER="$MANPAGER --style=plain"
+
+        break
+    fi
+done
+
+for i in cdiff cwdiff wdiff colordiff diff
+do
+    command -v "$i" > /dev/null 2>&1 && \
+        export DIFF="$i" && \
+        break
+done
+
+for i in qutebrowser palemoon firefox chromium chrome safari open w3m lynx elinks links
+do
+    command -v "$i" > /dev/null 2>&1 && \
+        export BROWSER="$i" && \
+        break
+done
+
 if command -v emacs > /dev/null 2>&1
 then
     alias e="emacs --no-window-system"
     alias ec="emacsclient --no-window-system"
 
-    if [ -d "$HOME/.doom.d" ]
-    then
+    [ -d "$HOME/.doom.d" ] && \
         prependpath "$HOME/.emacs.d/bin"
-
-        alias d="doom run -nw"
-    fi
-
 fi
 
-for i in neovim vim vim
+for i in neovim vim vi
 do
     # shellcheck disable=SC2139
     command -v "$i" > /dev/null 2>&1 && \
         alias vim="$i" && \
-        alias v="$i" && \
         break
 done
 
-for i in python python2 python3
+for i in python python3 python2
 do
     if command -v "$i" > /dev/null 2>&1
     then
         [ -f "$HOME/.pystartup" ] && \
             export PYTHONSTARTUP="$HOME/.pystartup"
 
-        for j in "$HOME/Library/Python/"*
-        do
-            [ -d "$j/bin" ] && prependpath "$j/bin"
-        done
+        if [ $(uname -s) = "Darwin" ]
+        then
+            for j in "$HOME/Library/Python/"*
+            do
+                prependpath "$j/bin"
+            done
+        fi
 
-        alias pip-upgrade="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
-        alias pip3-upgrade="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
+        alias pipup="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+        alias pip3up="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 
         break
     fi
@@ -192,7 +221,7 @@ then
 
     for i in "$HOME/.gem/ruby/"*
     do
-        [ -d "$i/bin" ] && prependpath "$i/bin"
+        prependpath "$i/bin"
     done
 fi
 
@@ -231,6 +260,11 @@ then
     export NNN_OPENER="open"
 
     alias n="nnn"
+fi
+
+if command -v ag > /dev/null 2>&1
+then
+    alias ag="ag --color"
 fi
 
 if command -v fzf > /dev/null 2>&1
@@ -301,15 +335,8 @@ then
     alias units="units --history=$XDG_DATA_HOME/units_history"
 fi
 
-if command -v ag > /dev/null 2>&1
-then
-    alias ag="ag --color"
-fi
-
 if command -v less > /dev/null 2>&1
 then
-    alias less="less --quit-if-one-screen --no-init"
-
     export LESS="-R -f -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]"
     export LESSCHARSET='utf-8'
     export LESSHISTFILE="-"
@@ -323,32 +350,6 @@ then
         export CCACHE_PATH="/usr/lib/ccache/bin:$PATH"
     else
         export CCACHE_PATH="$PATH"
-    fi
-fi
-
-if command -v brew > /dev/null 2>&1 || [ -d "$HOME/.brew" ]
-then
-    prependpath "$HOME/.brew/bin"
-
-    export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew/cache"
-    export HOMEBREW_TEMP="$XDG_CACHE_HOME/homebrew/temp"
-
-    [ ! -d "$HOMEBREW_CACHE" ] && mkdir -p "$HOMEBREW_CACHE"
-    [ ! -d "$HOMEBREW_TEMP" ] && mkdir -p "$HOMEBREW_TEMP"
-
-    if df -T autofs,nfs "$HOME" > /dev/null 2>&1
-    then
-        HOMEBREW_LOCKS_TARGET="$XDG_CACHE_HOME/homebrew/locks"
-        HOMEBREW_LOCKS_FOLDER="$HOME/.brew/var/homebrew"
-
-        [ ! -d "$HOMEBREW_LOCKS_TARGET" ] && mkdir -p "$HOMEBREW_LOCKS_TARGET"
-        [ ! -d "$HOMEBREW_LOCKS_FOLDER" ] && mkdir -p "$HOMEBREW_LOCKS_FOLDER"
-
-        if [ ! -L "$HOMEBREW_LOCKS_FOLDER" ] || [ ! -d "$HOMEBREW_LOCKS_FOLDER" ]
-        then
-            rm -rf "$HOMEBREW_LOCKS_FOLDER"
-            ln -s "$HOMEBREW_LOCKS_TARGET" "$HOMEBREW_LOCKS_FOLDER"
-        fi
     fi
 fi
 
@@ -385,11 +386,6 @@ then
     alias gll="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
     alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
     alias gl="gls"
-fi
-
-if command -v less > /dev/null 2>&1
-then
-    export MANPAGER="less -X"
 fi
 
 alias ~="cd ~"
