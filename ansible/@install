@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.ansible" ] && \
+    mkdir -p "$HOME/.ansible"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    ansible

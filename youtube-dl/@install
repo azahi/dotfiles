@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/youtube-dl" ] && \
+    mkdir -p "$HOME/.config/youtube-dl"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    youtube-dl

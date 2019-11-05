@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/htop" ] && \
+    mkdir -p "$HOME/.config/htop"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    htop

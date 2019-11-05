@@ -1,0 +1,4 @@
+---
+filter_version: '1.0'
+module_blacklist:
+    - docker

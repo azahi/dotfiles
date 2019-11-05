@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/config/aria2" ] && \
+    mkdir -p "$HOME/config/aria2"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    aria2

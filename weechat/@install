@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.weechat" ] && \
+    mkdir -p "$HOME/.weechat"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    weechat

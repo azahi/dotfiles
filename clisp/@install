@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Depends on "sbcl"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    clisp

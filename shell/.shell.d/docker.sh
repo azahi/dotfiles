@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Credit: https://github.com/jessfraz/dotfiles
+
 if command -v docker > /dev/null 2>&1
 then
     _docker_relies_on()
@@ -49,6 +51,39 @@ then
         then
             docker rm "$name"
         fi
+    }
+
+    docker-firefox()
+    {
+        _docker_rm_stopped firefox
+
+        docker run \
+            --cpuset-cpus 0 \
+            --detach \
+            --device /dev/snd \
+            --env "DISPLAY=unix${DISPLAY}" \
+            --memory 2gb \
+            --name firefox \
+            --net host \
+            --volume "$XDG_DOWNLOAD_DIR:/root/Downloads" \
+            --volume /etc/localtime:/etc/localtime:ro \
+            --volume /tmp/.X11-unix:/tmp/.X11-unix \
+            jess/firefox:alpine "$@"
+    }
+    command -v firefox > /dev/null 2>&1 && \
+        alias firefox="docker-firefox"
+
+    docker-john()
+    {
+        local file
+        file=$(realpath "$1")
+
+        docker run \
+            --rm\
+            --interactive \
+            --tty \
+            --volume "$file:/root/$(basename "$file")" \
+            jess/john "$@"
     }
 
     unset -f _docker_relies_on

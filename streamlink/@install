@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/streamlink" ] && \
+    mkdir -p "$HOME/.config/streamlink"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    streamlink

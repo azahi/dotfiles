@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.ssh" ] && \
+    mkdir -p "$HOME/.ssh"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    ssh

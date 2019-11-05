@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/feh" ] && \
+    mkdir -p "$HOME/.config/feh"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    feh

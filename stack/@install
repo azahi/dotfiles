@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.stack" ] && \
+    mkdir -p "$HOME/.stack"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    stack

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.gnupg" ] && \
+    mkdir -p "$HOME/.gnupg"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    gnupg

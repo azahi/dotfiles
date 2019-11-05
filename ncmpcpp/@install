@@ -1,0 +1,15 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/ncmpcpp" ] && \
+    mkdir -p "$HOME/.config/ncmpcpp"
+[ ! -d "$HOME/.local/share/ncmpcpp" ] && \
+    mkdir -p "$HOME/.local/share/ncmpcpp"
+[ ! -d "$HOME/.local/share/ncmpcpp/lyrics" ] && \
+    mkdir -p "$HOME/.local/share/ncmpcpp/lyrics"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    ncmpcpp

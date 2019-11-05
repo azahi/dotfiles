@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.ipython/profile_default" ] && \
+    mkdir -p "$HOME/.ipython/profile_default"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    ipython

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.ghc" ] && \
+    mkdir -p "$HOME/.ghc"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    ghc

@@ -1,7 +1,8 @@
 ;;; -*- mode: Lisp -*-
 
-(when (probe-file #p"/etc/common-lisp/gentoo-init.lisp")
-  (load #p"/etc/common-lisp/gentoo-init.lisp"))
+(let ((gentoo-init "/etc/common-lisp/gentoo-init.lisp"))
+  (when (probe-file gentoo-init)
+    (load gentoo-init)))
 
 #-quicklisp
 (let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp" (user-homedir-pathname))))

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/mpd" ] && \
+    mkdir -p "$HOME/.config/mpd"
+[ ! -d "$HOME/.local/share/mpd" ] && \
+    mkdir -p "$HOME/.local/share/mpd"
+[ ! -d "$HOME/.local/share/mpd/playlists" ] && \
+    mkdir -p "$HOME/.local/share/mpd/playlists"
+[ ! -f "$HOME/.local/share/mpd/state" ] && \
+    touch "$HOME/.local/share/mpd/state"
+[ ! -f "$HOME/.local/share/mpd/database.gz" ] && \
+    touch "$HOME/.local/share/mpd/database.gz"
+[ ! -f "$HOME/.local/share/mpd/sticker.db" ] && \
+    touch "$HOME/.local/share/mpd/sticker.db"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    mpd

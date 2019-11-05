@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.jupyter" ] && \
+    mkdir -p "$HOME/.jupyter"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    jupyter

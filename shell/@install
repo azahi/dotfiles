@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.shell.d" ] && \
+    mkdir -p "$HOME/.shell.d"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    shell

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config" ] && \
+    mkdir -p "$HOME/.config"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    xdg

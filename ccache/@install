@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.ccache" ] && \
+    mkdir -p "$HOME/.ccache"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    ccache

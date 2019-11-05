@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.local/share/tmux" ] && \
+    mkdir -p "$HOME/.local/share/tmux"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    tmux

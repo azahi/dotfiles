@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.hackport" ] && \
+    mkdir -p "$HOME/.hackport"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    hackport

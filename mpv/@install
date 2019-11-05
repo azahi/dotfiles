@@ -1,0 +1,13 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/mpv" ] && \
+    mkdir -p "$HOME/.config/mpv"
+[ ! -d "$HOME/.config/mpv/script-opts" ] && \
+    mkdir -p "$HOME/.config/mpv/script-opts"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    mpv

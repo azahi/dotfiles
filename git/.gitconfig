@@ -1,7 +1,7 @@
 [user]
-    name            = azahi
+    name            = Azat Bahawi
     email           = azahi@teknik.io
-	signingkey = B40FCB6608BBE3B6
+    signingkey      = B40FCB6608BBE3B6
 
 [credential]
     helper          = cache

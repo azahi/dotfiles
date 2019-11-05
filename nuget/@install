@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.nuget" ] && \
+    mkdir -p "$HOME/.nuget"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    nuget

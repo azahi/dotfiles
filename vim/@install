@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.vim" ] && \
+    mkdir -p "$HOME/.vim"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    vim

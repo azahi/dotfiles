@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/config/beets" ] && \
+    mkdir -p "$HOME/config/beets"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    beets

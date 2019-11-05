@@ -1,0 +1,8 @@
+#!/bin/sh
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    xresources

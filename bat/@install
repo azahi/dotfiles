@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/config/bat" ] && \
+    mkdir -p "$HOME/config/bat"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    bat

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/ranger" ] && \
+    mkdir -p "$HOME/.config/ranger"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    ranger
+
+[ ! -f "$HOME/.config/ranger/scope.sh" ] && \
+    ranger --copy-config=scope.sh

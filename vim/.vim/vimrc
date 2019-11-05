@@ -61,9 +61,6 @@ let maplocalleader = '\'
 nnoremap j gj
 nnoremap k gk
 
-inoremap jk <esc>
-inoremap kj <esc>
-
 nnoremap N Nzzzv
 nnoremap n nzzzv
 
@@ -101,17 +98,27 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+
 Plug 'editorconfig/editorconfig-vim'
+
 Plug 'farmergreg/vim-lastplace'
+
 Plug 'godlygeek/tabular'
+
 Plug 'jiangmiao/auto-pairs'
+
 Plug 'justinmk/vim-sneak'
+let g:sneak#label = 1
+
 Plug 'pbondoer/vim-42header'
 let g:hdr42user = "jdeathlo"
+
 Plug 'tpope/vim-repeat'
+
 Plug 'tpope/vim-surround'
+
 Plug 'vim-scripts/ruscmd'
 
-call plug#end()
+Plug 'dense-analysis/ale'
 
-let g:sneak#label = 1
+call plug#end()

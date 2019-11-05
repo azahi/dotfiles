@@ -249,6 +249,11 @@ then
     alias winep="wine explorer.exe /desktop=default,1600x900"
 fi
 
+if command -v docker > /dev/null 2>&1
+then
+    export DOCKER_CONTENT_TRUST=1
+fi
+
 if command -v nnn > /dev/null 2>&1
 then
     export NNN_MULTISCRIPT=1
@@ -378,14 +383,12 @@ else
     alias ll="ls -G -p -l"
     alias la="ls -G -p -l -a"
 fi
-alias l="ls"
 
 if command -v gls > /dev/null 2>&1
 then
     alias gls="gls --color=auto --group-directories-first --human-readable --indicator-style=classify"
     alias gll="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
     alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
-    alias gl="gls"
 fi
 
 alias ~="cd ~"

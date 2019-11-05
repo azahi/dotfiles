@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.opam" ] && \
+    mkdir -p "$HOME/.opam"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    opam
