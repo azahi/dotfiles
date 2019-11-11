@@ -29,10 +29,6 @@ set show-all-if-unmodified on
 set skip-completed-text on
 set visible-stats on
 
-$if Bash
-    set keyseq-timeout 200
-$endif
-
 "\e[B": history-search-forward
 "\e[A": history-search-backward
 "^P": history-search-backward

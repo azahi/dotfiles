@@ -95,9 +95,9 @@ then
     fi
 fi
 
-if [ ! "$(uname -s)" = "Darwin" ]
+if [ ! "$(uname -s)" = "Darwin" ] || [ "$(command -v open)" ]
 then
-    if grep -q Microsoft /proc/version
+    if grep -q Microsoft /proc/version > /dev/null 2>&1
     then
         alias open="explorer.exe"
     elif command -v xdg-open > /dev/null 2>&1
@@ -106,34 +106,37 @@ then
     fi
 fi
 
-for i in vim vi emacs nano
+for i in nvim vim vi emacs nano ed open
 do
     command -v "$i" > /dev/null 2>&1 && \
         export EDITOR="$i" VISUAL="$i" && \
         break
 done
 
-for i in bat less
+for i in bat less more cat
 do
     if command -v "$i" > /dev/null 2>&1
     then
-        export PAGER="$i"
-        export MANPAGER="$i"
-        [ "$i" = "bat" ] && \
-            export MANPAGER="$MANPAGER --style=plain"
+        if [ "$i" = "bat" ]
+        then
+            export PAGER="$i --style=plain"
+        else
+            export PAGER="$i"
+        fi
+        export MANPAGER="$PAGER"
 
         break
     fi
 done
 
-for i in cdiff cwdiff wdiff colordiff diff
+for i in cdiff colordiff diff
 do
     command -v "$i" > /dev/null 2>&1 && \
         export DIFF="$i" && \
         break
 done
 
-for i in qutebrowser palemoon firefox chromium chrome safari open w3m lynx elinks links
+for i in qutebrowser palemoon firefox chromium chrome safari w3m lynx elinks links open
 do
     command -v "$i" > /dev/null 2>&1 && \
         export BROWSER="$i" && \
@@ -149,11 +152,12 @@ then
         prependpath "$HOME/.emacs.d/bin"
 fi
 
-for i in neovim vim vi
+for i in nvim vim vi
 do
     # shellcheck disable=SC2139
     command -v "$i" > /dev/null 2>&1 && \
         alias vim="$i" && \
+        alias v="$i" \
         break
 done
 
@@ -164,7 +168,7 @@ do
         [ -f "$HOME/.pystartup" ] && \
             export PYTHONSTARTUP="$HOME/.pystartup"
 
-        if [ $(uname -s) = "Darwin" ]
+        if [ "$(uname -s)" = "Darwin" ]
         then
             for j in "$HOME/Library/Python/"*
             do
@@ -227,8 +231,9 @@ fi
 
 if command -v opam > /dev/null 2>&1
 then
-    [ -f "$HOME/.opam/opam-init/init.sh" ] && \
-        . $HOME/.opam/opam-init/init.sh > /dev/null 2>&1
+    # shellcheck disable=SC1090
+    [ -f "$HOME/.opam/opam-init/init.sh" ] &&
+        . "$HOME/.opam/opam-init/init.sh" > /dev/null 2>&1
 
     prependpath "$HOME/.opam/default/bin"
     prependpath "$HOME/.opam/default/sbin"
@@ -249,11 +254,6 @@ then
     alias winep="wine explorer.exe /desktop=default,1600x900"
 fi
 
-if command -v docker > /dev/null 2>&1
-then
-    export DOCKER_CONTENT_TRUST=1
-fi
-
 if command -v nnn > /dev/null 2>&1
 then
     export NNN_MULTISCRIPT=1
@@ -267,6 +267,11 @@ then
     alias n="nnn"
 fi
 
+if command -v ranger > /dev/null 2>&1 && [ -d "$XDG_CONFIG_HOME/ranger" ]
+then
+    export RANGER_LOAD_DEFAULT_RC="false"
+fi
+
 if command -v ag > /dev/null 2>&1
 then
     alias ag="ag --color"
@@ -276,11 +281,6 @@ if command -v fzf > /dev/null 2>&1
 then
     export FZF_DEFAULT_COMMAND=""
     export FZF_DEFAULT_OPTS="--height 20% --reverse --border"
-fi
-
-if command -v ranger > /dev/null 2>&1 && [ -d "$XDG_CONFIG_HOME/ranger" ]
-then
-    export RANGER_LOAD_DEFAULT_RC="false"
 fi
 
 if command -v beets > /dev/null 2>&1
@@ -296,10 +296,12 @@ then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 fi
 
-if command -v gpg > /dev/null 2>&1
-then
-    export GNUPGHOME="$HOME/.gnupg"
-fi
+for i in gpg gpg2
+do
+    command -v "$i" > /dev/null 2>&1 && \
+        export GNUPGHOME="$HOME/.gnupg" && \
+        break
+done
 
 if command -v pass > /dev/null 2>&1
 then
@@ -337,6 +339,7 @@ fi
 
 if command -v units > /dev/null 2>&1
 then
+    # shellcheck disable=SC2139
     alias units="units --history=$XDG_DATA_HOME/units_history"
 fi
 

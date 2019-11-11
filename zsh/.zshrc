@@ -54,10 +54,6 @@ zplug "junegunn/fzf", if:"[[ command -v fzf ]]", use:"shell/completion.zsh"
 
 zplug "djui/alias-tips"
 
-zplug "plugins/catimg", from:oh-my-zsh
-
-zplug "plugins/gitignore", from:oh-my-zsh
-
 zplug "hlissner/zsh-autopair", defer:2
 
 zplug "softmoth/zsh-vim-mode"
@@ -67,7 +63,7 @@ zplug "chrissicool/zsh-256color"
 
 zplug "ael-code/zsh-colored-man-pages"
 
-zplug "azahi/zsh-lambda", as:theme
+zplug "azahi/zsh-lambda", as:theme, if:"[[ $TERM != linux ]]"
 
 zplug check || zplug install
 zplug load

@@ -33,6 +33,7 @@ Thumbs.db
 [._]sw[a-p]
 \#*\#
 cmake-build-*/
+compile_commands.json
 cscope.*
 desktop.ini
 vgcore.*

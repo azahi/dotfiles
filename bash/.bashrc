@@ -3,7 +3,11 @@
 [[ $- != *i* ]] && \
     return
 
+stty -ixon
+
 set -o vi
+
+set -b +H
 
 shopt -s autocd
 shopt -s checkjobs
@@ -17,8 +21,9 @@ set +o histexpand
 shopt -s cmdhist
 shopt -s histappend
 shopt -s histreedit
-HISTCONTROL=ignoredups:ignorespace
+HISTCONTROL=erasedups:ignorespace
 HISTFILESIZE=$HISTSIZE
+HISTIGNORE=ls:ll:la
 
 complete -A directory cd
 

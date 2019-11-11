@@ -78,36 +78,34 @@
     autocorrect     = 1
 
 [alias]
-    aliases         = config --get-regexp alias
+    a               = config --get-regexp alias
     b               = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\" } ; f"
     bs              = branch -a
     c               = clone --recursive
     ca              = !git add -A && git commit -av
-    clone           = clone --recursive
-    conflicts       = diff --name-only --diff-filter=U
-    credit          = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; } ; f"
+    co              = diff --name-only --diff-filter=U
+    cor             = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; } ; f"
     d               = !"git diff-index --quiet HEAD -- || clear ; git --no-pager diff --patch-with-stat"
     di              = !"d() { git diff --patch-with-stat HEAD~$1 } ; git diff-index --quiet HEAD -- || clear ; d"
+    ds              = diff --staged --name-only --diff-filter=ACMR
     ec              = diff HEAD^ --name-only --diff-filter=ACMR
     ed              = diff HEAD --name-only --diff-filter=ACMR
     et              = conflicts
-    fetch           = fetch --all
+    f               = fetch --all
     gud             = commit --message=\"git gud\"
-    ignore          = update-index --assume-unchanged
+    i               = update-index --assume-unchanged
     lg              = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     lgs             = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
-    p               = git pull --recurse-submodules
-    pull            = pull --all
-    recommit        = commit --amend
-    rs              = remote -v
-    spull           = submodule foreach git pull
-    ss              = !git status --porcelain | awk '{print $2}'
-    st              = diff --staged --name-only --diff-filter=ACMR
-    ts              = tag -l
-    uncommit        = reset --soft HEAD^
-    unignore        = update-index --un-assume-unchanged
-    unpush          = push --force-with-lease origin HEAD^:master
-    unstage         = reset HEAD
+    p               = pull --all --recurse-submodules
+    ps              = submodule foreach git pull
+    r               = remote -v
+    re              = commit --amend
+    st              = !git status --porcelain | awk '{print $2}'
+    t               = tag -l
+    unc             = reset --soft HEAD^
+    uni             = update-index --un-assume-unchanged
+    unp             = push --force-with-lease origin HEAD^:master
+    uns             = reset HEAD
     wc              = whatchanged -p --abbrev-commit --pretty=medium
     wtc             = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
 

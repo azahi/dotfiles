@@ -1,23 +1,40 @@
+" Default {{{
 set nocompatible
 
 set noswapfile
+set nobackup
+set nowritebackup
 set viminfo+=n~/.vim/viminfo
+
+set noerrorbells
+set novisualbell
+set t_vb=
+
+set mouse=
 
 set clipboard=unnamedplus,autoselect
 set cmdheight=1
+set complete=.,w,b,i,u,t,
 set completeopt=menuone,menu,longest
+set conceallevel=0
+set fillchars=vert:\│
+set foldmethod=manual
 set hidden
 set laststatus=2
-set lazyredraw
-set mouse=
-set noerrorbells
+set modeline
+set nocursorline
+set nolazyredraw
+set nolist
+set nowrap
 set number
 set ruler
 set scrolloff=10
 set showcmd
 set showmatch
 set showmode
-set visualbell
+set splitbelow
+set splitright
+set title
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -25,8 +42,23 @@ set fileencodings=utf-8
 
 set wildmenu
 set wildmode=list:longest,list:full
-set wildignore+=,*~,*.swp,
-set wildignore+=*.o,*.a,*.out,
+
+set wildignore+=*.a,
+set wildignore+=*.d,
+set wildignore+=*.dll,
+set wildignore+=*.dump-hi,
+set wildignore+=*.dylib,
+set wildignore+=*.dyn_hi,
+set wildignore+=*.dyn_o,
+set wildignore+=*.hi,
+set wildignore+=*.in,
+set wildignore+=*.m4,
+set wildignore+=*.o,
+set wildignore+=*.out,
+set wildignore+=*.pdb,
+set wildignore+=*.pyc,
+set wildignore+=*.so,
+set wildignore+=stamp-h1
 
 set autoindent
 set backspace=indent,eol,start
@@ -54,40 +86,49 @@ set fileformats=unix,dos,mac
 syntax on
 filetype indent on
 filetype plugin on
+" }}}
 
+" Keybindings {{{
 let mapleader = ','
 let maplocalleader = '\'
 
-nnoremap j gj
-nnoremap k gk
+nnoremap        j           gj
+nnoremap        k           gk
 
-nnoremap N Nzzzv
-nnoremap n nzzzv
+nnoremap        N           Nzzzv
+nnoremap        n           nzzzv
 
-vnoremap < <gv
-vnoremap > >gv
+vmap            <Tab>       >
+vmap            <S-Tab>     <
+vnoremap        <           <gv
+vnoremap        >           >gv
+nnoremap        <Tab>       >>
+nnoremap        <S-Tab>     <<
 
-vmap . :normal .<cr>
+nnoremap        <Return>    :nohlsearch<Bar>redraw!<Bar>echo<CR>
 
-nnoremap ]b :<C-u>bnext<cr>
-nnoremap [b :<C-u>bprevious<cr>
+nnoremap        ]b          :bnext<CR>
+nnoremap        [b          :bprevious<CR>
 
-noremap <LEADER>/ :nohlsearch<cr>
+noremap         <Leader>/   :nohlsearch<CR>
 
-com! -bang -nargs=* -complete=file E e<bang> <args>
-com! -bang -nargs=* -complete=file W w<bang> <args>
-com! -bang Q q<bang>
+cnoremap        ;/          <C-r>=expand('%:p:h').'/'<CR>
+cnoremap        ;;          <C-r>=expand("%:t")<CR>
+cnoremap        ;.          <C-r>=expand("%:p:r")<CR>
 
-com! WW w !sudo tree % >/dev/null
+cnoremap        <C-a>       <Home>
+cnoremap        <C-e>       <End>
+" }}}
 
-cnoremap ;/ <C-R>=expand('%:p:h').'/'<CR>
-cnoremap ;; <C-R>=expand("%:t")<CR>
-cnoremap ;. <C-R>=expand("%:p:r")<CR>
+" Commands {{{
+com! -bang -nargs=* -complete=file  E       e<Bang> <Args>
+com! -bang -nargs=* -complete=file  W       w<Bang> <Args>
+com! -bang                          Q       q<Bang>
+" }}}
 
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-
-nnoremap zx :Bdelete<CR>
+" Auto {{{
+autocmd BufWritePre * %s/\s\+$//e
+" }}}
 
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -95,30 +136,57 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Plugins {{{
 call plug#begin('~/.vim/plugged')
 
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter' " {{{
+let g:gitgutter_sign_added                     = '+'
+let g:gitgutter_sign_modified                  = '~'
+let g:gitgutter_sign_modified_removed          = '~'
+let g:gitgutter_sign_removed                   = '-'
+let g:gitgutter_sign_removed_first_line        = '-'
+" }}}
 
-Plug 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim' " {{{
+" }}}
 
-Plug 'farmergreg/vim-lastplace'
+Plug 'farmergreg/vim-lastplace' " {{{
+" }}}
 
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular' " {{{
+" }}}
 
-Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs' " {{{
+" }}}
 
-Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak' " {{{
 let g:sneak#label = 1
+" }}}
 
-Plug 'pbondoer/vim-42header'
+Plug 'pbondoer/vim-42header' " {{{
 let g:hdr42user = "jdeathlo"
+" }}}
 
-Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat' " {{{
+" }}}
 
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround' " {{{
+" }}}
 
-Plug 'vim-scripts/ruscmd'
+Plug 'tpope/vim-sleuth' " {{{
+" }}}
 
-Plug 'dense-analysis/ale'
+Plug 'tpope/vim-unimpaired' " {{{
+" }}}
+
+Plug 'vim-scripts/ruscmd' " {{{
+" }}}
+
+Plug 'vim-syntastic/syntastic' " {{{
+" }}}
+
+Plug 'junegunn/fzf.vim' " {{{
+" }}}
 
 call plug#end()
+" }}}
