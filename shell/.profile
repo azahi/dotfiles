@@ -148,8 +148,7 @@ then
     alias e="emacs --no-window-system"
     alias ec="emacsclient --no-window-system"
 
-    [ -d "$HOME/.doom.d" ] && \
-        prependpath "$HOME/.emacs.d/bin"
+    prependpath "$HOME/.emacs.d/bin"
 fi
 
 for i in nvim vim vi
@@ -157,7 +156,7 @@ do
     # shellcheck disable=SC2139
     command -v "$i" > /dev/null 2>&1 && \
         alias vim="$i" && \
-        alias v="$i" \
+        alias v="$i" && \
         break
 done
 
@@ -359,6 +358,21 @@ then
     else
         export CCACHE_PATH="$PATH"
     fi
+fi
+
+if command -v wget > /dev/null 2>&1
+then
+    alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+fi
+
+if command -v df > /dev/null 2>&1
+then
+    alias disk="df --human-readable --exclude-type=tmpfs --exclude-type=devtmpfs"
+fi
+
+if command -v free > /dev/null 2>&1
+then
+    alias ram="free --human --wide | sed -e '/^Swap/d'"
 fi
 
 if ! command -v hd > /dev/null 2>&1 && command -v hexdump > /dev/null 2>&1
