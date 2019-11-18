@@ -1,94 +1,87 @@
-" Default {{{
-set nocompatible
+if ! has('nvim')
+    set nocompatible
+    set viminfo+=n~/.vim/viminfo
+endif
 
-set noswapfile
-set nobackup
-set nowritebackup
-set viminfo+=n~/.vim/viminfo
-
-set noerrorbells
-set novisualbell
-set t_vb=
-
-set mouse=
-
-set clipboard=unnamedplus,autoselect
+set autoindent
+set autoread
+set background=dark
+set backspace=indent,eol,start
+set breakindent
+set clipboard+=unnamedplus
 set cmdheight=1
-set complete=.,w,b,i,u,t,
+set cmdwinheight=10
+set complete+=i,d
 set completeopt=menuone,menu,longest
-set conceallevel=0
+set display+=lastline
+set encoding=utf-8
+set exrc
+set fileformats=unix,mac,dos
 set fillchars=vert:\│
+set foldcolumn=0
 set foldmethod=manual
+set foldminlines=1
+set formatoptions-=tro
 set hidden
+set hlsearch
+set ignorecase
+set incsearch
 set laststatus=2
+set lazyredraw
+set list
+set listchars=tab:>\ ,trail:\-,nbsp:\+,extends:\>,precedes:\<
+set magic
 set modeline
+set mouse=
+set nobackup
 set nocursorline
-set nolazyredraw
-set nolist
+set noerrorbells
+set noexpandtab
+set noshowmode
+set noswapfile
+set notitle
+set noundofile
+set novisualbell
 set nowrap
 set number
 set ruler
 set scrolloff=10
-set showcmd
-set showmatch
-set showmode
-set splitbelow
-set splitright
-set title
-
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8
-
-set wildmenu
-set wildmode=list:longest,list:full
-
-set wildignore+=*.a,
-set wildignore+=*.d,
-set wildignore+=*.dll,
-set wildignore+=*.dump-hi,
-set wildignore+=*.dylib,
-set wildignore+=*.dyn_hi,
-set wildignore+=*.dyn_o,
-set wildignore+=*.hi,
-set wildignore+=*.in,
-set wildignore+=*.m4,
-set wildignore+=*.o,
-set wildignore+=*.out,
-set wildignore+=*.pdb,
-set wildignore+=*.pyc,
-set wildignore+=*.so,
-set wildignore+=stamp-h1
-
-set autoindent
-set backspace=indent,eol,start
-set formatoptions=qrn1lr
-set noexpandtab
-set nowrap
+set sessionoptions-=options
 set shiftround
 set shiftwidth=4
+set sidescrolloff=10
+set smartcase
 set smartindent
 set smarttab
 set softtabstop=4
+set splitbelow
+set splitright
+set synmaxcol=500
+set t_Co=16
+set t_vb=
 set tabstop=4
-set whichwrap=b,s,h,l,<,>,[,]
+set ttimeout
+set ttimeoutlen=100
+set updatetime=300
+set viewoptions-=options
+set wildignorecase
+set wildmenu
 
-set hlsearch
-set ignorecase
-set incsearch
-set smartcase
+if has('autocmd')
+    filetype on
+    filetype plugin on
+    filetype indent on
+endif
 
-set background=dark
-colorscheme pablo
+if has('syntax')
+    syntax enable
+endif
 
-set fileformats=unix,dos,mac
+try
+    colorscheme pablo
+catch
+endtry
 
-syntax on
-filetype indent on
-filetype plugin on
-" }}}
-
-" Keybindings {{{
 let mapleader = ','
 let maplocalleader = '\'
 
@@ -98,6 +91,21 @@ nnoremap        k           gk
 nnoremap        N           Nzzzv
 nnoremap        n           nzzzv
 
+map             0           ^
+
+nmap            <M-j>       mz:<C-u>m+<cr>`z
+nmap            <M-k>       mz:<C-u>m-2<cr>`z
+vmap            <M-j>       :<C-u>m'>+<cr>`<my`>mzgv`yo`z
+vmap            <M-k>       :<C-u>m'<-2<cr>`>my`<mzgv`yo`z
+if has('max')
+    nmap        <D-j>       <M-j>
+    nmap        <D-k>       <M-k>
+    vmap        <D-j>       <M-j>
+    vmap        <D-k>       <M-k>
+endif
+
+nmap            <Leader>w   :<C-u>w!<CR>
+
 vmap            <Tab>       >
 vmap            <S-Tab>     <
 vnoremap        <           <gv
@@ -105,12 +113,12 @@ vnoremap        >           >gv
 nnoremap        <Tab>       >>
 nnoremap        <S-Tab>     <<
 
-nnoremap        <Return>    :nohlsearch<Bar>redraw!<Bar>echo<CR>
+nnoremap        <Return>    :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR>
 
-nnoremap        ]b          :bnext<CR>
-nnoremap        [b          :bprevious<CR>
+nnoremap        ]b          :<C-u>bnext<CR>
+nnoremap        [b          :<C-u>bprevious<CR>
 
-noremap         <Leader>/   :nohlsearch<CR>
+nnoremap        <C-l>       :<C-u>nohlsearch<C-r>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-l>
 
 cnoremap        ;/          <C-r>=expand('%:p:h').'/'<CR>
 cnoremap        ;;          <C-r>=expand("%:t")<CR>
@@ -118,33 +126,44 @@ cnoremap        ;.          <C-r>=expand("%:p:r")<CR>
 
 cnoremap        <C-a>       <Home>
 cnoremap        <C-e>       <End>
-" }}}
 
-" Commands {{{
-com! -bang -nargs=* -complete=file  E       e<Bang> <Args>
-com! -bang -nargs=* -complete=file  W       w<Bang> <Args>
-com! -bang                          Q       q<Bang>
-" }}}
+map             <C-n>       <C-h>h
+map             <C-j>       <C-w>j
+map             <C-k>       <C-k>k
+map             <C-l>       <C-l>l
 
-" Auto {{{
+map             <Leader>ss  :<C-u>setlocal spell!<CR>
+
+map             <Leader>sn  ]s
+map             <Leader>sp  [s
+map             <Leader>sa  zg
+map             <Leader>s?  z=
+
+command!        W           w !sudo tee % > /dev/null
+
 autocmd BufWritePre * %s/\s\+$//e
-" }}}
+autocmd FocusGained,BufEnter * checktime
 
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Plugins {{{
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plug')
+
+Plug 'scrooloose/nerdtree' " {{{
+" }}}
 
 Plug 'airblade/vim-gitgutter' " {{{
-let g:gitgutter_sign_added                     = '+'
-let g:gitgutter_sign_modified                  = '~'
-let g:gitgutter_sign_modified_removed          = '~'
-let g:gitgutter_sign_removed                   = '-'
-let g:gitgutter_sign_removed_first_line        = '-'
+let g:gitgutter_sign_added              = '+'
+let g:gitgutter_sign_modified           = '~'
+let g:gitgutter_sign_modified_removed   = '~'
+let g:gitgutter_sign_removed            = '-'
+let g:gitgutter_sign_removed_first_line = '-'
+" }}}
+
+Plug 'tpope/vim-fugitive' " {{{
 " }}}
 
 Plug 'editorconfig/editorconfig-vim' " {{{
@@ -182,11 +201,46 @@ Plug 'tpope/vim-unimpaired' " {{{
 Plug 'vim-scripts/ruscmd' " {{{
 " }}}
 
-Plug 'vim-syntastic/syntastic' " {{{
+Plug 'dense-analysis/ale' " {{{
+" }}}
+
+Plug 'sheerun/vim-polyglot' " {{{
 " }}}
 
 Plug 'junegunn/fzf.vim' " {{{
 " }}}
 
-call plug#end()
+Plug 'terryma/vim-expand-region' " {{{
 " }}}
+
+Plug 'nathanaelkane/vim-indent-guides' " {{{
+" }}}
+
+Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
+" }}}
+
+if executable('wakatime')
+    Plug 'wakatime/vim-wakatime' " {{{
+endif
+" }}}
+
+if has('nvim') && has('python')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " {{{
+    let g:deoplete#enable_at_startup = 1
+
+    Plug 'Shougo/neco-syntax' " {{{
+    " }}}
+    Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' } " {{{
+    " }}}
+    Plug 'copy/deoplete-ocaml', { 'for': 'ocaml' } " {{{
+    " }}}
+    Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' } " {{{
+    " }}}
+    Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' } " {{{
+    " }}}
+    Plug 'deoplete-plugins/deoplete-zsh', { 'for': 'zsh' } " {{{
+    " }}}
+    " }}}
+endif
+
+call plug#end()

@@ -88,7 +88,7 @@ c.content.geolocation = False
 # Value to send in the `Accept-Language` header. Note that the value
 # read from JavaScript is always the global value.
 # Type: String
-c.content.headers.accept_language = 'en-US,en,ru-RU,ru,ja-JP,ja'
+c.content.headers.accept_language = 'en-US,en'
 
 # Custom headers for qutebrowser HTTP requests.
 # Type: Dict
@@ -509,7 +509,7 @@ c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'file:///home/free/code/startpage/index.html'
+c.url.start_pages = 'https://start.duckduckgo.com'
 
 # URL parameters to strip with `:yank url`.
 # Type: List of String

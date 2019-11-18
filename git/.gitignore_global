@@ -4,6 +4,8 @@
 .TemporaryItems
 .\#*
 ._*
+.ccls-cache/
+.clangd/
 .fuse_hidden*
 .gdb_history
 .idea/**/contentModel.xml

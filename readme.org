@@ -1,4 +1,0 @@
-* Dotfiles
-** Installation
-Make sure that you have ~stow~ installed then do ~package/@install~ inside
-root of the repository

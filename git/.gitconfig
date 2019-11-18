@@ -72,7 +72,7 @@
 
 [rebase]
     autosquash      = true
-    autstash        = true
+    autostash       = true
 
 [help]
     autocorrect     = 1
@@ -113,16 +113,16 @@
     user            = azahi
 
 [url "git@github.com:"]
-    insteadOf       = "gh:"
-    pushInsteadOf   = "github:"
-    pushInsteadOf   = "git://github.com/"
+    insteadof       = "gh:"
+    pushinsteadof   = "github:"
+    pushinsteadof   = "git://github.com/"
 
 [url "git@gitlab.com:"]
-    insteadOf       = "gl:"
-    pushInsteadOf   = "gitlab:"
-    pushInsteadOf   = "git://gitlab.com/"
+    insteadof       = "gl:"
+    pushinsteadof   = "gitlab:"
+    pushinsteadof   = "git://gitlab.com/"
 
 [url "git@bitbucket.org:"]
-    insteadOf       = "bb:"
-    pushInsteadOf   = "bitbucket:"
-    pushInsteadOf   = "git://bitbucket.org/"
+    insteadof       = "bb:"
+    pushinsteadof   = "bitbucket:"
+    pushinsteadof   = "git://bitbucket.org/"
