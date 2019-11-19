@@ -82,25 +82,23 @@
     am              = commit --amend
     bs              = branch -a
     c               = clone --recursive
-    ca              = !git add -A && git commit -av
+    ca              = !"git add --all && git commit --all --verbose"
     co              = diff --name-only --diff-filter=U
     d               = !"git diff-index --quiet HEAD -- || clear ; git --no-pager diff --patch-with-stat"
     ds              = diff --staged --name-only --diff-filter=ACMR
     ec              = diff HEAD^ --name-only --diff-filter=ACMR
     ed              = diff HEAD --name-only --diff-filter=ACMR
     et              = conflicts
-    f               = fetch --all
+    f               = fetch --all --recurse-submodules
     gud             = commit --message=\"git gud\"
     i               = update-index --assume-unchanged
     lg              = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     lgs             = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
+    pl              = pull --all --recurse-submodules
     ps              = push
-    pu              = pull --all --recurse-submodules
     r               = remote -v
     re              = reset HEAD
-    s               = status
-    sp              = status --porcelain
-    t               = tag -l
+    s               = status --porcelain
     uc              = reset --soft HEAD^
     ui              = update-index --un-assume-unchanged
     ups             = push --force-with-lease origin HEAD^:master

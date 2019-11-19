@@ -1,8 +1,22 @@
-if [ "$(uname -s)" = "Darwin" ]
+if [ -z "$LANG" ]
 then
     export LANG="en_US.UTF-8"
-    export LC_ALL="$LANG"
 fi
+export LC_ADDRESS="$LANG"
+export LC_ALL="$LANG"
+export LC_COLLATE="$LANG"
+export LC_CTYPE="$LANG"
+export LC_IDENTIFICATION="$LANG"
+export LC_MEASUREMENT="$LANG"
+export LC_MESSAGES="$LANG"
+export LC_MONETARY="$LANG"
+export LC_NAME="$LANG"
+export LC_NUMERIC="$LANG"
+export LC_PAPER="$LANG"
+export LC_TELEPHONE="$LANG"
+export LC_TIME="$LANG"
+
+export KEYTIMEOUT=1
 
 export HISTFILE="$HOME/.shell.d/.history"
 export HISTSIZE=100000
@@ -369,6 +383,7 @@ fi
 
 if command -v wget > /dev/null 2>&1
 then
+    # shellcheck disable=SC2139
     alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
 fi
 

@@ -1,23 +1,38 @@
 #!/usr/bin/env zsh
 
-bindkey -v
-
-setopt autocd
-setopt extended_glob
+setopt auto_cd
+setopt auto_name_dirs
+setopt auto_pushd
+setopt cdable_vars
+setopt clobber
 setopt no_case_glob
 setopt prompt_subst
+setopt pushd_silent
+setopt pushd_to_home
+
+disable r
 
 # History {{{
-SAVEHIST=$HISTSIZE
+export SAVEHIST="$HISTSIZE"
+setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_find_no_dups
+setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 setopt hist_ignore_space
+setopt hist_reduce_blanks
 setopt hist_save_by_copy
+setopt hist_save_no_dups
 # }}}
 
 # Completion {{{
-autoload -Uz compinit && compinit -d "$XDG_CACHE_HOME/zcompdump"
+autoload -Uz compinit
+if [[ -n $ZCOMPDUMP(#qN.mh+24) ]]
+then
+    compinit -d $ZCOMPDUMP
+else
+    compinit -d $ZCOMPDUMP -C
+fi
 
 zstyle ':completion:*' format '%d'
 zstyle ':completion:*' list-colors ''
@@ -35,46 +50,52 @@ setopt magic_equal_subst
 # }}}
 
 # Plugins {{{
-if [ ! -d ~/.zplug ]
+if [ ! -d "$HOME/.zplug" ]
 then
-    git clone https://github.com/zplug/zplug $HOME/.zplug
-    source $HOME/.zplug/init.zsh && \
+    git clone "https://github.com/zplug/zplug" "$HOME/.zplug"
+    source "$HOME/.zplug/init.zsh" && \
         zplug update --self
 fi
 source $HOME/.zplug/init.zsh
 
 
-zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-autosuggestions" # {{{
+# }}}
 
-zplug "ninrod/pass-zsh-completion", if:"[[ command -v pass ]]"
-zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-completions" # {{{
+# }}}
 
-zplug "junegunn/fzf", if:"[[ command -v fzf ]]", use:"shell/key-bindings.zsh"
-zplug "junegunn/fzf", if:"[[ command -v fzf ]]", use:"shell/completion.zsh"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2 # {{{
+# }}}
 
-zplug "djui/alias-tips"
+zplug "zsh-users/zsh-history-substring-search" # {{{
+# }}}
 
-zplug "hlissner/zsh-autopair", defer:2
+zplug "djui/alias-tips" # {{{
+# }}}
 
-zplug "softmoth/zsh-vim-mode"
+zplug "hlissner/zsh-autopair", defer:2 # {{{
+# }}}
+
+MODE_INDICATOR="\0"
+zplug "plugins/vi-mode", from:oh-my-zsh # {{{
 bindkey '^ ' autosuggest-accept
+# }}}
 
-zplug "chrissicool/zsh-256color"
+zplug "azahi/zsh-lambda", as:theme, if:"[[ $TERM != linux ]]" # {{{
+# }}}
 
-zplug "ael-code/zsh-colored-man-pages"
-
-zplug "azahi/zsh-lambda", as:theme, if:"[[ $TERM != linux ]]"
 
 zplug check || zplug install
 zplug load
 # }}}
 
 # Keybindings {{{
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
+bindkey '^p' up-history
+bindkey '^n' down-history
+
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
+
+bindkey '^[[Z' reverse-menu-complete
 # }}}

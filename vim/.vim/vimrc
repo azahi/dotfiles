@@ -60,8 +60,8 @@ set synmaxcol=500
 set t_Co=16
 set t_vb=
 set tabstop=4
-set ttimeout
-set ttimeoutlen=100
+set timeoutlen=1000
+set ttimeoutlen=0
 set updatetime=300
 set viewoptions-=options
 set wildignorecase
