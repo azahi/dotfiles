@@ -219,6 +219,9 @@ Plug 'nathanaelkane/vim-indent-guides' " {{{
 Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
 " }}}
 
+Plug 'keith/tmux.vim' " {{{
+" }}}
+
 if executable('wakatime')
     Plug 'wakatime/vim-wakatime' " {{{
 endif
