@@ -29,7 +29,7 @@ set incsearch
 set laststatus=2
 set lazyredraw
 set list
-set listchars=tab:>\ ,trail:\-,nbsp:\+,extends:\>,precedes:\<
+set listchars+=extends:\>,precedes:\<
 set magic
 set modeline
 set mouse=

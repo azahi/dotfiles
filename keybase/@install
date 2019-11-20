@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/keybase" ] && \
+    mkdir -p "$HOME/.config/keybase"
+
+stow \
+    --dir=.. \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    keybase

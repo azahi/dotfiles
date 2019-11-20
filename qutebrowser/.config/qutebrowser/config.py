@@ -61,9 +61,10 @@ c.new_instance_open_target_window = 'last-focused'
 c.qt.args = []
 
 # Turn on Qt HighDPI scaling. This is equivalent to setting
-# QT_AUTO_SCREEN_SCALE_FACTOR=1 in the environment. It's off by default
-# as it can cause issues with some bitmap fonts. As an alternative to
-# this, it's possible to set font sizes and the `zoom.default` setting.
+# QT_AUTO_SCREEN_SCALE_FACTOR=1 or QT_ENABLE_HIGHDPI_SCALING=1 (Qt >=
+# 5.14) in the environment. It's off by default as it can cause issues
+# with some bitmap fonts. As an alternative to this, it's possible to
+# set font sizes and the `zoom.default` setting.
 # Type: Bool
 c.qt.highdpi = False
 
@@ -250,7 +251,7 @@ c.completion.timestamp_format = '%Y-%m-%d'
 # Directory to save downloads to. If unset, a sensible OS-specific
 # default is used.
 # Type: Directory
-c.downloads.location.directory = '~/downloads/qutebrowser'
+c.downloads.location.directory = '~/downloads'
 
 # Prompt the user for the download location. If set to false,
 # `downloads.location.directory` will be used.
@@ -378,7 +379,7 @@ c.scrolling.smooth = False
 #   - tr-TR: Turkish (Turkey)
 #   - uk-UA: Ukrainian (Ukraine)
 #   - vi-VN: Vietnamese (Viet Nam)
-c.spellcheck.languages = ['en-US', 'ru-RU', 'de-DE']
+c.spellcheck.languages = ['en-US', 'ru-RU']
 
 # Padding (in pixels) for the statusbar.
 # Type: Padding

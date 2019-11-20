@@ -6,12 +6,12 @@
 
     autoload -U zrecompile
 
+    zrecompile -pq $ZLOGIN
+    zrecompile -pq $ZPROFILE
+    zrecompile -pq $ZSHENV
+    zrecompile -pq $ZSHRC
     if [[ -s "$ZCOMPDUMP" && ( ! -s "$ZCPMDUMP.zwc" || "$ZCOMPDUMP" -nt "$ZCOMPDUMP.zwc" ) ]]
     then
         zrecompile -pq "$ZCOMPDUMP"
     fi
-
-    zrecompile -pq ${ZDOTDIR:-$HOME}/.zshrc
-    zrecompile -pq ${ZDOTDIR:-$HOME}/.zprofile
-    zrecompile -pq ${ZDOTDIR:-$HOME}/.zshenv
 ) &!

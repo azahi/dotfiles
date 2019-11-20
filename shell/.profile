@@ -21,7 +21,7 @@ export KEYTIMEOUT=1
 export HISTFILE="$HOME/.shell.d/.history"
 export HISTSIZE=100000
 
-if [ ! "$(uname -s)" = "Darwin" ]
+if [ "$OSTYPE" = "linux-gnu" ]
 then
     export XDG_CACHE_HOME="/tmp/.private/$USER"
     export XDG_CONFIG_HOME="$HOME/.config"
@@ -109,7 +109,7 @@ then
     fi
 fi
 
-if [ ! "$(uname -s)" = "Darwin" ] || [ "$(command -v open)" ]
+if [ "$OSTYPE" = "linux-gnu" ]
 then
     if grep -q Microsoft /proc/version > /dev/null 2>&1
     then
@@ -181,7 +181,7 @@ do
         [ -f "$HOME/.pystartup" ] && \
             export PYTHONSTARTUP="$HOME/.pystartup"
 
-        if [ "$(uname -s)" = "Darwin" ]
+        if [ ! "$OSTYPE" = "linux-gnu" ]
         then
             for j in "$HOME/Library/Python/"*
             do
@@ -303,15 +303,16 @@ then
     export FZF_DEFAULT_OPTS="--height 20% --reverse --border"
 fi
 
-if command -v beets > /dev/null 2>&1
+if command -v beet > /dev/null 2>&1
 then
     export BEETSDIR="$XDG_DATA_HOME/beets"
 
+    # shellcheck disable=SC2139
     [ -f "$XDG_CONFIG_HOME/beets/config.yaml" ] && \
-        alias beet="beet -c \$XDG_CONFIG_HOME/beets/config.yaml"
+        alias beet="beet -c $XDG_CONFIG_HOME/beets/config.yaml"
 fi
 
-if command -v dbus-daemon > /dev/null 2>&1 && [ ! "$(uname -s)" = "Darwin" ]
+if command -v dbus-daemon > /dev/null 2>&1 && [ "$OSTYPE" = "linux-gnu" ]
 then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 fi
