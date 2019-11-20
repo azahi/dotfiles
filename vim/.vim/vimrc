@@ -28,8 +28,7 @@ set ignorecase
 set incsearch
 set laststatus=2
 set lazyredraw
-set list
-set listchars+=extends:\>,precedes:\<
+set nolist
 set magic
 set modeline
 set mouse=
@@ -145,9 +144,9 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd FocusGained,BufEnter * checktime
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plug')
@@ -199,9 +198,6 @@ Plug 'tpope/vim-unimpaired' " {{{
 " }}}
 
 Plug 'vim-scripts/ruscmd' " {{{
-" }}}
-
-Plug 'dense-analysis/ale' " {{{
 " }}}
 
 Plug 'sheerun/vim-polyglot' " {{{

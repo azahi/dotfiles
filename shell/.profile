@@ -85,6 +85,7 @@ prependpath "/bin"
 
 if command -v brew > /dev/null 2>&1 || [ -d "$HOME/.brew" ]
 then
+    prependpath "$HOME/.brew/sbin"
     prependpath "$HOME/.brew/bin"
 
     export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew/cache"
