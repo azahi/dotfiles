@@ -1,3 +1,4 @@
+*.orig
 *~
 .*-V100
 .DS_Store
