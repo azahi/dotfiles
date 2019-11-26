@@ -59,22 +59,19 @@ fi
 source $HOME/.zplug/init.zsh
 
 
-zplug "zsh-users/zsh-autosuggestions" # {{{
+zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]" # {{{
 # }}}
 
 zplug "zsh-users/zsh-completions" # {{{
 # }}}
 
-zplug "zsh-users/zsh-syntax-highlighting", defer:2 # {{{
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, if:"[[ $TERM != linux ]]" # {{{
 # }}}
 
-zplug "zsh-users/zsh-history-substring-search" # {{{
+zplug "zsh-users/zsh-history-substring-search", if:"[[ $TERM != linux ]]" # {{{
 # }}}
 
-zplug "djui/alias-tips" # {{{
-# }}}
-
-zplug "hlissner/zsh-autopair", defer:2 # {{{
+zplug "hlissner/zsh-autopair", defer:2, if:"[[ $TERM != linux ]]" # {{{
 # }}}
 
 MODE_INDICATOR="\0"

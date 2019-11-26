@@ -59,34 +59,34 @@ fi
 [ ! -d "$XDG_TEMPLATES_DIR" ]   && mkdir -p "$XDG_TEMPLATES_DIR"
 [ ! -d "$XDG_VIDEOS_DIR" ]      && mkdir -p "$XDG_VIDEOS_DIR"
 
-appendpath ()
+path_append ()
 {
     [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
     [ -d "$1" ] || return
     eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
     eval export $PATHVAR="\$$PATHVAR:$1"
 }
-prependpath ()
+path_prepend ()
 {
     [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
     [ -d "$1" ] || return
     eval echo \$$PATHVAR | grep -q "\(:\|^\)$1\(:\|$\)" && return
     eval export $PATHVAR="$1:\$$PATHVAR"
 }
-prependpath "$HOME/.local/bin"
-prependpath "$HOME/.bin"
-prependpath "/usr/lib/plan9/bin"
-prependpath "/usr/local/sbin"
-prependpath "/usr/local/bin"
-prependpath "/usr/sbin"
-prependpath "/usr/bin"
-prependpath "/sbin"
-prependpath "/bin"
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.bin"
+path_prepend "/usr/lib/plan9/bin"
+path_prepend "/usr/local/sbin"
+path_prepend "/usr/local/bin"
+path_prepend "/usr/sbin"
+path_prepend "/usr/bin"
+path_prepend "/sbin"
+path_prepend "/bin"
 
 if command -v brew > /dev/null 2>&1 || [ -d "$HOME/.brew" ]
 then
-    prependpath "$HOME/.brew/sbin"
-    prependpath "$HOME/.brew/bin"
+    path_prepend "$HOME/.brew/sbin"
+    path_prepend "$HOME/.brew/bin"
 
     export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew/cache"
     export HOMEBREW_TEMP="$XDG_CACHE_HOME/homebrew/temp"
@@ -163,7 +163,7 @@ then
     alias e="emacs --no-window-system"
     alias ec="emacsclient --no-window-system"
 
-    prependpath "$HOME/.emacs.d/bin"
+    path_prepend "$HOME/.emacs.d/bin"
 fi
 
 for i in nvim vim vi
@@ -186,7 +186,7 @@ do
         then
             for j in "$HOME/Library/Python/"*
             do
-                prependpath "$j/bin"
+                path_prepend "$j/bin"
             done
         fi
 
@@ -199,7 +199,7 @@ done
 
 if command -v dotnet > /dev/null 2>&1
 then
-    prependpath "$HOME/.dotnet/tools"
+    path_prepend "$HOME/.dotnet/tools"
 
     export DOTNET_CLI_TELEMETRY_OPTOUT=1
     export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
@@ -216,7 +216,7 @@ fi
 
 if command -v cargo > /dev/null 2>&1
 then
-    prependpath "$HOME/.cargo/bin"
+    path_prepend "$HOME/.cargo/bin"
 
     export CARGO_HOME="$HOME/.cargo"
     export CARGO_CACHE_RUSTC_INFO=0
@@ -226,12 +226,12 @@ if command -v go > /dev/null 2>&1
 then
     export GOPATH="$HOME/.go"
 
-    prependpath "$HOME/.go/bin"
+    path_prepend "$HOME/.go/bin"
 fi
 
 if command -v ruby > /dev/null 2>&1
 then
-    prependpath "$HOME/.rvm/bin"
+    path_prepend "$HOME/.rvm/bin"
 
     # shellcheck disable=SC1090
     [ -s "$HOME/.rvm/scripts/rvm" ] && \
@@ -239,7 +239,7 @@ then
 
     for i in "$HOME/.gem/ruby/"*
     do
-        prependpath "$i/bin"
+        path_prepend "$i/bin"
     done
 fi
 
@@ -249,13 +249,13 @@ then
     [ -f "$HOME/.opam/opam-init/init.sh" ] &&
         . "$HOME/.opam/opam-init/init.sh" > /dev/null 2>&1
 
-    prependpath "$HOME/.opam/default/bin"
-    prependpath "$HOME/.opam/default/sbin"
+    path_prepend "$HOME/.opam/default/bin"
+    path_prepend "$HOME/.opam/default/sbin"
 fi
 
 if command -v cabal > /dev/null 2>&1
 then
-    prependpath "$HOME/.cabal/bin"
+    path_prepend "$HOME/.cabal/bin"
 fi
 
 if command -v git > /dev/null 2>&1
