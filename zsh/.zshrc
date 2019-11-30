@@ -62,6 +62,9 @@ source $HOME/.zplug/init.zsh
 zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]" # {{{
 # }}}
 
+zplug "ninrod/pass-zsh-completion", if:"$(command -v pass >/dev/null 2>&1)" # {{{
+# }}}
+
 zplug "zsh-users/zsh-completions" # {{{
 # }}}
 
