@@ -2,16 +2,17 @@
 
 (
     setopt local_options
-    setopt extendedglob
+    setopt extended_glob
 
-    autoload -U zrecompile
+    autoload -Uz zrecompile
 
-    zrecompile -pq $ZLOGIN
-    zrecompile -pq $ZPROFILE
-    zrecompile -pq $ZSHENV
-    zrecompile -pq $ZSHRC
+    zrecompile -pq "$ZLOGIN"
+    zrecompile -pq "$ZLOGOUT"
+    zrecompile -pq "$ZPROFILE"
+    zrecompile -pq "$ZSHENV"
+    zrecompile -pq "$ZSHRC"
     if [[ -s "$ZCOMPDUMP" && ( ! -s "$ZCPMDUMP.zwc" || "$ZCOMPDUMP" -nt "$ZCOMPDUMP.zwc" ) ]]
     then
         zrecompile -pq "$ZCOMPDUMP"
     fi
-) &!
+) &

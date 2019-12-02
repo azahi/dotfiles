@@ -1,16 +1,18 @@
 #!/usr/bin/env zsh
 
-skip_global_compinit=true
+unsetopt global_rcs
+skip_global_compinit=1
+setopt no_global_rcs
 
-setopt noglobalrcs
-
-export ZCOMPDUMP="${XDG_CACHE_HOME:-ZDOTDIR:-$HOME}/.zcompdump"
-export ZLOGIN="${ZDOTDIR:-$HOME}/.zlogin"
-export ZPROFILE="${ZDOTDIR:-$HOME}/.zprofile"
-export ZSHENV="${ZDOTDIR:-$HOME}/.zshenv"
-export ZSHRC="${ZDOTDIR:-$HOME}/.zshrc"
+export ZCOMPDUMP="${XDG_CACHE_HOME:-$HOME}/.zcompdump"
+export ZLOGIN="$HOME/.zlogin"
+export ZLOGOUT="$HOME/.zlogout"
+export ZPROFILE="$HOME/.zprofile"
+export ZSHENV="$HOME/.zshenv"
+export ZSHRC="$HOME/.zshrc"
 
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZPROFILE" ]]
 then
+    # shellcheck disable=SC1090
     source "$ZPROFILE"
 fi

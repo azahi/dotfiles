@@ -1,3 +1,5 @@
+*.bak
+*.bkp
 *.orig
 *~
 .*-V100
@@ -26,8 +28,6 @@
 .idea/**/usage.statistics.xml
 .idea/**/workspace.xml
 .netrwhist
-CMakeCache.txt
-CMakeFiles/
 TAGS
 Thumbs.db
 [._]*.s[a-v][a-z]
@@ -37,8 +37,6 @@ Thumbs.db
 [._]ss[a-gi-z]
 [._]sw[a-p]
 \#*\#
-cmake_install.cmake
-compile_commands.json
 cscope.*
 desktop.ini
 vgcore.*

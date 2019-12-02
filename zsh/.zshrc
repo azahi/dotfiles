@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 
 setopt auto_cd
 setopt auto_name_dirs
@@ -27,11 +27,12 @@ setopt hist_save_no_dups
 
 # Completion {{{
 autoload -Uz compinit
-if [[ -n $ZCOMPDUMP(#qN.mh+24) ]]
+if [[ -s $ZCOMPDUMP(#qN.mh+24) && ( ! -s "$ZCOMPDUMP.zwc" || "$ZCOMPDUMP" -nt "$ZCOMPDUMP.zwc" ) ]]
 then
-    compinit -d $ZCOMPDUMP
+    compinit -d "$ZCOMPDUMP"
+    zrecompile -pq "$ZCOMPDUMP"
 else
-    compinit -d $ZCOMPDUMP -C
+    compinit -d "$ZCOMPDUMP" -C
 fi
 
 zstyle ':completion:*' format '%d'
@@ -53,10 +54,12 @@ setopt magic_equal_subst
 if [ ! -d "$HOME/.zplug" ]
 then
     git clone "https://github.com/zplug/zplug" "$HOME/.zplug"
+    # shellcheck disable=SC1090
     source "$HOME/.zplug/init.zsh" && \
         zplug update --self
 fi
-source $HOME/.zplug/init.zsh
+# shellcheck disable=SC1090
+source "$HOME/.zplug/init.zsh"
 
 
 zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]" # {{{
@@ -77,7 +80,7 @@ zplug "zsh-users/zsh-history-substring-search", if:"[[ $TERM != linux ]]" # {{{
 zplug "hlissner/zsh-autopair", defer:2, if:"[[ $TERM != linux ]]" # {{{
 # }}}
 
-MODE_INDICATOR="\0"
+export MODE_INDICATOR="\0"
 zplug "plugins/vi-mode", from:oh-my-zsh # {{{
 bindkey '^ ' autosuggest-accept
 # }}}
