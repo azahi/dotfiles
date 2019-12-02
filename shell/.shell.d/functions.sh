@@ -110,7 +110,8 @@ fi
 
 if ! command -v dirname >/dev/null 2>&1
 then
-    dirname() {
+    dirname()
+    {
         dir=${1%%/}
         [ "${dir##*/*}" ] && dir=.
         dir=${dir%/*}
@@ -121,7 +122,8 @@ fi
 
 if ! command -v basename >/dev/null 2>&1
 then
-    basename() {
+    basename()
+    {
         dir=${1%${1##*[!/]}}
         dir=${dir##*/}
         dir=${dir%"$2"}

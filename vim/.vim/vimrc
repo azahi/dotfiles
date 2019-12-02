@@ -8,7 +8,7 @@ set autoread
 set background=dark
 set backspace=indent,eol,start
 set breakindent
-set clipboard+=unnamedplus
+set clipboard=unnamed,unnamedplus
 set cmdheight=1
 set cmdwinheight=10
 set complete+=i,d
