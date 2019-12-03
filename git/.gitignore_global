@@ -1,42 +1,53 @@
-*.bak
-*.bkp
-*.orig
-*~
-.*-V100
-.DS_Store
-.TemporaryItems
-.\#*
-._*
-.ccls-cache/
-.clangd/
-.fuse_hidden*
-.gdb_history
-.idea/**/contentModel.xml
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/dataSources/
-.idea/**/dbnavigator.xml
-.idea/**/dictionaries
-.idea/**/dynamic.xml
-.idea/**/gradle.xml
-.idea/**/libraries
-.idea/**/mongoSettings.xml
-.idea/**/shelf
-.idea/**/sqlDataSources.xml
-.idea/**/tasks.xml
-.idea/**/uiDesigner.xml
-.idea/**/usage.statistics.xml
-.idea/**/workspace.xml
+# Vim
 .netrwhist
-TAGS
-Thumbs.db
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
-[._]*.un~
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
 [._]sw[a-p]
+
+# Emacs
+*~
+.dir-locals.el
 \#*\#
-cscope.*
+
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+*.code-workspace
+
+# JetBrains
+.idea/**/dictionaries/
+.idea/**/shelf/
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/workspace.xml
+
+# Tags
+!TAGS/
+!tags/
+.TAGS
+.tags
+TAGS
+tags
+
+# GNU/Linux
+.fuse_hidden*
+
+# MacOS
+.DS_Store
+Thumbs.db
+
+# Windows
 desktop.ini
+
+# Misc
+*.bak
+*.ccls-cache/
+*.clangd/
+.gdb_history
+cscope.*
 vgcore.*

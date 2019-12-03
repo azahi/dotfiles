@@ -15,4 +15,4 @@
     then
         zrecompile -pq "$ZCOMPDUMP"
     fi
-) &
+) &!
