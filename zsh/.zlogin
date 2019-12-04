@@ -4,7 +4,7 @@
     setopt local_options
     setopt extended_glob
 
-    autoload -Uz zrecompile
+    autoload -U zrecompile
 
     zrecompile -pq "$ZLOGIN"
     zrecompile -pq "$ZLOGOUT"

@@ -16,8 +16,6 @@ export LC_PAPER="$LANG"
 export LC_TELEPHONE="$LANG"
 export LC_TIME="$LANG"
 
-export KEYTIMEOUT=1
-
 export HISTFILE="$HOME/.shell.d/.history"
 export HISTSIZE=100000
 
@@ -130,18 +128,10 @@ done
 
 for i in bat less more cat
 do
-    if command -v "$i" > /dev/null 2>&1
-    then
-        if [ "$i" = "bat" ]
-        then
-            export PAGER="$i --style=plain"
-        else
-            export PAGER="$i"
-        fi
-        export MANPAGER="$PAGER"
-
+    command -v "$i" > /dev/null 2>&1 && \
+        export PAGER="$i" && \
+        export MANPAGER="$PAGER" && \
         break
-    fi
 done
 
 for i in cdiff colordiff diff
@@ -431,6 +421,16 @@ then
     alias gll="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
     alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
 fi
+
+alias cp="cp -i -v"
+alias ln="ln -i -v"
+alias mv="mv -i -v"
+alias rm="rm -i -v"
+alias mkdir="mkdir -p -v"
+
+alias grep="grep --color=auto"
+alias egrep="grep --color=auto"
+alias fgrep="grep --color=auto"
 
 alias ~="cd ~"
 alias ..="cd .."
