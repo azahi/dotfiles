@@ -181,7 +181,6 @@ do
         fi
 
         alias pipup="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
-        alias pip3up="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 
         break
     fi
@@ -422,11 +421,11 @@ then
     alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
 fi
 
-alias cp="cp -i -v"
-alias ln="ln -i -v"
-alias mv="mv -i -v"
-alias rm="rm -i -v"
-alias mkdir="mkdir -p -v"
+alias cp="cp -v -i"
+alias ln="ln -v -i"
+alias mv="mv -v -i"
+alias rm="rm -v -I"
+alias mkdir="mkdir -v -p"
 
 alias grep="grep --color=auto"
 alias egrep="grep --color=auto"

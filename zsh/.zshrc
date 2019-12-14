@@ -29,6 +29,7 @@ setopt rc_quotes
 # History {{{
 export HISTFILE="${HISTFILE}_zsh"
 export SAVEHIST="$HISTSIZE"
+
 setopt append_history
 setopt bang_hist
 setopt extended_history
@@ -66,76 +67,28 @@ setopt no_complete_aliases
 setopt no_menu_complete
 setopt path_dirs
 
-zstyle ':completion:*' verbose yes
+zstyle ':complation:*' matcher-list      'm:{a-z}={A-Z}'
+zstyle ':completion:*' accept-exact      '*(N)'
+zstyle ':completion:*' cache-path        "${XDG_CACHE_HOME-$HOME}/.zcompcache"
+zstyle ':completion:*' insert-sections   true
+zstyle ':completion:*' list-colors       ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-dirs-first   true
+zstyle ':completion:*' menu              select
+zstyle ':completion:*' separate-sections true
+zstyle ':completion:*' use-cache         true
+zstyle ':completion:*' verbose           true
 
-zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' cache-path   "${XDG_CACHE_HOME-$HOME}/.zcompcache"
-zstyle ':completion:*' use-cache    on
-
-zstyle ':complation:*' matcher-list '' \
-    'm:{a-z\-}={A-Z\_}' \
-    'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-    'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
-
-zstyle ':completion:*:*:*:*:*' menu select
-
-zstyle ':completion:*:options' description      yes
-zstyle ':completion:*:options' auto-description '%d'
-
-zstyle ':completion:*:matches' group yes
-
-zstyle ':completion:*'              format '%d'
-zstyle ':completion:*:corrections'  format '%F{green}%d (errors: %e)%f'
-zstyle ':completion:*:descriptions' format '%F{yellow}%d%f'
+zstyle ':completion:*'              format '%F{blue}%d%f'
+zstyle ':completion:*:corrections'  format '%F{yellow}%d (errors: %e)%f'
+zstyle ':completion:*:descriptions' format '%F{green}%d%f'
 zstyle ':completion:*:messages'     format '%F{purple}%d%f'
 zstyle ':completion:*:warnings'     format '%F{red}no matches found%f'
 
-zstyle ':completion:*'               completer  _complete _list _match _approximate
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
-zstyle ':completion:*:match:*'       original   only
-
-zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-
-zstyle ':completion:*'                        special-dirs    true
-zstyle ':completion:*'                        squeeze-slashes true
-zstyle ':completion:*:*:cd:*'                 ignore-parents  parent pwd
-zstyle ':completion:*:*:cd:*'                 tag-order       local-directories directory-stack path-directories
-zstyle ':completion:*:*:cd:*:directory-stack' menu            yes select
-zstyle ':completion:*:-tilde-:*'              group-order     'named-directories' 'path-directories' 'users' 'expand'
-zstyle ':completion:*:default'                list-colors     ${(s.:.)LS_COLORS}
-
-zstyle ':completion:*:history-words' list            false
-zstyle ':completion:*:history-words' menu            yes
-zstyle ':completion:*:history-words' remove-all-dups yes
-zstyle ':completion:*:history-words' stop            yes
-
-zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
-
-zstyle ':completion:*:rm:*' file-patterns '*:all-files'
-zstyle ':completion:*:rm:*' ignore-line   other
+zstyle ':completion:*:matches' group true
 
 zstyle ':completion:*:*:kill:*'           force-list always
-zstyle ':completion:*:*:kill:*'           insert-ids single
-zstyle ':completion:*:*:kill:*'           menu yes select
-zstyle ':completion:*:*:kill:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
+zstyle ':completion:*:*:kill:*:processes' command 'ps -u $LOGNAME -o pid,command -w'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
-
-zstyle ':completion:*:manuals'       separate-sections true
-zstyle ':completion:*:manuals.(^1*)' insert-sections   true
-
-zstyle ':completion:*:(scp|rsync):*' group-order users files all-files hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:(scp|rsync):*' tag-order   'hosts:-host:host hosts:-domain:domain hosts:-ipaddr:ip\ address *'
-zstyle ':completion:*:(ssh|mosh):*'  group-order users hosts-domain hosts-host users hosts-ipaddr
-zstyle ':completion:*:(ssh|mosh):*'  tag-order   'hosts:-host:host hosts:-domain:domain hosts:-ipaddr:ip\ address *'
-
-zstyle ':completion:*:(ssh|mosh|scp|rsync):*:hosts-domain' ignored-patterns \
-    '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
-zstyle ':completion:*:(ssh|mosh|scp|rsync):*:hosts-host'   ignored-patterns \
-    '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
-zstyle ':completion:*:(ssh|mosh|scp|rsync):*:hosts-ipaddr' ignored-patterns \
-    '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
 # }}}
 
 # Plugins {{{

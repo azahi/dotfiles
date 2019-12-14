@@ -1,0 +1,15 @@
+profile:                  dark
+
+char.foreground:          x-light-salmon
+comment.foreground:       x-chocolate1
+constant.foreground:      x-aquamarine
+directive.foreground:     x-lightsteelblue
+doc.foreground:           x-light-salmon
+error.foreground:         red
+identifier.foreground:    none
+keyword.foreground:       x-cyan1
+module.foreground:        x-palegreen
+parenthesis.background:   blue
+quotation.foreground:     x-purple
+string.foreground:        x-light-salmon
+symbol.foreground:        x-cyan1

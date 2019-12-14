@@ -7,11 +7,11 @@
 
          :completion
          (company
-          +chilframe
+          -chilframe
           +auto
           +tng)
          (ivy
-          +childframe
+          -childframe
           +prescient
           +fuzzy)
 
