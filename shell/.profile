@@ -218,18 +218,19 @@ then
     path_prepend "$HOME/.go/bin"
 fi
 
-if command -v ruby > /dev/null 2>&1
+if command -v ruby > /dev/null 2>&1 || [ -d "$HOME/.rvm" ]
 then
-    path_prepend "$HOME/.rvm/bin"
-
     # shellcheck disable=SC1090
-    [ -s "$HOME/.rvm/scripts/rvm" ] && \
+    if [ -s "$HOME/.rvm/scripts/rvm" ]
+    then
         source "$HOME/.rvm/scripts/rvm"
-
-    for i in "$HOME/.gem/ruby/"*
-    do
-        path_prepend "$i/bin"
-    done
+    elif command -v gem > /dev/null 2>&1 && [ -d "$HOME/.gem" ]
+    then
+        for i in "$HOME/.gem/ruby/"*
+        do
+            path_prepend "$i/bin"
+        done
+    fi
 fi
 
 if command -v opam > /dev/null 2>&1
@@ -237,9 +238,6 @@ then
     # shellcheck disable=SC1090
     [ -f "$HOME/.opam/opam-init/init.sh" ] &&
         . "$HOME/.opam/opam-init/init.sh" > /dev/null 2>&1
-
-    path_prepend "$HOME/.opam/default/bin"
-    path_prepend "$HOME/.opam/default/sbin"
 fi
 
 if command -v cabal > /dev/null 2>&1
@@ -256,12 +254,12 @@ fi
 
 if command -v wine > /dev/null 2>&1
 then
-    export WINEARCH="win32"
+    export WINEARCH="win64"
+    export WINEDEBUG="+all"
+    export WINEDLLOVERRIDES="winemenubuilder.exe=d"
     export WINEPREFIX="$HOME/.wine"
-    export WINEDEBUG="-all"
-    export WINEDLLOVERRIDES="mscoree,mshtml=;winemenubuilder.exe=d"
 
-    alias winep="wine explorer.exe /desktop=default,1600x900"
+    alias wine-vd="wine explorer.exe /desktop=default,1600x900"
 fi
 
 if command -v nnn > /dev/null 2>&1
@@ -330,17 +328,11 @@ then
     export XAUTHORITY="$XDG_DATA_HOME/xorg/.Xauthority"
 fi
 
-if command -v startx > /dev/null 2>&1
-then
-    alias sx="startx -- vt1 -nolisten tcp"
-fi
-
 if command -v rsync > /dev/null 2>&1
 then
     alias rsync-cp="rsync --archive --compress --verbose --progress --human-readable"
     alias rsync-mv="rsync --archive --compress --verbose --progress --human-readable --remove-source-files"
     alias rsync-sync="rsync --archive --compress --verbose --progress --human-readable --update --delete"
-    alias rsync-update="rsync --archive --compress --verbose --progress --human-readable --update"
 fi
 
 if command -v torrentinfo > /dev/null 2>&1
@@ -438,9 +430,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-alias week="date +%V"
-
-alias path='echo -e ${PATH//:/\\n} | sort'
+alias path="echo -e '${PATH//:/\\n}'"
 
 for i in "$HOME/.shell.d/"*.sh
 do
