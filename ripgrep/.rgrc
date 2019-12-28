@@ -8,6 +8,7 @@
 --glob=!Debug/*
 --glob=!Release/*
 --glob=!VideoDecodeStats
+--glob=!build/*
 --glob=!databases-incognito
 --glob=!obj/*
 --hidden

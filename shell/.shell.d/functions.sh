@@ -21,37 +21,6 @@ then
     }
 fi
 
-strstrip()
-{
-    printf "%s\n" "${1/$2}"
-}
-
-strstrip-all()
-{
-    printf "%s\n" "${1//$2}"
-}
-
-strtrim()
-{
-    : "${1#"${1%%[![:space:]]*}"}"
-    : "${_%"${_##*[![:space:]]}"}"
-    printf "%s\n" "$_"
-}
-
-strtrim-all()
-{
-    set -f
-    set -- $*
-    printf "%s\n" "$*"
-    set +f
-}
-
-strtrim-quotes()
-{
-    : "${1//\'}"
-    printf "%s\n" "${_//\"}"
-}
-
 strlwr()
 {
     printf '%s\n' "${1,,}"
@@ -60,11 +29,6 @@ strlwr()
 strupr()
 {
     printf '%s\n' "${1^^}"
-}
-
-count()
-{
-    printf "%s\n" "$#"
 }
 
 dec2hex()

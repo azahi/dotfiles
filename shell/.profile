@@ -1,3 +1,5 @@
+#!/bin/sh
+
 if [ -z "$LANG" ]
 then
     export LANG="en_US.UTF-8"
@@ -19,7 +21,7 @@ export LC_TIME="$LANG"
 export HISTFILE="$HOME/.shell.d/.history"
 export HISTSIZE=100000
 
-if [ "$OSTYPE" = "linux-gnu" ]
+if [ "$(uname)" = "Linux" ]
 then
     export XDG_CACHE_HOME="/tmp/.private/$USER"
     export XDG_CONFIG_HOME="$HOME/.config"
@@ -108,7 +110,7 @@ then
     fi
 fi
 
-if [ "$OSTYPE" = "linux-gnu" ]
+if [ "$(uname)" = "Linux" ]
 then
     if grep -q Microsoft /proc/version > /dev/null 2>&1
     then
@@ -172,7 +174,7 @@ do
         [ -f "$HOME/.pystartup" ] && \
             export PYTHONSTARTUP="$HOME/.pystartup"
 
-        if [ ! "$OSTYPE" = "linux-gnu" ]
+        if [ ! "$(uname)" = "Linux" ]
         then
             for j in "$HOME/Library/Python/"*
             do
@@ -223,7 +225,7 @@ then
     # shellcheck disable=SC1090
     if [ -s "$HOME/.rvm/scripts/rvm" ]
     then
-        source "$HOME/.rvm/scripts/rvm"
+        . "$HOME/.rvm/scripts/rvm"
     elif command -v gem > /dev/null 2>&1 && [ -d "$HOME/.gem" ]
     then
         for i in "$HOME/.gem/ruby/"*
@@ -300,7 +302,7 @@ then
         alias beet="beet -c $XDG_CONFIG_HOME/beets/config.yaml"
 fi
 
-if command -v dbus-daemon > /dev/null 2>&1 && [ "$OSTYPE" = "linux-gnu" ]
+if command -v dbus-daemon > /dev/null 2>&1 && [ "$(uname)" = "Linux" ]
 then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 fi
@@ -430,10 +432,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-alias path="echo -e '${PATH//:/\\n}'"
-
 for i in "$HOME/.shell.d/"*.sh
 do
     # shellcheck disable=SC1090
-    source "$i"
+    . "$i"
 done
