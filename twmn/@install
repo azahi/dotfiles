@@ -1,11 +1,11 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/twnm" ] && \
-    mkdir -p "$HOME/.config/twnm"
+[ ! -d "$HOME/.config/twmn" ] && \
+    mkdir -p "$HOME/.config/twmn"
 
 stow \
     --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \
-    twnm
+    twmn

@@ -432,6 +432,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
+alias c="clear"
+
 for i in "$HOME/.shell.d/"*.sh
 do
     # shellcheck disable=SC1090

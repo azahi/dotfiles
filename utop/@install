@@ -1,11 +1,8 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/pulse" ] && \
-    mkdir -p "$HOME/.config/pulse"
-
 stow \
     --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \
-    pulseaudio
+    utop
