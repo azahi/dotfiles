@@ -50,6 +50,9 @@ then
     fcitx -r -d -s 0 &
 fi
 
+export QT_LOGGIN_RULES="qt5ct.debug=false"
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
 [ "$(command -v compton)" ] && compton -b
 
 for i in xmonad stumpwm bspwm 2bwm dwm twm
