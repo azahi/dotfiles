@@ -82,7 +82,6 @@
          rgb
          tmux
          upload
-         wakatime
 
          :lang
          assembly
@@ -108,6 +107,7 @@
           +gnuplot
           +ipython
           +pandoc
+          +pomodoro
           +present)
          perl
          plantuml
@@ -207,7 +207,6 @@
          rgb
          tmux
          upload
-         wakatime
 
          :lang
          assembly
