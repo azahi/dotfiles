@@ -47,8 +47,7 @@ desktop.ini
 
 # Misc
 *.bak
-*.ccls-cache/
-*.clangd/
+.ccls-cache/
 .gdb_history
 cscope.*
 vgcore.*

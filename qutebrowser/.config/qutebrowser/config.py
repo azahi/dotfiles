@@ -101,6 +101,62 @@ c.content.headers.custom = {}
 # Type: Bool
 c.content.headers.do_not_track = True
 
+# User agent to send.  The following placeholders are defined:  *
+# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
+# The underlying WebKit version (set to a fixed value   with
+# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
+# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
+# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
+# QtWebEngine. * `{upstream_browser_version}`: The corresponding
+# Safari/Chrome version. * `{qutebrowser_version}`: The currently
+# running qutebrowser version.  The default value is equal to the
+# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
+# read from JavaScript is always the global value.
+# Type: FormatString
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
+
+# User agent to send.  The following placeholders are defined:  *
+# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
+# The underlying WebKit version (set to a fixed value   with
+# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
+# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
+# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
+# QtWebEngine. * `{upstream_browser_version}`: The corresponding
+# Safari/Chrome version. * `{qutebrowser_version}`: The currently
+# running qutebrowser version.  The default value is equal to the
+# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
+# read from JavaScript is always the global value.
+# Type: FormatString
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://accounts.google.com/*')
+
+# User agent to send.  The following placeholders are defined:  *
+# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
+# The underlying WebKit version (set to a fixed value   with
+# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
+# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
+# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
+# QtWebEngine. * `{upstream_browser_version}`: The corresponding
+# Safari/Chrome version. * `{qutebrowser_version}`: The currently
+# running qutebrowser version.  The default value is equal to the
+# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
+# read from JavaScript is always the global value.
+# Type: FormatString
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
+
+# User agent to send.  The following placeholders are defined:  *
+# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
+# The underlying WebKit version (set to a fixed value   with
+# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
+# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
+# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
+# QtWebEngine. * `{upstream_browser_version}`: The corresponding
+# Safari/Chrome version. * `{qutebrowser_version}`: The currently
+# running qutebrowser version.  The default value is equal to the
+# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
+# read from JavaScript is always the global value.
+# Type: FormatString
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://docs.google.com/*')
+
 # Enable host blocking.
 # Type: Bool
 c.content.host_blocking.enabled = True
@@ -130,6 +186,14 @@ c.content.host_blocking.whitelist = []
 # Type: Bool
 c.content.hyperlink_auditing = False
 
+# Load images automatically in web pages.
+# Type: Bool
+config.set('content.images', True, 'chrome-devtools://*')
+
+# Load images automatically in web pages.
+# Type: Bool
+config.set('content.images', True, 'devtools://*')
+
 # Allow JavaScript to read from or write to the clipboard. With
 # QtWebEngine, writing the clipboard as response to a user interaction
 # is always allowed.
@@ -147,6 +211,14 @@ c.content.javascript.enabled = True
 # Enable JavaScript.
 # Type: Bool
 config.set('content.javascript.enabled', True, 'file://*')
+
+# Enable JavaScript.
+# Type: Bool
+config.set('content.javascript.enabled', True, 'chrome-devtools://*')
+
+# Enable JavaScript.
+# Type: Bool
+config.set('content.javascript.enabled', True, 'devtools://*')
 
 # Enable JavaScript.
 # Type: Bool
@@ -276,7 +348,7 @@ c.downloads.location.suggestion = 'path'
 c.downloads.remove_finished = 0
 
 # Editor (and arguments) to use for the `open-editor` command. The
-# following placeholders are defined: * `{file}`: Filename of the file
+# following placeholders are defined:  * `{file}`: Filename of the file
 # to be edited. * `{line}`: Line in which the caret is found in the
 # text. * `{column}`: Column in which the caret is found in the text. *
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
