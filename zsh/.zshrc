@@ -27,8 +27,11 @@ setopt pushd_to_home
 setopt rc_quotes
 
 # History {{{
-export HISTFILE="${HISTFILE}_zsh"
-export SAVEHIST="$HISTSIZE"
+[ -z "$HISTFILE" ] && \
+    export HISTFILE="${HISTFILE}_zsh"
+[ -z "$HISTSIZE" ] && \
+    export SAVEHIST="$HISTSIZE" || \
+    export SAVEHIST=10000
 
 setopt append_history
 setopt bang_hist
@@ -69,9 +72,9 @@ setopt path_dirs
 
 zstyle ':complation:*' matcher-list      'm:{a-z}={A-Z}'
 zstyle ':completion:*' accept-exact      '*(N)'
-zstyle ':completion:*' cache-path        "${XDG_CACHE_HOME-$HOME}/.zcompcache"
+zstyle ':completion:*' cache-path        "${XDG_CACHE_HOME:-$HOME}/.zcompcache"
 zstyle ':completion:*' insert-sections   true
-zstyle ':completion:*' list-colors       ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors       "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' list-dirs-first   true
 zstyle ':completion:*' menu              select
 zstyle ':completion:*' separate-sections true
