@@ -4,7 +4,6 @@
     mkdir -p "$HOME/.local/share/tmux"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

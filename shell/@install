@@ -4,7 +4,6 @@
     mkdir -p "$HOME/.shell.d"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

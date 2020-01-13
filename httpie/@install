@@ -4,7 +4,6 @@
     mkdir -p "$HOME/.httpie"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

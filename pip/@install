@@ -4,7 +4,6 @@
     mkdir -p "$HOME/.config/pip"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

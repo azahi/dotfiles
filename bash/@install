@@ -3,7 +3,6 @@
 # Depends on "shell"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

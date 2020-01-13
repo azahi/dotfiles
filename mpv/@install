@@ -6,7 +6,6 @@
     mkdir -p "$HOME/.config/mpv/script-opts"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

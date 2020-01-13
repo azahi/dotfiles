@@ -6,7 +6,6 @@
     mkdir -p "$HOME/.config/gtk-3.0"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

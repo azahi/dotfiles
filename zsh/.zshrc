@@ -27,11 +27,8 @@ setopt pushd_to_home
 setopt rc_quotes
 
 # History {{{
-[ -z "$HISTFILE" ] && \
-    export HISTFILE="${HISTFILE}_zsh"
-[ -z "$HISTSIZE" ] && \
-    export SAVEHIST="$HISTSIZE" || \
-    export SAVEHIST=10000
+export HISTFILE="${HISTFILE}_zsh"
+export SAVEHIST="$HISTSIZE"
 
 setopt append_history
 setopt bang_hist

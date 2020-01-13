@@ -10,7 +10,6 @@
     mkdir -p "$HOME/.config/fcitx/skin"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

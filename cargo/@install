@@ -4,7 +4,6 @@
     mkdir -p "$HOME/.cargo"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

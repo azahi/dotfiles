@@ -4,7 +4,6 @@
     mkdir -p "$HOME/.nuget"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

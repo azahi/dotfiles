@@ -4,7 +4,6 @@
     mkdir -p "$HOME/.config/ocp"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

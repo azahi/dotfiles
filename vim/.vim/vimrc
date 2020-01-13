@@ -96,7 +96,7 @@ nmap            <M-j>       mz:<C-u>m+<cr>`z
 nmap            <M-k>       mz:<C-u>m-2<cr>`z
 vmap            <M-j>       :<C-u>m'>+<cr>`<my`>mzgv`yo`z
 vmap            <M-k>       :<C-u>m'<-2<cr>`>my`<mzgv`yo`z
-if has('max')
+if has('mac')
     nmap        <D-j>       <M-j>
     nmap        <D-k>       <M-k>
     vmap        <D-j>       <M-j>
@@ -138,7 +138,7 @@ map             <Leader>sp  [s
 map             <Leader>sa  zg
 map             <Leader>s?  z=
 
-command!        W           w !sudo tee % > /dev/null
+command         W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 autocmd BufWritePre * %s/\s\+$//e
 autocmd FocusGained,BufEnter * checktime
@@ -216,6 +216,9 @@ Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
 " }}}
 
 Plug 'keith/tmux.vim' " {{{
+" }}}
+
+Plug 'jceb/vim-orgmode' " {{{
 " }}}
 
 if executable('wakatime')

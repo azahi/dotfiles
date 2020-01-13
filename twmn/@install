@@ -4,7 +4,6 @@
     mkdir -p "$HOME/.config/twmn"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \

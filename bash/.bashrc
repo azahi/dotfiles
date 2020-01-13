@@ -22,6 +22,7 @@ shopt -s cmdhist
 shopt -s histappend
 shopt -s histreedit
 HISTCONTROL=erasedups:ignorespace
+HISTFILE="${HISTFILE}_bash"
 HISTFILESIZE=$HISTSIZE
 HISTIGNORE=ls:ll:la
 

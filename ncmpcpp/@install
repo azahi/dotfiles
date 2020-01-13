@@ -8,7 +8,6 @@
     mkdir -p "$HOME/.local/share/ncmpcpp/lyrics"
 
 stow \
-    --dir=.. \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \
