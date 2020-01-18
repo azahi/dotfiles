@@ -27,7 +27,7 @@ setopt pushd_to_home
 setopt rc_quotes
 
 # History {{{
-export HISTFILE="${HISTFILE}_zsh"
+[ "${HISTFILE: -4}" != "_zsh" ] && export HISTFILE="${HISTFILE}_zsh"
 export SAVEHIST="$HISTSIZE"
 
 setopt append_history
