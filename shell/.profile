@@ -366,12 +366,6 @@ then
     fi
 fi
 
-if command -v make > /dev/null 2>&1 && command -v nproc > /dev/null 2>&1
-then
-    # shellcheck disable=SC2139
-    alias m="make -j$(echo "$(nproc) + 1" | bc)"
-fi
-
 if command -v wget > /dev/null 2>&1
 then
     # shellcheck disable=SC2139
