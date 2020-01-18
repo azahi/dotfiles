@@ -83,8 +83,9 @@
     bs              = branch -a
     c               = clone --recursive
     ca              = !"git add --all && git commit --all --verbose"
+    caw             = !"git add --all && git wtc"
     co              = diff --name-only --diff-filter=U
-    d               = !"git diff-index --quiet HEAD -- || clear ; git --no-pager diff --patch-with-stat"
+    d               = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
     ds              = diff --staged --name-only --diff-filter=ACMR
     ec              = diff HEAD^ --name-only --diff-filter=ACMR
     ed              = diff HEAD --name-only --diff-filter=ACMR
@@ -103,7 +104,7 @@
     ui              = update-index --un-assume-unchanged
     ups             = push --force-with-lease origin HEAD^:master
     wc              = whatchanged -p --abbrev-commit --pretty=medium
-    wtc             = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+    wtc             = !"git commit -m \"$(curl -s whatthecommit.com/index.txt)\""
 
 [github]
     user            = azahi
