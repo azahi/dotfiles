@@ -399,20 +399,20 @@ fi
 
 if ls --color > /dev/null 2>&1
 then
-    alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
-    alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
-    alias la="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
+    alias ls="LC_ALL=\"C\" ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
+    alias la="LC_ALL=\"C\" ls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all"
+    alias ll="LC_ALL=\"C\" ls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all --format=verbose"
 else
-    alias ls="ls -G -p"
-    alias ll="ls -G -p -l"
-    alias la="ls -G -p -l -a"
+    alias ls="LC_ALL=\"C\" ls -G -p"
+    alias la="LC_ALL=\"C\" ls -G -p -A"
+    alias ll="LC_ALL=\"C\" ls -G -p -A -l"
 fi
 
 if command -v gls > /dev/null 2>&1
 then
-    alias gls="gls --color=auto --group-directories-first --human-readable --indicator-style=classify"
-    alias gll="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose"
-    alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --format=verbose --all"
+    alias gls="LC_ALL=\"C\" gls --color=auto --group-directories-first --human-readable --indicator-style=classify"
+    alias gla="LC_ALL=\"C\" gls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all"
+    alias gll="LC_ALL=\"C\" gls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all --format=verbose"
 fi
 
 alias cp="cp -v -i"
