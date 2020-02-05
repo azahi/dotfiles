@@ -105,7 +105,7 @@ zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]" # {{{
 bindkey '^ ' autosuggest-accept
 # }}}
 
-zplug "ninrod/pass-zsh-completion", if:"$(command -v pass >/dev/null 2>&1)" # {{{
+zplug "ninrod/pass-zsh-completion", if:"[[ $(command -v pass) ]]" # {{{
 # }}}
 
 zplug "zsh-users/zsh-completions" # {{{

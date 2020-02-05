@@ -2,7 +2,7 @@
 
 rm_existing()
 {
-    [ -f "$1" ] || [ -d "$1" ] && rm -rf "$1"
+    ( [ -f "$1" ] || [ -d "$1" ] ) && rm -rf "$1"
 }
 
 rm_existing "${ZCOMPDUMP}.zwc.old"

@@ -44,9 +44,7 @@
           -onsave)
          lispy
          multiple-cursors
-         objed
          parinfer
-         rotate-text
          snippets
          word-wrap
 
@@ -60,6 +58,11 @@
          eshell
          shell
 
+         :checkers
+         syntax
+         spell
+         grammar
+
          :tools
          ansible
          debugger
@@ -69,8 +72,6 @@
          ein
          (eval
           +overlay)
-         flycheck
-         flyspell
          gist
          lookup
          lsp
@@ -175,9 +176,7 @@
           -onsave)
          lispy
          multiple-cursors
-         objed
          parinfer
-         rotate-text
          snippets
          word-wrap
 
@@ -191,13 +190,15 @@
          eshell
          shell
 
+         :checkers
+         syntax
+
          :tools
          debugger
          direnv
          docker
          editorconfig
          (eval +overlay)
-         flycheck
          lookup
          lsp
          magit

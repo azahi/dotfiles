@@ -1,5 +1,17 @@
 #!/bin/sh
 
+if [ -f "/etc/profile.env" ]
+then
+    # shellcheck disable=SC1091
+    . "/etc/profile.env"
+fi
+
+for i in /etc/profile.d/*.sh
+do
+    # shellcheck disable=SC1090
+    [ -r "$i" ] && . "$i"
+done
+
 if [ -z "$LANG" ]
 then
     export LANG="en_US.UTF-8"
@@ -366,6 +378,17 @@ then
     fi
 fi
 
+if command -v docker > /dev/null 2>&1
+then
+    alias d-ip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+    alias d-pid="docker inspect --formet '{{ .State.Pid }}'"
+    alias d-rm-all="docker rm \$(docker ps --quiet --all)"
+    alias d-rm-exited="docker rm \$(docker ps --quiet --formet 'status=exited')"
+    alias d-rmi-all="docker rmi \$(docker images --quiet --all)"
+    alias d-rmi-dangling="docker rmi \$(docker images --quiet --format 'dangling=true')"
+    alias d-stop-all="docker stop \$(docker ps --quiet --format 'status=running')"
+fi
+
 if command -v wget > /dev/null 2>&1
 then
     # shellcheck disable=SC2139
@@ -432,7 +455,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-alias c="clear"
+alias c="cd -P && ll"
+alias l="ll"
 
 for i in "$HOME/.shell.d/"*.sh
 do

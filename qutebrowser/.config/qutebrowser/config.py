@@ -246,7 +246,7 @@ c.content.local_storage = True
 #   - true
 #   - false
 #   - ask
-c.content.media_capture = True
+c.content.media_capture = 'ask'
 
 # Enable plugins in Web pages.
 # Type: Bool
