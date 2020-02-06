@@ -458,6 +458,16 @@ alias ......="cd ../../../../.."
 alias c="cd -P && ll"
 alias l="ll"
 
+if [ "$(uname)" = "Darwin" ]
+then
+    alias finder_hide="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+    alias finder_unhide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+    alias mute="osascript -e 'set volume output muted true'"
+
+    alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+fi
+
 for i in "$HOME/.shell.d/"*.sh
 do
     # shellcheck disable=SC1090

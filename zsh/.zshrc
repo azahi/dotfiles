@@ -1,26 +1,37 @@
 #!/usr/bin/env zsh
 
 setopt auto_cd
+setopt auto_menu
 setopt auto_name_dirs
 setopt auto_pushd
 setopt auto_resume
+setopt c_bases
 setopt cdable_vars
 setopt clobber
 setopt combining_chars
+setopt complete_in_word
 setopt hash_list_all
 setopt ignore_eof
+setopt interactive_comments
+setopt list_packed
 setopt long_list_jobs
 setopt magic_equal_subst
+setopt no_always_to_end
 setopt no_auto_name_dirs
 setopt no_beep
 setopt no_bg_nice
 setopt no_check_jobs
 setopt no_correct_all
+setopt no_glob_complete
 setopt no_glob_dots
 setopt no_hup
 setopt no_mail_warning
+setopt no_prompt_cr
 setopt notify
+setopt notify
+setopt octal_zeroes
 setopt prompt_subst
+setopt promptsubst
 setopt pushd_ignore_dups
 setopt pushd_silent
 setopt pushd_to_home
@@ -102,7 +113,7 @@ source "$HOME/.zplug/init.zsh"
 
 
 zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]" # {{{
-bindkey '^ ' autosuggest-accept
+bindkey '^ ' autosuggest-accept # C-SPC
 # }}}
 
 zplug "ninrod/pass-zsh-completion", if:"[[ $(command -v pass) ]]" # {{{
@@ -134,11 +145,16 @@ zplug load
 # }}}
 
 # Keybindings {{{
-bindkey '^p' up-history
-bindkey '^n' down-history
+bindkey '^P'    up-history              # C-p
+bindkey '^N'    down-history            # C-n
 
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
+bindkey '^A'    beginning-of-line       # C-a
+bindkey '^E'    end-of-line             # C-e
 
-bindkey '^[[Z' reverse-menu-complete
+bindkey '^H'    backward-delete-char    # C-h
+
+bindkey '^J'    accept-line             # C-m
+
+bindkey '^[[Z'  reverse-menu-complete   # M-TAB
+
 # }}}
