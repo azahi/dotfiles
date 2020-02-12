@@ -24,7 +24,6 @@ shopt -s histreedit
 HISTCONTROL=erasedups:ignorespace
 [ "${HISTFILE: -5}" != "_bash" ] && HISTFILE="${HISTFILE}_bash"
 HISTFILESIZE=$HISTSIZE
-HISTIGNORE=ls:ll:la
 
 complete -A directory cd
 

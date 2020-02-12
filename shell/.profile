@@ -389,6 +389,11 @@ then
     alias d-stop-all="docker stop \$(docker ps --quiet --format 'status=running')"
 fi
 
+if command -v ssh > /dev/null 2>&1
+then
+    alias s="TERM=xterm ssh"
+fi
+
 if command -v wget > /dev/null 2>&1
 then
     # shellcheck disable=SC2139
@@ -422,20 +427,20 @@ fi
 
 if ls --color > /dev/null 2>&1
 then
-    alias ls="LC_ALL=\"C\" ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
-    alias la="LC_ALL=\"C\" ls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all"
-    alias ll="LC_ALL=\"C\" ls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all --format=verbose"
+    alias ls="ls --color=auto --group-directories-first --human-readable --indicator-style=classify"
+    alias la="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all"
+    alias ll="ls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all --format=verbose"
 else
-    alias ls="LC_ALL=\"C\" ls -G -p"
-    alias la="LC_ALL=\"C\" ls -G -p -A"
-    alias ll="LC_ALL=\"C\" ls -G -p -A -l"
+    alias ls="ls -G -p"
+    alias la="ls -G -p -A"
+    alias ll="ls -G -p -A -l"
 fi
 
 if command -v gls > /dev/null 2>&1
 then
-    alias gls="LC_ALL=\"C\" gls --color=auto --group-directories-first --human-readable --indicator-style=classify"
-    alias gla="LC_ALL=\"C\" gls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all"
-    alias gll="LC_ALL=\"C\" gls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all --format=verbose"
+    alias gls="gls --color=auto --group-directories-first --human-readable --indicator-style=classify"
+    alias gla="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all"
+    alias gll="gls --color=auto --group-directories-first --human-readable --indicator-style=classify --almost-all --format=verbose"
 fi
 
 alias cp="cp -v -i"
