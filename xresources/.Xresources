@@ -1,62 +1,64 @@
 ! special
-URxvt.foreground:           #a19782
-URxvt.background:           #0b0806
-URxvt.cursorColor:          #844d2c
-URxvt.underlineColor:       #c1ab83
+*.foreground:               #a19782
+*.background:               #0b0806
+*.cursorColor:              #844d2c
+*.underlineColor:           #c1ab83
 
 ! black
-URxvt.color0:               #0b0806
-URxvt.color8:               #2f2b2a
+*.color0:                   #0b0806
+*.color8:                   #2f2b2a
 
 ! red
-URxvt.color1:               #844d2c
-URxvt.color9:               #a64848
+*.color1:                   #844d2c
+*.color9:                   #a64848
 
 ! green
-URxvt.color2:               #57553a
-URxvt.color10:              #897f5a
+*.color2:                   #57553a
+*.color10:                  #897f5a
 
 ! yellow
-URxvt.color3:               #a17c38
-URxvt.color11:              #c8b38d
+*.color3:                   #a17c38
+*.color11:                  #c8b38d
 
 ! blue
-URxvt.color4:               #41434f
-URxvt.color12:              #526274
+*.color4:                   #41434f
+*.color12:                  #526274
 
 ! magenta
-URxvt.color5:               #6b4444
-URxvt.color13:              #755c47
+*.color5:                   #6b4444
+*.color13:                  #755c47
 
 ! cyan
-URxvt.color6:               #59664c
-URxvt.color14:              #718062
+*.color6:                   #59664c
+*.color14:                  #718062
 
 ! white
-URxvt.color7:               #a19782
-URxvt.color15:              #c1ab83
+*.color7:                   #a19782
+*.color15:                  #c1ab83
 
 URxvt.font:                 xft:tewi:style=Regular:size=8,  \
                             xft:Biwidth,                    \
                             xft:Fixed,                      \
                             xft:Misc Fixed Wide
 
-URxvt.boldFont:             xft:tewi:style=Bold:size=8,     \
+*.boldFont:                 xft:tewi:style=Bold:size=8,     \
                             xft:tewi:style=Regular:size=8,  \
                             xft:Biwidth,                    \
                             xft:Fixed,                      \
                             xft:Misc Fixed Wide
 
-URxvt.italicFont:           xft:tewi:style=Regular:size=8,  \
+*.italicFont:               xft:tewi:style=Regular:size=8,  \
                             xft:Biwidth,                    \
                             xft:Fixed,                      \
                             xft:Misc Fixed Wide
 
-URxvt.boldItalicFont:       xft:tewi:style=Bold:size=8,     \
+*.boldItalicFont:           xft:tewi:style=Bold:size=8,     \
                             xft:tewi:style=Regular:size=8,  \
                             xft:Biwidth,                    \
                             xft:Fixed,                      \
                             xft:Misc Fixed Wide
+
+Sxiv.font:                  tewi:Style=Regular:size=8
 
 URxvt.internalBorder:       6
 URxvt.letterSpace:          0

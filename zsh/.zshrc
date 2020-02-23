@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+#zmodload zsh/zprof
+
 setopt auto_cd
 setopt auto_menu
 setopt auto_name_dirs
@@ -158,3 +160,5 @@ bindkey '^J'    accept-line             # C-m
 bindkey '^[[Z'  reverse-menu-complete   # M-TAB
 
 # }}}
+
+#zprof

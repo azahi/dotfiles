@@ -143,6 +143,11 @@ command         W           :execute ':silent w !sudo tee % > /dev/null' | :edit
 autocmd BufWritePre * %s/\s\+$//e
 autocmd FocusGained,BufEnter * checktime
 
+augroup project
+    autocmd!
+    autocmd BufRead, BufNewFile *.h,*.c set filetype=c.doxygen
+augroup END
+
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo "~/.vim/autoload/plug.vim" --create-dirs
                 \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
@@ -234,15 +239,21 @@ if has('nvim') && has('python')
     " }}}
     Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' } " {{{
     " }}}
-    Plug 'copy/deoplete-ocaml', { 'for': 'ocaml' } " {{{
+    Plug 'copy/deoplete-ocaml' " {{{
     " }}}
-    Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' } " {{{
+    Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' } " {{{
     " }}}
-    Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' } " {{{
+    Plug 'deoplete-plugins/deoplete-jedi' " {{{
     " }}}
-    Plug 'deoplete-plugins/deoplete-zsh', { 'for': 'zsh' } " {{{
+    Plug 'deoplete-plugins/deoplete-zsh' " {{{
+    " }}}
+    Plug 'deoplete-plugins/deoplete-clang' " {{{
+    " }}}
+    Plug 'deoplete-plugins/deoplete-docker' " {{{
     " }}}
     " }}}
 endif
+
+
 
 call plug#end()
