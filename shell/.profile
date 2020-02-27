@@ -460,9 +460,6 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-alias c="cd -P && ll"
-alias l="ll"
-
 if [ "$(uname)" = "Darwin" ]
 then
     alias finder_hide="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
