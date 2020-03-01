@@ -47,7 +47,7 @@ then
     export GTK_IM_MODULE="fcitx"
     export QT_IM_MODULE="fcitx"
 
-    fcitx -r -d -s 0 &
+    fcitx -r -d -s 0 > /dev/null 2>&1
 fi
 
 export QT_LOGGIN_RULES="qt5ct.debug=false"
