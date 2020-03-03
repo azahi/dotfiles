@@ -78,6 +78,15 @@ c.content.cookies.store = True
 # Type: String
 c.content.default_encoding = 'utf-8'
 
+# Allow websites to share screen content. On Qt < 5.10, a dialog box is
+# always displayed, even if this is set to "true".
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+c.content.desktop_capture = 'ask'
+
 # Allow websites to request geolocations.
 # Type: BoolAsk
 # Valid values:
