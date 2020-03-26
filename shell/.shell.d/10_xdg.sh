@@ -1,22 +1,29 @@
 #!/bin/sh
 
-if [ "$(uname)" = "Linux" ]
+DESKTOP_DIR="$HOME/documents"
+DOCUMENTS_DIR="$HOME/documents"
+DOWNLOAD_DIR="$HOME/downloads"
+MUSIC_DIR="$HOME/audios"
+PICTURES_DIR="$HOME/pictures"
+PUBLICSHARE_DIR="$HOME/documents"
+TEMPLATES_DIR="$HOME/documents"
+VIDEOS_DIR="$HOME/videos"
+
+export XDG_CACHE_HOME="/tmp/.private/$USER"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+if [ "$(uname)" != "Darwin" ]
 then
-    export XDG_CACHE_HOME="/tmp/.private/$USER"
-    export XDG_CONFIG_HOME="$HOME/.config"
-    export XDG_DATA_HOME="$HOME/.local/share"
-    export XDG_DESKTOP_DIR="$HOME/documents"
-    export XDG_DOCUMENTS_DIR="$HOME/documents"
-    export XDG_DOWNLOAD_DIR="$HOME/downloads"
-    export XDG_MUSIC_DIR="$HOME/audios"
-    export XDG_PICTURES_DIR="$HOME/pictures"
-    export XDG_PUBLICSHARE_DIR="$HOME/documents"
-    export XDG_TEMPLATES_DIR="$HOME/documents"
-    export XDG_VIDEOS_DIR="$HOME/videos"
+    export XDG_DESKTOP_DIR="$DESKTOP_DIR"
+    export XDG_DOCUMENTS_DIR="$DOCUMENTS_DIR"
+    export XDG_DOWNLOAD_DIR="$DOWNLOAD_DIR"
+    export XDG_MUSIC_DIR="$MUSIC_DIR"
+    export XDG_PICTURES_DIR="$PICTURES_DIR"
+    export XDG_PUBLICSHARE_DIR="$PUBLICSHARE_DIR"
+    export XDG_TEMPLATES_DIR="$TEMPLATES_DIR"
+    export XDG_VIDEOS_DIR="$VIDEOS_DIR"
 else
-    export XDG_CACHE_HOME="/tmp/$USER"
-    export XDG_CONFIG_HOME="$HOME/.config"
-    export XDG_DATA_HOME="$HOME/.local/share"
     export XDG_DESKTOP_DIR="$HOME/Desktop"
     export XDG_DOCUMENTS_DIR="$HOME/Documents"
     export XDG_DOWNLOAD_DIR="$HOME/Downloads"
@@ -25,6 +32,13 @@ else
     export XDG_PUBLICSHARE_DIR="$HOME/Documents"
     export XDG_TEMPLATES_DIR="$HOME/Documents"
     export XDG_VIDEOS_DIR="$HOME/Documents"
+
+    [ ! -f "$DESKTOP_DIR" ]   && ln -s "$DESKTOP_DIR"   "$XDG_DESKTOP_DIR"
+    [ ! -f "$DOCUMENTS_DIR" ] && ln -s "$DOCUMENTS_DIR" "$XDG_DOCUMENTS_DIR"
+    [ ! -f "$DOWNLOAD_DIR" ]  && ln -s "$DOWNLOAD_DIR"  "$XDG_DOWNLOAD_DIR"
+    [ ! -f "$MUSIC_DIR" ]     && ln -s "$MUSIC_DIR"     "$XDG_MUSIC_DIR"
+    [ ! -f "$PICTURES_DIR" ]  && ln -s "$PICTURES_DIR"  "$XDG_PICTURES_DIR"
+    [ ! -f "$VIDEOS_DIR" ]    && ln -s "$VIDEOS_DIR"    "$XDG_VIDEOS_DIR"
 fi
 
 [ ! -d "$XDG_CONFIG_HOME" ]     && mkdir -p "$XDG_CONFIG_HOME"
