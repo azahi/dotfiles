@@ -15,3 +15,5 @@ set dns:cache-enable false
 set ftp:anon-pass anonymous
 set ftp:anon-user anonymous
 set ftp:sync-mode false
+
+set sftp:auto-confirm yes

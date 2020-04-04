@@ -4,5 +4,6 @@ for i in qutebrowser palemoon firefox chromium chrome safari w3m lynx elinks lin
 do
     command -v "$i" > /dev/null 2>&1 && \
         export BROWSER="$i" && \
+        alias b="$BROWSER" && \
         break
 done

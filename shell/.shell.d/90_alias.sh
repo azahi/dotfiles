@@ -3,7 +3,7 @@
 alias cp="cp -v -i"
 alias ln="ln -v -i"
 alias mv="mv -v -i"
-alias rm="rm -v -I"
+alias rm="rm -v -i"
 
 alias mkdir="mkdir -v -p"
 alias rmdir="rmdir -v -p"

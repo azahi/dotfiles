@@ -13,7 +13,7 @@
 #   - multiple-tabs: Show a confirmation if multiple tabs are opened.
 #   - downloads: Show a confirmation if downloads are running
 #   - never: Never show a confirmation.
-c.confirm_quit = ['never']
+c.confirm_quit = ['downloads']
 
 # Maximum time (in minutes) between two history items for them to be
 # considered being from the same browsing session. Items with less time
@@ -301,7 +301,7 @@ c.completion.cmd_history_max_items = 100
 
 # Height (in pixels or as percentage of the window) of the completion.
 # Type: PercOrInt
-c.completion.height = 224
+c.completion.height = '30%'
 
 # When to show the autocompletion window.
 # Type: String
@@ -309,12 +309,12 @@ c.completion.height = 224
 #   - always: Whenever a completion is available.
 #   - auto: Whenever a completion is requested.
 #   - never: Never.
-c.completion.show = 'always'
+c.completion.show = 'auto'
 
 # Shrink the completion to be smaller than the configured size if there
 # are no scrollbars.
 # Type: Bool
-c.completion.shrink = False
+c.completion.shrink = True
 
 # Width (in pixels) of the scrollbar in the completion window.
 # Type: Int
@@ -328,6 +328,10 @@ c.completion.scrollbar.padding = 0
 # https://sqlite.org/lang_datefunc.html for allowed substitutions.
 # Type: String
 c.completion.timestamp_format = '%Y-%m-%d'
+
+# Minimum amount of characters needed to update completions.
+# Type: Int
+c.completion.min_chars = 1
 
 # Directory to save downloads to. If unset, a sensible OS-specific
 # default is used.
@@ -350,6 +354,15 @@ c.downloads.location.remember = True
 #   - filename: Show only download filename.
 #   - both: Show download path and filename.
 c.downloads.location.suggestion = 'path'
+
+# Which categories to show (in which order) in the :open completion.
+# Type: FlagList
+# Valid values:
+#   - searchengines
+#   - quickmarks
+#   - bookmarks
+#   - history
+c.completion.open_categories = ['quickmarks', 'bookmarks', 'history']
 
 # Duration (in milliseconds) to wait before removing finished downloads.
 # If set to -1, downloads are never removed.
@@ -464,7 +477,7 @@ c.spellcheck.languages = ['en-US', 'ru-RU']
 
 # Padding (in pixels) for the statusbar.
 # Type: Padding
-c.statusbar.padding = {'top': 6, 'bottom': 6, 'left': 5, 'right': 5}
+c.statusbar.padding = {'bottom': 5, 'left': 2, 'right': 5, 'top': 6}
 
 # Position of the status bar.
 # Type: VerticalPosition
@@ -484,6 +497,11 @@ c.tabs.background = True
 #   - middle: Close tabs on middle-click.
 #   - none: Don't close tabs using the mouse.
 c.tabs.close_mouse_button = 'middle'
+
+# Scaling factor for favicons in the tab bar. The tab size is unchanged,
+# so big favicons also require extra `tabs.padding`.
+# Type: Float
+c.tabs.favicons.scale = 1.0
 
 # When to show favicons in the tab bar.
 # Type: String
@@ -519,7 +537,7 @@ c.tabs.new_position.unrelated = 'last'
 
 # Padding (in pixels) around text for tabs.
 # Type: Padding
-c.tabs.padding = {'top': 6, 'bottom': 6, 'left': 6, 'right': 6}
+c.tabs.padding = {'bottom': 5, 'left': 9, 'right': 6, 'top': 5}
 
 # Position of the tab bar.
 # Type: Position
@@ -558,12 +576,27 @@ c.tabs.title.alignment = 'left'
 # `{protocol}`: Protocol (http/https/...) of the current web page. *
 # `{audio}`: Indicator for audio/mute status.
 # Type: FormatString
-c.tabs.title.format = '{current_title}'
+c.tabs.title.format = '{audio}{index} : {current_title}'
 
 # Format to use for the tab title for pinned tabs. The same placeholders
 # like for `tabs.title.format` are defined.
 # Type: FormatString
-c.tabs.title.format_pinned = '{index}'
+c.tabs.title.format_pinned = '{audio}{index}'
+
+# Minimum width (in pixels) of tabs (-1 for the default minimum size
+# behavior). This setting only applies when tabs are horizontal. This
+# setting does not apply to pinned tabs, unless `tabs.pinned.shrink` is
+# False.
+# Type: Int
+c.tabs.min_width = -1
+
+# Maximum width (in pixels) of tabs (-1 for no maximum). This setting
+# only applies when tabs are horizontal. This setting does not apply to
+# pinned tabs, unless `tabs.pinned.shrink` is False. This setting may
+# not apply properly if max_width is smaller than the minimum size of
+# tab contents, or smaller than tabs.min_width.
+# Type: Int
+c.tabs.max_width = -1
 
 # Width (in pixels) of the progress indicator (0 to disable).
 # Type: Int
@@ -571,7 +604,15 @@ c.tabs.indicator.width = 0
 
 # Padding (in pixels) for tab indicators.
 # Type: Padding
-c.tabs.indicator.padding = {'top': 6, 'bottom': 6, 'left': 0, 'right': 0}
+c.tabs.indicator.padding = {'bottom': 2, 'left': 4, 'right': 4, 'top': 2}
+
+# Shrink pinned tabs down to their contents.
+# Type: Bool
+c.tabs.pinned.shrink = True
+
+# Force pinned tabs to stay at fixed URL.
+# Type: Bool
+c.tabs.pinned.frozen = False
 
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
@@ -596,6 +637,21 @@ c.url.start_pages = 'https://start.duckduckgo.com'
 # URL parameters to strip with `:yank url`.
 # Type: List of String
 c.url.yank_ignored_parameters = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+
+# Hide the window decoration.  This setting requires a restart on
+# Wayland.
+# Type: Bool
+c.window.hide_decoration = True
+
+# Format to use for the window title. The same placeholders like for
+# `tabs.title.format` are defined.
+# Type: FormatString
+c.window.title_format = 'qutebrowser'
+
+# Text color of the completion widget. May be a single color to use for
+# all columns or a list of three colors, one for each column.
+# Type: List of QtColor, or QtColor
+c.colors.completion.fg = ['#a19782', '#c1ab83', '#a19782']
 
 # Background color of the completion widget for odd rows.
 # Type: QssColor
@@ -662,6 +718,10 @@ c.colors.statusbar.insert.fg = '#A19782'
 # Type: QssColor
 c.colors.statusbar.insert.bg = '#57553A'
 
+# Background color of the statusbar in command mode.
+# Type: QssColor
+c.colors.statusbar.command.bg = '#0b0806'
+
 # Foreground color of the URL in the statusbar on successful load
 # (https).
 # Type: QssColor
@@ -703,58 +763,87 @@ c.colors.tabs.selected.even.fg = '#C1AB83'
 # Type: QtColor
 c.colors.tabs.selected.even.bg = '#0B0806'
 
-# Default monospace fonts. Whenever "monospace" is used in a font
-# setting, it's replaced with the fonts listed here.
-# Type: Font
-c.fonts.monospace = 'tewi, Biwidth, Fixed, "Misc Fixed Wide"'
+# Foreground color of pinned unselected odd tabs.
+# Type: QtColor
+c.colors.tabs.pinned.odd.fg = '#a19782'
+
+# Background color of pinned unselected odd tabs.
+# Type: QtColor
+c.colors.tabs.pinned.odd.bg = '#2f2b2a'
+
+# Foreground color of pinned unselected even tabs.
+# Type: QtColor
+c.colors.tabs.pinned.even.fg = '#a19782'
+
+# Background color of pinned unselected even tabs.
+# Type: QtColor
+c.colors.tabs.pinned.even.bg = '#2f2b2a'
+
+# Default font families to use. Whenever "default_family" is used in a
+# font setting, it's replaced with the fonts listed here. If set to an
+# empty value, a system-specific monospace default is used.
+# Type: List of Font, or Font
+c.fonts.default_family = 'tewi, Biwidth, Fixed, "Misc Fixed Wide", "MigMix 1P", "DejaVu Sans", "Droid Sans"'
+
+# Default font size to use. Whenever "default_size" is used in a font
+# setting, it's replaced with the size listed here. Valid values are
+# either a float value with a "pt" suffix, or an integer value with a
+# "px" suffix.
+# Type: String
+c.fonts.default_size = '11px'
 
 # Font used in the completion widget.
 # Type: Font
-c.fonts.completion.entry = '8pt monospace'
+c.fonts.completion.entry = 'default_size default_family'
 
 # Font used in the completion categories.
 # Type: Font
-c.fonts.completion.category = '8pt monospace'
+c.fonts.completion.category = 'default_size default_family'
+
+# Font used for the context menu. If set to null, the Qt default is
+# used.
+# Type: Font
+c.fonts.contextmenu = None
 
 # Font used for the debugging console.
 # Type: QtFont
-c.fonts.debug_console = '8pt monospace'
+c.fonts.debug_console = 'default_size default_family'
 
 # Font used for the downloadbar.
 # Type: Font
-c.fonts.downloads = '8pt monospace'
+c.fonts.downloads = 'default_size default_family'
 
 # Font used for the hints.
 # Type: Font
-c.fonts.hints = '8pt monospace'
+c.fonts.hints = 'default_size default_family'
 
 # Font used in the keyhint widget.
 # Type: Font
-c.fonts.keyhint = '8pt monospace'
+c.fonts.keyhint = 'default_size default_family'
 
 # Font used for error messages.
 # Type: Font
-c.fonts.messages.error = '8pt monospace'
+c.fonts.messages.error = 'default_size default_family'
 
 # Font used for info messages.
 # Type: Font
-c.fonts.messages.info = '8pt monospace'
+c.fonts.messages.info = 'default_size default_family'
 
 # Font used for warning messages.
 # Type: Font
-c.fonts.messages.warning = '8pt monospace'
+c.fonts.messages.warning = 'default_size default_family'
 
 # Font used for prompts.
 # Type: Font
-c.fonts.prompts = '8pt monospace'
+c.fonts.prompts = 'default_size default_family'
 
 # Font used in the statusbar.
 # Type: Font
-c.fonts.statusbar = '8pt monospace'
+c.fonts.statusbar = 'default_size default_family'
 
 # Font used in the tab bar.
 # Type: QtFont
-c.fonts.tabs = '8pt monospace'
+c.fonts.tabs = 'tewi, Biwidth, Fixed, "Misc Fixed Wide"'
 
 # Font family for standard fonts.
 # Type: FontFamily

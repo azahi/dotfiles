@@ -1,3 +1,7 @@
+$include /etc/inputrc
+
+set editing-mode vi
+
 set bell-style none
 set bind-tty-special-chars off
 set blink-matching-paren on
@@ -7,12 +11,10 @@ set completion-ignore-case on
 set completion-map-case on
 set convert-meta off
 set echo-control-characters on
-set editing-mode vi
 set enable-keypad off
 set enable-meta-key on
 set horizontal-scroll-mode off
 set input-meta on
-set keymap vi
 set mark-directories on
 set mark-modified-lines off
 set mark-symlinked-directories on
@@ -22,7 +24,6 @@ set meta-flag on
 set output-meta on
 set page-completions on
 set print-completions-horizontally on
-set revert-all-at-newline off
 set revert-all-at-newline on
 set show-all-if-ambiguous on
 set show-all-if-unmodified on

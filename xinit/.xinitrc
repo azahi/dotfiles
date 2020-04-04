@@ -9,7 +9,7 @@ then
 
     xset mouse 0 0
 
-    xset r rate 250 50
+    xset r rate 300 50
 
     xset dpms force on
     xset s default
@@ -53,7 +53,8 @@ fi
 export QT_LOGGIN_RULES="qt5ct.debug=false"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
-[ "$(command -v compton)" ] && compton -b
+#[ "$(command -v compton)" ] && \
+#    compton -b
 
 for i in xmonad stumpwm bspwm 2bwm dwm twm
 do
