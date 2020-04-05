@@ -109,15 +109,11 @@ vmap            <Tab>       >
 vmap            <S-Tab>     <
 vnoremap        <           <gv
 vnoremap        >           >gv
-nnoremap        <Tab>       >>
-nnoremap        <S-Tab>     <<
-
-nnoremap        <Return>    :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR>
 
 nnoremap        ]b          :<C-u>bnext<CR>
 nnoremap        [b          :<C-u>bprevious<CR>
 
-nnoremap        <C-l>       :<C-u>nohlsearch<C-r>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-l>
+nnoremap        <Return>    :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR><C-l>
 
 cnoremap        ;/          <C-r>=expand('%:p:h').'/'<CR>
 cnoremap        ;;          <C-r>=expand("%:t")<CR>
@@ -203,8 +199,8 @@ Plug 'vim-scripts/ruscmd' " {{{
 " }}}
 
 if executable('fzf')
-	Plug 'junegunn/fzf.vim' " {{{
-	" }}}
+    Plug 'junegunn/fzf.vim' " {{{
+    " }}}
 endif
 
 Plug 'terryma/vim-expand-region' " {{{
@@ -237,8 +233,8 @@ endif
 
 if has('nvim') && has('python')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " {{{
-	let g:deoplete#keyword_patterns = {}
-	let g:deoplete#sources = {}
+    let g:deoplete#keyword_patterns = {}
+    let g:deoplete#sources = {}
     let g:deoplete#enable_at_startup = 1
 
     Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' } " {{{
@@ -256,21 +252,16 @@ if has('nvim') && has('python')
     if executable('ccls')
         let g:LanguageClient_serverCommands[ 'c' ] = [ 'ccls' ]
         let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'ccls' ]
-        let g:LanguageClient_serverCommands[ 'cuda' ] = [ 'ccls' ]
-        let g:LanguageClient_serverCommands[ 'objc' ] = [ 'ccls' ]
 
-        augroup project
-            autocmd!
-            autocmd BufRead, BufNewFile *.h,*.c set filetype=c.doxygen
-        augroup END
+        autocmd BufRead, BufNewFile *.h,*.c set filetype=c.doxygen
 
         func! C_init()
             setlocal formatexpr=LanguageClient#textDocument_rangeFormatting()
         endf
         autocmd FileType c,cpp,cuda,objc :call C_init()
     endif
-    if executable('pyls')
-        let g:LanguageClient_serverCommands[ 'python' ] = [ 'pyls' ]
+    if executable('rls')
+        let g:LanguageClient_serverCommands[ 'rust' ] = [ 'rls' ]
     endif
     if executable('gopls')
         let g:LanguageClient_serverCommands[ 'go' ] = [ 'gopls' ]
@@ -278,8 +269,8 @@ if has('nvim') && has('python')
     if executable('hie-wrapper')
         let g:LanguageClient_serverCommands[ 'haskell' ] = [ 'hie-wrapper', '--lsp' ]
     endif
-    if executable('bash-language-server')
-        let g:LanguageClient_serverCommands[ 'sh' ] = [ 'bash-language-server', 'start' ]
+    if executable('pyls')
+        let g:LanguageClient_serverCommands[ 'python' ] = [ 'pyls' ]
     endif
     " }}}
 
@@ -287,12 +278,20 @@ if has('nvim') && has('python')
     " }}}
 
     Plug 'Shougo/neco-vim' " {{{
-	" }}}
-
-	Plug 'deoplete-plugins/deoplete-zsh' " {{{
     " }}}
 
-    Plug 'deoplete-plugins/deoplete-docker' " {{{
+    if executable('clang')
+        Plug 'Shougo/deoplete-clangx', { 'for': [ 'c', 'cpp' ] } " {{{
+        " }}}
+
+        Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp' ] } " {{{
+        " }}}
+    endif
+
+    Plug 'deoplete-plugins/deoplete-zsh', { 'for': 'zsh' } " {{{
+    " }}}
+
+    Plug 'deoplete-plugins/deoplete-docker', { 'for': 'Dockerfile' } " {{{
     " }}}
 
     Plug 'wellle/tmux-complete.vim' " {{{
