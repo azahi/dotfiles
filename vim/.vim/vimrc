@@ -138,23 +138,20 @@ map             <Leader>sp  [s
 map             <Leader>sa  zg
 map             <Leader>s?  z=
 
-command         W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command!        W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 autocmd BufWritePre * %s/\s\+$//e
 autocmd FocusGained,BufEnter * checktime
 
-augroup project
-    autocmd!
-    autocmd BufRead, BufNewFile *.h,*.c set filetype=c.doxygen
-augroup END
+autocmd BufEnter * set noreadonly
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo "~/.vim/autoload/plug.vim" --create-dirs
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plug')
+call plug#begin('~/.vim/.plug')
 
 Plug 'scrooloose/nerdtree' " {{{
 " }}}
@@ -167,13 +164,13 @@ let g:gitgutter_sign_removed            = '-'
 let g:gitgutter_sign_removed_first_line = '-'
 " }}}
 
-Plug 'tpope/vim-fugitive' " {{{
-" }}}
-
 Plug 'editorconfig/editorconfig-vim' " {{{
+autocmd VimEnter * EditorConfigEnable
+autocmd BufEnter * EditorConfigReload
 " }}}
 
 Plug 'farmergreg/vim-lastplace' " {{{
+let g:lastplace_ignore = "gitcommit,gitrebase"
 " }}}
 
 Plug 'godlygeek/tabular' " {{{
@@ -205,55 +202,103 @@ Plug 'tpope/vim-unimpaired' " {{{
 Plug 'vim-scripts/ruscmd' " {{{
 " }}}
 
-Plug 'sheerun/vim-polyglot' " {{{
-" }}}
-
-Plug 'junegunn/fzf.vim' " {{{
-" }}}
+if executable('fzf')
+	Plug 'junegunn/fzf.vim' " {{{
+	" }}}
+endif
 
 Plug 'terryma/vim-expand-region' " {{{
 " }}}
 
 Plug 'nathanaelkane/vim-indent-guides' " {{{
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 1
+" }}}
+
+Plug 'sheerun/vim-polyglot' " {{{
 " }}}
 
 Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
 " }}}
 
-Plug 'keith/tmux.vim' " {{{
+Plug 'ericpruitt/tmux.vim', { 'rtp': 'vim/' } " {{{
 " }}}
 
-Plug 'jceb/vim-orgmode' " {{{
+Plug 'jceb/vim-orgmode', { 'for': 'org' } " {{{
+" }}}
+
+Plug 'gentoo/gentoo-syntax' " {{{
 " }}}
 
 if executable('wakatime')
     Plug 'wakatime/vim-wakatime' " {{{
 endif
-" }}}
 
 if has('nvim') && has('python')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " {{{
+	let g:deoplete#keyword_patterns = {}
+	let g:deoplete#sources = {}
     let g:deoplete#enable_at_startup = 1
+
+    Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' } " {{{
+
+    nnoremap    <F5>        :<C-u>call LanguageClient_contextMenu()<CR>
+
+    nnoremap    <Leader>h   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'L'})<CR>
+    nnoremap    <Leader>j   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'D'})<CR>
+    nnoremap    <Leader>k   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'U'})<CR>
+    nnoremap    <Leader>l   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'R'})<CR>
+
+    let g:LanguageClient_loadSettings = 1
+
+    let g:LanguageClient_serverCommands = {}
+    if executable('ccls')
+        let g:LanguageClient_serverCommands[ 'c' ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'cuda' ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'objc' ] = [ 'ccls' ]
+
+        augroup project
+            autocmd!
+            autocmd BufRead, BufNewFile *.h,*.c set filetype=c.doxygen
+        augroup END
+
+        func! C_init()
+            setlocal formatexpr=LanguageClient#textDocument_rangeFormatting()
+        endf
+        autocmd FileType c,cpp,cuda,objc :call C_init()
+    endif
+    if executable('pyls')
+        let g:LanguageClient_serverCommands[ 'python' ] = [ 'pyls' ]
+    endif
+    if executable('gopls')
+        let g:LanguageClient_serverCommands[ 'go' ] = [ 'gopls' ]
+    endif
+    if executable('hie-wrapper')
+        let g:LanguageClient_serverCommands[ 'haskell' ] = [ 'hie-wrapper', '--lsp' ]
+    endif
+    if executable('bash-language-server')
+        let g:LanguageClient_serverCommands[ 'sh' ] = [ 'bash-language-server', 'start' ]
+    endif
+    " }}}
 
     Plug 'Shougo/neco-syntax' " {{{
     " }}}
-    Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' } " {{{
+
+    Plug 'Shougo/neco-vim' " {{{
+	" }}}
+
+	Plug 'deoplete-plugins/deoplete-zsh' " {{{
     " }}}
-    Plug 'copy/deoplete-ocaml' " {{{
-    " }}}
-    Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' } " {{{
-    " }}}
-    Plug 'deoplete-plugins/deoplete-jedi' " {{{
-    " }}}
-    Plug 'deoplete-plugins/deoplete-zsh' " {{{
-    " }}}
-    Plug 'deoplete-plugins/deoplete-clang' " {{{
-    " }}}
+
     Plug 'deoplete-plugins/deoplete-docker' " {{{
+    " }}}
+
+    Plug 'wellle/tmux-complete.vim' " {{{
+    let g:tmuxcomplete#trigger = ''
     " }}}
     " }}}
 endif
-
-
 
 call plug#end()

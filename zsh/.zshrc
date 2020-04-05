@@ -118,7 +118,19 @@ zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]" # {{{
 bindkey '^ ' autosuggest-accept # C-SPC
 # }}}
 
+zplug "rbirnie/oh-my-zsh-keybase", if:"[[ $(command -v keybase) ]]" # {{{
+# }}}
+
 zplug "ninrod/pass-zsh-completion", if:"[[ $(command -v pass) ]]" # {{{
+# }}}
+
+zplug "srijanshetty/zsh-pandoc-completion", if:"[[ $(command -v pandoc) ]]" # {{{
+# }}}
+
+zplug "srijanshetty/zsh-pip-completion", if:"[[ $(command -v pip) ]]" # {{{
+# }}}
+
+zplug "racket/shell-completion", if:"[[ $(command -v racket) ]]" # {{{
 # }}}
 
 zplug "zsh-users/zsh-completions" # {{{
@@ -131,6 +143,9 @@ zplug "zsh-users/zsh-history-substring-search", if:"[[ $TERM != linux ]]" # {{{
 # }}}
 
 zplug "hlissner/zsh-autopair", defer:2, if:"[[ $TERM != linux ]]" # {{{
+# }}}
+
+zplug "wyntau/fzf-zsh", if:"[[ $(command -v fzf) ]]" # {{{
 # }}}
 
 zplug "plugins/vi-mode", from:oh-my-zsh # {{{

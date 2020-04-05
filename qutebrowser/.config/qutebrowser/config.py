@@ -68,6 +68,11 @@ c.qt.args = []
 # Type: Bool
 c.qt.highdpi = False
 
+# Automatically start playing `<video>` elements. Note: On Qt < 5.11,
+# this option needs a restart and does not support URL patterns.
+# Type: Bool
+c.content.autoplay = False
+
 # Store cookies. Note this option needs a restart with QtWebEngine on Qt
 # < 5.9.
 # Type: Bool
@@ -257,6 +262,14 @@ c.content.local_storage = True
 #   - ask
 c.content.media_capture = 'ask'
 
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+c.content.notifications = False
+
 # Enable plugins in Web pages.
 # Type: Bool
 c.content.plugins = False
@@ -292,7 +305,7 @@ c.content.user_stylesheets = []
 
 # Enable WebGL.
 # Type: Bool
-c.content.webgl = False
+c.content.webgl = True
 
 # Number of commands to save in the command history. 0: no history / -1:
 # unlimited
