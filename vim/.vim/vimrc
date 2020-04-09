@@ -288,6 +288,25 @@ if has('nvim') && has('python')
         " }}}
     endif
 
+    Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' } " {{{
+    " }}}
+
+    if executable('racer')
+        Plug 'sebastianmarkow/deoplete-rust' " {{{
+        let g:deoplete#sources#rust#racer_binary = 'racer'
+        let g:deoplete#sources#rust#rust_source_path = '/usr/lib/rustlib/src/rust/src'
+        " }}}
+    endif
+
+    Plug 'copy/deoplete-ocaml', { 'for': 'ocaml' } " {{{
+    " }}}
+
+    Plug 'slashmili/alchemist.vim', { 'for': 'elixir' } " {{{
+    " }}}
+
+    Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' } " {{{
+    " }}}
+
     Plug 'deoplete-plugins/deoplete-zsh', { 'for': 'zsh' } " {{{
     " }}}
 

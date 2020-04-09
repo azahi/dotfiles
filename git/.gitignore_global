@@ -49,5 +49,6 @@ desktop.ini
 *.bak
 .ccls-cache/
 .gdb_history
+compile_commands.json
 cscope.*
 vgcore.*
