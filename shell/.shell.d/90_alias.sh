@@ -3,7 +3,12 @@
 alias cp="cp -v -i"
 alias ln="ln -v -i"
 alias mv="mv -v -i"
-alias rm="rm -v -i"
+if [ "$(uname -s)" = "Linux" ]
+then
+    alias rm="rm -v -I"
+else
+    alias rm="rm -v -i"
+fi
 
 alias mkdir="mkdir -v -p"
 alias rmdir="rmdir -v -p"

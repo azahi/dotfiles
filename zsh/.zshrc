@@ -108,8 +108,6 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 if [ ! -d "$HOME/.zplug" ]
 then
     git clone "https://github.com/zplug/zplug" "$HOME/.zplug"
-    source "$HOME/.zplug/init.zsh" && \
-        zplug update --self
 fi
 source "$HOME/.zplug/init.zsh"
 
