@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if command -v brew > /dev/null 2>&1 || [ -d "$HOME/.brew" ]
+if command -v brew >/dev/null 2>&1 || [ -d "$HOME/.brew" ]
 then
     path_prepend "$HOME/.brew/sbin"
     path_prepend "$HOME/.brew/bin"

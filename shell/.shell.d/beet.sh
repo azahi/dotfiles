@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if command -v beet > /dev/null 2>&1
+if command -v beet >/dev/null 2>&1
 then
     export BEETSDIR="$XDG_DATA_HOME/beets"
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if command -v ag > /dev/null 2>&1
+if command -v ag >/dev/null 2>&1
 then
-    alias ag="ag --color --smart-case --pager='less -MIRFX'"
+    alias ag="ag --color --smart-case"
 fi

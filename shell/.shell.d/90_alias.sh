@@ -1,24 +1,14 @@
 #!/bin/sh
 
-alias cp="cp -v -i"
-alias ln="ln -v -i"
-alias mv="mv -v -i"
+alias cp="cp -i"
+alias ln="ln -i"
+alias mv="mv -i"
 if [ "$(uname -s)" = "Linux" ]
 then
-    alias rm="rm -v -I"
-else
-    alias rm="rm -v -i"
+    alias rm="rm -I"
 fi
 
-alias mkdir="mkdir -v -p"
-alias rmdir="rmdir -v -p"
+alias mkdir="mkdir -p"
+alias rmdir="rmdir -p"
 
 alias grep="grep --color=auto"
-alias egrep="grep --color=auto"
-alias fgrep="grep --color=auto"
-
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."

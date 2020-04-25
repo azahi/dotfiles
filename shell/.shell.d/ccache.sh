@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if command -v ccache > /dev/null 2>&1
+if command -v ccache >/dev/null 2>&1
 then
     export CCACHE_DIR="$HOME/.ccache"
     if [ -f "/usr/lib/ccache/bin" ]

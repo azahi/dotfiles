@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if command -v docker > /dev/null 2>&1
+if command -v docker >/dev/null 2>&1
 then
     alias d-ip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
     alias d-pid="docker inspect --formet '{{ .State.Pid }}'"

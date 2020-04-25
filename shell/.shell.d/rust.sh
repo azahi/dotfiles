@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if command -v cargo > /dev/null 2>&1
+if command -v cargo >/dev/null 2>&1
 then
     path_prepend "$HOME/.cargo/bin"
 

@@ -2,10 +2,10 @@
 
 if [ "$(uname)" = "Linux" ]
 then
-    if grep -q Microsoft /proc/version > /dev/null 2>&1
+    if grep -q Microsoft /proc/version >/dev/null 2>&1
     then
         alias open="explorer.exe"
-    elif command -v xdg-open > /dev/null 2>&1
+    elif command -v xdg-open >/dev/null 2>&1
     then
         alias open="xdg-open"
     fi

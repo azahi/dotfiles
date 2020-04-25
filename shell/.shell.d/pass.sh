@@ -1,6 +1,8 @@
 #!/bin/sh
 
-if command -v pass > /dev/null 2>&1
-then
-    export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
-fi
+for i in gopass pass
+do
+    command -v "$i" >/dev/null 2>&1 && \
+        export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass" && \
+        break
+done
