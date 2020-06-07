@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ "$(umask)" = "000" ] || [ "$(umask)" = "0000" ]
+then
+    umask 0022
+fi
+
 if [ -f "/etc/profile.env" ]
 then
     # shellcheck disable=SC1091
