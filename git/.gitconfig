@@ -14,6 +14,7 @@
     ui              = true
 
 [core]
+    autocrlf        = input
     commitgraph     = true
     excludesfile    = ~/.gitignore_global
     quotepath       = false
