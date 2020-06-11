@@ -30,7 +30,6 @@ setopt no_hup
 setopt no_mail_warning
 setopt no_prompt_cr
 setopt notify
-setopt notify
 setopt octal_zeroes
 setopt prompt_subst
 setopt promptsubst
@@ -146,6 +145,9 @@ zplug "hlissner/zsh-autopair", defer:2, if:"[[ $TERM != linux ]]" # {{{
 zplug "wyntau/fzf-zsh", if:"[[ $(command -v fzf) ]]" # {{{
 # }}}
 
+zplug "plugins/autojump", from:oh-my-zsh, if:"[[ $(command -v autojump) ]]" # {{{
+# }}}
+
 zplug "plugins/vi-mode", from:oh-my-zsh # {{{
 KEYTIMEOUT=1
 MODE_INDICATOR="\0"
@@ -171,7 +173,6 @@ bindkey '^H'    backward-delete-char    # C-h
 bindkey '^J'    accept-line             # C-m
 
 bindkey '^[[Z'  reverse-menu-complete   # M-TAB
-
 # }}}
 
 #zprof
