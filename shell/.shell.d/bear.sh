@@ -8,4 +8,5 @@ then
     else
         alias m="bear make"
     fi
+    alias md="m DEBUG=1"
 fi
