@@ -1,4 +1,4 @@
 ---
 filter_version: '1.0'
 module_blacklist:
-    - easy_install
+    -

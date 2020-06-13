@@ -8,10 +8,13 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{c,C,c++,cc,cpp,cxx,cu,m,M,mm,h,hh,h++,hm,hpp,hxx,in,txx}]
+[*.S]
 indent_style = tab
 
-[Makefile]
+[*.{c,cc,cpp,cxx,c++,h,hh,hpp,hxx,h++}]
+indent_style = tab
+
+[Makefile,Makefile.*,.mk]
 indent_style = tab
 
 [CMakeList.txt]
@@ -21,9 +24,14 @@ indent_style = space
 [*.{ac,am,m4)]
 indent_style = tab
 
-[*.cs]
+[*.{cs,fs}]
 charset = utf-8-bom
 end_of_line = crlf
+indent_style = space
+
+[*.{hs,lhs}]
+indent_size = 2
+indent_style = space
 
 [*.ebuild]
 indent_style = tab
