@@ -28,7 +28,6 @@ set ignorecase
 set incsearch
 set laststatus=2
 set lazyredraw
-set nolist
 set magic
 set modeline
 set mouse=
@@ -36,6 +35,7 @@ set nobackup
 set nocursorline
 set noerrorbells
 set noexpandtab
+set nolist
 set noshowmode
 set noswapfile
 set notitle
@@ -49,6 +49,7 @@ set sessionoptions-=options
 set shiftround
 set shiftwidth=4
 set sidescrolloff=10
+set signcolumn=yes
 set smartcase
 set smartindent
 set smarttab
@@ -212,7 +213,34 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 1
 " }}}
 
+Plug 'mhinz/vim-startify' " {{{
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+        \ { 'type': 'files',                    'header': ['   MRU']            },
+        \ { 'type': 'dir',                      'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',                 'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks',                'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   GIT Modified']   },
+        \ { 'type': function('s:gitUntracked'), 'header': ['   GIT Untracked']  },
+        \ { 'type': 'commands',                 'header': ['   Commands']       },
+        \ ]
+" }}}
+
 Plug 'sheerun/vim-polyglot' " {{{
+" }}}
+
+Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] } " {{{
+nnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
+vnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
 " }}}
 
 Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
@@ -233,24 +261,26 @@ endif
 
 if has('nvim') && has('python')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " {{{
-    let g:deoplete#keyword_patterns = {}
-    let g:deoplete#sources = {}
     let g:deoplete#enable_at_startup = 1
+    " }}}
 
     Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' } " {{{
-
-    nnoremap    <F5>        :<C-u>call LanguageClient_contextMenu()<CR>
-
-    nnoremap    <Leader>h   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'L'})<CR>
-    nnoremap    <Leader>j   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'D'})<CR>
-    nnoremap    <Leader>k   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'U'})<CR>
-    nnoremap    <Leader>l   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'R'})<CR>
-
     let g:LanguageClient_loadSettings = 1
+
+    nnoremap    <Leader>lm  :<C-u>call LanguageClient_contextMenu()<CR>
+    nnoremap    <Leader>la  :<C-u>call LanguageClient_workspace_applyEdit()<CR>
+    nnoremap    <Leader>lc  :<C-u>call LanguageClient#textDocument_completion()<CR>
+    nnoremap    <Leader>ld  :<C-u>call LanguageClient#textDocument_definition()<CR>
+    nnoremap    <Leader>le  :<C-u>call LanguageClient#textDocument_references()<CR>
+    nnoremap    <Leader>lf  :<C-u>call LanguageClient#textDocument_formatting()<CR>
+    nnoremap    <Leader>lh  :<C-u>call LanguageClient#textDocument_hover()<CR>
+    nnoremap    <Leader>lr  :<C-u>call LanguageClient#textDocument_rename()<CR>
+    nnoremap    <Leader>ls  :<C-u>call LanguageClient_textDocument_documentSymbol()<CR>
+    nnoremap    <Leader>lt  :<C-u>call LanguageClient#textDocument_typeDefinition()<CR>
 
     let g:LanguageClient_serverCommands = {}
     if executable('ccls')
-        let g:LanguageClient_serverCommands[ 'c' ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'c' ]   = [ 'ccls' ]
         let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'ccls' ]
 
         autocmd BufRead, BufNewFile *.h,*.c set filetype=c.doxygen
@@ -258,17 +288,33 @@ if has('nvim') && has('python')
         func! C_init()
             setlocal formatexpr=LanguageClient#textDocument_rangeFormatting()
         endf
-        autocmd FileType c,cpp,cuda,objc :call C_init()
+        autocmd FileType c,cpp :call C_init()
+
+        nnoremap    <Leader>h   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'L'})<CR>
+        nnoremap    <Leader>j   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'D'})<CR>
+        nnoremap    <Leader>k   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'U'})<CR>
+        nnoremap    <Leader>l   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'R'})<CR>
+    elseif executable('clangd')
+        let g:LanguageClient_serverCommands[ 'c' ]   = [ 'clangd' ]
+        let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'clangd' ]
     endif
+
+    if executable('jdtls')
+        let g:LanguageClient_serverCommands[ 'java' ] = [ 'jdtls', '-data', getcwd() ]
+    endif
+
     if executable('rls')
         let g:LanguageClient_serverCommands[ 'rust' ] = [ 'rls' ]
     endif
+
     if executable('gopls')
         let g:LanguageClient_serverCommands[ 'go' ] = [ 'gopls' ]
     endif
+
     if executable('hie-wrapper')
         let g:LanguageClient_serverCommands[ 'haskell' ] = [ 'hie-wrapper', '--lsp' ]
     endif
+
     if executable('pyls')
         let g:LanguageClient_serverCommands[ 'python' ] = [ 'pyls' ]
     endif
@@ -283,20 +329,15 @@ if has('nvim') && has('python')
     if executable('clang')
         Plug 'Shougo/deoplete-clangx', { 'for': [ 'c', 'cpp' ] } " {{{
         " }}}
-
-        Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp' ] } " {{{
-        " }}}
     endif
 
-    Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' } " {{{
+    Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp' ] } " {{{
     " }}}
 
-    if executable('racer')
-        Plug 'sebastianmarkow/deoplete-rust' " {{{
-        let g:deoplete#sources#rust#racer_binary = 'racer'
-        let g:deoplete#sources#rust#rust_source_path = '/usr/lib/rustlib/src/rust/src'
-        " }}}
+    if executable('gocode')
+        Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' } " {{{
     endif
+    " }}}
 
     Plug 'copy/deoplete-ocaml', { 'for': 'ocaml' } " {{{
     " }}}
@@ -316,6 +357,10 @@ if has('nvim') && has('python')
     Plug 'wellle/tmux-complete.vim' " {{{
     let g:tmuxcomplete#trigger = ''
     " }}}
+
+    Plug 'Shougo/echodoc.vim' " {{{
+    let g:echodoc#enable_at_startup	= 1
+    let g:echodoc#type = 'signature'
     " }}}
 endif
 
