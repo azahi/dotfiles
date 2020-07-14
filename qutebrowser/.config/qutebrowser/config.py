@@ -73,6 +73,36 @@ c.qt.highdpi = False
 # Type: Bool
 c.content.autoplay = False
 
+# Which cookies to accept. With QtWebEngine, this setting also controls
+# other features with tracking capabilities similar to those of cookies;
+# including IndexedDB, DOM storage, filesystem API, service workers, and
+# AppCache. Note that with QtWebKit, only `all` and `never` are
+# supported as per-domain values. Setting `no-3rdparty` or `no-
+# unknown-3rdparty` per-domain on QtWebKit will have the same effect as
+# `all`.
+# Type: String
+# Valid values:
+#   - all: Accept all cookies.
+#   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
+#   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
+#   - never: Don't accept cookies at all.
+config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
+
+# Which cookies to accept. With QtWebEngine, this setting also controls
+# other features with tracking capabilities similar to those of cookies;
+# including IndexedDB, DOM storage, filesystem API, service workers, and
+# AppCache. Note that with QtWebKit, only `all` and `never` are
+# supported as per-domain values. Setting `no-3rdparty` or `no-
+# unknown-3rdparty` per-domain on QtWebKit will have the same effect as
+# `all`.
+# Type: String
+# Valid values:
+#   - all: Accept all cookies.
+#   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
+#   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
+#   - never: Don't accept cookies at all.
+config.set('content.cookies.accept', 'all', 'devtools://*')
+
 # Store cookies. Note this option needs a restart with QtWebEngine on Qt
 # < 5.9.
 # Type: Bool
@@ -170,6 +200,20 @@ config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/53
 # read from JavaScript is always the global value.
 # Type: FormatString
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://docs.google.com/*')
+
+# User agent to send.  The following placeholders are defined:  *
+# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
+# The underlying WebKit version (set to a fixed value   with
+# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
+# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
+# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
+# QtWebEngine. * `{upstream_browser_version}`: The corresponding
+# Safari/Chrome version. * `{qutebrowser_version}`: The currently
+# running qutebrowser version.  The default value is equal to the
+# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
+# read from JavaScript is always the global value.
+# Type: FormatString
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://drive.google.com/*')
 
 # Enable host blocking.
 # Type: Bool
@@ -632,14 +676,23 @@ c.tabs.pinned.frozen = False
 # Type: FuzzyUrl
 c.url.default_page = 'https://start.duckduckgo.com/'
 
-# Search engines which can be used via the address bar. Maps a search
+# Search engines which can be used via the address bar.  Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
 # placeholder. The placeholder will be replaced by the search term, use
-# `{{` and `}}` for literal `{`/`}` signs. The search engine named
-# `DEFAULT` is used when `url.auto_search` is turned on and something
-# else than a URL was entered to be opened. Other search engines can be
-# used by prepending the search engine name to the search term, e.g.
-# `:open google qutebrowser`.
+# `{{` and `}}` for literal `{`/`}` braces.  The following further
+# placeholds are defined to configure how special characters in the
+# search terms are replaced by safe characters (called 'quoting'):  *
+# `{}` and `{semiquoted}` quote everything except slashes; this is the
+# most   sensible choice for almost all search engines (for the search
+# term   `slash/and&amp` this placeholder expands to `slash/and%26amp`).
+# * `{quoted}` quotes all characters (for `slash/and&amp` this
+# placeholder   expands to `slash%2Fand%26amp`). * `{unquoted}` quotes
+# nothing (for `slash/and&amp` this placeholder   expands to
+# `slash/and&amp`).  The search engine named `DEFAULT` is used when
+# `url.auto_search` is turned on and something else than a URL was
+# entered to be opened. Other search engines can be used by prepending
+# the search engine name to the search term, e.g. `:open google
+# qutebrowser`.
 # Type: Dict
 c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
 

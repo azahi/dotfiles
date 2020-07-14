@@ -161,6 +161,16 @@ zplug check || zplug install
 zplug load
 # }}}
 
+# direnv {{{
+[[ $(command -v direnv) ]] \
+    && eval "$(direnv hook zsh)"
+# }}}
+
+# grc {{{
+[[ -s "/usr/share/grc/grc.zsh" ]] && \
+    source /usr/share/grc/grc.zsh
+# }}}
+
 # Keybindings {{{
 bindkey '^P'    up-history              # C-p
 bindkey '^N'    down-history            # C-n

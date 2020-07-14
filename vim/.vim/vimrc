@@ -15,14 +15,18 @@ set complete+=i,d
 set completeopt=menuone,menu,longest
 set display+=lastline
 set encoding=utf-8
+set expandtab
 set exrc
 set fileformats=unix,mac,dos
 set fillchars=vert:\│
 set foldcolumn=0
+set foldenable
+set foldmethod=manual
 set foldmethod=manual
 set foldminlines=1
 set formatoptions-=tro
 set hidden
+set history=100
 set hlsearch
 set ignorecase
 set incsearch
@@ -34,7 +38,6 @@ set mouse=
 set nobackup
 set nocursorline
 set noerrorbells
-set noexpandtab
 set nolist
 set noshowmode
 set noswapfile
@@ -42,12 +45,14 @@ set notitle
 set noundofile
 set novisualbell
 set nowrap
+set nowritebackup
 set number
 set ruler
 set scrolloff=10
 set sessionoptions-=options
 set shiftround
 set shiftwidth=4
+set showcmd
 set sidescrolloff=10
 set signcolumn=yes
 set smartcase
@@ -57,7 +62,7 @@ set softtabstop=4
 set splitbelow
 set splitright
 set synmaxcol=500
-set t_Co=16
+set t_Co=256
 set t_vb=
 set tabstop=4
 set timeoutlen=1000
@@ -135,12 +140,20 @@ map             <Leader>sp  [s
 map             <Leader>sa  zg
 map             <Leader>s?  z=
 
+imap            <C-v>       <ESC>"+gpa
+nmap            <Leader>y   "+yE
+vmap            <Leader>y   "+y
+
 command!        W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 autocmd BufWritePre * %s/\s\+$//e
 autocmd FocusGained,BufEnter * checktime
 
 autocmd BufEnter * set noreadonly
+
+if !exists(":DiffOrig")
+    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+endif
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs

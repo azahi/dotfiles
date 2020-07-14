@@ -56,7 +56,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 #[ "$(command -v compton)" ] && \
 #    compton -b
 
-for i in xmonad stumpwm bspwm 2bwm dwm twm
+for i in xmonad-ng xmonad stumpwm bspwm 2bwm dwm twm
 do
     command -v "$i" >/dev/null 2>&1 && exec "$i"
 done

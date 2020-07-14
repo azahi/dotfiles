@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/stylish-haskell" ] && \
+    mkdir -p "$HOME/.config/stylish-haskell"
+
+stow \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    stylish-haskell
