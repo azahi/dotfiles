@@ -18,3 +18,4 @@ else
     fi
 fi
 
+alias l="ll"

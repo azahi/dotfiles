@@ -936,4 +936,4 @@ c.fonts.web.family.cursive = None
 c.fonts.web.family.fantasy = None
 
 # Bindings for normal mode
-config.bind('z', 'hint links spawn mpv {hint-url}')
+config.bind('z', 'hint links spawn --detach mpv {hint-url}')

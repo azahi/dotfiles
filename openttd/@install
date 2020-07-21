@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.openttd" ] && \
+    mkdir -p "$HOME/.openttd"
+
+stow \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    openttd

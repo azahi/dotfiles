@@ -79,12 +79,14 @@
     autocorrect     = 1
 
 [alias]
-    a               = config --get-regexp alias
+	a               = add
+	aa              = add .
+    ac              = !"git add --all && git commit --all --verbose"
+    acw             = !"git add --all && git wtc"
+    al              = config --get-regexp alias
     am              = commit --amend
     bs              = branch -a
     c               = clone --recursive
-    ca              = !"git add --all && git commit --all --verbose"
-    caw             = !"git add --all && git wtc"
     co              = diff --name-only --diff-filter=U
     d               = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
     ds              = diff --staged --name-only --diff-filter=ACMR
