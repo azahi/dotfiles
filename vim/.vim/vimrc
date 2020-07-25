@@ -22,7 +22,6 @@ set fillchars=vert:\│
 set foldcolumn=0
 set foldenable
 set foldmethod=manual
-set foldmethod=manual
 set foldminlines=1
 set formatoptions-=tro
 set hidden
@@ -47,6 +46,7 @@ set novisualbell
 set nowrap
 set nowritebackup
 set number
+set path+=**
 set ruler
 set scrolloff=10
 set sessionoptions-=options
@@ -161,6 +161,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+let g:netrw_altv=1
+let g:netrw_banner=0
+let g:netrw_browse_split=4
+
 call plug#begin('~/.vim/.plug')
 
 Plug 'scrooloose/nerdtree' " {{{
@@ -237,21 +241,22 @@ function! s:gitUntracked()
     return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
-let g:startify_lists = [
-        \ { 'type': 'files',                    'header': ['   MRU']            },
-        \ { 'type': 'dir',                      'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'sessions',                 'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks',                'header': ['   Bookmarks']      },
-        \ { 'type': function('s:gitModified'),  'header': ['   GIT Modified']   },
-        \ { 'type': function('s:gitUntracked'), 'header': ['   GIT Untracked']  },
-        \ { 'type': 'commands',                 'header': ['   Commands']       },
-        \ ]
+let g:startify_lists =
+            \ [
+            \ { 'type': 'files',                    'header': ['   MRU']             },
+            \ { 'type': 'dir',                      'header': ['   MRU ' . getcwd()] },
+            \ { 'type': 'sessions',                 'header': ['   Sessions']        },
+            \ { 'type': 'bookmarks',                'header': ['   Bookmarks']       },
+            \ { 'type': function('s:gitModified'),  'header': ['   GIT Modified']    },
+            \ { 'type': function('s:gitUntracked'), 'header': ['   GIT Untracked']   },
+            \ { 'type': 'commands',                 'header': ['   Commands']        },
+            \ ]
 " }}}
 
 Plug 'sheerun/vim-polyglot' " {{{
 " }}}
 
-Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] } " {{{
+Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp', 'objc' ] } " {{{
 nnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
 vnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
 " }}}
@@ -293,27 +298,25 @@ if has('nvim') && has('python')
 
     let g:LanguageClient_serverCommands = {}
     if executable('ccls')
-        let g:LanguageClient_serverCommands[ 'c' ]   = [ 'ccls' ]
-        let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'c'    ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'cpp'  ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'objc' ] = [ 'ccls' ]
 
         autocmd BufRead, BufNewFile *.h,*.c set filetype=c.doxygen
 
         func! C_init()
             setlocal formatexpr=LanguageClient#textDocument_rangeFormatting()
         endf
-        autocmd FileType c,cpp :call C_init()
+        autocmd FileType c,cpp,objc :call C_init()
 
         nnoremap    <Leader>h   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'L'})<CR>
         nnoremap    <Leader>j   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'D'})<CR>
         nnoremap    <Leader>k   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'U'})<CR>
         nnoremap    <Leader>l   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'R'})<CR>
     elseif executable('clangd')
-        let g:LanguageClient_serverCommands[ 'c' ]   = [ 'clangd' ]
-        let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'clangd' ]
-    endif
-
-    if executable('jdtls')
-        let g:LanguageClient_serverCommands[ 'java' ] = [ 'jdtls', '-data', getcwd() ]
+        let g:LanguageClient_serverCommands[ 'c'    ] = [ 'clangd' ]
+        let g:LanguageClient_serverCommands[ 'cpp'  ] = [ 'clangd' ]
+        let g:LanguageClient_serverCommands[ 'objc' ] = [ 'clangd' ]
     endif
 
     if executable('rls')
@@ -324,12 +327,16 @@ if has('nvim') && has('python')
         let g:LanguageClient_serverCommands[ 'go' ] = [ 'gopls' ]
     endif
 
-    if executable('hie-wrapper')
-        let g:LanguageClient_serverCommands[ 'haskell' ] = [ 'hie-wrapper', '--lsp' ]
+    if executable('haskell-language-server-wrapper')
+        let g:LanguageClient_serverCommands[ 'haskell' ] = [ 'haskell-language-server-wrapper', '--lsp' ]
     endif
 
     if executable('pyls')
         let g:LanguageClient_serverCommands[ 'python' ] = [ 'pyls' ]
+    endif
+
+    if executable('ocamllsp')
+        let g:LanguageClient_serverCommands[ 'ocaml' ] = [ 'ocamllsp' ]
     endif
     " }}}
 
@@ -339,26 +346,7 @@ if has('nvim') && has('python')
     Plug 'Shougo/neco-vim' " {{{
     " }}}
 
-    if executable('clang')
-        Plug 'Shougo/deoplete-clangx', { 'for': [ 'c', 'cpp' ] } " {{{
-        " }}}
-    endif
-
-    Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp' ] } " {{{
-    " }}}
-
-    if executable('gocode')
-        Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' } " {{{
-    endif
-    " }}}
-
-    Plug 'copy/deoplete-ocaml', { 'for': 'ocaml' } " {{{
-    " }}}
-
-    Plug 'slashmili/alchemist.vim', { 'for': 'elixir' } " {{{
-    " }}}
-
-    Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' } " {{{
+    Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp', 'objc' ] } " {{{
     " }}}
 
     Plug 'deoplete-plugins/deoplete-zsh', { 'for': 'zsh' } " {{{

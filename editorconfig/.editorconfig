@@ -11,10 +11,10 @@ trim_trailing_whitespace = true
 [*.S]
 indent_style = tab
 
-[*.{c,cc,cpp,cxx,c++,h,hh,hpp,hxx,h++}]
+[*.{c,cc,cpp,cxx,c++,h,hh,hpp,hxx,h++,mm}]
 indent_style = tab
 
-[Makefile,Makefile.*,.mk]
+[Makefile,*.mk]
 indent_style = tab
 
 [CMakeList.txt]
@@ -30,6 +30,10 @@ end_of_line = crlf
 indent_style = space
 
 [*.{hs,lhs}]
+indent_size = 2
+indent_style = space
+
+[*.el]
 indent_size = 2
 indent_style = space
 
