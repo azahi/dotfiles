@@ -7,7 +7,7 @@ do
         [ -f "$HOME/.pystartup" ] && \
             export PYTHONSTARTUP="$HOME/.pystartup"
 
-        if [ ! "$(uname)" = "Linux" ]
+        if [ "$(uname)" = "Darwin" ]
         then
             for j in "$HOME/Library/Python/"*
             do

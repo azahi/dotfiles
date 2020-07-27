@@ -168,6 +168,7 @@ let g:netrw_browse_split=4
 call plug#begin('~/.vim/.plug')
 
 Plug 'scrooloose/nerdtree' " {{{
+let g:NERDTreeHijackNetrw = 0
 " }}}
 
 Plug 'airblade/vim-gitgutter' " {{{

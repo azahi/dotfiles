@@ -4,3 +4,6 @@ templates:
         author-name: Azat Bahawi
         copyright: Copyright (c) 2020 Azat Bahawi
         github-username: azahi
+
+ghc-options:
+    "$everything": -haddock

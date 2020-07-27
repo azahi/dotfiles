@@ -12,7 +12,6 @@ VIDEOS_DIR="$HOME/videos"
 export XDG_CACHE_HOME="/tmp/.private/$USER"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
-
 if [ "$(uname)" != "Darwin" ]
 then
     export XDG_DESKTOP_DIR="$DESKTOP_DIR"
@@ -41,6 +40,7 @@ else
     [ ! -f "$VIDEOS_DIR" ]    && ln -s "$VIDEOS_DIR"    "$XDG_VIDEOS_DIR"
 fi
 
+[ ! -d "$XDG_CACHE_HOME" ]      && mkdir -p "$XDG_CACHE_DIR"
 [ ! -d "$XDG_CONFIG_HOME" ]     && mkdir -p "$XDG_CONFIG_HOME"
 [ ! -d "$XDG_DATA_HOME" ]       && mkdir -p "$XDG_DATA_HOME"
 [ ! -d "$XDG_DESKTOP_DIR" ]     && mkdir -p "$XDG_DESKTOP_DIR"
