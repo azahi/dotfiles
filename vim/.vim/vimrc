@@ -242,6 +242,7 @@ function! s:gitUntracked()
     return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
+let g:startify_custom_header = []
 let g:startify_lists =
             \ [
             \ { 'type': 'files',                    'header': ['   MRU']             },

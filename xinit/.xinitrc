@@ -3,7 +3,7 @@
 [ "$(command -v xrdb)" ] && [ -f "$HOME/.Xresources" ] && \
     xrdb "$HOME/.Xresources"
 
-if [ "$(command -v xset)" ]
+if command -v xset >/dev/null 2>&1
 then
     xset b off
 
@@ -17,46 +17,65 @@ then
     xset fp rehash
 fi
 
-[ "$(command -v urxvtd)" ] && \
-    urxvtd -q -o -f
-
-[ "$(command -v setxkbmap)" ] && \
-    setxkbmap -layout "us, ru" -option "grp:win_space_toggle" -option "compose:menu"
-
-if [ "$(command -v xmodmap)" ] && [ -f "$HOME/.xmodmaprc" ]
+if command -v urxvtd >/dev/null 2>&1
 then
-    xmodmap "$HOME/.xmodmaprc"
+    urxvtd -q -o -f
 fi
 
-[ "$(command -v xsetroot)" ] && \
+if command -v setxkbmap >/dev/null 2>&1
+then
+    setxkbmap -layout "us, ru" -option "grp:win_space_toggle" -option "compose:menu"
+fi
+
+if command -v xmodmap >/dev/null 2>&1
+then
+    [ -f "$HOME/.xmodmaprc" ] && \
+        xmodmap "$HOME/.xmodmaprc"
+fi
+
+if command -v xsetroot >/dev/null 2>&1
+then
     xsetroot -cursor_name left_ptr
+fi
 
-PAPE="$HOME/pictures/wallpapers/danish_soldiers_return_to_copenhagen.jpg"
-[ "$(command -v hsetroot)" ] && [ -f "$PAPE" ] && \
-    hsetroot -cover "$PAPE"
+if command -v hsetroot >/dev/null 2>&1
+then
+    PAPE="$HOME/pictures/wallpapers/danish_soldiers_return_to_copenhagen.jpg"
+    [ -f "$PAPE" ] && \
+        hsetroot -cover "$PAPE"
+fi
 
-[ "$(command -v unclutter)" ] && \
+if command -v unclutter >/dev/null 2>&1
+then
     unclutter --fork --ignore-scrolling
+fi
 
-[ "$(command -v autocutsel)" ] && \
+if command -v autocutsel >/dev/null 2>&1
+then
     autocutsel -fork && autocutsel -fork -selection PRIMARY
+fi
 
-if [ "$(command -v fcitx)" ]
+if command -v fcitx >/dev/null 2>&1
 then
     export XMODIFIERS="@im=fcitx"
     export GTK_IM_MODULE="fcitx"
     export QT_IM_MODULE="fcitx"
 
-    fcitx -r -d -s 0 > /dev/null 2>&1
+    if pgrep mozc_server >/dev/null 2>&1
+    then
+        pkill mozc_server
+    fi
+
+    fcitx -r -d -s 0 >/dev/null 2>&1
 fi
 
-export QT_LOGGIN_RULES="qt5ct.debug=false"
-export QT_QPA_PLATFORMTHEME="qt5ct"
-
-[ "$(command -v compton)" ] && \
+if command -v compton >/dev/null 2>&1
+then
     compton -b
+fi
 
-for i in xmonad-ng xmonad stumpwm bspwm 2bwm dwm twm
+for i in dwm xmonad-ng xmonad
 do
-    command -v "$i" >/dev/null 2>&1 && exec "$i"
+    command -v "$i" >/dev/null 2>&1 && \
+        exec "$i"
 done
