@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd "$HOME" || exit
+
 [ "$(command -v xrdb)" ] && [ -f "$HOME/.Xresources" ] && \
     xrdb "$HOME/.Xresources"
 
@@ -69,9 +71,9 @@ then
     fcitx -r -d -s 0 >/dev/null 2>&1
 fi
 
-if command -v compton >/dev/null 2>&1
+if command -v picom >/dev/null 2>&1
 then
-    compton -b
+    picom --daemon
 fi
 
 for i in dwm xmonad-ng xmonad
