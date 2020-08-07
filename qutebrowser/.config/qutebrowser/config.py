@@ -866,14 +866,14 @@ c.colors.tabs.pinned.even.bg = '#2f2b2a'
 # font setting, it's replaced with the fonts listed here. If set to an
 # empty value, a system-specific monospace default is used.
 # Type: List of Font, or Font
-c.fonts.default_family = 'tewi, Biwidth, Fixed, "Misc Fixed Wide", "MigMix 1P", "DejaVu Sans", "Droid Sans"'
+c.fonts.default_family = 'Efont Biwidth, Efont Fixed, "Migu 1P"'
 
 # Default font size to use. Whenever "default_size" is used in a font
 # setting, it's replaced with the size listed here. Valid values are
 # either a float value with a "pt" suffix, or an integer value with a
 # "px" suffix.
 # Type: String
-c.fonts.default_size = '11px'
+c.fonts.default_size = '9pt'
 
 # Font used in the completion widget.
 # Type: Font

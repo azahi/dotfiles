@@ -31,12 +31,6 @@ HISTTIMEFORMAT='%F %T '
 
 complete -A directory cd
 
-[[ command -v direnv ]] && \
-    eval "$(direnv hook bash)"
-
-[[ -s "/usr/share/grc/grc.bashrc" ]] && \
-    source /usr/share/grc/grc.bashrc
-
 bind "set completion-ignore-case on"
 bind "set completion-map-case on"
 bind "set mark-symlinked-directories on"

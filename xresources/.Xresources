@@ -1,8 +1,7 @@
 ! special
 *.foreground:               #a19782
 *.background:               #0b0806
-*.cursorColor:              #844d2c
-*.underlineColor:           #c1ab83
+*.cursorColor:              #a19782
 
 ! black
 *.color0:                   #0b0806
@@ -36,67 +35,4 @@
 *.color7:                   #a19782
 *.color15:                  #c1ab83
 
-URxvt.font:                 xft:tewi:style=Regular:size=8,  \
-                            xft:Biwidth,                    \
-                            xft:Fixed,                      \
-                            xft:Misc Fixed Wide
-
-*.boldFont:                 xft:tewi:style=Bold:size=8,     \
-                            xft:tewi:style=Regular:size=8,  \
-                            xft:Biwidth,                    \
-                            xft:Fixed,                      \
-                            xft:Misc Fixed Wide
-
-*.italicFont:               xft:tewi:style=Regular:size=8,  \
-                            xft:Biwidth,                    \
-                            xft:Fixed,                      \
-                            xft:Misc Fixed Wide
-
-*.boldItalicFont:           xft:tewi:style=Bold:size=8,     \
-                            xft:tewi:style=Regular:size=8,  \
-                            xft:Biwidth,                    \
-                            xft:Fixed,                      \
-                            xft:Misc Fixed Wide
-
-Sxiv.font:                  tewi:Style=Regular:size=8
-
-URxvt.internalBorder:       6
-URxvt.letterSpace:          0
-URxvt.lineSpace:            0
-
-URxvt.termName:             rxvt-256color
-URxvt.imLocate:             en_US.UTF-8
-
-URxvt.buffered:             true
-
-URxvt.cursorUnderline:      false
-URxvt.cursorBlink:          true
-
-URxvt.loginShell:           true
-
-URxvt.perl-ext-common:      default,matcher
-
-URxvt.matcher.pattern.0:    \\b(http|https):\/\/[\\w\\-\\@;\\/?:&=%\\$.+!*\x27,~#]+
-URxvt.matcher.launcher.0:   qutebrowser
-
-!URxvt.matcher.pattern.0:    \\b(http|https):\/\/www\.youtube\.com/watch\\?v=([\\w-&=]+)
-!URxvt.matcher.launcher.0:   streamlink
-
-!URxvt.matcher.pattern.1:    \\b(http|https):\/\/(?!www\\.youtube.*)[\\w\\-\\@;\\/?:&=%\\$.+!*\x27,~#]+
-!URxvt.matcher.launcher.1:   qutebrowser
-
-URxvt.matcher.button:       1
-URxvt.matcher.rend.0:       Uline fg5
-
-URxvt.jumpScroll:           true
-
-URxvt.saveLines:            4096
-
-URxvt.scrollBar:            false
-URxvt.scrollTtyKeypress:    true
-URxvt.scrollTtyOutput:      false
-URxvt.scrollWidthBuffer:    true
-URxvt.scrollstyle:          plain
-
-URxvt.urgentOnBell:         true
-URxvt.visualBell:           false
+*.font:                     Efont Biwidth:Style=Regular:size=9
