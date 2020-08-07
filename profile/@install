@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.profile.d" ] && \
+    mkdir -p "$HOME/.profile.d"
+
+stow \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    profile

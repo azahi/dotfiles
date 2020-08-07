@@ -63,18 +63,18 @@ then
     export GTK_IM_MODULE="fcitx"
     export QT_IM_MODULE="fcitx"
 
-    if pgrep mozc_server >/dev/null 2>&1
-    then
-        pkill mozc_server
-    fi
+#    if pgrep mozc_server >/dev/null 2>&1
+#    then
+#        pkill mozc_server
+#    fi
 
-    fcitx -r -d -s 0 >/dev/null 2>&1
+#    fcitx -r -d -s 0 >/dev/null 2>&1
 fi
 
-if command -v picom >/dev/null 2>&1
-then
-    picom --daemon
-fi
+#if command -v picom >/dev/null 2>&1
+#then
+#    picom --daemon
+#fi
 
 for i in dwm xmonad-ng xmonad
 do
