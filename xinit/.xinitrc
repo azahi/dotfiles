@@ -46,6 +46,12 @@ then
     picom --daemon
 fi
 
+### TODO Make this a daemon running as "mpdscribble" user.
+if command -v mpdscribble >/dev/null 2>&1 && [ -f "/var/lib/mpd/pid" ] && [ ! -f "/tmp/mpdscribble.pid" ]
+then
+    mpdscribble
+fi
+
 for i in dwm xmonad-ng xmonad
 do
     command -v "$i" >/dev/null 2>&1 && \

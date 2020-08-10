@@ -1,38 +1,6 @@
-! special
-*.foreground:               #a19782
-*.background:               #0b0806
-*.cursorColor:              #a19782
+#include ".Xresources.d/color"
+#include ".Xresources.d/font"
 
-! black
-*.color0:                   #0b0806
-*.color8:                   #2f2b2a
-
-! red
-*.color1:                   #844d2c
-*.color9:                   #a64848
-
-! green
-*.color2:                   #57553a
-*.color10:                  #897f5a
-
-! yellow
-*.color3:                   #a17c38
-*.color11:                  #c8b38d
-
-! blue
-*.color4:                   #41434f
-*.color12:                  #526274
-
-! magenta
-*.color5:                   #6b4444
-*.color13:                  #755c47
-
-! cyan
-*.color6:                   #59664c
-*.color14:                  #718062
-
-! white
-*.color7:                   #a19782
-*.color15:                  #c1ab83
-
-*.font:                     Efont Biwidth:Style=Regular:size=9
+#include ".Xresources.d/st"
+#include ".Xresources.d/dwm"
+#include ".Xresources.d/dmenu"

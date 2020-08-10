@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/cava" ] && \
+    mkdir -p "$HOME/.config/cava"
+
+stow \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    cava

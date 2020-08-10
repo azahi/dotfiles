@@ -269,7 +269,14 @@ Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
 Plug 'ericpruitt/tmux.vim', { 'rtp': 'vim/' } " {{{
 " }}}
 
-Plug 'jceb/vim-orgmode', { 'for': 'org' } " {{{
+Plug 'mattn/calendar-vim' " {{{
+" }}}
+
+Plug 'vim-scripts/SyntaxRange' " {{{
+" }}}
+
+Plug 'jceb/vim-orgmode' " {{{
+let g:org_agenda_files = [ '~/org/*.org' ]
 " }}}
 
 Plug 'gentoo/gentoo-syntax' " {{{

@@ -494,6 +494,15 @@ c.hints.mode = 'letter'
 # Type: Bool
 c.hints.uppercase = False
 
+# When/how to show the scrollbar.
+# Type: String
+# Valid values:
+#   - always: Always show the scrollbar.
+#   - never: Never show the scrollbar.
+#   - when-searching: Show the scrollbar when searching for text in the webpage. With the QtWebKit backend, this is equal to `never`.
+#   - overlay: Show an overlay scrollbar. With Qt < 5.11 or on macOS, this is unavailable and equal to `when-searching`; with the QtWebKit backend, this is equal to `never`. Enabling/disabling overlay scrollbars requires a restart.
+c.scrolling.bar = 'never'
+
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
 # Type: Bool

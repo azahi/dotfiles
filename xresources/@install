@@ -1,5 +1,8 @@
 #!/bin/sh
 
+[ ! -d "$HOME/.Xresources.d" ] && \
+    mkdir -p "$HOME/.Xresources.d"
+
 stow \
     --target="$HOME" \
     --ignore="^@.*" \

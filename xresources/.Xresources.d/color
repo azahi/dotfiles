@@ -1,0 +1,33 @@
+#define color_black0    #0b0806
+#define color_black1    #2f2b2a
+#define color_red0      #844d2c
+#define color_red1      #a64848
+#define color_green0    #57553a
+#define color_green1    #897f5a
+#define color_yellow0   #a17c38
+#define color_yellow1   #c8b38d
+#define color_blue0     #41434f
+#define color_blue1     #526274
+#define color_magenta0  #6b4444
+#define color_magenta1  #755c47
+#define color_cyan0     #59664c
+#define color_cyan1     #718062
+#define color_white0    #a19782
+#define color_white1    #c1ab83
+
+*.color0:       color_black0
+*.color8:       color_black1
+*.color1:       color_red0
+*.color9:       color_red1
+*.color2:       color_green0
+*.color10:      color_green1
+*.color3:       color_yellow0
+*.color11:      color_yellow1
+*.color4:       color_blue0
+*.color12:      color_blue1
+*.color5:       color_magenta0
+*.color13:      color_magenta1
+*.color6:       color_cyan0
+*.color14:      color_cyan1
+*.color7:       color_white0
+*.color15:      color_white1
