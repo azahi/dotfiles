@@ -1,1 +1,5 @@
 #define font "Efont Biwidth:size=9"
+
+*.font: font
+
+! vim:filetype=xdefaults

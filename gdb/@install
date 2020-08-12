@@ -1,0 +1,7 @@
+#!/bin/sh
+
+stow \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    gdb

@@ -31,3 +31,5 @@
 *.color14:      color_cyan1
 *.color7:       color_white0
 *.color15:      color_white1
+
+! vim:filetype=xdefaults

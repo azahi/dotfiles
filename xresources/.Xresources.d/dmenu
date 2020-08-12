@@ -2,3 +2,5 @@ dmenu.background:       color_black0
 dmenu.foreground:       color_white0
 dmenu.selbackground:    color_black1
 dmenu.selforeground:    color_white1
+
+! vim:filetype=xdefaults

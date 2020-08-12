@@ -11,7 +11,7 @@ set completion-ignore-case on
 set completion-map-case on
 set convert-meta off
 set echo-control-characters on
-set enable-keypad off
+set enable-keypad on
 set enable-meta-key on
 set horizontal-scroll-mode off
 set input-meta on

@@ -2,8 +2,10 @@
 
 cd "$HOME" || exit
 
-[ "$(command -v xrdb)" ] && [ -f "$HOME/.Xresources" ] && \
+if command -v xrdb >/dev/null 2>&1 && [ -f "$HOME/.Xresources" ]
+then
     xrdb "$HOME/.Xresources"
+fi
 
 if command -v xset >/dev/null 2>&1
 then
@@ -26,7 +28,7 @@ fi
 
 if command -v hsetroot >/dev/null 2>&1
 then
-    PAPE="$HOME/pictures/wallpapers/danish_soldiers_return_to_copenhagen.jpg"
+    PAPE="$HOME/pictures/wallpapers/mill-blur.png"
     [ -f "$PAPE" ] && \
         hsetroot -cover "$PAPE"
 fi
@@ -46,8 +48,12 @@ then
     picom --daemon
 fi
 
-### TODO Make this a daemon running as "mpdscribble" user.
-if command -v mpdscribble >/dev/null 2>&1 && [ -f "/var/lib/mpd/pid" ] && [ ! -f "/tmp/mpdscribble.pid" ]
+if command -v mpd >/dev/null 2>&1 && [ ! -f "/tmp/mpd.pid" ]
+then
+    mpd
+fi
+
+if command -v mpdscribble >/dev/null 2>&1 && [ -f "/tmp/mpd.pid" ] && [ ! -f "/tmp/mpdscribble.pid" ]
 then
     mpdscribble
 fi

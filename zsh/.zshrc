@@ -2,6 +2,21 @@
 
 #zmodload zsh/zprof
 
+if [ "${TERM:0:2}" = "st" ]
+then
+    function zle-line-init ()
+    {
+        echoti smkx
+    }
+    zle -N zle-line-init
+
+    function zle-line-finish ()
+    {
+        echoti rmkx
+    }
+    zle -N zle-line-finish
+fi
+
 setopt auto_cd
 setopt auto_menu
 setopt auto_name_dirs
