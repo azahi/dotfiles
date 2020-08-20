@@ -8,5 +8,5 @@ then
     export WINEPREFIX="${HOME}/.wine"
 
     command -v xrandr >/dev/null 2>&1 && \
-        alias wine-vd="wine explorer.exe /desktop=default,$(xrandr | grep \* | cut -d' ' -f4)"
+        alias wine-vd="wine explorer.exe /desktop=default,\$(xrandr | grep '\*' | cut -d' ' -f4)"
 fi

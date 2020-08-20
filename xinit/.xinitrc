@@ -26,6 +26,11 @@ then
     setxkbmap -layout "us,ru" -option "grp:win_space_toggle" -option "compose:menu" -option "caps:escape"
 fi
 
+if command -v xbindkeys >/dev/null 2>&1 && [ -f "$HOME/.xbindkeysrc" ]
+then
+    xbindkeys
+fi
+
 if command -v hsetroot >/dev/null 2>&1
 then
     PAPE="$HOME/pictures/wallpapers/mill-blur.png"
@@ -46,16 +51,6 @@ fi
 if command -v picom >/dev/null 2>&1
 then
     picom --daemon
-fi
-
-if command -v mpd >/dev/null 2>&1 && [ ! -f "/tmp/mpd.pid" ]
-then
-    mpd
-fi
-
-if command -v mpdscribble >/dev/null 2>&1 && [ -f "/tmp/mpd.pid" ] && [ ! -f "/tmp/mpdscribble.pid" ]
-then
-    mpdscribble
 fi
 
 for i in dwm xmonad-ng xmonad

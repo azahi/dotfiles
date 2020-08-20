@@ -1,19 +1,19 @@
 dwm.normbgcolor:        color_black0
 dwm.normbordercolor:    color_black0
-dwm.normfgcolor:        color_white1
+dwm.normfgcolor:        color_white0
 dwm.selbgcolor:         color_black1
 dwm.selbordercolor:     color_white0
-dwm.selfgcolor:         color_white0
+dwm.selfgcolor:         color_white1
 dwm.borderpx:           1
 dwm.snap:               0
 dwm.showbar:            1
 dwm.topbar:             1
-dwm.barheight:          18
+dwm.barheight:          22
 dwm.nmaster:            1
 dwm.resizehints:        0
 dwm.mfact:              0.5
-dwm.sidepad:            30
-dwm.vertpad:            30
-dwm.gappx:              30
+dwm.sidepad:            0
+dwm.vertpad:            0
+dwm.gappx:              0
 
 ! vim:filetype=xdefaults

@@ -1,5 +1,5 @@
-#define font "Efont Biwidth:size=9"
+#define font1 Efont Biwidth:size=9
 
-*.font: font
+*.font: font1
 
 ! vim:filetype=xdefaults

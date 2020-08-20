@@ -1,0 +1,39 @@
+keystate_numlock = disable
+keystate_capslock = disable
+keystate_scrolllock= disable
+
+"st -e zsh --login"
+    Mod4 + Return
+
+"dmenu_run"
+    Mod4 + x
+
+"qutebrowser"
+    Mod4 + w
+
+"passmenu"
+    Mod4 + Shift + p
+
+"amixer sset Master toggle"
+    XF86AudioMute
+
+"amixer sset Master unmute 5%+"
+    XF86AudioRaiseVolume
+
+"amixer sset Master unmute 5%-"
+    XF86AudioLowerVolume
+
+"amixer sset Capture toggle"
+    XF86AudioMicMute
+
+"mpc --quiet toggle"
+    XF86AudioPlay
+
+"mpc --quiet stop"
+    XF86AudioStop
+
+"mpc --quiet next"
+    XF86AudioNext
+
+"mpc --quiet prev"
+    XF86AudioPrev

@@ -3,7 +3,7 @@
 DESKTOP_DIR="${HOME}/documents"
 DOCUMENTS_DIR="${HOME}/documents"
 DOWNLOAD_DIR="${HOME}/downloads"
-MUSIC_DIR="${HOME}/audios"
+MUSIC_DIR="${HOME}/music"
 PICTURES_DIR="${HOME}/pictures"
 PUBLICSHARE_DIR="${HOME}/documents"
 TEMPLATES_DIR="${HOME}/documents"

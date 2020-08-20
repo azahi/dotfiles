@@ -22,3 +22,8 @@ do
     # shellcheck disable=SC1090
     [ -r "$i" ] && . "$i"
 done
+
+if command -v user-init >/dev/null 2>&1
+then
+    user-init
+fi

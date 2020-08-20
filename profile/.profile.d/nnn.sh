@@ -14,5 +14,6 @@ then
 
     alias n="nnn"
 
+    # shellcheck disable=SC2139
     alias ncp="cat ${XDG_CONFIG_HOME}/nnn/.selection | tr '\0' '\n'"
 fi

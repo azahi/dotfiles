@@ -1,0 +1,4 @@
+--exclude=.*
+--recurse=yes
+--tag-relative=yes
+--totals=yes

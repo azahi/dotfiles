@@ -161,10 +161,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-let g:netrw_altv=1
-let g:netrw_banner=0
-let g:netrw_browse_split=4
-
 call plug#begin('~/.vim/.plug')
 
 Plug 'scrooloose/nerdtree' " {{{
@@ -180,8 +176,6 @@ let g:gitgutter_sign_removed_first_line = '-'
 " }}}
 
 Plug 'editorconfig/editorconfig-vim' " {{{
-autocmd VimEnter * EditorConfigEnable
-autocmd BufEnter * EditorConfigReload
 " }}}
 
 Plug 'farmergreg/vim-lastplace' " {{{
@@ -200,6 +194,7 @@ let g:sneak#label = 1
 
 Plug 'pbondoer/vim-42header' " {{{
 let g:hdr42user = "jdeathlo"
+let g:hdr42mail = "marvin@42.fr"
 " }}}
 
 Plug 'tpope/vim-repeat' " {{{
@@ -216,11 +211,6 @@ Plug 'tpope/vim-unimpaired' " {{{
 
 Plug 'vim-scripts/ruscmd' " {{{
 " }}}
-
-if executable('fzf')
-    Plug 'junegunn/fzf.vim' " {{{
-    " }}}
-endif
 
 Plug 'terryma/vim-expand-region' " {{{
 " }}}
@@ -258,16 +248,12 @@ let g:startify_lists =
 Plug 'sheerun/vim-polyglot' " {{{
 " }}}
 
-Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp', 'objc' ] } " {{{
-nnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
-vnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
-" }}}
-
-Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
-" }}}
-
-Plug 'ericpruitt/tmux.vim', { 'rtp': 'vim/' } " {{{
-" }}}
+if executable('clang-format')
+    Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp', 'objc' ] } " {{{
+    nnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
+    vnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
+    " }}}
+endif
 
 Plug 'mattn/calendar-vim' " {{{
 " }}}
@@ -282,8 +268,23 @@ let g:org_agenda_files = [ '~/org/*.org' ]
 Plug 'gentoo/gentoo-syntax' " {{{
 " }}}
 
+if executable('fzf')
+    Plug 'junegunn/fzf.vim' " {{{
+    " }}}
+endif
+
+if executable('tmux')
+    Plug 'ericpruitt/tmux.vim', { 'rtp': 'vim/' } " {{{
+    " }}}
+endif
+
 if executable('wakatime')
     Plug 'wakatime/vim-wakatime' " {{{
+endif
+
+if executable('python')
+    Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
+    " }}}
 endif
 
 if has('nvim') && has('python')

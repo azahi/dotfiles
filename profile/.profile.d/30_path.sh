@@ -16,11 +16,22 @@ path_prepend ()
     eval export $PATHVAR="$1:\$$PATHVAR"
 }
 
+path_prepend "/bin"
 path_prepend "/sbin"
+path_prepend "/usr/bin"
 path_prepend "/usr/sbin"
 path_prepend "/usr/local/sbin"
-path_prepend "/bin"
-path_prepend "/usr/bin"
 path_prepend "/usr/local/bin"
 path_prepend "${HOME}/.bin"
 path_prepend "${HOME}/.local/bin"
+path_prepend "/opt/bin"
+
+if [ -d /usr/lib/llvm ]
+then
+    for VERSION in /usr/lib/llvm/*
+    do
+        path_append "${VERSION}/bin"
+        path_append "${VERSION}/share/clang"
+    done
+fi
+unset LLVM_DIR

@@ -13,6 +13,7 @@ rm_existing "${ZSHENV}.zwc.old"
 rm_existing "${ZSHRC}.zwc.old"
 
 rm_existing "$HOME/.cache"
+rm_existing "$HOME/.wget_hsts"
 rm_existing "$HOME/VideoDecodeStats"
 rm_existing "$HOME/databases-incognito"
 rm_existing "$HOME/shared_proto_db"
