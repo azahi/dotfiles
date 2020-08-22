@@ -144,6 +144,8 @@ imap            <C-v>       <ESC>"+gpa
 nmap            <Leader>y   "+yE
 vmap            <Leader>y   "+y
 
+nnoremap        ZX          :<C-u>qa!<CR>
+
 command!        W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 autocmd BufWritePre * %s/\s\+$//e
