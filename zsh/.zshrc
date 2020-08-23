@@ -2,28 +2,21 @@
 
 #zmodload zsh/zprof
 
-if [ "${TERM:0:2}" = "st" ]
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} ))
 then
     function zle-line-init ()
     {
         echoti smkx
     }
-    zle -N zle-line-init
-
     function zle-line-finish ()
     {
         echoti rmkx
     }
+
+    zle -N zle-line-init
     zle -N zle-line-finish
 fi
 
-setopt auto_cd
-setopt auto_menu
-setopt auto_name_dirs
-setopt auto_pushd
-setopt auto_resume
-setopt c_bases
-setopt cdable_vars
 setopt clobber
 setopt combining_chars
 setopt complete_in_word
@@ -34,20 +27,15 @@ setopt list_packed
 setopt long_list_jobs
 setopt magic_equal_subst
 setopt no_always_to_end
-setopt no_auto_name_dirs
 setopt no_beep
 setopt no_bg_nice
 setopt no_check_jobs
 setopt no_correct_all
 setopt no_glob_complete
 setopt no_glob_dots
-setopt no_hup
-setopt no_mail_warning
-setopt no_prompt_cr
 setopt notify
 setopt octal_zeroes
 setopt prompt_subst
-setopt promptsubst
 setopt pushd_ignore_dups
 setopt pushd_silent
 setopt pushd_to_home
@@ -126,42 +114,63 @@ fi
 source "$HOME/.zplug/init.zsh"
 
 
-zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]" # {{{
-bindkey '^ ' autosuggest-accept # C-SPC
+# {{{
+zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]"
+#bindkey '^ ' autosuggest-accept # C-SPC
 # }}}
 
-zplug "ninrod/pass-zsh-completion", if:"[[ $(command -v pass) ]]" # {{{
+# {{{
+zplug "ninrod/pass-zsh-completion", if:"[[ $(command -v pass) ]]"
 # }}}
 
-zplug "srijanshetty/zsh-pip-completion", if:"[[ $(command -v pip) ]]" # {{{
+# {{{
+zplug "zsh-users/zsh-completions"
 # }}}
 
-zplug "zsh-users/zsh-completions" # {{{
+# {{{
+zplug "gentoo/gentoo-zsh-completions"
+fpath+="$HOME/.zplug/repos/gentoo/gentoo-zsh-completions/src"
 # }}}
 
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, if:"[[ $TERM != linux ]]" # {{{
+# {{{
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, if:"[[ $TERM != linux ]]"
 # }}}
 
-zplug "zsh-users/zsh-history-substring-search", if:"[[ $TERM != linux ]]" # {{{
+# {{{
+zplug "hlissner/zsh-autopair", defer:2, if:"[[ $TERM != linux ]]"
 # }}}
 
-zplug "hlissner/zsh-autopair", defer:2, if:"[[ $TERM != linux ]]" # {{{
+# {{{
+zplug "plugins/colored-man-pages", from:oh-my-zsh
 # }}}
 
-zplug "wyntau/fzf-zsh", if:"[[ $(command -v fzf) ]]" # {{{
+# {{{
+zplug "plugins/ansible", from:oh-my-zsh, if:"[[ $(command -v ansible) ]]"
 # }}}
 
-zplug "plugins/autojump", from:oh-my-zsh, if:"[[ $(command -v autojump) ]]" # {{{
+# {{{
+zplug "plugins/fzf", from:oh-my-zsh, if:"[[ $(command -v fzf) ]]"
 # }}}
 
-zplug "plugins/vi-mode", from:oh-my-zsh # {{{
-KEYTIMEOUT=1
-MODE_INDICATOR="\0"
+# {{{
+zplug "plugins/autojump", from:oh-my-zsh, if:"[[ $(command -v autojump) ]]"
 # }}}
 
-zplug "azahi/zsh-lambda", as:theme, if:"[[ $TERM != linux ]]" # {{{
+# {{{
+zplug "plugins/brew", from:oh-my-zsh, if:"[[ $(command -v brew) ]]"
 # }}}
 
+# {{{
+zplug "plugins/rust", from:oh-my-zsh, if:"[[ $(command -v rustc) ]]"
+# }}}
+
+# {{{
+MODE_INDICATOR=""
+zplug "softmoth/zsh-vim-mode"
+# }}}
+
+zplug "azahi/zsh-lambda", as:theme, if:"[[ $TERM != linux ]]"
+# }}}
 
 zplug check || zplug install
 zplug load
