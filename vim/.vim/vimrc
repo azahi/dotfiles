@@ -231,7 +231,7 @@ endfunction
 
 function! s:gitUntracked()
     let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
+    return map(files, "{ 'line': v:val, 'path': v:val }")
 endfunction
 
 let g:startify_custom_header = []
@@ -251,9 +251,9 @@ Plug 'sheerun/vim-polyglot' " {{{
 " }}}
 
 if executable('clang-format')
-    Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp', 'objc' ] } " {{{
-    nnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
-    vnoremap    <Buffer><Leader>cf  :<C-u>ClangFormat<CR>
+    Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] } " {{{
+    nnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
+    vnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
     " }}}
 endif
 
@@ -297,38 +297,31 @@ if has('nvim') && has('python')
     Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' } " {{{
     let g:LanguageClient_loadSettings = 1
 
-    nnoremap    <Leader>lm  :<C-u>call LanguageClient_contextMenu()<CR>
-    nnoremap    <Leader>la  :<C-u>call LanguageClient_workspace_applyEdit()<CR>
-    nnoremap    <Leader>lc  :<C-u>call LanguageClient#textDocument_completion()<CR>
-    nnoremap    <Leader>ld  :<C-u>call LanguageClient#textDocument_definition()<CR>
-    nnoremap    <Leader>le  :<C-u>call LanguageClient#textDocument_references()<CR>
-    nnoremap    <Leader>lf  :<C-u>call LanguageClient#textDocument_formatting()<CR>
-    nnoremap    <Leader>lh  :<C-u>call LanguageClient#textDocument_hover()<CR>
-    nnoremap    <Leader>lr  :<C-u>call LanguageClient#textDocument_rename()<CR>
-    nnoremap    <Leader>ls  :<C-u>call LanguageClient_textDocument_documentSymbol()<CR>
-    nnoremap    <Leader>lt  :<C-u>call LanguageClient#textDocument_typeDefinition()<CR>
+    nnoremap <Leader>lm :<C-u>call LanguageClient_contextMenu()<CR>
+    nnoremap <Leader>la :<C-u>call LanguageClient_workspace_applyEdit()<CR>
+    nnoremap <Leader>lc :<C-u>call LanguageClient#textDocument_completion()<CR>
+    nnoremap <Leader>ld :<C-u>call LanguageClient#textDocument_definition()<CR>
+    nnoremap <Leader>le :<C-u>call LanguageClient#textDocument_references()<CR>
+    nnoremap <Leader>lf :<C-u>call LanguageClient#textDocument_formatting()<CR>
+    nnoremap <Leader>lh :<C-u>call LanguageClient#textDocument_hover()<CR>
+    nnoremap <Leader>lr :<C-u>call LanguageClient#textDocument_rename()<CR>
+    nnoremap <Leader>ls :<C-u>call LanguageClient_textDocument_documentSymbol()<CR>
+    nnoremap <Leader>lt :<C-u>call LanguageClient#textDocument_typeDefinition()<CR>
 
     let g:LanguageClient_serverCommands = {}
     if executable('ccls')
-        let g:LanguageClient_serverCommands[ 'c'    ] = [ 'ccls' ]
-        let g:LanguageClient_serverCommands[ 'cpp'  ] = [ 'ccls' ]
-        let g:LanguageClient_serverCommands[ 'objc' ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'c'   ] = [ 'ccls' ]
+        let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'ccls' ]
 
-        autocmd BufRead, BufNewFile *.h,*.c set filetype=c.doxygen
-
-        func! C_init()
+        func! C_init_language_client()
             setlocal formatexpr=LanguageClient#textDocument_rangeFormatting()
         endf
-        autocmd FileType c,cpp,objc :call C_init()
+        autocmd FileType c,cpp :call C_init_language_client()
 
-        nnoremap    <Leader>h   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'L'})<CR>
-        nnoremap    <Leader>j   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'D'})<CR>
-        nnoremap    <Leader>k   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'U'})<CR>
-        nnoremap    <Leader>l   :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'R'})<CR>
-    elseif executable('clangd')
-        let g:LanguageClient_serverCommands[ 'c'    ] = [ 'clangd' ]
-        let g:LanguageClient_serverCommands[ 'cpp'  ] = [ 'clangd' ]
-        let g:LanguageClient_serverCommands[ 'objc' ] = [ 'clangd' ]
+        nnoremap <Leader>h :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'L'})<CR>
+        nnoremap <Leader>j :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'D'})<CR>
+        nnoremap <Leader>k :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'U'})<CR>
+        nnoremap <Leader>l :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'R'})<CR>
     endif
 
     if executable('rls')
@@ -358,7 +351,7 @@ if has('nvim') && has('python')
     Plug 'Shougo/neco-vim' " {{{
     " }}}
 
-    Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp', 'objc' ] } " {{{
+    Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp' ] } " {{{
     " }}}
 
     Plug 'deoplete-plugins/deoplete-zsh', { 'for': 'zsh' } " {{{
