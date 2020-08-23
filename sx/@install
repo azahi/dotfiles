@@ -4,4 +4,4 @@ stow \
     --target="$HOME" \
     --ignore="^@.*" \
     --verbose \
-    xinit
+    sx

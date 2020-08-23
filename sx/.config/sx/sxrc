@@ -1,29 +1,8 @@
 #!/bin/sh
 
-cd "$HOME" || exit
-
 if command -v xrdb >/dev/null 2>&1 && [ -f "$HOME/.Xresources" ]
 then
     xrdb "$HOME/.Xresources"
-fi
-
-if command -v xset >/dev/null 2>&1
-then
-    xset b off
-
-    xset mouse 0 0
-
-    xset r rate 300 50
-
-    xset dpms force on
-    xset s default
-
-    xset fp rehash
-fi
-
-if command -v setxkbmap >/dev/null 2>&1
-then
-    setxkbmap -layout "us,ru" -option "grp:win_space_toggle" -option "compose:menu" -option "caps:escape"
 fi
 
 if command -v xbindkeys >/dev/null 2>&1 && [ -f "$HOME/.xbindkeysrc" ]
@@ -33,7 +12,7 @@ fi
 
 if command -v hsetroot >/dev/null 2>&1
 then
-    PAPE="$HOME/pictures/wallpapers/mill-blur.png"
+    PAPE="$HOME/pictures/wallpapers/mill.png"
     [ -f "$PAPE" ] && \
         hsetroot -cover "$PAPE"
 fi

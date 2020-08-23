@@ -1,0 +1,12 @@
+* dotfiles
+** Layout
+I manage my configuraiton files with
+[[https://www.gnu.org/software/stow/][stow]], usually by calling the ~@install~
+script from the root of this repository: ~./category/@install~.
+** XMonad
+XMonad configuration is [[https://github.com/azahi/xmonad-config][here]]. It's
+no longer actively maintained because I switched to
+[[https://dwm.suckless.org/][dwm]].
+** Screenshots
+A small history of my desktop alterations can be found here
+[[https://v.teknik.io/v/kqFNt][here]]. (Recent stuff is a the bottom)
