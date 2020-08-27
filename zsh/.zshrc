@@ -17,70 +17,69 @@ then
     zle -N zle-line-finish
 fi
 
-setopt clobber
-setopt combining_chars
-setopt complete_in_word
-setopt hash_list_all
-setopt ignore_eof
-setopt interactive_comments
-setopt list_packed
-setopt long_list_jobs
-setopt magic_equal_subst
-setopt no_always_to_end
-setopt no_beep
-setopt no_bg_nice
-setopt no_check_jobs
-setopt no_correct_all
-setopt no_glob_complete
-setopt no_glob_dots
-setopt notify
-setopt octal_zeroes
-setopt prompt_subst
-setopt pushd_ignore_dups
-setopt pushd_silent
-setopt pushd_to_home
-setopt rc_quotes
+setopt CLOBBER
+setopt COMBINING_CHARS
+setopt COMPLETE_IN_WORD
+setopt HASH_LIST_ALL
+setopt IGNORE_EOF
+setopt INTERACTIVE_COMMENTS
+setopt LIST_PACKED
+setopt LONG_LIST_JOBS
+setopt MAGIC_EQUAL_SUBST
+setopt NO_ALWAYS_TO_END
+setopt NO_BEEP
+setopt NO_BG_NICE
+setopt NO_CHECK_JOBS
+setopt NO_CORRECT_ALL
+setopt NO_GLOB_COMPLETE
+setopt NO_GLOB_DOTS
+setopt NOTIFY
+setopt PROMPT_SUBST
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+setopt PUSHD_TO_HOME
+setopt RC_QUOTES
 
 # History {{{
 [ "${HISTFILE: -4}" != "_zsh" ] && export HISTFILE="${HISTFILE}_zsh"
-export SAVEHIST="$HISTSIZE"
+export SAVEHIST="${HISTSIZE}"
 
-setopt append_history
-setopt bang_hist
-setopt extended_history
-setopt hist_beep
-setopt hist_expire_dups_first
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt hist_verify
-setopt inc_append_history
-setopt share_history
+setopt APPEND_HISTORY
+setopt BANG_HIST
+setopt EXTENDED_HISTORY
+setopt HIST_BEEP
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 # }}}
 
 # Completion {{{
 autoload -Uz compinit
-if [[ -s $ZCOMPDUMP(#qN.mh+24) && ( ! -s "$ZCOMPDUMP.zwc" || "$ZCOMPDUMP" -nt "$ZCOMPDUMP.zwc" ) ]]
+if [[ -s ${ZCOMPDUMP}(#qN.mh+24) && ( ! -s "${ZCOMPDUMP}.zwc" || "${ZCOMPDUMP}" -nt "${ZCOMPDUMP}.zwc" ) ]]
 then
-    compinit -d "$ZCOMPDUMP"
-    zrecompile -pq "$ZCOMPDUMP"
+    compinit -d "${ZCOMPDUMP}"
+    zrecompile -pq "${ZCOMPDUMP}"
 else
-    compinit -d "$ZCOMPDUMP" -C
+    compinit -d "${ZCOMPDUMP}" -C
 fi
 
-setopt auto_list
-setopt auto_menu
-setopt auto_param_keys
-setopt auto_param_slash
-setopt complete_in_word
-setopt flow_control
-setopt no_always_to_end
-setopt no_case_glob
-setopt no_complete_aliases
-setopt no_menu_complete
-setopt path_dirs
+setopt AUTO_LIST
+setopt AUTO_MENU
+setopt AUTO_PARAM_KEYS
+setopt AUTO_PARAM_SLASH
+setopt COMPLETE_IN_WORD
+setopt FLOW_CONTROL
+setopt NO_ALWAYS_TO_END
+setopt NO_CASE_GLOB
+setopt NO_COMPLETE_ALIASES
+setopt NO_MENU_COMPLETE
+setopt PATH_DIRS
 
 zstyle ':complation:*' matcher-list      'm:{a-z}={A-Z}'
 zstyle ':completion:*' accept-exact      '*(N)'
@@ -107,81 +106,126 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 # }}}
 
 # Plugins {{{
-if [ ! -d "$HOME/.zplug" ]
+if [ ! -d "${HOME}/.zplug" ]
 then
-    git clone "https://github.com/zplug/zplug" "$HOME/.zplug"
+    git clone "https://github.com/zplug/zplug" "${HOME}/.zplug"
 fi
-source "$HOME/.zplug/init.zsh"
+source "${HOME}/.zplug/init.zsh"
 
-
-# {{{
-zplug "zsh-users/zsh-autosuggestions", if:"[[ $TERM != linux ]]"
-#bindkey '^ ' autosuggest-accept # C-SPC
-# }}}
-
-# {{{
-zplug "ninrod/pass-zsh-completion", if:"[[ $(command -v pass) ]]"
-# }}}
-
-# {{{
-zplug "zsh-users/zsh-completions"
-# }}}
-
-# {{{
-zplug "gentoo/gentoo-zsh-completions"
-fpath+="$HOME/.zplug/repos/gentoo/gentoo-zsh-completions/src"
-# }}}
-
-# {{{
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, if:"[[ $TERM != linux ]]"
-# }}}
-
-# {{{
-zplug "hlissner/zsh-autopair", defer:2, if:"[[ $TERM != linux ]]"
-# }}}
-
-# {{{
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-# }}}
-
-# {{{
-zplug "plugins/ansible", from:oh-my-zsh, if:"[[ $(command -v ansible) ]]"
-# }}}
-
-# {{{
-zplug "plugins/fzf", from:oh-my-zsh, if:"[[ $(command -v fzf) ]]"
-# }}}
-
-# {{{
-zplug "plugins/autojump", from:oh-my-zsh, if:"[[ $(command -v autojump) ]]"
-# }}}
-
-# {{{
-zplug "plugins/brew", from:oh-my-zsh, if:"[[ $(command -v brew) ]]"
-# }}}
-
-# {{{
-zplug "plugins/rust", from:oh-my-zsh, if:"[[ $(command -v rustc) ]]"
-# }}}
 
 # {{{
 MODE_INDICATOR=""
+VIM_MODE_TRACK_KEYMAP=no
+
 zplug "softmoth/zsh-vim-mode"
+
+bindkey -rpM viins '^[^[' # https://github.com/softmoth/zsh-vim-mode#removing-bindings
 # }}}
 
-zplug "azahi/zsh-lambda", as:theme, if:"[[ $TERM != linux ]]"
+
+# {{{
+
+zplug "hlissner/zsh-autopair", defer:3, if:"[[ ${TERM} != linux ]]"
+
 # }}}
+
+
+# {{{
+
+zplug "zsh-users/zsh-autosuggestions", if:"[[ ${TERM} != linux ]]"
+
+bindkey '^ ' autosuggest-accept # C-SPC
+# }}}
+
+
+# {{{
+
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, if:"[[ ${TERM} != linux ]]"
+
+# }}}
+
+
+# {{{
+
+zplug "zsh-users/zsh-completions"
+
+# }}}
+
+
+# {{{
+
+zplug "gentoo/gentoo-zsh-completions", if:"[[ $(zgrep Gentoo /proc/config.gz) ]]"
+
+fpath+="${ZPLUG_REPOS}/gentoo/gentoo-zsh-completions/src"
+# }}}
+
+
+# {{{
+
+zplug "ninrod/pass-zsh-completion", if:"[[ $(command -v pass) ]]"
+
+# }}}
+
+
+# {{{
+
+zplug "plugins/colored-man-pages", from:oh-my-zsh, if:"[[ $(command -v man) ]]"
+
+# }}}
+
+
+# {{{
+
+zplug "plugins/ansible", from:oh-my-zsh, if:"[[ $(command -v ansible) ]]"
+
+# }}}
+
+
+# {{{
+
+zplug "plugins/fzf", from:oh-my-zsh, if:"[[ $(command -v fzf) ]]"
+
+# }}}
+
+
+# {{{
+
+zplug "plugins/autojump", from:oh-my-zsh, if:"[[ $(command -v autojump) ]]"
+
+# }}}
+
+
+# {{{
+
+zplug "plugins/brew", from:oh-my-zsh, if:"[[ $(command -v brew) ]]"
+
+# }}}
+
+
+# {{{
+
+zplug "plugins/rust", from:oh-my-zsh, if:"[[ $(command -v rustc) ]]"
+
+# }}}
+
+
+# {{{
+
+zplug "azahi/zsh-lambda", as:theme, if:"[[ ${TERM} != linux ]]"
+
+# }}}
+
 
 zplug check || zplug install
 zplug load
 # }}}
 
-# direnv {{{
+# https://github.com/direnv/direnv {{{
 [[ $(command -v direnv) ]] \
     && eval "$(direnv hook zsh)"
 # }}}
 
-# grc {{{
+# https://github.com/garabik/grc {{{
 [[ -s "/usr/share/grc/grc.zsh" ]] && \
     source /usr/share/grc/grc.zsh
 # }}}

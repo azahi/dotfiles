@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [ -f "$HOME"/.profile ]
+if [ -f "${HOME}"/.profile ]
 then
-    emulate sh -c ". $HOME/.profile"
+    emulate sh -c ". ${HOME}/.profile"
 fi
