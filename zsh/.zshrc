@@ -16,27 +16,20 @@ then
 fi
 
 setopt CLOBBER
-setopt COMBINING_CHARS
-setopt COMPLETE_IN_WORD
-setopt HASH_LIST_ALL
-setopt IGNORE_EOF
+setopt GLOBDOTS
 setopt INTERACTIVE_COMMENTS
-setopt LIST_PACKED
 setopt LONG_LIST_JOBS
 setopt MAGIC_EQUAL_SUBST
-setopt NO_ALWAYS_TO_END
-setopt NO_BEEP
-setopt NO_BG_NICE
-setopt NO_CHECK_JOBS
-setopt NO_CORRECT_ALL
-setopt NO_GLOB_COMPLETE
-setopt NO_GLOB_DOTS
 setopt NOTIFY
 setopt PROMPT_SUBST
 setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
 setopt RC_QUOTES
+unsetopt BEEP
+unsetopt BG_NICE
+unsetopt CHECK_JOBS
+unsetopt CORRECT_ALL
 
 # History {{{
 [ "${HISTFILE: -4}" != "_zsh" ] && export HISTFILE="${HISTFILE}_zsh"
@@ -45,7 +38,6 @@ export SAVEHIST="${HISTSIZE}"
 setopt APPEND_HISTORY
 setopt BANG_HIST
 setopt EXTENDED_HISTORY
-setopt HIST_BEEP
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_DUPS
@@ -72,12 +64,13 @@ setopt AUTO_MENU
 setopt AUTO_PARAM_KEYS
 setopt AUTO_PARAM_SLASH
 setopt COMPLETE_IN_WORD
-setopt FLOW_CONTROL
-setopt NO_ALWAYS_TO_END
-setopt NO_CASE_GLOB
-setopt NO_COMPLETE_ALIASES
-setopt NO_MENU_COMPLETE
+setopt EXTENDED_GLOB
+setopt HASH_LIST_ALL
+setopt LIST_PACKED
 setopt PATH_DIRS
+unsetopt CASE_GLOB
+unsetopt FLOW_CONTROL
+unsetopt MENU_COMPLETE
 
 zstyle ':completion:*' use-cache                on
 zstyle ':completion:*' cache-path               "${XDG_CACHE_HOME:-$HOME}/.zcompcache"
@@ -100,6 +93,14 @@ zstyle ':completion:*:default'                  list-prompt '%S%M matches%s'
 zstyle ':completion:*'                          format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*'                          group-name ''
 zstyle ':completion:*'                          verbose yes
+zstyle ':completion:*'                          matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+zstyle ':completion:*'                          squeeze-slashes true
+zstyle ':completion:*'                          special-dirs true
+zstyle ':completion:*:default'                  list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:cd:*'                   tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:cd:*:directory-stack'   menu yes select
+zstyle ':completion:*:-tilde-:*'                group-order 'named-directories' 'path-directories' 'users' 'expand'
 
 zstyle ':completion:*'                          completer _complete _match _approximate
 zstyle ':completion:*:match:*'                  original only
@@ -117,7 +118,7 @@ zstyle ':completion::*:(-command-|export):*'    fake-parameters ${${${_comps[(I)
 zstyle ':completion:*:(rm|kill|diff):*'         ignore-line other
 zstyle ':completion:*:rm:*'                     file-patterns '*:all-files'
 
-zstyle ':completion:*:*:*:*:processes'          command 'ps -u $LOGNAME -o pid,user,command -w'
+zstyle ':completion:*:*:*:*:processes'          command 'ps -u ${LOGNAME} -o pid,user,command -w'
 zstyle ':completion:*:*:kill:*:processes'       list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
 zstyle ':completion:*:*:kill:*'                 menu yes select
 zstyle ':completion:*:*:kill:*'                 force-list always
