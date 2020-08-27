@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-#zmodload zsh/zprof
-
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} ))
 then
     function zle-line-init ()
@@ -61,7 +59,7 @@ setopt SHARE_HISTORY
 
 # Completion {{{
 autoload -Uz compinit
-if [[ -s ${ZCOMPDUMP}(#qN.mh+24) && ( ! -s "${ZCOMPDUMP}.zwc" || "${ZCOMPDUMP}" -nt "${ZCOMPDUMP}.zwc" ) ]]
+if [[ -s ${ZCOMPDUMP}(#qN.mh+12) && ( ! -s "${ZCOMPDUMP}.zwc" || "${ZCOMPDUMP}" -nt "${ZCOMPDUMP}.zwc" ) ]]
 then
     compinit -d "${ZCOMPDUMP}"
     zrecompile -pq "${ZCOMPDUMP}"
@@ -81,143 +79,52 @@ setopt NO_COMPLETE_ALIASES
 setopt NO_MENU_COMPLETE
 setopt PATH_DIRS
 
-zstyle ':complation:*' matcher-list      'm:{a-z}={A-Z}'
-zstyle ':completion:*' accept-exact      '*(N)'
-zstyle ':completion:*' cache-path        "${XDG_CACHE_HOME:-$HOME}/.zcompcache"
-zstyle ':completion:*' insert-sections   true
-zstyle ':completion:*' list-colors       "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' list-dirs-first   true
-zstyle ':completion:*' menu              select
-zstyle ':completion:*' separate-sections true
-zstyle ':completion:*' use-cache         true
-zstyle ':completion:*' verbose           true
+zstyle ':completion:*' use-cache                on
+zstyle ':completion:*' cache-path               "${XDG_CACHE_HOME:-$HOME}/.zcompcache"
 
-zstyle ':completion:*'              format '%F{blue}%d%f'
-zstyle ':completion:*:corrections'  format '%F{yellow}%d (errors: %e)%f'
-zstyle ':completion:*:descriptions' format '%F{green}%d%f'
-zstyle ':completion:*:messages'     format '%F{purple}%d%f'
-zstyle ':completion:*:warnings'     format '%F{red}no matches found%f'
+zstyle ':completion:*'                          format '%F{blue}%d%f'
+zstyle ':completion:*:corrections'              format '%F{yellow}%d (errors: %e)%f'
+zstyle ':completion:*:descriptions'             format '%F{green}%d%f'
+zstyle ':completion:*:messages'                 format '%F{purple}%d%f'
+zstyle ':completion:*:warnings'                 format '%F{red}no matches found%f'
 
-zstyle ':completion:*:matches' group true
+zstyle ':completion:*:*:*:*:*'                  menu select
+zstyle ':completion:*:matches'                  group 'yes'
+zstyle ':completion:*:options'                  description 'yes'
+zstyle ':completion:*:options'                  auto-description '%d'
+zstyle ':completion:*:corrections'              format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions'             format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages'                 format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings'                 format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default'                  list-prompt '%S%M matches%s'
+zstyle ':completion:*'                          format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*'                          group-name ''
+zstyle ':completion:*'                          verbose yes
 
-zstyle ':completion:*:*:kill:*'           force-list always
-zstyle ':completion:*:*:kill:*:processes' command 'ps -u $LOGNAME -o pid,command -w'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
-# }}}
+zstyle ':completion:*'                          completer _complete _match _approximate
+zstyle ':completion:*:match:*'                  original only
+zstyle ':completion:*:approximate:*'            max-errors 1 numeric
 
-# Plugins {{{
-if [ ! -d "${HOME}/.zplug" ]
-then
-    git clone "https://github.com/zplug/zplug" "${HOME}/.zplug"
-fi
-source "${HOME}/.zplug/init.zsh"
+zstyle ':completion:*:functions'                ignored-patterns '(_*|pre(cmd|exec))'
 
+zstyle ':completion:*:history-words'            stop yes
+zstyle ':completion:*:history-words'            remove-all-dups yes
+zstyle ':completion:*:history-words'            list false
+zstyle ':completion:*:history-words'            menu yes
 
-# {{{
-MODE_INDICATOR=""
-VIM_MODE_TRACK_KEYMAP=no
+zstyle ':completion::*:(-command-|export):*'    fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
 
-zplug "softmoth/zsh-vim-mode"
+zstyle ':completion:*:(rm|kill|diff):*'         ignore-line other
+zstyle ':completion:*:rm:*'                     file-patterns '*:all-files'
 
-bindkey -rpM viins '^[^[' # https://github.com/softmoth/zsh-vim-mode#removing-bindings
-# }}}
+zstyle ':completion:*:*:*:*:processes'          command 'ps -u $LOGNAME -o pid,user,command -w'
+zstyle ':completion:*:*:kill:*:processes'       list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
+zstyle ':completion:*:*:kill:*'                 menu yes select
+zstyle ':completion:*:*:kill:*'                 force-list always
+zstyle ':completion:*:*:kill:*'                 insert-ids single
 
-
-# {{{
-
-zplug "hlissner/zsh-autopair", defer:3, if:"[[ ${TERM} != linux ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "zsh-users/zsh-autosuggestions", if:"[[ ${TERM} != linux ]]"
-
-bindkey '^ ' autosuggest-accept # C-SPC
-# }}}
-
-
-# {{{
-
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, if:"[[ ${TERM} != linux ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "zsh-users/zsh-completions"
-
-# }}}
-
-
-# {{{
-
-zplug "gentoo/gentoo-zsh-completions", if:"[[ $(zgrep Gentoo /proc/config.gz) ]]"
-
-fpath+="${ZPLUG_REPOS}/gentoo/gentoo-zsh-completions/src"
-# }}}
-
-
-# {{{
-
-zplug "ninrod/pass-zsh-completion", if:"[[ $(command -v pass) ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "plugins/colored-man-pages", from:oh-my-zsh, if:"[[ $(command -v man) ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "plugins/ansible", from:oh-my-zsh, if:"[[ $(command -v ansible) ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "plugins/fzf", from:oh-my-zsh, if:"[[ $(command -v fzf) ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "plugins/autojump", from:oh-my-zsh, if:"[[ $(command -v autojump) ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "plugins/brew", from:oh-my-zsh, if:"[[ $(command -v brew) ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "plugins/rust", from:oh-my-zsh, if:"[[ $(command -v rustc) ]]"
-
-# }}}
-
-
-# {{{
-
-zplug "azahi/zsh-lambda", as:theme, if:"[[ ${TERM} != linux ]]"
-
-# }}}
-
-
-zplug check || zplug install
-zplug load
+zstyle ':completion:*:manuals'                  separate-sections true
+zstyle ':completion:*:manuals.(^1*)'            insert-sections true
 # }}}
 
 # https://github.com/direnv/direnv {{{
@@ -225,8 +132,13 @@ zplug load
     && eval "$(direnv hook zsh)"
 # }}}
 
+# https://github.com/wting/autojump {{{
+[[ -s /usr/share/autojump/autojump.zsh ]] && \
+    source /usr/share/autojump/autojump.zsh
+# }}}
+
 # https://github.com/garabik/grc {{{
-[[ -s "/usr/share/grc/grc.zsh" ]] && \
+[[ -s /usr/share/grc/grc.zsh ]] && \
     source /usr/share/grc/grc.zsh
 # }}}
 
@@ -244,4 +156,58 @@ bindkey '^J'    accept-line             # C-m
 bindkey '^[[Z'  reverse-menu-complete   # M-TAB
 # }}}
 
-#zprof
+# Plugins {{{
+if [ ! -d "${HOME}/.zgen" ]
+then
+    git clone "https://github.com/tarjoilija/zgen" "${HOME}/.zgen"
+fi
+
+# softmoth/zsh-vim-mode
+MODE_INDICATOR=""
+VIM_MODE_TRACK_KEYMAP=no
+
+# zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=64
+ZSH_AUTOSUGGEST_USE_ASYNC=yes
+
+# https://github.com/tarjoilija/zgen
+ZGEN_AUTOLOAD_COMPINIT=0
+source "${HOME}/.zgen/zgen.zsh"
+if ! zgen saved
+then
+    true && \
+        zgen load azahi/zsh-lambda \
+        lambda.zsh-theme
+
+    command -v pass >/dev/null 2>&1 && \
+        zgen load ninrod/pass-zsh-completion \
+        src
+
+    zgrep Gentoo /proc/config.gz >/dev/null 2>&1 && \
+        zgen load gentoo/gentoo-zsh-completions \
+        src
+
+    true && \
+        zgen load zsh-users/zsh-completions
+
+    true && \
+        zgen load softmoth/zsh-vim-mode
+
+    true && \
+        zgen load hlissner/zsh-autopair
+
+    true && \
+        zgen load zsh-users/zsh-autosuggestions
+
+    true && \
+        zgen load zsh-users/zsh-syntax-highlighting
+
+    zgen save
+fi
+
+# softmoth/zsh-vim-mode
+bindkey -rpM viins '^[^['
+
+# zsh-users/zsh-autosuggestions
+bindkey '^ '    autosuggest-accept      # C-SPC
+# }}}
