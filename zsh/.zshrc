@@ -158,57 +158,60 @@ bindkey '^[[Z'  reverse-menu-complete   # M-TAB
 # }}}
 
 # Plugins {{{
-if [ ! -d "${HOME}/.zgen" ]
+if [ ${TERM} != "linux" ]
 then
-    git clone "https://github.com/tarjoilija/zgen" "${HOME}/.zgen"
+    if [ ! -d "${HOME}/.zgen" ]
+    then
+        git clone "https://github.com/tarjoilija/zgen" "${HOME}/.zgen"
+    fi
+
+    # softmoth/zsh-vim-mode
+    MODE_INDICATOR=""
+    VIM_MODE_TRACK_KEYMAP=no
+
+    # zsh-users/zsh-autosuggestions
+    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=64
+    ZSH_AUTOSUGGEST_USE_ASYNC=yes
+
+    # https://github.com/tarjoilija/zgen
+    ZGEN_AUTOLOAD_COMPINIT=0
+    source "${HOME}/.zgen/zgen.zsh"
+    if ! zgen saved
+    then
+        true && \
+            zgen load azahi/zsh-lambda \
+            lambda.zsh-theme
+
+        command -v pass >/dev/null 2>&1 && \
+            zgen load ninrod/pass-zsh-completion \
+            src
+
+        zgrep Gentoo /proc/config.gz >/dev/null 2>&1 && \
+            zgen load gentoo/gentoo-zsh-completions \
+            src
+
+        true && \
+            zgen load zsh-users/zsh-completions
+
+        true && \
+            zgen load softmoth/zsh-vim-mode
+
+        true && \
+            zgen load hlissner/zsh-autopair
+
+        true && \
+            zgen load zsh-users/zsh-autosuggestions
+
+        true && \
+            zgen load zsh-users/zsh-syntax-highlighting
+
+        zgen save
+    fi
+
+    # softmoth/zsh-vim-mode
+    bindkey -rpM viins '^[^['
+
+    # zsh-users/zsh-autosuggestions
+    bindkey '^ '    autosuggest-accept      # C-SPC
 fi
-
-# softmoth/zsh-vim-mode
-MODE_INDICATOR=""
-VIM_MODE_TRACK_KEYMAP=no
-
-# zsh-users/zsh-autosuggestions
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=64
-ZSH_AUTOSUGGEST_USE_ASYNC=yes
-
-# https://github.com/tarjoilija/zgen
-ZGEN_AUTOLOAD_COMPINIT=0
-source "${HOME}/.zgen/zgen.zsh"
-if ! zgen saved
-then
-    true && \
-        zgen load azahi/zsh-lambda \
-        lambda.zsh-theme
-
-    command -v pass >/dev/null 2>&1 && \
-        zgen load ninrod/pass-zsh-completion \
-        src
-
-    zgrep Gentoo /proc/config.gz >/dev/null 2>&1 && \
-        zgen load gentoo/gentoo-zsh-completions \
-        src
-
-    true && \
-        zgen load zsh-users/zsh-completions
-
-    true && \
-        zgen load softmoth/zsh-vim-mode
-
-    true && \
-        zgen load hlissner/zsh-autopair
-
-    true && \
-        zgen load zsh-users/zsh-autosuggestions
-
-    true && \
-        zgen load zsh-users/zsh-syntax-highlighting
-
-    zgen save
-fi
-
-# softmoth/zsh-vim-mode
-bindkey -rpM viins '^[^['
-
-# zsh-users/zsh-autosuggestions
-bindkey '^ '    autosuggest-accept      # C-SPC
 # }}}

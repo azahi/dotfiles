@@ -26,6 +26,12 @@ keystate_scrolllock= disable
 "amixer sset Capture toggle"
     XF86AudioMicMute
 
+"amixer sset Capture unmute 5%+"
+    Shift + XF86AudioRaiseVolume
+
+"amixer sset Capture unmute 5%-"
+    Shift + XF86AudioLowerVolume
+
 "mpc --quiet toggle"
     XF86AudioPlay
 
