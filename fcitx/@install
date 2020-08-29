@@ -1,13 +1,13 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/fcitx" ] && \
-    mkdir -p "$HOME/.config/fcitx"
-[ ! -d "$HOME/.config/fcitx/addon" ] && \
-    mkdir -p "$HOME/.config/fcitx/addon"
-[ ! -d "$HOME/.config/fcitx/conf" ] && \
-    mkdir -p "$HOME/.config/fcitx/conf"
-[ ! -d "$HOME/.config/fcitx/skin" ] && \
-    mkdir -p "$HOME/.config/fcitx/skin"
+[ ! -d "${XDG_CONFIG_HOME}/fcitx" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/fcitx"
+[ ! -d "${XDG_CONFIG_HOME}/fcitx/addon" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/fcitx/addon"
+[ ! -d "${XDG_CONFIG_HOME}/fcitx/conf" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/fcitx/conf"
+[ ! -d "${XDG_CONFIG_HOME}/fcitx/skin" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/fcitx/skin"
 
 stow \
     --target="$HOME" \

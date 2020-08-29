@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/streamlink" ] && \
-    mkdir -p "$HOME/.config/streamlink"
+[ ! -d "${XDG_CONFIG_HOME}/streamlink" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/streamlink"
 
 stow \
     --target="$HOME" \

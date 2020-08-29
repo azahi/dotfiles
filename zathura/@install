@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/zathura" ] && \
-    mkdir -p "$HOME/.config/zathura"
+[ ! -d "${XDG_CONFIG_HOME}/zathura" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/zathura"
 
 stow \
     --target="$HOME" \

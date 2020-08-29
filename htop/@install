@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/htop" ] && \
-    mkdir -p "$HOME/.config/htop"
+[ ! -d "${XDG_CONFIG_HOME}/htop" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/htop"
 
 stow \
     --target="$HOME" \

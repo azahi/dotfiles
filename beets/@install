@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/beets" ] && \
-    mkdir -p "$HOME/.config/beets"
+[ ! -d "${XDG_CONFIG_HOME}/beets" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/beets"
 
 stow \
     --target="$HOME" \

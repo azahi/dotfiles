@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/ocp" ] && \
-    mkdir -p "$HOME/.config/ocp"
+[ ! -d "${XDG_CONFIG_HOME}/ocp" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/ocp"
 
 stow \
     --target="$HOME" \

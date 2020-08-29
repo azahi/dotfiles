@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/twmn" ] && \
-    mkdir -p "$HOME/.config/twmn"
+[ ! -d "${XDG_CONFIG_HOME}/twmn" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/twmn"
 
 stow \
     --target="$HOME" \

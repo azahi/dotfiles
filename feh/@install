@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/feh" ] && \
-    mkdir -p "$HOME/.config/feh"
+[ ! -d "${XDG_CONFIG_HOME}/feh" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/feh"
 
 stow \
     --target="$HOME" \

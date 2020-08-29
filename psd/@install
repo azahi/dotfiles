@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/psd" ] && \
-    mkdir -p "$HOME/.config/psd"
+[ ! -d "${XDG_CONFIG_HOME}/psd" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/psd"
 
 stow \
     --target="$HOME" \

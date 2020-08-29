@@ -1,9 +1,9 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/mpv" ] && \
-    mkdir -p "$HOME/.config/mpv"
-[ ! -d "$HOME/.config/mpv/script-opts" ] && \
-    mkdir -p "$HOME/.config/mpv/script-opts"
+[ ! -d "${XDG_CONFIG_HOME}/mpv" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/mpv"
+[ ! -d "${XDG_CONFIG_HOME}/mpv/script-opts" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/mpv/script-opts"
 
 stow \
     --target="$HOME" \

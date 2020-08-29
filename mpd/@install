@@ -1,17 +1,17 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/mpd" ] && \
-    mkdir -p "$HOME/.config/mpd"
-[ ! -d "$HOME/.local/share/mpd" ] && \
-    mkdir -p "$HOME/.local/share/mpd"
-[ ! -d "$HOME/.local/share/mpd/playlists" ] && \
-    mkdir -p "$HOME/.local/share/mpd/playlists"
-[ ! -f "$HOME/.local/share/mpd/state" ] && \
-    touch "$HOME/.local/share/mpd/state"
-[ ! -f "$HOME/.local/share/mpd/database.gz" ] && \
-    touch "$HOME/.local/share/mpd/database.gz"
-[ ! -f "$HOME/.local/share/mpd/sticker.db" ] && \
-    touch "$HOME/.local/share/mpd/sticker.db"
+[ ! -d "${XDG_CONFIG_HOME}/mpd" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/mpd"
+[ ! -d "${XDG_DATA_HOME}/mpd" ] && \
+    mkdir -p "${XDG_DATA_HOME}/mpd"
+[ ! -d "${XDG_DATA_HOME}/mpd/playlists" ] && \
+    mkdir -p "${XDG_DATA_HOME}/mpd/playlists"
+[ ! -f "${XDG_DATA_HOME}/mpd/state" ] && \
+    touch "${XDG_DATA_HOME}/mpd/state"
+[ ! -f "${XDG_DATA_HOME}/mpd/database.gz" ] && \
+    touch "${XDG_DATA_HOME}/mpd/database.gz"
+[ ! -f "${XDG_DATA_HOME}/mpd/sticker.db" ] && \
+    touch "${XDG_DATA_HOME}/mpd/sticker.db"
 
 stow \
     --target="$HOME" \

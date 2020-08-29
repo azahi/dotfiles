@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/ranger" ] && \
-    mkdir -p "$HOME/.config/ranger"
+[ ! -d "${XDG_CONFIG_HOME}/ranger" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/ranger"
 
 stow \
     --target="$HOME" \
@@ -9,5 +9,5 @@ stow \
     --verbose \
     ranger
 
-[ ! -f "$HOME/.config/ranger/scope.sh" ] && \
+[ ! -f "${XDG_CONFIG_HOME}/ranger/scope.sh" ] && \
     ranger --copy-config=scope.sh

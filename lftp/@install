@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/lftp" ] && \
-    mkdir -p "$HOME/.config/lftp"
+[ ! -d "${XDG_CONFIG_HOME}/lftp" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/lftp"
 
 stow \
     --target="$HOME" \

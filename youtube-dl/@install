@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/youtube-dl" ] && \
-    mkdir -p "$HOME/.config/youtube-dl"
+[ ! -d "${XDG_CONFIG_HOME}/youtube-dl" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/youtube-dl"
 
 stow \
     --target="$HOME" \

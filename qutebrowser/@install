@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.config/qutebrowser" ] && \
-    mkdir -p "$HOME/.config/qutebrowser"
+[ ! -d "${XDG_CONFIG_HOME}/qutebrowser" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/qutebrowser"
 
 stow \
     --target="$HOME" \
