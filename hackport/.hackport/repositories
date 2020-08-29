@@ -1,4 +1,4 @@
-Just LocalInfo { distfiles_dir = "/usr/portage/distfiles"
-               , overlay_list = []
-               , portage_dir = "/usr/portage"
+Just LocalInfo { distfiles_dir = "/var/cache/distfiles"
+               , overlay_list = [ "/home/azahi/src/gentoo-haskell" ]
+               , portage_dir = "/var/db/repos/gentoo"
                }

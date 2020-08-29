@@ -8,37 +8,62 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.S]
+# Assembly
+[*.{asm,s,S}]
 indent_style = tab
 
-[*.{c,cc,cpp,cxx,c++,h,hh,hpp,hxx,h++,mm}]
+# C/C++
+[*.{c,h,cc,hh,cpp,hpp,cxx,hxx}]
 indent_style = tab
 
-[Makefile,*.mk]
-indent_style = tab
-
-[CMakeList.txt]
-indent_size = 8
-indent_style = space
-
-[*.{ac,am,m4)]
-indent_style = tab
-
+# C Sharp
 [*.{cs,fs}]
 charset = utf-8-bom
 end_of_line = crlf
 indent_style = space
 
+# Haskell
 [*.{hs,lhs}]
 indent_size = 2
 indent_style = space
 
+# Emacs Lisp
 [*.el]
 indent_size = 2
 indent_style = space
 
+# Common Lisp
+[*.{lisp,lsp,l,cl}]
+indent_size = 2
+indent_style = space
+
+# Scheme
+[*.{scm,sps,sls,sld,ss,sc,sch}]
+indent_size = 2
+indent_style = space
+
+# Racket
+[*.rkt]
+indent_size = 2
+indent_style = space
+
+# Make
+[Makefile,*.mk]
+indent_style = tab
+
+# CMake
+[CMakeList.txt]
+indent_size = 8
+indent_style = space
+
+# Autotools
+[*.{ac,am,m4)]
+indent_style = tab
+
+# Ebuild
 [*.ebuild]
 indent_style = tab
 
+# Git
 [*.git*]
 indent_style = tab
