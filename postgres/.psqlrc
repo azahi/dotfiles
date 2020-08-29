@@ -3,6 +3,6 @@
 \pset null '[NULL]'
 \x auto
 \set VERBOSITY verbose
-\set HISTFILE ~/.local/share/psql_history
+\set HISTFILE ~/.var/psql_history
 \set HISTCONTROL ignoredups
 \set COMP_KEYWORD_CASE upper

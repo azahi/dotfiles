@@ -1,10 +1,10 @@
-ncmpcpp_directory   = "~/.local/share/ncmpcpp"
-lyrics_directory    = "~/.local/share/ncmpcpp/lyrics"
+ncmpcpp_directory   = "~/.var/ncmpcpp"
+lyrics_directory    = "~/.var/ncmpcpp/lyrics"
 
 mpd_host                = "localhost"
 mpd_port                = "6600"
 mpd_connection_timeout  = "10"
-mpd_music_dir           = "~/audios/music"
+mpd_music_dir           = "~/music"
 mpd_crossfade_time      = "0"
 
 visualizer_fifo_path            = "/tmp/mpd.fifo"
