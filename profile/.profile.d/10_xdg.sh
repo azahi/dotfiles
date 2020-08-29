@@ -10,8 +10,8 @@ TEMPLATES_DIR="${HOME}/documents"
 VIDEOS_DIR="${HOME}/videos"
 
 export XDG_CACHE_HOME="/tmp/.private/${USER}"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.etc"
+export XDG_DATA_HOME="$HOME/.var"
 if [ "$(uname)" != "Darwin" ]
 then
     export XDG_DESKTOP_DIR="${DESKTOP_DIR}"

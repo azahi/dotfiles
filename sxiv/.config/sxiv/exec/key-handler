@@ -1,0 +1,16 @@
+#!/bin/sh
+
+while read file
+do
+    case "$1" in
+        "C-c")
+            echo -en "$file" | xclip -selection clipboard
+            ;;
+        "C-f")
+            xclip -selection clipboard -target image/png "$file"
+            ;;
+        "C-d")
+            rm -f "$file"
+            ;;
+    esac
+done

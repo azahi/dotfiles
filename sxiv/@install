@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "$HOME/.config/sxiv/exec" ] && \
+    mkdir -p "$HOME/.config/sxiv/exec"
+
+stow \
+    --target="$HOME" \
+    --ignore="^@.*" \
+    --verbose \
+    sxiv

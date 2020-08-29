@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for i in cdiff colordiff diff
+for i in batdiff cdiff colordiff diff
 do
     # shellcheck disable=SC2139
     command -v "$i" >/dev/null 2>&1 && \

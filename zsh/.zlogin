@@ -11,10 +11,18 @@
         fi
     }
 
-    lazy_zrecompile "$ZCOMPDUMP"
-    lazy_zrecompile "$ZLOGIN"
-    lazy_zrecompile "$ZLOGOUT"
-    lazy_zrecompile "$ZPROFILE"
-    lazy_zrecompile "$ZSHENV"
-    lazy_zrecompile "$ZSHRC"
+    FLIST=(
+        ${ZCOMPDUMP}
+        ${ZLOGIN}
+        ${ZLOGOUT}
+        ${ZPROFILE}
+        ${ZSHENV}
+        ${ZSHRC}
+        ${HOME}/.zsh.d/*.zsh
+    )
+
+    for i in ${FLIST}
+    do
+        lazy_zrecompile "${i}"
+    done
 ) &!

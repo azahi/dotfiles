@@ -1,5 +1,8 @@
 #!/bin/sh
 
+[ ! -d "$HOME/.zsh.d" ] &&
+    mkdir -p "$HOME/.zsh.d"
+
 stow \
     --target="$HOME" \
     --ignore="^@.*" \

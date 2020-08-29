@@ -1,4 +1,4 @@
 #!/bin/sh
 
-export HISTFILE="${HOME}/.local/share/.histfile"
+export HISTFILE="${XDG_DATA_HOME}/.histfile"
 export HISTSIZE=100000
