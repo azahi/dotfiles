@@ -9,8 +9,8 @@ sort_album: albumartist+ album+
 sort_case_insensitive: yes
 import:
     write: yes
-    copy: no
-    move: yes
+    copy: yes
+    move: no
     bell: yes
 match:
     preferred:
