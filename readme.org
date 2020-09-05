@@ -5,8 +5,7 @@ I manage my configuraiton files with
 script from the root of this repository: ~./category/@install~.
 ** XMonad
 XMonad configuration is [[https://github.com/azahi/xmonad-config][here]]. It's
-no longer actively maintained because I switched to
-[[https://dwm.suckless.org/][dwm]].
+no longer actively maintained because I'm not interested in it anymore.
 ** Screenshots
 A small history of my desktop alterations can be found here
-[[https://v.teknik.io/v/kqFNt][here]]. (Recent stuff is a the bottom)
+[[https://v.teknik.io/v/kqFNt][here]]. (The more recent stuff is a the bottom)
