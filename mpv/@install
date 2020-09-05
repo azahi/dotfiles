@@ -6,7 +6,7 @@
     mkdir -p "${XDG_CONFIG_HOME}/mpv/script-opts"
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     mpv

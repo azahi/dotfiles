@@ -10,7 +10,7 @@
     mkdir -p "${XDG_CONFIG_HOME}/fcitx/skin"
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     fcitx

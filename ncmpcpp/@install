@@ -8,7 +8,7 @@
     mkdir -p "${XDG_DATA_HOME}/ncmpcpp/lyrics"
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     ncmpcpp

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# Depends on "sbcl"
+# Depends on "sbcl".
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     clisp

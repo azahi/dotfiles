@@ -12,5 +12,6 @@ done
 
 if [ "$MANPAGER" == "bat" ]
 then
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    export MANPAGER="sh -c 'col -bx | bat --language=man --style=grid --color=always --decoration=always man -p'"
+
 fi

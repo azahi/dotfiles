@@ -64,6 +64,10 @@ indent_style = tab
 [*.ebuild]
 indent_style = tab
 
+# XML
+[*.xml]
+indent_style = tab
+
 # Git
 [*.git*]
 indent_style = tab

@@ -14,7 +14,7 @@
     touch "${XDG_DATA_HOME}/mpd/sticker.db"
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     mpd

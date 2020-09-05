@@ -86,7 +86,9 @@ c.content.autoplay = False
 # AppCache. Note that with QtWebKit, only `all` and `never` are
 # supported as per-domain values. Setting `no-3rdparty` or `no-
 # unknown-3rdparty` per-domain on QtWebKit will have the same effect as
-# `all`.
+# `all`. If this setting is used with URL patterns, the pattern gets
+# applied to the origin/first party URL of the page making the request,
+# not the request URL.
 # Type: String
 # Valid values:
 #   - all: Accept all cookies.
@@ -101,7 +103,9 @@ config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 # AppCache. Note that with QtWebKit, only `all` and `never` are
 # supported as per-domain values. Setting `no-3rdparty` or `no-
 # unknown-3rdparty` per-domain on QtWebKit will have the same effect as
-# `all`.
+# `all`. If this setting is used with URL patterns, the pattern gets
+# applied to the origin/first party URL of the page making the request,
+# not the request URL.
 # Type: String
 # Valid values:
 #   - all: Accept all cookies.
@@ -345,7 +349,9 @@ c.content.print_element_backgrounds = True
 c.content.private_browsing = False
 
 # Proxy to use. In addition to the listed values, you can use a
-# `socks://...` or `http://...` URL.
+# `socks://...` or `http://...` URL. Note that with QtWebEngine, it will
+# take a couple of seconds until the change is applied, if this value is
+# changed at runtime.
 # Type: Proxy
 # Valid values:
 #   - system: Use the system wide proxy.
@@ -875,7 +881,7 @@ c.colors.tabs.pinned.even.bg = '#2f2b2a'
 # font setting, it's replaced with the fonts listed here. If set to an
 # empty value, a system-specific monospace default is used.
 # Type: List of Font, or Font
-c.fonts.default_family = 'Efont Biwidth, Efont Fixed, "Migu 1P"'
+c.fonts.default_family = 'efont biwidth, efont fixed, migmix 1p, baekmuk dotum, siji'
 
 # Default font size to use. Whenever "default_size" is used in a font
 # setting, it's replaced with the size listed here. Valid values are

@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Depends on "sbcl"
-
-stow \
-    --target="$HOME" \
-    --ignore="^@.*" \
-    --verbose \
-    clozurecl

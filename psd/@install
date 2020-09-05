@@ -4,7 +4,7 @@
     mkdir -p "${XDG_CONFIG_HOME}/psd"
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     psd

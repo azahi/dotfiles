@@ -4,7 +4,7 @@
     mkdir -p "${XDG_CONFIG_HOME}"
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     xdg

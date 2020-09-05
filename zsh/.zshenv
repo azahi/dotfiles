@@ -5,7 +5,7 @@ skip_global_compinit=1
 setopt NO_GLOBAL_RCS
 
 export ZDOTDIR="${HOME}"
-export ZCOMPDUMP="${ZDOTDIR}/.zcompdump"
+export ZCOMPDUMP="${ZDOTDIR}/.zsh.d/.zcompdump"
 export ZLOGIN="${ZDOTDIR}/.zlogin"
 export ZLOGOUT="${ZDOTDIR}/.zlogout"
 export ZPROFILE="${ZDOTDIR}/.zprofile"

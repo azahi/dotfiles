@@ -1,10 +1,10 @@
 #!/bin/sh
 
-[ ! -d "$HOME/.ropeproject" ] && \
-    mkdir -p "$HOME/.ropeproject"
+[ ! -d "${HOME}/.ropeproject" ] && \
+    mkdir -p "${HOME}/.ropeproject"
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     rope

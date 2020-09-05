@@ -4,7 +4,7 @@
     mkdir -p "${XDG_CONFIG_HOME}/streamlink"
 
 stow \
-    --target="$HOME" \
+    --target="${HOME}" \
     --ignore="^@.*" \
     --verbose \
     streamlink
