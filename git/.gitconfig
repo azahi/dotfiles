@@ -30,11 +30,3 @@
 	wtc = !"curl -s whatthecommit.com/index.txt | git commit --file -"
 [github]
 	user = azahi
-[url "git@github.com:"]
-	insteadof = "gh:"
-	insteadof = "github:"
-	insteadof = "git://github.com/"
-[url "git@gitlab.com:"]
-	insteadof = "gl:"
-	insteadof = "gitlab:"
-	insteadof = "git://gitlab.com/"
