@@ -1,125 +1,40 @@
 [user]
-	name            = Azat Bahawi
-	email           = azahi@teknik.io
-	signingkey      = B40FCB6608BBE3B6
-
-[credential]
-	helper          = cache
-
-[color]
-	branch          = auto
-	diff            = auto
-	interactive     = auto
-	status          = auto
-	ui              = true
-
-[core]
-	autocrlf        = input
-	commitgraph     = true
-	excludesfile    = ~/.gitignore_global
-	quotepath       = false
-	untrackedcache  = true
-	whitespace      = space-before-tab,-indent-with-non-tab,trailing-space
-
+	name = Azat Bahawi
+	email = azahi@teknik.io
+	signingkey = 0xB40FCB6608BBE3B6
 [commit]
-	gpgsign         = true
-	verbose         = false
-
-[branch]
-	autosetupmerge  = always
-	autosetuprebase = always
-
-[branch "master"]
-	rebase          = true
-
-[merge]
-	ff              = only
-	log             = true
-
-[mergetool]
-	keepbackup      = false
-	prompt          = false
-
-[diff]
-	renames         = copies
-	submodule       = log
-
-[diff "bin"]
-	textconv        = hexdump -v -C
-
-[difftool]
-	prompt          = false
-	trustexitcode   = true
-
-[log]
-	date            = local
-	decorate        = short
-
-[status]
-	color           = true
-
-[apply]
-	whitespace      = fix
-
-[push]
-	default         = simple
-	followtags      = true
-
-[pull]
-	rebase          = true
-
-[fetch]
-	prune           = true
-
-[rebase]
-	autosquash      = true
-	autostash       = true
-
+	gpgsign = true
 [alias]
-	a               = add
-	aa              = add .
-	ac              = !"git add --all && git commit --all --verbose"
-	acw             = !"git add --all && git wtc"
-	al              = config --get-regexp alias
-	am              = commit --amend
-	bs              = branch -a
-	c               = clone --recursive
-	co              = diff --name-only --diff-filter=U
-	d               = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
-	ds              = diff --staged --name-only --diff-filter=ACMR
-	ec              = diff HEAD^ --name-only --diff-filter=ACMR
-	ed              = diff HEAD --name-only --diff-filter=ACMR
-	et              = conflicts
-	f               = fetch --all --recurse-submodules
-	gud             = commit --message=\"git gud\"
-	i               = update-index --assume-unchanged
-	l               = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	ls              = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
-	pl              = pull --all --recurse-submodules
-	ps              = push
-	r               = remote -v
-	re              = reset HEAD
-	s               = status --porcelain
-	uc              = reset --soft HEAD^
-	ui              = update-index --un-assume-unchanged
-	ups             = push --force-with-lease origin HEAD^:master
-	wc              = whatchanged -p --abbrev-commit --pretty=medium
-	wtc             = !"git commit -m \"$(curl -s whatthecommit.com/index.txt)\""
-
+	a = add
+	aa = add --all
+	ac = commit --all --verbose
+	al = config --get-regexp alias
+	b = branch --all
+	c = clone --recurse-submodules
+	ca = commit --amend
+	ch = checkout
+	d = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
+	f = fetch --all --recurse-submodules
+	gud = commit --message=\"git gud\"
+	i = update-index --assume-unchanged
+	iu = update-index --un-assume-unchanged
+	l = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	ls = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
+	pl = pull --all --recurse-submodules
+	ps = push
+	r = remote -v
+	re = reset HEAD
+	ree = reset HEAD^
+	s = status --short
+	wc = whatchanged -p --abbrev-commit --pretty=medium
+	wtc = !"curl -s whatthecommit.com/index.txt | git commit --file -"
 [github]
-	user            = azahi
-
+	user = azahi
 [url "git@github.com:"]
-	insteadof       = "gh:"
-	pushinsteadof   = "github:"
-	pushinsteadof   = "git://github.com/"
-
+	insteadof = "gh:"
+	insteadof = "github:"
+	insteadof = "git://github.com/"
 [url "git@gitlab.com:"]
-	insteadof       = "gl:"
-	pushinsteadof   = "gitlab:"
-	pushinsteadof   = "git://gitlab.com/"
-
-[url "git@bitbucket.org:"]
-	insteadof       = "bb:"
-	pushinsteadof   = "bitbucket:"
-	pushinsteadof   = "git://bitbucket.org/"
+	insteadof = "gl:"
+	insteadof = "gitlab:"
+	insteadof = "git://gitlab.com/"
