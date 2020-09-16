@@ -1,7 +1,9 @@
 [user]
 	name = Azat Bahawi
 	email = azahi@teknik.io
-	signingkey = 0xB40FCB6608BBE3B6
+	signingkey = B40FCB6608BBE3B6
+[core]
+	excludesfile = ~/.gitignore
 [commit]
 	gpgsign = true
 [alias]
@@ -13,6 +15,7 @@
 	c = clone --recurse-submodules
 	ca = commit --amend
 	ch = checkout
+	ci = commit --signoff
 	d = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
 	f = fetch --all --recurse-submodules
 	gud = commit --message=\"git gud\"

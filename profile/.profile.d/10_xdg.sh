@@ -8,10 +8,11 @@ PICTURES_DIR="${HOME}/pictures"
 PUBLICSHARE_DIR="${HOME}/documents"
 TEMPLATES_DIR="${HOME}/documents"
 VIDEOS_DIR="${HOME}/videos"
+RUNTIME_DIR="/tmp"
 
 export XDG_CACHE_HOME="/tmp/.private/${USER}"
-export XDG_CONFIG_HOME="$HOME/.etc"
-export XDG_DATA_HOME="$HOME/.var"
+export XDG_CONFIG_HOME="${HOME}/.etc"
+export XDG_DATA_HOME="${HOME}/.var"
 if [ "$(uname)" != "Darwin" ]
 then
     export XDG_DESKTOP_DIR="${DESKTOP_DIR}"
@@ -20,6 +21,7 @@ then
     export XDG_MUSIC_DIR="${MUSIC_DIR}"
     export XDG_PICTURES_DIR="${PICTURES_DIR}"
     export XDG_PUBLICSHARE_DIR="${PUBLICSHARE_DIR}"
+    export XDG_RUNTIME_DIR="${RUNTIME_DIR}"
     export XDG_TEMPLATES_DIR="${TEMPLATES_DIR}"
     export XDG_VIDEOS_DIR="${VIDEOS_DIR}"
 else
@@ -31,6 +33,7 @@ else
     export XDG_PUBLICSHARE_DIR="${HOME}/Documents"
     export XDG_TEMPLATES_DIR="${HOME}/Documents"
     export XDG_VIDEOS_DIR="${HOME}/Documents"
+    export XDG_RUNTIME_DIR="/tmp"
 
     [ ! -f "${DESKTOP_DIR}" ]   && ln -s "${DESKTOP_DIR}"   "${XDG_DESKTOP_DIR}"
     [ ! -f "${DOCUMENTS_DIR}" ] && ln -s "${DOCUMENTS_DIR}" "${XDG_DOCUMENTS_DIR}"
@@ -49,5 +52,6 @@ fi
 [ ! -d "${XDG_MUSIC_DIR}" ]       && mkdir -p "${XDG_MUSIC_DIR}"
 [ ! -d "${XDG_PICTURES_DIR}" ]    && mkdir -p "${XDG_PICTURES_DIR}"
 [ ! -d "${XDG_PUBLICSHARE_DIR}" ] && mkdir -p "${XDG_PUBLICSHARE_DIR}"
+[ ! -d "${XDG_RUNTIME_DIR}" ]     && mkdir -p "${XDG_RUNTIME_DIR}"
 [ ! -d "${XDG_TEMPLATES_DIR}" ]   && mkdir -p "${XDG_TEMPLATES_DIR}"
 [ ! -d "${XDG_VIDEOS_DIR}" ]      && mkdir -p "${XDG_VIDEOS_DIR}"

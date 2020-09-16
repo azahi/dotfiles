@@ -45,15 +45,15 @@ if command -v mpd >/dev/null 2>&1 && \
     [ -f "${MPD_CONF}" ] && \
     [ ! -f "/tmp/mpd.pid" ]
 then
-    mpd "${MPD_CONF}" &
-fi
+    mpd "${MPD_CONF}"
 
-if command -v mpdscribble >/dev/null 2>&1 && \
-    [ -f "${MPDSCRIBBLE_CONF}" ] && \
-    [ -f "/tmp/mpd.pid" ] && \
-    [ ! -f "/tmp/mpdscribble.pid" ]
-then
-    mpdscribble --conf "${MPDSCRIBBLE_CONF}" &
+    if command -v mpdscribble >/dev/null 2>&1 && \
+        [ -f "${MPDSCRIBBLE_CONF}" ] && \
+        [ -f "/tmp/mpd.pid" ] && \
+        [ ! -f "/tmp/mpdscribble.pid" ]
+    then
+        mpdscribble --conf "${MPDSCRIBBLE_CONF}" &
+    fi
 fi
 unset MPD_CONF
 unset MPDSCRIBBLE_CONF

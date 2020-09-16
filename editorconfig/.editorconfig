@@ -48,7 +48,11 @@ indent_size = 2
 indent_style = space
 
 # Make
-[Makefile,*.mk]
+[Makefile]
+indent_style = tab
+
+# mk
+[*.mk]
 indent_style = tab
 
 # CMake

@@ -19,24 +19,10 @@
 !.vscode/tasks.json
 *.code-workspace
 
-# JetBrains
-.idea/**/dictionaries/
-.idea/**/shelf/
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/workspace.xml
-cmake-build-*/
-
 # Tags
-!TAGS/
-!tags/
-.TAGS
-.tags
-TAGS
-tags
-
-# GNU/Linux
-.fuse_hidden*
+.[Tt][Aa][Gg][Ss]
+[Tt][Aa][Gg][Ss]
+![Tt][Aa][Gg][Ss]/
 
 # MacOS
 .DS_Store
@@ -46,7 +32,6 @@ Thumbs.db
 desktop.ini
 
 # Misc
-*.bak
 .ccls-cache/
 .gdb_history
 compile_commands.json
