@@ -1,16 +1,22 @@
 #!/bin/sh
 
+FILES=()
+while read -r
+do
+    FILES+=("$REPLY")
+done
+
 while read file
 do
     case "$1" in
         "C-c")
-            echo -en "$file" | xclip -selection clipboard
+            echo -en "${FILES[@]}" | xclip -selection clipboard
             ;;
         "C-f")
-            xclip -selection clipboard -target image/png "$file"
+            xclip -selection clipboard -target image/png "${FILES[@]}"
             ;;
         "C-d")
-            rm -f "$file"
+            rm -f "${FILES[@]}"
             ;;
     esac
 done

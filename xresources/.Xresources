@@ -1,9 +1,0 @@
-#include ".Xresources.d/color"
-#include ".Xresources.d/font"
-#include ".Xresources.d/xft"
-
-#include ".Xresources.d/twobwm"
-#include ".Xresources.d/dmenu"
-#include ".Xresources.d/dwm"
-#include ".Xresources.d/st"
-#include ".Xresources.d/sxiv"

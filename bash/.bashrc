@@ -14,11 +14,10 @@ shopt -s checkwinsize
 shopt -s extglob
 shopt -s globstar
 shopt -s hostcomplete
-shopt -s nocaseglob
 
-shopt -s autocd 2> /dev/null
-shopt -s dirspell 2> /dev/null
-shopt -s cdspell 2> /dev/null
+shopt -s autocd 2>/dev/null
+shopt -s dirspell 2>/dev/null
+shopt -s cdspell 2>/dev/null
 
 set +o histexpand
 shopt -s cmdhist
@@ -27,7 +26,7 @@ shopt -s histreedit
 HISTCONTROL=erasedups:ignorespace
 [ "${HISTFILE: -5}" != "_bash" ] && HISTFILE="${HISTFILE}_bash"
 HISTFILESIZE=$HISTSIZE
-HISTTIMEFORMAT='%F %T '
+HISTTIMEFORMAT="[%F %T] "
 
 complete -A directory cd
 

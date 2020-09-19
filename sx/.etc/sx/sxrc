@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if command -v xrdb >/dev/null 2>&1 && [ -f "${HOME}/.Xresources" ]
+if command -v xrdb >/dev/null 2>&1 && [ -f "${HOME}/.xresources" ]
 then
-    xrdb "${HOME}/.Xresources"
+    xrdb "${HOME}/.xresources"
 fi
 
 if command -v xbindkeys >/dev/null 2>&1 && [ -f "${HOME}/.xbindkeysrc" ]

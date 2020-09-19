@@ -5,14 +5,20 @@ keystate_scrolllock= disable
 "st -e zsh --login"
     Mod4 + Return
 
+"wrapper-terminal -e ncmpcpp"
+    Mod4 + Shift + m
+
+"wrapper-terminal -e htop"
+    Mod4 + Shift + t
+
 "dmenu_run"
     Mod4 + x
 
-"qutebrowser"
-    Mod4 + w
-
 "passmenu"
     Mod4 + Shift + p
+
+"wrapper-browser"
+    Mod4 + w
 
 "amixer sset Master toggle"
     XF86AudioMute

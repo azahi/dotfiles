@@ -29,7 +29,6 @@ set history=100
 set hlsearch
 set ignorecase
 set incsearch
-set laststatus=2
 set lazyredraw
 set magic
 set modeline
@@ -81,11 +80,6 @@ endif
 if has('syntax')
     syntax enable
 endif
-
-try
-    colorscheme pablo
-catch
-endtry
 
 let mapleader = ','
 let maplocalleader = '\'
@@ -169,11 +163,18 @@ endif
 
 call plug#begin('~/.vim/.plug')
 
-Plug 'scrooloose/nerdtree' " {{{
+" {{{
+set laststatus=2
+Plug 'itchyny/lightline.vim'
+" }}}
+
+" {{{
+Plug 'scrooloose/nerdtree'
 let g:NERDTreeHijackNetrw = 0
 " }}}
 
-Plug 'airblade/vim-gitgutter' " {{{
+" {{{
+Plug 'airblade/vim-gitgutter'
 let g:gitgutter_sign_added              = '+'
 let g:gitgutter_sign_modified           = '~'
 let g:gitgutter_sign_modified_removed   = '~'
@@ -181,53 +182,71 @@ let g:gitgutter_sign_removed            = '-'
 let g:gitgutter_sign_removed_first_line = '-'
 " }}}
 
-Plug 'editorconfig/editorconfig-vim' " {{{
+" {{{
+Plug 'editorconfig/editorconfig-vim'
 " }}}
 
-Plug 'farmergreg/vim-lastplace' " {{{
+" {{{
+Plug 'farmergreg/vim-lastplace'
 let g:lastplace_ignore = "gitcommit,gitrebase"
 " }}}
 
-Plug 'godlygeek/tabular' " {{{
+" {{{
+Plug 'godlygeek/tabular'
 " }}}
 
-Plug 'jiangmiao/auto-pairs' " {{{
+" {{{
+Plug 'jiangmiao/auto-pairs'
 " }}}
 
-Plug 'justinmk/vim-sneak' " {{{
+" {{{
+Plug 'romainl/vim-cool'
+" }}}
+
+" {{{
+Plug 'justinmk/vim-sneak'
 let g:sneak#label = 1
 " }}}
 
-Plug 'pbondoer/vim-42header' " {{{
+" {{{
+Plug 'pbondoer/vim-42header'
 let g:hdr42user = "jdeathlo"
 let g:hdr42mail = "marvin@42.fr"
 " }}}
 
-Plug 'tpope/vim-repeat' " {{{
+" {{{
+Plug 'tpope/vim-repeat'
 " }}}
 
-Plug 'tpope/vim-surround' " {{{
+" {{{
+Plug 'tpope/vim-surround'
 " }}}
 
-Plug 'tpope/vim-sleuth' " {{{
+" {{{
+Plug 'tpope/vim-sleuth'
 " }}}
 
-Plug 'tpope/vim-unimpaired' " {{{
+" {{{
+Plug 'tpope/vim-unimpaired'
 " }}}
 
-Plug 'vim-scripts/ruscmd' " {{{
+" {{{
+Plug 'vim-scripts/ruscmd'
 " }}}
 
-Plug 'terryma/vim-expand-region' " {{{
+" {{{
+Plug 'terryma/vim-expand-region'
 " }}}
 
-Plug 'nathanaelkane/vim-indent-guides' " {{{
+" {{{
+Plug 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 1
 " }}}
 
-Plug 'mhinz/vim-startify' " {{{
+" {{{
+Plug 'mhinz/vim-startify'
 function! s:gitModified()
     let files = systemlist('git ls-files -m 2>/dev/null')
     return map(files, "{'line': v:val, 'path': v:val}")
@@ -251,50 +270,64 @@ let g:startify_lists =
             \ ]
 " }}}
 
-Plug 'sheerun/vim-polyglot' " {{{
+" {{{
+Plug 'sheerun/vim-polyglot'
 " }}}
 
+" {{{
 if executable('clang-format')
-    Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] } " {{{
+    Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
     nnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
     vnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
-    " }}}
+
 endif
-
-Plug 'mattn/calendar-vim' " {{{
 " }}}
 
-Plug 'vim-scripts/SyntaxRange' " {{{
+" {{{
+Plug 'mattn/calendar-vim'
 " }}}
 
-Plug 'jceb/vim-orgmode' " {{{
+" {{{
+Plug 'vim-scripts/SyntaxRange'
+" }}}
+
+" {{{
+Plug 'jceb/vim-orgmode'
 let g:org_agenda_files = [ '~/org/*.org' ]
 " }}}
 
-Plug 'gentoo/gentoo-syntax' " {{{
+" {{{
+Plug 'gentoo/gentoo-syntax'
 " }}}
 
+" {{{
 if executable('fzf')
-    Plug 'junegunn/fzf.vim' " {{{
-    " }}}
+    Plug 'junegunn/fzf.vim'
 endif
+" }}}
 
+" {{{
 if executable('tmux')
-    Plug 'ericpruitt/tmux.vim', { 'rtp': 'vim/' } " {{{
-    " }}}
+    Plug 'ericpruitt/tmux.vim', { 'rtp': 'vim/' }
 endif
+" }}}
 
+" {{{
 if executable('wakatime')
-    Plug 'wakatime/vim-wakatime' " {{{
+    Plug 'wakatime/vim-wakatime'
 endif
+" }}}
 
+" {{{
 if executable('python')
-    Plug 'python-mode/python-mode', { 'for': 'python' } " {{{
-    " }}}
+    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 endif
+" }}}
 
+" Minimal NeoVim completion framework {{{
 if has('nvim') && has('python')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " {{{
+    " {{{
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     let g:deoplete#enable_at_startup = 1
     " }}}
 
@@ -349,26 +382,33 @@ if has('nvim') && has('python')
     endif
     " }}}
 
-    Plug 'Shougo/neco-syntax' " {{{
+    " {{{
+    Plug 'Shougo/neco-syntax'
     " }}}
 
-    Plug 'Shougo/neco-vim' " {{{
+    " {{{
+    Plug 'Shougo/neco-vim'
     " }}}
 
-    Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp' ] } " {{{
+    " {{{
+    Plug 'Shougo/neoinclude.vim', { 'for': [ 'c', 'cpp' ] }
     " }}}
 
-    Plug 'deoplete-plugins/deoplete-zsh', { 'for': 'zsh' } " {{{
+    " {{{
+    Plug 'deoplete-plugins/deoplete-zsh', { 'for': 'zsh' }
     " }}}
 
-    Plug 'deoplete-plugins/deoplete-docker', { 'for': 'Dockerfile' } " {{{
+    " {{{
+    Plug 'deoplete-plugins/deoplete-docker', { 'for': 'Dockerfile' }
     " }}}
 
-    Plug 'wellle/tmux-complete.vim' " {{{
+    " {{{
+    Plug 'wellle/tmux-complete.vim'
     let g:tmuxcomplete#trigger = ''
     " }}}
 
-    Plug 'Shougo/echodoc.vim' " {{{
+    " {{{
+    Plug 'Shougo/echodoc.vim'
     let g:echodoc#enable_at_startup	= 1
     let g:echodoc#type = 'signature'
     " }}}

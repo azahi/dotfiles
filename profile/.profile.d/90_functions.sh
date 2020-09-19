@@ -1,5 +1,16 @@
 #!/bin/sh
 
+t()
+{
+    if [ -n "$1" ]
+    then
+        st -e "$@" &
+    else
+        st -e "${SHELL}" --login &
+    fi
+    disown
+}
+
 strlwr()
 {
     printf '%s\n' "${1,,}"

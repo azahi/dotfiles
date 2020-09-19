@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ ! -d "${HOME}/.Xresources.d" ] && \
-    mkdir -p "${HOME}/.Xresources.d"
+[ ! -d "${HOME}/.xresources.d" ] && \
+    mkdir -p "${HOME}/.xresources.d"
 
 stow \
     --target="${HOME}" \

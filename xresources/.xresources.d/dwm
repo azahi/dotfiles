@@ -11,9 +11,6 @@ dwm.topbar:             1
 dwm.barheight:          22
 dwm.nmaster:            1
 dwm.resizehints:        0
-dwm.mfact:              0.5
-dwm.sidepad:            0
-dwm.vertpad:            0
-dwm.gappx:              0
+dwm.mfact:              0.66
 
 ! vim:filetype=xdefaults
