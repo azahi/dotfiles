@@ -11,6 +11,11 @@ t()
     disown
 }
 
+ff()
+{
+    find . -type f -iname "$@" -ls
+}
+
 strlwr()
 {
     printf '%s\n' "${1,,}"

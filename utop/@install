@@ -1,7 +1,0 @@
-#!/bin/sh
-
-stow \
-    --target="${HOME}" \
-    --ignore="^@.*" \
-    --verbose \
-    utop

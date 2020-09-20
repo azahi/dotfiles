@@ -16,24 +16,12 @@ then
     source "${ZGEN_DIR}/zgen.zsh"
     if ! zgen saved
     then
-        true && \
-            zgen load azahi/zsh-lambda \
-            lambda.zsh-theme
-
-        true && \
-            zgen load zsh-users/zsh-completions
-
-        true && \
-            zgen load softmoth/zsh-vim-mode
-
-        true && \
-            zgen load hlissner/zsh-autopair
-
-        true && \
-            zgen load zsh-users/zsh-autosuggestions
-
-        true && \
-            zgen load zsh-users/zsh-syntax-highlighting
+        zgen load azahi/zsh-lambda lambda.zsh-theme
+        zgen load hlissner/zsh-autopair
+        zgen load softmoth/zsh-vim-mode
+        zgen load zsh-users/zsh-autosuggestions
+        zgen load zsh-users/zsh-history-substring-search
+        zgen load zsh-users/zsh-syntax-highlighting
 
         zgen save
     fi
@@ -44,8 +32,3 @@ then
     # zsh-users/zsh-autosuggestions
     bindkey '^ ' autosuggest-accept
 fi
-
-fpath()
-{
-    echo "$fpath" | tr ' ' '\n'
-}

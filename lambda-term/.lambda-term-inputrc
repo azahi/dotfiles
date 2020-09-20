@@ -1,5 +1,0 @@
-# -*- conf-colon -*-
-
-[read-line]
-C-n: history-next
-C-p: history-prev
