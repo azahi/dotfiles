@@ -2,8 +2,9 @@
 #include ".xresources.d/font"
 #include ".xresources.d/xft"
 
-#include ".xresources.d/twobwm"
 #include ".xresources.d/dmenu"
 #include ".xresources.d/dwm"
 #include ".xresources.d/st"
 #include ".xresources.d/sxiv"
+#include ".xresources.d/twobwm"
+#include ".xresources.d/xcursor"

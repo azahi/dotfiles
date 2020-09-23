@@ -1,13 +1,15 @@
 #!/bin/sh
 
-if command -v xrdb >/dev/null 2>&1 && [ -f "${HOME}/.xresources" ]
+if [ -f "${HOME}/.profile" ]
 then
-    xrdb "${HOME}/.xresources"
+    # shellcheck disable=SC1090
+    . "${HOME}/.profile"
 fi
 
-if command -v xbindkeys >/dev/null 2>&1 && [ -f "${HOME}/.xbindkeysrc" ]
+if command -v xrdb >/dev/null 2>&1 && \
+    [ -f "${HOME}/.xresources" ]
 then
-    xbindkeys &
+    xrdb "${HOME}/.xresources"
 fi
 
 if command -v hsetroot >/dev/null 2>&1
@@ -21,6 +23,12 @@ then
             hsetroot -cover "${PAPE}" &
         unset PAPE
     fi
+fi
+
+if command -v xbindkeys >/dev/null 2>&1 && \
+    [ -f "${HOME}/.xbindkeysrc" ]
+then
+    xbindkeys &
 fi
 
 if command -v unclutter >/dev/null 2>&1

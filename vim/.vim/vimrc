@@ -164,11 +164,6 @@ endif
 call plug#begin('~/.vim/.plug')
 
 " {{{
-set laststatus=2
-Plug 'itchyny/lightline.vim'
-" }}}
-
-" {{{
 Plug 'scrooloose/nerdtree'
 let g:NERDTreeHijackNetrw = 0
 " }}}
@@ -206,12 +201,6 @@ Plug 'romainl/vim-cool'
 " {{{
 Plug 'justinmk/vim-sneak'
 let g:sneak#label = 1
-" }}}
-
-" {{{
-Plug 'pbondoer/vim-42header'
-let g:hdr42user = "jdeathlo"
-let g:hdr42mail = "marvin@42.fr"
 " }}}
 
 " {{{

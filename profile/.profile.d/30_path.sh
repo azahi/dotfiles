@@ -1,6 +1,6 @@
 #!/bin/sh
 
-path_append ()
+path_append()
 {
     [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
     [ -d "$1" ] || return
@@ -8,7 +8,7 @@ path_append ()
     eval export $PATHVAR="\$$PATHVAR:$1"
 }
 
-path_prepend ()
+path_prepend()
 {
     [ $# -eq 2 ] && PATHVAR=$2 || PATHVAR=PATH
     [ -d "$1" ] || return
@@ -34,4 +34,3 @@ then
         path_append "${VERSION}/share/clang"
     done
 fi
-unset LLVM_DIR

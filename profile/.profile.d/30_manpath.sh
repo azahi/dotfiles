@@ -1,6 +1,6 @@
 #!/bin/sh
 
-manpath_append ()
+manpath_append()
 {
     [ $# -eq 2 ] && MANPATHVAR=$2 || MANPATHVAR=MANPATH
     [ -d "$1" ] || return
@@ -8,7 +8,7 @@ manpath_append ()
     eval export $MANPATHVAR="\$$MANPATHVAR:$1"
 }
 
-manpath_prepend ()
+manpath_prepend()
 {
     [ $# -eq 2 ] && MANPATHVAR=$2 || MANPATHVAR=MANPATH
     [ -d "$1" ] || return

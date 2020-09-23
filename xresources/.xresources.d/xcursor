@@ -1,0 +1,5 @@
+Xcursor.theme:      core
+Xcursor.theme_core: true
+Xcursor.size:       16
+
+! vim:filetype=xdefaults
