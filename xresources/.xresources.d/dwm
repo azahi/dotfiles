@@ -1,14 +1,14 @@
 dwm.normbgcolor:        color_black0
 dwm.normbordercolor:    color_black0
 dwm.normfgcolor:        color_white0
-dwm.selbgcolor:         color_black1
+dwm.selbgcolor:         color_white0
 dwm.selbordercolor:     color_white0
-dwm.selfgcolor:         color_white1
+dwm.selfgcolor:         color_black0
 dwm.borderpx:           1
 dwm.snap:               0
 dwm.showbar:            1
 dwm.topbar:             1
-dwm.barheight:          22
+dwm.barheight:          21
 dwm.nmaster:            1
 dwm.resizehints:        0
 dwm.mfact:              0.66

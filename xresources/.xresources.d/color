@@ -32,7 +32,7 @@
 *.color7:       color_white0
 *.color15:      color_white1
 
-*.background:   color_white0
-*.foreground:   color_black0
+*.background:   color_black0
+*.foreground:   color_white0
 
 ! vim:filetype=xdefaults

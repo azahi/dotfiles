@@ -18,3 +18,5 @@ rm_existing "$HOME/.wget-hsts"
 rm_existing "$HOME/VideoDecodeStats"
 rm_existing "$HOME/databases-incognito"
 rm_existing "$HOME/shared_proto_db"
+
+clear

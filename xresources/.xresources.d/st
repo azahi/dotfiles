@@ -1,3 +1,5 @@
-st.borderpx: 6
+st.borderpx:    7
+st.tabspaces:   4
+st.termname:    xterm
 
 ! vim:filetype=xdefaults

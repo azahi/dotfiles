@@ -5,3 +5,8 @@ stow \
     --ignore="^@.*" \
     --verbose \
     sx
+
+if command -v sx >/dev/null 2>&1
+then
+    ln -s "${XDG_CONFIG_HOME}/sx/sxrc" "${HOME}/.xinitrc"
+fi

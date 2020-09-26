@@ -6,27 +6,33 @@ then
     . "${HOME}/.profile"
 fi
 
-if command -v xrdb >/dev/null 2>&1 && \
-    [ -f "${HOME}/.xresources" ]
+if command -v xrdb >/dev/null 2>&1 \
+&& [ -f "${HOME}/.xresources" ]
 then
     xrdb "${HOME}/.xresources"
 fi
 
-if command -v hsetroot >/dev/null 2>&1
+if command -v hsetroot >/dev/null 2>&1 \
+&& command -v xgetres >/dev/null 2>&1
 then
-    if command -v xgetres >/dev/null 2>&1
-    then
-        hsetroot -solid "$(xgetres color0)"
-    else
-        PAPE="${HOME}/pictures/wallpapers/mill.png"
-        [ -f "${PAPE}" ] && \
-            hsetroot -cover "${PAPE}" &
-        unset PAPE
-    fi
+    hsetroot -solid "$(xgetres background)" &
 fi
 
-if command -v xbindkeys >/dev/null 2>&1 && \
-    [ -f "${HOME}/.xbindkeysrc" ]
+if command -v xset >/dev/null 2>&1
+then
+    xset m 3/2 3 &
+    xset r rate 200 50 &
+fi
+
+if command -v setxkbmap >/dev/null 2>&1
+then
+    setxkbmap \
+        -layout "us,ru" \
+        -option "grp:win_space_toggle,compose:menu,caps:escape" &
+fi
+
+if command -v xbindkeys >/dev/null 2>&1 \
+&& [ -f "${HOME}/.xbindkeysrc" ]
 then
     xbindkeys &
 fi
@@ -47,27 +53,21 @@ then
     picom --daemon &
 fi
 
-MPD_CONF="${XDG_CONFIG_HOME}/mpd/mpd.conf"
-MPDSCRIBBLE_CONF="${XDG_CONFIG_HOME}/mpdscribble.conf"
-if command -v mpd >/dev/null 2>&1 && \
-    [ -f "${MPD_CONF}" ] && \
-    [ ! -f "/tmp/mpd.pid" ]
+if command -v mpd-init >/dev/null 2>&1
 then
-    mpd "${MPD_CONF}"
-
-    if command -v mpdscribble >/dev/null 2>&1 && \
-        [ -f "${MPDSCRIBBLE_CONF}" ] && \
-        [ -f "/tmp/mpd.pid" ] && \
-        [ ! -f "/tmp/mpdscribble.pid" ]
-    then
-        mpdscribble --conf "${MPDSCRIBBLE_CONF}" &
-    fi
+    mpd-init &
 fi
-unset MPD_CONF
-unset MPDSCRIBBLE_CONF
 
 for WM in dwm 2bwm xmonad-ng xmonad
 do
-    command -v "${WM}" >/dev/null 2>&1 && \
+    if command -v "${WM}" >/dev/null 2>&1
+    then
+        if [ "${WM}" = "dwm" ] \
+        && command -v dwm-status >/dev/null 2>&1
+        then
+            dwm-status &
+        fi
+
         exec "${WM}"
+    fi
 done
