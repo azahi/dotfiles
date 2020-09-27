@@ -566,7 +566,7 @@ c.spellcheck.languages = ['en-US', 'ru-RU']
 
 # Padding (in pixels) for the statusbar.
 # Type: Padding
-c.statusbar.padding = {'bottom': 5, 'left': 2, 'right': 5, 'top': 6}
+c.statusbar.padding = {'bottom': 5, 'left': 5, 'right': 5, 'top': 5}
 
 # Position of the status bar.
 # Type: VerticalPosition
@@ -626,7 +626,7 @@ c.tabs.new_position.unrelated = 'last'
 
 # Padding (in pixels) around text for tabs.
 # Type: Padding
-c.tabs.padding = {'bottom': 5, 'left': 9, 'right': 6, 'top': 5}
+c.tabs.padding = {'bottom': 5, 'left': 5, 'right': 5, 'top': 5}
 
 # Position of the tab bar.
 # Type: Position
@@ -744,7 +744,7 @@ c.window.hide_decoration = True
 # Format to use for the window title. The same placeholders like for
 # `tabs.title.format` are defined.
 # Type: FormatString
-c.window.title_format = 'qutebrowser'
+c.window.title_format = '{perc}{current_title}{title_sep}qutebrowser'
 
 # Text color of the completion widget. May be a single color to use for
 # all columns or a list of three colors, one for each column.
@@ -881,7 +881,7 @@ c.colors.tabs.pinned.even.bg = '#2f2b2a'
 # font setting, it's replaced with the fonts listed here. If set to an
 # empty value, a system-specific monospace default is used.
 # Type: List of Font, or Font
-c.fonts.default_family = 'efont biwidth, efont fixed, migmix 1p, baekmuk dotum, siji'
+c.fonts.default_family = 'Efont Biwidth'
 
 # Default font size to use. Whenever "default_size" is used in a font
 # setting, it's replaced with the size listed here. Valid values are

@@ -143,7 +143,7 @@ nnoremap        ZX          :<C-u>qa!<CR>
 if executable("doas")
     command!    W           :execute ':silent w !doas tee % > /dev/null' | :edit!
 elseif executable("sudo")
-    command!    W           :execute ':silent w !doas tee % > /dev/null' | :edit!
+    command!    W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
 endif
 
 autocmd BufWritePre * %s/\s\+$//e
@@ -164,30 +164,12 @@ endif
 call plug#begin('~/.vim/.plug')
 
 " {{{
-Plug 'scrooloose/nerdtree'
-let g:NERDTreeHijackNetrw = 0
-" }}}
-
-" {{{
-Plug 'airblade/vim-gitgutter'
-let g:gitgutter_sign_added              = '+'
-let g:gitgutter_sign_modified           = '~'
-let g:gitgutter_sign_modified_removed   = '~'
-let g:gitgutter_sign_removed            = '-'
-let g:gitgutter_sign_removed_first_line = '-'
-" }}}
-
-" {{{
 Plug 'editorconfig/editorconfig-vim'
 " }}}
 
 " {{{
 Plug 'farmergreg/vim-lastplace'
 let g:lastplace_ignore = "gitcommit,gitrebase"
-" }}}
-
-" {{{
-Plug 'godlygeek/tabular'
 " }}}
 
 " {{{
@@ -228,38 +210,6 @@ Plug 'terryma/vim-expand-region'
 " }}}
 
 " {{{
-Plug 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 1
-" }}}
-
-" {{{
-Plug 'mhinz/vim-startify'
-function! s:gitModified()
-    let files = systemlist('git ls-files -m 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-function! s:gitUntracked()
-    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{ 'line': v:val, 'path': v:val }")
-endfunction
-
-let g:startify_custom_header = []
-let g:startify_lists =
-            \ [
-            \ { 'type': 'files',                    'header': ['   MRU']             },
-            \ { 'type': 'dir',                      'header': ['   MRU ' . getcwd()] },
-            \ { 'type': 'sessions',                 'header': ['   Sessions']        },
-            \ { 'type': 'bookmarks',                'header': ['   Bookmarks']       },
-            \ { 'type': function('s:gitModified'),  'header': ['   GIT Modified']    },
-            \ { 'type': function('s:gitUntracked'), 'header': ['   GIT Untracked']   },
-            \ { 'type': 'commands',                 'header': ['   Commands']        },
-            \ ]
-" }}}
-
-" {{{
 Plug 'sheerun/vim-polyglot'
 " }}}
 
@@ -268,7 +218,6 @@ if executable('clang-format')
     Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
     nnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
     vnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
-
 endif
 " }}}
 
@@ -281,7 +230,7 @@ Plug 'vim-scripts/SyntaxRange'
 " }}}
 
 " {{{
-Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode', { 'for': 'org' }
 let g:org_agenda_files = [ '~/org/*.org' ]
 " }}}
 
@@ -308,12 +257,6 @@ endif
 " }}}
 
 " {{{
-if executable('python')
-    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-endif
-" }}}
-
-" Minimal NeoVim completion framework {{{
 if has('nvim') && has('python')
     " {{{
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -339,19 +282,15 @@ if has('nvim') && has('python')
         let g:LanguageClient_serverCommands[ 'c'   ] = [ 'ccls' ]
         let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'ccls' ]
 
-        func! C_init_language_client()
+        func! C_init()
             setlocal formatexpr=LanguageClient#textDocument_rangeFormatting()
         endf
-        autocmd FileType c,cpp :call C_init_language_client()
+        autocmd FileType c,cpp :call C_init()
 
         nnoremap <Leader>h :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'L'})<CR>
         nnoremap <Leader>j :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'D'})<CR>
         nnoremap <Leader>k :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'U'})<CR>
         nnoremap <Leader>l :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'R'})<CR>
-    endif
-
-    if executable('rls')
-        let g:LanguageClient_serverCommands[ 'rust' ] = [ 'rls' ]
     endif
 
     if executable('gopls')
@@ -365,10 +304,6 @@ if has('nvim') && has('python')
     if executable('pyls')
         let g:LanguageClient_serverCommands[ 'python' ] = [ 'pyls' ]
     endif
-
-    if executable('ocamllsp')
-        let g:LanguageClient_serverCommands[ 'ocaml' ] = [ 'ocamllsp' ]
-    endif
     " }}}
 
     " {{{
@@ -376,7 +311,7 @@ if has('nvim') && has('python')
     " }}}
 
     " {{{
-    Plug 'Shougo/neco-vim'
+    Plug 'Shougo/neco-vim', { 'for': 'vim' }
     " }}}
 
     " {{{
@@ -389,11 +324,6 @@ if has('nvim') && has('python')
 
     " {{{
     Plug 'deoplete-plugins/deoplete-docker', { 'for': 'Dockerfile' }
-    " }}}
-
-    " {{{
-    Plug 'wellle/tmux-complete.vim'
-    let g:tmuxcomplete#trigger = ''
     " }}}
 
     " {{{

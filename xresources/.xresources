@@ -4,6 +4,7 @@
 
 #include ".xresources.d/dmenu"
 #include ".xresources.d/dwm"
+#include ".xresources.d/emacs"
 #include ".xresources.d/st"
 #include ".xresources.d/sxiv"
 #include ".xresources.d/twobwm"
