@@ -6,6 +6,12 @@ then
     . "${HOME}/.profile"
 fi
 
+if command -v dbus-launch >/dev/null 2>&1 \
+&& [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]
+then
+    eval "$(dbus-launch --sh-syntax --exit-with-session)"
+fi
+
 if command -v xrdb >/dev/null 2>&1 \
 && [ -f "${HOME}/.xresources" ]
 then
@@ -68,6 +74,11 @@ do
             dwm-status &
         fi
 
-        exec "${WM}"
+        if command -v dbus-launch >/dev/null 2>&1
+        then
+            dbus-launch ${WM}
+        else
+            exec "${WM}"
+        fi
     fi
 done
