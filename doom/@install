@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "${HOME}/.doom.d" ] &&
+    mkdir -p "${HOME}/.doom.d"
+
+stow \
+    --target="${HOME}" \
+    --ignore="^@.*" \
+    --verbose \
+    doom

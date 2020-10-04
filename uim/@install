@@ -1,0 +1,12 @@
+#!/bin/sh
+
+[ ! -d "${HOME}/.uim.d" ] &&
+    mkdir -p "${HOME}/.uim.d"
+[ ! -d "${HOME}/.uim.d/customs" ] &&
+    mkdir -p "${HOME}/.uim.d/customs"
+
+stow \
+    --target="${HOME}" \
+    --ignore="^@.*" \
+    --verbose \
+    uim
