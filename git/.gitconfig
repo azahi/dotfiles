@@ -4,32 +4,45 @@
 	signingkey = B40FCB6608BBE3B6
 [core]
 	excludesfile = ~/.gitignore
+	whitespace = trailing-space
 [commit]
 	gpgsign = true
-[alias]
-	a = add
-	aa = add --all
-	ac = commit --all --verbose
-	al = config --get-regexp alias
-	b = branch --all
-	c = clone --recurse-submodules
-	ca = commit --amend
-	ch = checkout
-	ci = commit --signoff
-	d = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
-	f = fetch --all --recurse-submodules
-	gud = commit --message=\"git gud\"
-	i = update-index --assume-unchanged
-	iu = update-index --un-assume-unchanged
-	l = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	ls = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
-	pl = pull --all --recurse-submodules
-	ps = push
-	r = remote -v
-	re = reset HEAD
-	ree = reset HEAD^
-	s = status --short
-	wc = whatchanged -p --abbrev-commit --pretty=medium
-	wtc = !"curl -s whatthecommit.com/index.txt | git commit --file -"
 [github]
 	user = azahi
+[rebase]
+	autosquash = true
+[push]
+	default = current
+[alias]
+	ad = add
+	ada = add --all
+	al = config --get-regexp alias
+	br = branch --all
+	ch = checkout
+	cho = checkout --orphan
+	ci = commit
+	cia = commit --amend
+	cis = commit --signoff
+	cisa = commit --signoff --amend
+	cl = clone
+	clr = clone --recurse-submodules
+	cls = clone --depth=1
+	di = diff
+	dif = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
+	fe = fetch
+	fer = fetch --all --recurse-submodules
+	gud = commit --message=\"git gud\"
+	lo = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	los = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
+	ls = ls-files
+	pl = pull
+	plr = pull --all --recurse-submodules
+	ps = push
+	psf = push --force
+	re = reset HEAD
+	ree = reset HEAD^
+	st = status --short
+	ui = update-index --assume-unchanged
+	uiu = update-index --un-assume-unchanged
+	wc = whatchanged -p --abbrev-commit --pretty=medium
+	wtc = !"curl -s whatthecommit.com/index.txt | git commit --file -"

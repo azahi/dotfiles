@@ -11,6 +11,10 @@
 .dir-locals.el
 \#*\#
 
+# JetBrains
+.idea/
+cmake-build-*/
+
 # Visual Studio Code
 .vscode/*
 !.vscode/extensions.json
@@ -24,16 +28,11 @@
 [Tt][Aa][Gg][Ss]
 ![Tt][Aa][Gg][Ss]/
 
-# MacOS
-.DS_Store
-Thumbs.db
-
-# Windows
-desktop.ini
-
 # Misc
 .ccls-cache/
 .gdb_history
+.git
+.svn
 compile_commands.json
 cscope.*
 vgcore.*
