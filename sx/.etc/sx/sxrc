@@ -9,7 +9,7 @@ fi
 if command -v dbus-launch >/dev/null 2>&1 \
 && [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]
 then
-    eval "$(dbus-launch --sh-syntax --exit-with-session)"
+    eval "$(dbus-launch --sh-syntax --exit-with-x11)"
 fi
 
 if command -v xrdb >/dev/null 2>&1 \
@@ -64,6 +64,11 @@ then
     mpd-init &
 fi
 
+if command -v uim-xim
+then
+    uim-xim --async >/dev/null 2>&1 &
+fi
+
 for WM in dwm 2bwm xmonad-ng xmonad
 do
     if command -v "${WM}" >/dev/null 2>&1
@@ -76,9 +81,11 @@ do
 
         if command -v dbus-launch >/dev/null 2>&1
         then
-            dbus-launch ${WM}
+            dbus-launch --exit-with-session "${WM}"
         else
             exec "${WM}"
         fi
+
+        exit "$?"
     fi
 done

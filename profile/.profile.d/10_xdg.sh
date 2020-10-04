@@ -8,9 +8,9 @@ PICTURES_DIR="${HOME}/pictures"
 PUBLICSHARE_DIR="${HOME}/documents"
 TEMPLATES_DIR="${HOME}/documents"
 VIDEOS_DIR="${HOME}/videos"
-RUNTIME_DIR="/tmp"
+RUNTIME_DIR="/tmp/.private/${USER}"
 
-export XDG_CACHE_HOME="/tmp/.private/${USER}"
+export XDG_CACHE_HOME="${RUNTIME_DIR}/.run"
 export XDG_CONFIG_HOME="${HOME}/.etc"
 export XDG_DATA_HOME="${HOME}/.var"
 if [ "$(uname)" != "Darwin" ]
