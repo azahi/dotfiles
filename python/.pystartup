@@ -1,7 +1,10 @@
+from code import InteractiveConsole
+from tempfile import mkstemp
+import atexit
 import os
 import readline
-import rlcompleter
-import atexit
+import rlcompleter  # noqa: F401
+import sys
 
 readline.parse_and_bind("tab: complete")
 
@@ -51,15 +54,11 @@ class TermColors(dict):
     color_base = '\001\033[%sm\002'
 
     def __init__(self):
-        if os.environ.get('TERM') in (
-                'linux',
-                'rxvt',
-                'rxvt-256color',
-                'screen',
-                'screen-256color',
-                'xterm',
-                'xterm-256color'
-            ):
+        if os.environ.get('TERM') in ('rxvt', 'rxvt-256color',
+                                      'urxvt', 'urxvt-256color',
+                                      'screen', 'screen-256color',
+                                      'xterm', 'xterm-256color',
+                                      'st', 'st-256color'):
             self.update(dict(
                 [(k, self.color_base % v) for k, v in self.color_templates]))
         else:
@@ -67,12 +66,12 @@ class TermColors(dict):
                 [(k, self.color_default) for k, v in self.color_templates]))
 
 
-import sys
 TC = TermColors()
 sys.ps1 = "%sλ%s %s>%s " % (TC['Blue'], TC['Normal'],
                             TC['White'], TC['Normal'])
 sys.ps2 = "    %s…%s %s>%s " % (TC['Blue'], TC['Normal'],
                                 TC['White'], TC['Normal'])
+
 
 def display_hook(value):
     if value is not None:
@@ -86,14 +85,12 @@ def display_hook(value):
         pprint.pprint(value)
         del pprint
 
+
 sys.displayhook = display_hook
 
 
 EDITOR = os.environ.get('EDITOR', 'vim')
 EDIT_CMD = ':e'
-
-from tempfile import mkstemp
-from code import InteractiveConsole
 
 
 class EditableBufferInteractiveConsole(InteractiveConsole):
@@ -122,13 +119,9 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
         return line
 
 
-del sys
-
 C = EditableBufferInteractiveConsole(locals=locals())
 C.interact(banner="")
 
-import sys
 sys.exit()
 
-# flake8: noqa
 # vim: filetype=python
