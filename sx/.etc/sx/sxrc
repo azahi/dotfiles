@@ -64,6 +64,11 @@ then
     mpd-init &
 fi
 
+if command -v gpg-connect-agent >/dev/null 2>&1
+then
+    gpg-connect-agent updatestartuptty /bye &
+fi
+
 if command -v uim-xim
 then
     uim-xim --async >/dev/null 2>&1 &
