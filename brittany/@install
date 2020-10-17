@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "${XDG_CONFIG_HOME}/brittany" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/brittany"
+
+stow \
+    --target="${HOME}" \
+    --ignore="^@.*" \
+    --verbose \
+    brittany
