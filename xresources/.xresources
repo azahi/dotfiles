@@ -8,4 +8,5 @@
 #include ".xresources.d/st"
 #include ".xresources.d/sxiv"
 #include ".xresources.d/twobwm"
+#include ".xresources.d/urxvt"
 #include ".xresources.d/xcursor"

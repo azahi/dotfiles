@@ -5,7 +5,7 @@ keystate_scrolllock= disable
 "pkill Xorg"
     Mod4 + Shift + w
 
-"st -e zsh --login"
+"wrapper-terminal"
     Mod4 + Return
 
 "wrapper-terminal -e ncmpcpp"

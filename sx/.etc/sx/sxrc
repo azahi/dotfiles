@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd || exit "$?"
+
 if [ -f "${HOME}/.profile" ]
 then
     # shellcheck disable=SC1090
@@ -34,7 +36,7 @@ if command -v setxkbmap >/dev/null 2>&1
 then
     setxkbmap \
         -layout "us,ru" \
-        -option "grp:win_space_toggle,compose:menu,caps:escape" &
+        -option "grp:win_space_toggle,compose:menu,caps:escape,terminate:ctrl_alt_bksp" &
 fi
 
 if command -v xbindkeys >/dev/null 2>&1 \
@@ -69,9 +71,14 @@ then
     gpg-connect-agent updatestartuptty /bye &
 fi
 
-if command -v uim-xim
+if command -v uim-xim >/dev/null 2>&1
 then
     uim-xim --async >/dev/null 2>&1 &
+fi
+
+if command -v urxvtd >/dev/null 2>&1
+then
+    urxvtd --quiet --opendisplay --fork &
 fi
 
 for WM in dwm 2bwm xmonad-ng xmonad
@@ -90,7 +97,5 @@ do
         else
             exec "${WM}"
         fi
-
-        exit "$?"
     fi
 done

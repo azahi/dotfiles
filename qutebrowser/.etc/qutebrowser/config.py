@@ -132,6 +132,15 @@ c.content.default_encoding = 'utf-8'
 #   - true
 #   - false
 #   - ask
+config.set('content.desktop_capture', True, 'https://discord.com')
+
+# Allow websites to share screen content. On Qt < 5.10, a dialog box is
+# always displayed, even if this is set to "true".
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
 c.content.desktop_capture = 'ask'
 
 # Allow websites to request geolocations.
@@ -319,6 +328,38 @@ c.content.local_content_can_access_file_urls = True
 # Enable support for HTML 5 local storage and Web SQL.
 # Type: Bool
 c.content.local_storage = True
+
+# Allow websites to record audio.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.media.audio_capture', True, 'https://web.skype.com')
+
+# Allow websites to record audio.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.media.audio_capture', True, 'https://discord.com')
+
+# Allow websites to record video.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.media.video_capture', True, 'https://web.skype.com')
+
+# Allow websites to record video.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.media.video_capture', True, 'https://discord.com')
 
 # Allow websites to show notifications.
 # Type: BoolAsk
@@ -656,15 +697,15 @@ c.tabs.title.alignment = 'left'
 # Format to use for the tab title. The following placeholders are
 # defined:  * `{perc}`: Percentage as a string like `[10%]`. *
 # `{perc_raw}`: Raw percentage, e.g. `10`. * `{current_title}`: Title of
-# the current web page. * `{title_sep}`: The string ` - ` if a title is
-# set, empty otherwise. * `{index}`: Index of this tab. *
+# the current web page. * `{title_sep}`: The string `" - "` if a title
+# is set, empty otherwise. * `{index}`: Index of this tab. *
 # `{aligned_index}`: Index of this tab padded with spaces to have the
 # same   width. * `{id}`: Internal tab ID of this tab. * `{scroll_pos}`:
 # Page scroll position. * `{host}`: Host of the current web page. *
-# `{backend}`: Either ''webkit'' or ''webengine'' * `{private}`:
-# Indicates when private mode is enabled. * `{current_url}`: URL of the
-# current web page. * `{protocol}`: Protocol (http/https/...) of the
-# current web page. * `{audio}`: Indicator for audio/mute status.
+# `{backend}`: Either `webkit` or `webengine` * `{private}`: Indicates
+# when private mode is enabled. * `{current_url}`: URL of the current
+# web page. * `{protocol}`: Protocol (http/https/...) of the current web
+# page. * `{audio}`: Indicator for audio/mute status.
 # Type: FormatString
 c.tabs.title.format = '{audio}{index} : {current_title}'
 

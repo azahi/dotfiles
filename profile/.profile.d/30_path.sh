@@ -25,6 +25,7 @@ path_prepend "/usr/local/bin"
 path_prepend "${HOME}/.bin"
 path_prepend "${HOME}/.local/bin"
 path_prepend "/opt/bin"
+path_prepend "/opt/plan9/bin"
 
 if [ -d /usr/lib/llvm ]
 then
