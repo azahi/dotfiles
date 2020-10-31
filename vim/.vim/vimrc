@@ -146,7 +146,6 @@ elseif executable("sudo")
     command!    W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
 endif
 
-autocmd BufWritePre * %s/\s\+$//e
 autocmd FocusGained,BufEnter * checktime
 
 autocmd BufEnter * set noreadonly

@@ -37,5 +37,3 @@ bind "set show-all-if-ambiguous on"
 
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
 PROMPT_DIRTRIM=2
-
-PS1="\[\033[0;32m\]\w\[\033[0m\] \[\033[1;32m\]λ\[\033[0m\] "

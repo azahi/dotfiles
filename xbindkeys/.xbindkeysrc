@@ -2,9 +2,6 @@ keystate_numlock = disable
 keystate_capslock = disable
 keystate_scrolllock= disable
 
-"pkill Xorg"
-    Mod4 + Shift + w
-
 "wrapper-terminal"
     Mod4 + Return
 

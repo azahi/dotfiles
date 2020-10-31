@@ -4,9 +4,9 @@ t()
 {
     if [ -n "$1" ]
     then
-        st -e "$@" &
+        wrapper-terminal -e "$@" &
     else
-        st -e "${SHELL}" --login &
+        wrapper-terminal &
     fi
     disown
 }

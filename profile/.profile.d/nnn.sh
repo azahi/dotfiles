@@ -8,12 +8,12 @@ then
     export NNN_NO_AUTOSELECT=1
     export NNN_OPENER="nuke"
     export NNN_QUOTE_ON=1
-    export NNN_TMPFILE="$XDG_CACHE_HOME/nnn"
+    export NNN_TMPFILE="${XDG_CACHE_HOME}/nnn"
     export NNN_TRASH=0
     export NNN_USE_EDITOR=1
 
     alias n="nnn"
 
     # shellcheck disable=SC2139
-    alias ncp="cat ${XDG_CONFIG_HOME}/nnn/.selection | tr '\0' '\n'"
+    alias ncp="cat ${NNN_TMPFILE}/.selection | tr '\0' '\n'"
 fi

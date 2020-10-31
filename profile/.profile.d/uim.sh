@@ -8,6 +8,6 @@ then
     export UIM_FEP="skk"
     export XIM="uim"
     export XIM_ARGS=
-    export XIM_PROGRAM="$(command -v uim-xim)"
+    export XIM_PROGRAM="uim-xim"
     export XMODIFIERS="@im=uim"
 fi
