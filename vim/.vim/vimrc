@@ -17,7 +17,7 @@ set display+=lastline
 set encoding=utf-8
 set expandtab
 set exrc
-set fileformats=unix,mac,dos
+set fileformats=unix,dos
 set fillchars=vert:\│
 set foldcolumn=0
 set foldenable
@@ -96,12 +96,6 @@ nmap            <M-j>       mz:<C-u>m+<cr>`z
 nmap            <M-k>       mz:<C-u>m-2<cr>`z
 vmap            <M-j>       :<C-u>m'>+<cr>`<my`>mzgv`yo`z
 vmap            <M-k>       :<C-u>m'<-2<cr>`>my`<mzgv`yo`z
-if has('mac')
-    nmap        <D-j>       <M-j>
-    nmap        <D-k>       <M-k>
-    vmap        <D-j>       <M-j>
-    vmap        <D-k>       <M-k>
-endif
 
 nmap            <Leader>w   :<C-u>w!<CR>
 
@@ -160,8 +154,6 @@ if executable("doas")
 elseif executable("sudo")
     command!    W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
 endif
-
-autocmd FocusGained,BufEnter * checktime
 
 autocmd BufEnter * set noreadonly
 

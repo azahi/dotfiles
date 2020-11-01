@@ -11,7 +11,12 @@ fi
 if command -v dbus-launch >/dev/null 2>&1 \
 && [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]
 then
-    eval "$(dbus-launch --sh-syntax --exit-with-x11)"
+    if [ "${HOST}" != "sava" ]
+    then
+        eval "$(dbus-launch --sh-syntax --exit-with-x11)"
+    else
+        eval "$(dbus-launch --sh-syntax --exit-with-session)"
+    fi
 fi
 
 if command -v xrdb >/dev/null 2>&1 \
@@ -59,6 +64,9 @@ fi
 if command -v picom >/dev/null 2>&1
 then
     picom --daemon &
+elif command -v compton >/dev/null 2>&1
+then
+    compton -b &
 fi
 
 if command -v mpd-init >/dev/null 2>&1
