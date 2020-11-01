@@ -1,12 +1,19 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
 (setq user-full-name "Azat Bahawi"
-      user-mail-address "azahi@teknik.io")
+  user-mail-address "azahi@teknik.io")
 
-(setq doom-theme 'doom-monokai-spectrum)
+(setq doom-theme 'doom-tomorrow-night)
 
-(setq doom-font (font-spec :family "Source Code Pro" :size 12)
-      doom-bin-font (font-spec :family "Source Code Pro" :size 19))
+;; (setq doom-font (font-spec :family "Source Code Pro" :size 12)
+;;       doom-big-font (font-spec :family "Source Code Pro" :size 19))
+
+(setq doom-font (font-spec :family "Efont Biwidth" :pixelsize 14)
+      doom-serif-font (font-spec :family "Efont Biwidth" :pixelsize 14)
+      doom-variable-pitch-font (font-spec :family "Efont Biwidth" :pixelsize 14)
+      doom-unicode-font (font-spec :family "Efont Biwidth" :pixelsize 14)
+      doom-unicode-extra-fonts 'nil
+      doom-big-font (font-spec :family "Efont Biwidth" :pixelsize 24))
 
 (with-eval-after-load 'flycheck
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))

@@ -140,6 +140,21 @@ vmap            <Leader>y   "+y
 
 nnoremap        ZX          :<C-u>qa!<CR>
 
+function! FzyCommand(choice_command, vim_command)
+    try
+        let output = system(a:choice_command . " | fzy ")
+    catch /Vim:Interrupt/
+    endtry
+    redraw!
+    if v:shell_error == 0 && !empty(output)
+        exec a:vim_command . ' ' . output
+    endif
+endfunction
+
+nnoremap        <Leader>e   :<C-u>call FzyCommand("find . -type f", ":e")<CR>
+nnoremap        <Leader>v   :<C-u>call FzyCommand("find . -type f", ":vs")<CR>
+nnoremap        <Leader>s   :<C-u>call FzyCommand("find . -type f", ":sp")<CR>
+
 if executable("doas")
     command!    W           :execute ':silent w !doas tee % > /dev/null' | :edit!
 elseif executable("sudo")
@@ -168,7 +183,6 @@ Plug 'editorconfig/editorconfig-vim'
 
 " {{{
 Plug 'farmergreg/vim-lastplace'
-let g:lastplace_ignore = "gitcommit,gitrebase"
 " }}}
 
 " {{{
@@ -235,12 +249,6 @@ let g:org_agenda_files = [ '~/org/*.org' ]
 
 " {{{
 Plug 'gentoo/gentoo-syntax'
-" }}}
-
-" {{{
-if executable('fzf')
-    Plug 'junegunn/fzf.vim'
-endif
 " }}}
 
 " {{{

@@ -1,4 +1,4 @@
-#define font1   Efont Biwidth:pixelsize=12
+#define font1   Efont Biwidth:style=Regular:pixelsize=14:antialias=false
 
 *.font: font1
 

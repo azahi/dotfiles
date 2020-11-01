@@ -1,24 +1,22 @@
-URxvt.font:                 xft:lucy tewi:style=Regular:pixelsize=11:antialias=false,\
-                            xft:Efont Biwidth:style=Regular:pixelsize=12:antialias=false,\
-                            xft:Efont Fixed:style=Regular:pixelsize=12:antialias=false
+URxvt.font:                 xft:Efont Biwidth:style=Regular:pixelsize=14:antialias=false,\
+                            xft:Efont Fixed:style=Regular:pixelsize=14:antialias=false
 
-URxvt.boldFont:            xft:lucy tewi:style=Regular:pixelsize=11:antialias=false,\
-                            xft:Efont Biwidth:style=Regular:pixelsize=12:antialias=false,\
-                            xft:Efont Fixed:style=Regular:pixelsize=12:antialias=false
+URxvt.boldFont:             xft:Efont Biwidth:style=Regular:pixelsize=14:antialias=false,\
+                            xft:Efont Fixed:style=Regular:pixelsize=14:antialias=false
 
-URxvt.italicFont:           xft:lucy tewi:style=Regular:pixelsize=11:antialias=false,\
-                            xft:Efont Biwidth:style=Regular:pixelsize=12:antialias=false,\
-                            xft:Efont Fixed:style=Regular:pixelsize=12:antialias=false
+URxvt.italicFont:           xft:Efont Biwidth:style=Italic:pixelsize=14:antialias=false,\
+                            xft:Efont Fixed:style=Italic:pixelsize=14:antialias=false
 
-URxvt.boldItalicFont:       xft:lucy tewi:style=Regular:pixelsize=11:antialias=false,\
-                            xft:Efont Biwidth:style=Regular:pixelsize=12:antialias=false,\
-                            xft:Efont Fixed:style=Regular:pixelsize=12:antialias=false
+URxvt.boldItalicFont:       xft:Efont Biwidth:style=Italic:pixelsize=14:antialias=false,\
+                            xft:Efont Fixed:style=Italic:pixelsize=14:antialias=false
 
 URxvt.internalBorder:       5
 URxvt.externalBorder:       0
 
 URxvt.letterSpace:          0
 URxvt.lineSpace:            0
+
+URxvt.saveLines:            10000
 
 URxvt.buffered:             false
 URxvt.cursorBlink:          true
@@ -36,7 +34,10 @@ URxvt.scrollTtyOutput:      false
 URxvt.scrollWidthBuffer:    true
 URxvt.scrollstyle:          plain
 
-URxvt.perl-ext:             default,matcher
+URxvt.iso14755:             false
+URxvt.iso14755_52:          false
+
+URxvt.perl-ext:             default,matcher,xim-onthespot
 
 URxvt.matcher.button:       1
 URxvt.url-launcher:         wrapper-browser

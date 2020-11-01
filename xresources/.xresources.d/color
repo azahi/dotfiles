@@ -1,19 +1,19 @@
-#define color_black0    #0b0806
-#define color_black1    #2f2b2a
-#define color_red0      #844d2c
-#define color_red1      #a64848
-#define color_green0    #57553a
-#define color_green1    #897f5a
-#define color_yellow0   #a17c38
-#define color_yellow1   #c8b38d
-#define color_blue0     #41434f
-#define color_blue1     #526274
-#define color_magenta0  #6b4444
-#define color_magenta1  #755c47
-#define color_cyan0     #59664c
-#define color_cyan1     #718062
-#define color_white0    #a19782
-#define color_white1    #c1ab83
+#define color_black0    #161719
+#define color_black1    #969896
+#define color_red0      #cc6666
+#define color_red1      #cc6666
+#define color_green0    #b5bd68
+#define color_green1    #b5bd68
+#define color_yellow0   #f0c674
+#define color_yellow1   #f0c674
+#define color_blue0     #81a2be
+#define color_blue1     #81a2be
+#define color_magenta0  #b294bb
+#define color_magenta1  #b294bb
+#define color_cyan0     #8abeb7
+#define color_cyan1     #8abeb7
+#define color_white0    #c5c8c6
+#define color_white1    #ffffff
 
 *.color0:       color_black0
 *.color8:       color_black1

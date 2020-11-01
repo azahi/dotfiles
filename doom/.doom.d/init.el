@@ -14,7 +14,7 @@
        hl-todo
        hydra
        indent-guides
-       (modeline +light)
+       ;(modeline +light)
        nav-flash
        ophints
        (popup +defaults)
@@ -76,7 +76,7 @@
        (go +lsp)
        (haskell +lsp)
        json
-       (latex +latexmk +cdlatex +lsp +fold)
+       ;(latex +latexmk +cdlatex +lsp +fold)
        ledger
        (markdown +grip)
        (org +brain +journal +noter +pandoc +pomodoro +roam)
