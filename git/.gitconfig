@@ -13,6 +13,9 @@
 	autosquash = true
 [push]
 	default = current
+[pull]
+	rebase = false
+	ff = only
 [alias]
 	ad = add
 	ada = add --all

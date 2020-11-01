@@ -24,7 +24,8 @@ do
 done
 
 if [ -n "${BASH_VERSION}" ] \
-&& [ -f "${HOME}/.bashrc" ]
+&& [ -f "${HOME}/.bashrc" ] \
+&& [ "${HOST}" = "sava" ]
 then
     # shellcheck disable=SC1090
     . "${HOME}/.bashrc"
