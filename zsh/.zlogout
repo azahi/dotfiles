@@ -14,6 +14,7 @@ rm_existing "${ZSHRC}.zwc.old"
 
 rm_existing "$HOME/.cache"
 rm_existing "$HOME/.gdb_history"
+rm_existing "$HOME/.nvimlog"
 rm_existing "$HOME/.wget-hsts"
 rm_existing "$HOME/VideoDecodeStats"
 rm_existing "$HOME/databases-incognito"
