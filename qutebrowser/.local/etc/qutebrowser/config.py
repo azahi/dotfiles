@@ -415,7 +415,7 @@ c.completion.cmd_history_max_items = 100
 
 # Height (in pixels or as percentage of the window) of the completion.
 # Type: PercOrInt
-c.completion.height = '30%'
+c.completion.height = '50%'
 
 # When to show the autocompletion window.
 # Type: String
@@ -847,7 +847,37 @@ c.colors.completion.scrollbar.bg = '#161719'
 
 # Background color for the download bar.
 # Type: QssColor
-c.colors.downloads.bar.bg = 'black'
+c.colors.downloads.bar.bg = '#161719'
+
+# Color gradient start for download backgrounds.
+# Type: QtColor
+c.colors.downloads.start.bg = '#0000aa'
+
+# Color gradient interpolation system for download text.
+# Type: ColorSystem
+# Valid values:
+#   - rgb: Interpolate in the RGB color system.
+#   - hsv: Interpolate in the HSV color system.
+#   - hsl: Interpolate in the HSL color system.
+#   - none: Don't show a gradient.
+c.colors.downloads.system.fg = 'none'
+
+# Color gradient interpolation system for download backgrounds.
+# Type: ColorSystem
+# Valid values:
+#   - rgb: Interpolate in the RGB color system.
+#   - hsv: Interpolate in the HSV color system.
+#   - hsl: Interpolate in the HSL color system.
+#   - none: Don't show a gradient.
+c.colors.downloads.system.bg = 'none'
+
+# Foreground color for downloads with errors.
+# Type: QtColor
+c.colors.downloads.error.fg = '#ffffff'
+
+# Background color for downloads with errors.
+# Type: QtColor
+c.colors.downloads.error.bg = '#cc6666'
 
 # Font color for hints.
 # Type: QssColor
@@ -873,6 +903,58 @@ c.colors.keyhint.suffix.fg = '#cc6666'
 # Background color of the keyhint widget.
 # Type: QssColor
 c.colors.keyhint.bg = '#161719'
+
+# Foreground color of an error message.
+# Type: QssColor
+c.colors.messages.error.fg = '#ffffff'
+
+# Background color of an error message.
+# Type: QssColor
+c.colors.messages.error.bg = '#cc6666'
+
+# Border color of an error message.
+# Type: QssColor
+c.colors.messages.error.border = '#cc6666'
+
+# Foreground color of a warning message.
+# Type: QssColor
+c.colors.messages.warning.fg = '#ffffff'
+
+# Background color of a warning message.
+# Type: QssColor
+c.colors.messages.warning.bg = '#f0c674'
+
+# Border color of a warning message.
+# Type: QssColor
+c.colors.messages.warning.border = '#f9c674'
+
+# Foreground color of an info message.
+# Type: QssColor
+c.colors.messages.info.fg = '#c5c8c6'
+
+# Background color of an info message.
+# Type: QssColor
+c.colors.messages.info.bg = '#161719'
+
+# Border color of an info message.
+# Type: QssColor
+c.colors.messages.info.border = '#161719'
+
+# Foreground color for prompts.
+# Type: QssColor
+c.colors.prompts.fg = '#c5c8c6'
+
+# Border used around UI elements in prompts.
+# Type: String
+c.colors.prompts.border = '0px'
+
+# Background color for prompts.
+# Type: QssColor
+c.colors.prompts.bg = '#161719'
+
+# Background color for the selected item in filename prompts.
+# Type: QssColor
+c.colors.prompts.selected.bg = '#c5c8c6'
 
 # Foreground color of the statusbar.
 # Type: QssColor
@@ -944,6 +1026,15 @@ c.colors.tabs.bar.bg = '#161719'
 # Type: QtColor
 c.colors.tabs.indicator.error = '#cc6666'
 
+# Color gradient interpolation system for the tab indicator.
+# Type: ColorSystem
+# Valid values:
+#   - rgb: Interpolate in the RGB color system.
+#   - hsv: Interpolate in the HSV color system.
+#   - hsl: Interpolate in the HSL color system.
+#   - none: Don't show a gradient.
+c.colors.tabs.indicator.system = 'none'
+
 # Foreground color of unselected odd tabs.
 # Type: QtColor
 c.colors.tabs.odd.fg = '#c5c8c6'
@@ -995,7 +1086,7 @@ c.colors.tabs.pinned.even.bg = '#2f2b2a'
 # Background color for webpages if unset (or empty to use the theme's
 # color).
 # Type: QtColor
-c.colors.webpage.bg = '#161719'
+c.colors.webpage.bg = 'white'
 
 # Default font families to use. Whenever "default_family" is used in a
 # font setting, it's replaced with the fonts listed here. If set to an
