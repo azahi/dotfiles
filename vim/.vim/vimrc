@@ -5,7 +5,6 @@ endif
 
 set autoindent
 set autoread
-set background=dark
 set backspace=indent,eol,start
 set breakindent
 set clipboard=unnamed,unnamedplus
@@ -255,7 +254,7 @@ endif
 " }}}
 
 " {{{
-if has('nvim') && has('python')
+if has('nvim') && has('python3')
     " {{{
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     let g:deoplete#enable_at_startup = 1
