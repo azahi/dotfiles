@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "${HOME}/.subversion" ] && \
+    mkdir -p "${HOME}/.subversion"
+
+stow \
+    --target="${HOME}" \
+    --ignore="^@.*" \
+    --verbose \
+    subversion

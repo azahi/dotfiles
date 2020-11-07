@@ -5,7 +5,6 @@ endif
 
 set autoindent
 set autoread
-set background=dark
 set backspace=indent,eol,start
 set breakindent
 set clipboard=unnamed,unnamedplus

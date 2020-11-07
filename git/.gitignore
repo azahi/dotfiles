@@ -16,12 +16,7 @@
 cmake-build-*/
 
 # Visual Studio Code
-.vscode/*
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/settings.json
-!.vscode/tasks.json
-*.code-workspace
+.vscode/
 
 # Tags
 .[Tt][Aa][Gg][Ss]
@@ -29,10 +24,13 @@ cmake-build-*/
 ![Tt][Aa][Gg][Ss]/
 
 # Misc
+*.bak
+*.temp
+*.tmp
 .ccls-cache/
 .gdb_history
-.git
-.svn
+.git/
+.svn/
 .wakatime-project
 compile_commands.json
 cscope.*

@@ -8,6 +8,12 @@ then
     . "${HOME}/.profile"
 fi
 
+if command -v xset >/dev/null 2>&1
+then
+    xset m 3/2 3 &
+    xset r rate 200 50 &
+fi
+
 if command -v dbus-launch >/dev/null 2>&1 \
 && [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]
 then
@@ -29,12 +35,6 @@ if command -v hsetroot >/dev/null 2>&1 \
 && command -v xgetres >/dev/null 2>&1
 then
     hsetroot -solid "$(xgetres background)" &
-fi
-
-if command -v xset >/dev/null 2>&1
-then
-    xset m 3/2 3 &
-    xset r rate 200 50 &
 fi
 
 if command -v setxkbmap >/dev/null 2>&1
