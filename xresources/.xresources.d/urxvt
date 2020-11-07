@@ -1,20 +1,19 @@
-URxvt.font:                 xft:Efont Biwidth:style=Regular:pixelsize=14:antialias=false,\
-                            xft:Efont Fixed:style=Regular:pixelsize=14:antialias=false
+#define urxvt_font1 xft:font1
+#define urxvt_font2 xft:font2
 
-URxvt.boldFont:             xft:Efont Biwidth:style=Regular:pixelsize=14:antialias=false,\
-                            xft:Efont Fixed:style=Regular:pixelsize=14:antialias=false
+!#define urxvt_font1 xft:UW Ttyp0:pixelsize=14:style=Regular:antialias=false
+!#define urxvt_font2 xft:Efont Biwidth:pixelsize=14:style=Regular:antialias=false
 
-URxvt.italicFont:           xft:Efont Biwidth:style=Italic:pixelsize=14:antialias=false,\
-                            xft:Efont Fixed:style=Italic:pixelsize=14:antialias=false
-
-URxvt.boldItalicFont:       xft:Efont Biwidth:style=Italic:pixelsize=14:antialias=false,\
-                            xft:Efont Fixed:style=Italic:pixelsize=14:antialias=false
-
-URxvt.internalBorder:       5
-URxvt.externalBorder:       0
+URxvt.font:                 urxvt_font1,urxvt_font2
+URxvt.boldFont:             urxvt_font1,urxvt_font2
+URxvt.italicFont:           urxvt_font1,urxvt_font2
+URxvt.boldItalicFont:       urxvt_font1,urxvt_font2
 
 URxvt.letterSpace:          0
 URxvt.lineSpace:            0
+
+URxvt.internalBorder:       5
+URxvt.externalBorder:       0
 
 URxvt.saveLines:            10000
 

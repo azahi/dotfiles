@@ -1,6 +1,6 @@
 if ! has('nvim')
     set nocompatible
-    set viminfo+=n~/.vim/viminfo
+    set viminfo+=~/.vim/viminfo
 endif
 
 set autoindent
@@ -109,8 +109,8 @@ nnoremap        [b          :<C-u>bprevious<CR>
 nnoremap        <Return>    :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR><C-l>
 
 cnoremap        ;/          <C-r>=expand('%:p:h').'/'<CR>
-cnoremap        ;;          <C-r>=expand("%:t")<CR>
-cnoremap        ;.          <C-r>=expand("%:p:r")<CR>
+cnoremap        ;;          <C-r>=expand('%:t')<CR>
+cnoremap        ;.          <C-r>=expand('%:p:r')<CR>
 
 cnoremap        <C-a>       <Home>
 cnoremap        <C-e>       <End>
@@ -135,7 +135,7 @@ nnoremap        ZX          :<C-u>qa!<CR>
 
 function! FzyCommand(choice_command, vim_command)
     try
-        let output = system(a:choice_command . " | fzy ")
+        let output = system(a:choice_command . ' | fzy ')
     catch /Vim:Interrupt/
     endtry
     redraw!
@@ -144,25 +144,25 @@ function! FzyCommand(choice_command, vim_command)
     endif
 endfunction
 
-nnoremap        <Leader>e   :<C-u>call FzyCommand("find . -type f", ":e")<CR>
-nnoremap        <Leader>v   :<C-u>call FzyCommand("find . -type f", ":vs")<CR>
-nnoremap        <Leader>s   :<C-u>call FzyCommand("find . -type f", ":sp")<CR>
+nnoremap        <Leader>e   :<C-u>call FzyCommand('find . -type f', ':e')<CR>
+nnoremap        <Leader>v   :<C-u>call FzyCommand('find . -type f', ':vs')<CR>
+nnoremap        <Leader>s   :<C-u>call FzyCommand('find . -type f', ':sp')<CR>
 
-if executable("doas")
+if executable('doas')
     command!    W           :execute ':silent w !doas tee % > /dev/null' | :edit!
-elseif executable("sudo")
+elseif executable('sudo')
     command!    W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
 endif
 
 autocmd BufEnter * set noreadonly
 
-if !exists(":DiffOrig")
+if !exists(':DiffOrig')
     command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 endif
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+                \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -255,13 +255,14 @@ endif
 " }}}
 
 " {{{
-if has('nvim') && has('python')
+if has('nvim') && has('python3')
     " {{{
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     let g:deoplete#enable_at_startup = 1
     " }}}
 
-    Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' } " {{{
+    " {{{
+    Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' }
     let g:LanguageClient_loadSettings = 1
 
     nnoremap <Leader>lm :<C-u>call LanguageClient_contextMenu()<CR>
@@ -326,7 +327,7 @@ if has('nvim') && has('python')
 
     " {{{
     Plug 'Shougo/echodoc.vim'
-    let g:echodoc#enable_at_startup	= 1
+    let g:echodoc#enable_at_startup = 1
     let g:echodoc#type = 'signature'
     " }}}
 endif

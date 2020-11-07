@@ -1,4 +1,5 @@
-#define font1   Efont Biwidth:style=Regular:pixelsize=14:antialias=false
+#define font1 UW Ttyp0:pixelsize=14:style=Regular:antialias=false
+#define font2 Efont Biwidth:pixelsize=14:style=Regular:antialias=false
 
 *.font: font1
 
