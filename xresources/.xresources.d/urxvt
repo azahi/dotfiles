@@ -1,9 +1,6 @@
 #define urxvt_font1 xft:font1
 #define urxvt_font2 xft:font2
 
-!#define urxvt_font1 xft:UW Ttyp0:pixelsize=14:style=Regular:antialias=false
-!#define urxvt_font2 xft:Efont Biwidth:pixelsize=14:style=Regular:antialias=false
-
 URxvt.font:                 urxvt_font1,urxvt_font2
 URxvt.boldFont:             urxvt_font1,urxvt_font2
 URxvt.italicFont:           urxvt_font1,urxvt_font2

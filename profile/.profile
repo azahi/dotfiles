@@ -22,11 +22,3 @@ do
     # shellcheck disable=SC1090
     [ -r "$i" ] && . "$i"
 done
-
-if [ -n "${BASH_VERSION}" ] \
-&& [ -f "${HOME}/.bashrc" ] \
-&& [ "$(hostname)" = "sava" ]
-then
-    # shellcheck disable=SC1090
-    . "${HOME}/.bashrc"
-fi

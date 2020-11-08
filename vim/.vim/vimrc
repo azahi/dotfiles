@@ -69,6 +69,19 @@ set viewoptions-=options
 set wildignorecase
 set wildmenu
 
+set statusline=\ 
+set statusline+=%f
+set statusline+=\ %1*\ 
+set statusline+=%y
+set statusline+=\ %2*\ 
+set statusline+=%=
+set statusline+=\ %3*\ 
+set statusline+=\ 
+set statusline+=%l
+set statusline+=\ %4*\ 
+set statusline+=%L
+set statusline+=\ 
+
 if has('autocmd')
     filetype on
     filetype plugin on
@@ -166,6 +179,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/.plug')
+
+" {{{
+Plug 'chriskempson/base16-vim'
+" }}}
 
 " {{{
 Plug 'editorconfig/editorconfig-vim'
@@ -332,3 +349,8 @@ if has('nvim') && has('python3')
 endif
 
 call plug#end()
+
+"try
+"    colorscheme base16-tomorrow-night
+"catch /^Vim\%((\a\+)\)\=:E185/
+"endtry

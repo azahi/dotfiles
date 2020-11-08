@@ -1,45 +1,61 @@
 $include /etc/inputrc
 
-set editing-mode vi
-
-set bell-style none
+set bell-style visible
 set bind-tty-special-chars off
-set blink-matching-paren on
 set colored-completion-prefix on
 set colored-stats on
 set completion-ignore-case on
-set completion-map-case on
 set convert-meta off
-set echo-control-characters on
-set enable-keypad on
-set enable-meta-key on
-set horizontal-scroll-mode off
+set echo-control-characters off
+set editing-mode vi
 set input-meta on
-set mark-directories on
-set mark-modified-lines off
 set mark-symlinked-directories on
-set match-hidden-files on
+set match-hidden-files off
 set menu-complete-display-prefix on
 set meta-flag on
 set output-meta on
 set page-completions on
-set print-completions-horizontally on
-set revert-all-at-newline on
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
-set skip-completed-text on
+set show-mode-in-prompt on
 set visible-stats on
 
-"\e[B": history-search-forward
-"\e[A": history-search-backward
-"^P": history-search-backward
-"^N": history-search-forward
+$if mode=emacs
+	"\e[1~": beginning-of-line
+	"\e[4~": end-of-line
+	"\e[5C": forward-word
+	"\e[5D": backward-word
+	"\e[3~": delete-char
+	"\e[2~": quoted-insert
+	"\e[5~": history-search-backward
+	"\e[6~": history-search-forward
+	"\t": menu-complete
+$endif
 
-"\e[1;5C": forward-word
-"\e[1;5D": backward-word
-"\eOC": forward-word
-"\eOD": backward-word
+$if mode=vi
+	set keymap vi-command
+	"gg": beginning-of-history
+	"G": end-of-history
+	"k": history-search-backward
+	"j": history-search-forward
+	"?": reverse-search-history
+	"/": forward-search-history
 
-"\e[2~": overwrite-mode
+	set keymap vi-insert
+	"\C-l": clear-screen
+	"\C-w": backward-kill-word
+	"\C-a": beginning-of-line
+	"\C-e": end-of-line
+	"\C-p": history-search-backward
+	"\C-n": history-search-forward
+$endif
 
-TAB: menu-complete
+$if term=linux
+	set vi-ins-mode-string \1\e[?0c\2
+	set vi-cmd-mode-string \1\e[?8c\2
+$else
+	set vi-ins-mode-string \1\e[6 q\2
+	set vi-cmd-mode-string \1\e[2 q\2
+$endif
+
+set keymap vi
