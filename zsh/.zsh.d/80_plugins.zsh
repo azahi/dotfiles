@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [ ${TERM} != "linux" ]
+if [ "${TERM}" != "linux" ]
 then
     ZGEN_DIR="${HOME}/.zsh.d/zgen"
 
@@ -17,17 +17,27 @@ then
     if ! zgen saved
     then
         zgen load azahi/zsh-lambda lambda.zsh-theme
+
         zgen load hlissner/zsh-autopair
-        zgen load softmoth/zsh-vim-mode
+
         zgen load zsh-users/zsh-autosuggestions
+
         zgen load zsh-users/zsh-history-substring-search
+
         zgen load zsh-users/zsh-syntax-highlighting
 
+        if [ "$(hostname)" != "sava" ]
+        then
+            #zgen load softmoth/zsh-vim-mode
+        fi
         zgen save
     fi
 
     # softmoth/zsh-vim-mode
-    bindkey -rpM viins '^[^['
+    if [ "$(hostname)" != "sava" ]
+    then
+        bindkey -rpM viins '^[^['
+    fi
 
     # zsh-users/zsh-autosuggestions
     bindkey '^ ' autosuggest-accept

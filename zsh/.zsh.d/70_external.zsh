@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 # https://github.com/direnv/direnv {{{
-[[ $(command -v direnv) ]] \
-    && eval "$(direnv hook zsh)"
+if command -v direnv >/dev/null 2>&1 && \
+    eval "$(direnv hook zsh)"
 # }}}
 
 # https://github.com/wting/autojump {{{
@@ -13,9 +13,4 @@
 # https://github.com/garabik/grc {{{
 [[ -s /usr/share/grc/grc.zsh ]] && \
     source /usr/share/grc/grc.zsh
-# }}}
-
-# https://github.com/junegunn/fzf {{{
-[[ -s /usr/share/fzf/key-bindings.zsh ]] && \
-    source /usr/share/fzf/key-bindings.zsh
 # }}}

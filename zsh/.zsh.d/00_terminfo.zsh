@@ -6,11 +6,11 @@ then
     {
         echoti smkx
     }
+    zle -N zle-line-init
+
     function zle-line-finish ()
     {
         echoti rmkx
     }
-
-    zle -N zle-line-init
     zle -N zle-line-finish
 fi
