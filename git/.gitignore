@@ -30,6 +30,7 @@ cmake-build-*/
 .ccls-cache/
 .gdb_history
 .git/
+.ignore
 .svn/
 .wakatime-project
 compile_commands.json
