@@ -1,5 +1,7 @@
 --buffer-size 1024
 --continue
+--external-downloader aria2c
+--external-downloader-args '-k 2M'
 --geo-bypass
 --hls-prefer-ffmpeg
 --no-call-home

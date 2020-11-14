@@ -26,15 +26,17 @@ then
 
         zgen load zsh-users/zsh-syntax-highlighting
 
-        if [ "$(hostname)" != "sava" ]
+        zgen load zsh-users/zsh-completions
+
+        if (( $(echo "$ZSH_VERSION > 5.8" | bc -l) ))
         then
-            #zgen load softmoth/zsh-vim-mode
+            zgen load softmoth/zsh-vim-mode
         fi
         zgen save
     fi
 
     # softmoth/zsh-vim-mode
-    if [ "$(hostname)" != "sava" ]
+    if (( $(echo "$ZSH_VERSION > 5.8" | bc -l) ))
     then
         bindkey -rpM viins '^[^['
     fi

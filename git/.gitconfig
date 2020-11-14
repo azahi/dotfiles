@@ -7,15 +7,34 @@
 	whitespace = trailing-space
 [commit]
 	gpgsign = true
-[github]
-	user = azahi
+[diff]
+	mnemonicprefix = true
+	renames = copies
+	submodule = log
+[branch]
+	autosetupmerge = true
+[merge]
+	conflictstyle = diff3
+	stat = true
 [rebase]
 	autosquash = true
+[fetch]
+	prune = true
 [push]
 	default = current
 [pull]
-	rebase = false
 	ff = only
+	rebase = false
+[status]
+	submodulesummary = true
+[rerere]
+	enabled = true
+[advice]
+	detachedhead = false
+	pushnonfastforwards = false
+	statushints = false
+[github]
+	user = azahi
 [alias]
 	ad = add
 	ada = add --all
@@ -25,13 +44,13 @@
 	cho = checkout --orphan
 	ci = commit
 	cia = commit --amend
-	cis = commit --signoff
-	cisa = commit --signoff --amend
+	cias = commit --amend --signoff
 	cl = clone
 	clr = clone --recurse-submodules
 	cls = clone --depth=1
 	di = diff
-	dif = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
+	dis = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
+	e = "!exec"
 	fe = fetch
 	fer = fetch --all --recurse-submodules
 	gud = commit --message=\"git gud\"
@@ -44,6 +63,7 @@
 	psf = push --force
 	re = reset HEAD
 	ree = reset HEAD^
+	setup = !"git init && git commit --allow-empty -m Initial"
 	st = status --short
 	ui = update-index --assume-unchanged
 	uiu = update-index --un-assume-unchanged
