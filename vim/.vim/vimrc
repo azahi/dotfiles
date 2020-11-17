@@ -265,6 +265,15 @@ endif
 " }}}
 
 " {{{
+if executable('ack') || executable('ag')
+    Plug 'mileszs/ack.vim'
+    if executable('ag')
+        let g:ackprg = 'ag --vimgrep'
+    endif
+endif
+" }}}
+
+" {{{
 if executable('wakatime')
     Plug 'wakatime/vim-wakatime'
 endif

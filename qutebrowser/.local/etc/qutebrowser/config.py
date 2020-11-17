@@ -507,11 +507,15 @@ c.hints.auto_follow_timeout = 0
 
 # CSS border value for hints.
 # Type: String
-c.hints.border = '3px solid #0B0806'
+c.hints.border = '0px'
 
 # Padding (in pixels) for hints.
 # Type: Padding
 c.hints.padding = {'bottom': 3, 'left': 3, 'right': 3, 'top': 3}
+
+# Rounding radius (in pixels) for the edges of hints.
+# Type: Int
+c.hints.radius = 0
 
 # Characters used for hint strings.
 # Type: UniqueCharString
@@ -533,9 +537,22 @@ c.hints.min_chars = 1
 #   - word: Use hints words based on the html elements and the extra words.
 c.hints.mode = 'letter'
 
+# Scatter hint key chains (like Vimium) or not (like dwb). Ignored for
+# number hints.
+# Type: Bool
+c.hints.scatter = False
+
 # Make characters in hint strings uppercase.
 # Type: Bool
 c.hints.uppercase = False
+
+# Rounding radius (in pixels) for the edges of the keyhint dialog.
+# Type: Int
+c.keyhint.radius = 0
+
+# Rounding radius (in pixels) for the edges of prompts.
+# Type: Int
+c.prompt.radius = 0
 
 # When/how to show the scrollbar.
 # Type: String
