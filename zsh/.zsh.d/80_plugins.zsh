@@ -28,19 +28,20 @@ then
 
         zgen load zsh-users/zsh-completions
 
-        if (( $(echo "$ZSH_VERSION > 5.8" | bc -l) ))
+        if [[ "${ZSH_VERSION}" == "5.8" ]]
         then
             zgen load softmoth/zsh-vim-mode
         fi
-        zgen save
-    fi
 
-    # softmoth/zsh-vim-mode
-    if (( $(echo "$ZSH_VERSION > 5.8" | bc -l) ))
-    then
-        bindkey -rpM viins '^[^['
+        zgen save
     fi
 
     # zsh-users/zsh-autosuggestions
     bindkey '^ ' autosuggest-accept
+
+    # softmoth/zsh-vim-mode
+    if [[ "${ZSH_VERSION}" == "5.8" ]]
+    then
+        bindkey -rpM viins '^[^['
+    fi
 fi

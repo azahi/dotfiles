@@ -15,12 +15,21 @@ indent_style = tab
 # C/C++
 [*.{c,h,cc,hh,cpp,hpp,cxx,hxx}]
 indent_style = tab
+max_line_length = 80
 
-# C Sharp
+# C#
 [*.{cs,fs}]
 charset = utf-8-bom
 end_of_line = crlf
 indent_style = space
+
+# Python
+[*.py]
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+max_line_length = 80
+trim_trailing_whitespace = true
 
 # Haskell
 [*.{hs,lhs}]
@@ -50,6 +59,7 @@ indent_style = space
 # Make
 [Makefile]
 indent_style = tab
+max_line_length = 80
 
 # mk
 [*.mk]
