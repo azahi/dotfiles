@@ -64,9 +64,6 @@ fi
 if command -v picom >/dev/null 2>&1
 then
     picom --daemon &
-elif command -v compton >/dev/null 2>&1
-then
-    compton -b &
 fi
 
 if command -v mpd-init >/dev/null 2>&1
