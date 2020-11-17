@@ -99,11 +99,6 @@ do
             dwm-status &
         fi
 
-        if command -v dbus-launch >/dev/null 2>&1
-        then
-            dbus-launch --exit-with-session "${WM}"
-        else
-            exec "${WM}"
-        fi
+        exec "${WM}"
     fi
 done
