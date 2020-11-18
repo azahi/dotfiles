@@ -1,9 +1,6 @@
 templates:
-    params:
-        author-email: azahi@teknik.io
-        author-name: Azat Bahawi
-        copyright: Copyright (c) 2020 Azat Bahawi
-        github-username: azahi
-
-ghc-options:
-    "$everything": -haddock
+  params:
+    author-name: Azat Bahawi
+    author-email: azahi@teknik.io
+    copyright: Copyright (C) 2020 Azat Bahawi
+    github-username: azahi
