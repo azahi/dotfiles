@@ -33,6 +33,8 @@
 	detachedhead = false
 	pushnonfastforwards = false
 	statushints = false
+[color]
+	ui = true
 [github]
 	user = azahi
 [alias]

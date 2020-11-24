@@ -21,6 +21,8 @@ else
     alias rm="rm -i"
 fi
 
+alias c="cd"
+
 alias ln="ln -i"
 
 alias mkdir="mkdir -p"

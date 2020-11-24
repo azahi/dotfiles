@@ -1,9 +1,10 @@
+conf_disable_formatting: false
 conf_debug:
   dconf_roundtrip_exactprint_only: false
   dconf_dump_bridoc_simpl_par: false
   dconf_dump_ast_unknown: false
   dconf_dump_bridoc_simpl_floating: false
-  dconf_dump_config: false
+  dconf_dump_config: true
   dconf_dump_bridoc_raw: false
   dconf_dump_bridoc_final: false
   dconf_dump_bridoc_simpl_alt: false
@@ -45,3 +46,4 @@ conf_layout:
   lconfig_columnAlignMode:
     tag: ColumnAlignModeMajority
     contents: 0.7
+

@@ -7,10 +7,11 @@ do
         [ -f "${HOME}/.pystartup" ] && \
             export PYTHONSTARTUP="${HOME}/.pystartup"
 
-	for j in pip pip3 pip2
+        for j in pip pip3 pip2
         do
-            alias pip-update="${j} list --user --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 ${j} install --user -U"
-	    break
+            # shellcheck disable=SC2139
+            alias pip-update="${j} list --user --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 ${j} install --user -U"
+	        break
         done
 
         break

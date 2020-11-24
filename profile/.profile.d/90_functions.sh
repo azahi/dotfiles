@@ -1,16 +1,5 @@
 #!/bin/sh
 
-t()
-{
-    if [ -n "$1" ]
-    then
-        wrapper-terminal -e "$@" &
-    else
-        wrapper-terminal &
-    fi
-    disown
-}
-
 ff()
 {
     find . -type f -iname "$@" -ls

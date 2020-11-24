@@ -66,27 +66,36 @@ then
     picom --daemon &
 fi
 
-if command -v mpd-init >/dev/null 2>&1
-then
-    mpd-init &
-fi
+(
+    MPD_CONF="${XDG_CONFIG_HOME}/mpd/mpd.conf"
+    MPD_PID="${XDG_RUNTIME_DIR}/mpd.pid"
+    MPDSCRIBBLE_CONF="${XDG_CONFIG_HOME}/mpdscribble.conf"
+    MPDSCRIBBLE_PID="${XDG_RUNTIME_DIR}/mpdscribble.pid"
 
-if command -v gpg-connect-agent >/dev/null 2>&1
-then
-    gpg-connect-agent updatestartuptty /bye &
-fi
+    if command -v mpd >/dev/null 2>&1 \
+    && [ -f "${MPD_CONF}" ] \
+    && [ ! -f "${MPD_PID}" ]
+    then
+        mpd "${MPD_CONF}"
 
-if command -v uim-xim >/dev/null 2>&1
-then
-    uim-xim --async >/dev/null 2>&1 &
-fi
+        if command -v mpdscribble >/dev/null 2>&1 \
+        && [ -f "${MPDSCRIBBLE_CONF}" ] \
+        && [ -f "${MPD_PID}" ] \
+        && [ ! -f "${MPDSCRIBBLE_PID}" ]
+        then
+            mpdscribble --conf "${MPDSCRIBBLE_CONF}"
+        fi
+    fi
+
+    unset MPD_CONF MPD_PID MPDSCRIBBLE_CONF MPDSCRIBBLE_PID
+) &
 
 if command -v urxvtd >/dev/null 2>&1
 then
     urxvtd --quiet --opendisplay --fork &
 fi
 
-for WM in dwm 2bwm xmonad-ng xmonad
+for WM in dwm emacs
 do
     if command -v "${WM}" >/dev/null 2>&1
     then
