@@ -620,7 +620,7 @@ c.spellcheck.languages = ['en-US', 'ru-RU']
 
 # Padding (in pixels) for the statusbar.
 # Type: Padding
-c.statusbar.padding = {'bottom': 1, 'left': 0, 'right': 0, 'top': 1}
+c.statusbar.padding = {'bottom': 1, 'left': 6, 'right': 6, 'top': 1}
 
 # Position of the status bar.
 # Type: VerticalPosition
@@ -680,7 +680,7 @@ c.tabs.new_position.unrelated = 'last'
 
 # Padding (in pixels) around text for tabs.
 # Type: Padding
-c.tabs.padding = {'bottom': 1, 'left': 5, 'right': 5, 'top': 1}
+c.tabs.padding = {'bottom': 1, 'left': 6, 'right': 6, 'top': 1}
 
 # Position of the tab bar.
 # Type: Position
