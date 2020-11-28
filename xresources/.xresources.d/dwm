@@ -8,7 +8,6 @@ dwm.borderpx:           1
 dwm.snap:               0
 dwm.showbar:            1
 dwm.topbar:             1
-dwm.barheight:          26
 dwm.nmaster:            1
 dwm.resizehints:        0
 dwm.mfact:              0.66

@@ -19,6 +19,6 @@ then
     if command -v gpg-connect-agent >/dev/null 2>&1 \
     && [ "${TERM}" != "linux" ]
     then
-        gpg-connect-agent updatestartuptty /bye >/dev/null
+        gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
     fi
 fi

@@ -8,3 +8,17 @@ stow \
     --ignore="^@.*" \
     --verbose \
     xresources
+
+if [ -z "${URXVT_PERL_LIB}" ]
+then
+    EXT_FONT_SIZE="${URXVT_PERL_LIB}/font-size"
+    if [ ! -f "${EXT_FONT_SIZE}" ] \
+    && command -v curl >/dev/null 2>&1
+    then
+        curl \
+            --create-dirs \
+            --output "${EXT_FONT_SIZE}" \
+            "https://raw.githubusercontent.com/majutsushi/urxvt-font-size/master/font-size"
+    fi
+    unset EXT_FONT_SIZE
+fi

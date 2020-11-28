@@ -325,37 +325,37 @@ c.content.local_content_can_access_file_urls = True
 # Type: Bool
 c.content.local_storage = True
 
-# Allow websites to record audio.
+# Allow websites to record audio and video.
 # Type: BoolAsk
 # Valid values:
 #   - true
 #   - false
 #   - ask
-config.set('content.media.audio_capture', True, 'https://web.skype.com')
+config.set('content.media.audio_video_capture', True, 'https://web.skype.com')
 
-# Allow websites to record audio.
+# Allow websites to record audio and video.
 # Type: BoolAsk
 # Valid values:
 #   - true
 #   - false
 #   - ask
-config.set('content.media.audio_capture', True, 'https://discord.com')
+config.set('content.media.audio_video_capture', True, 'https://discord.com')
 
-# Allow websites to record video.
+# Allow websites to record audio and video.
 # Type: BoolAsk
 # Valid values:
 #   - true
 #   - false
 #   - ask
-config.set('content.media.video_capture', True, 'https://web.skype.com')
+config.set('content.media.audio_video_capture', True, 'https://us01web.zoom.us')
 
-# Allow websites to record video.
+# Allow websites to record audio and video.
 # Type: BoolAsk
 # Valid values:
 #   - true
 #   - false
 #   - ask
-config.set('content.media.video_capture', True, 'https://discord.com')
+config.set('content.media.audio_video_capture', True, 'https://us02web.zoom.us')
 
 # Allow websites to show notifications.
 # Type: BoolAsk
@@ -620,7 +620,7 @@ c.spellcheck.languages = ['en-US', 'ru-RU']
 
 # Padding (in pixels) for the statusbar.
 # Type: Padding
-c.statusbar.padding = {'bottom': 2, 'left': 0, 'right': 6, 'top': 2}
+c.statusbar.padding = {'bottom': 1, 'left': 0, 'right': 0, 'top': 1}
 
 # Position of the status bar.
 # Type: VerticalPosition
@@ -680,7 +680,7 @@ c.tabs.new_position.unrelated = 'last'
 
 # Padding (in pixels) around text for tabs.
 # Type: Padding
-c.tabs.padding = {'bottom': 2, 'left': 6, 'right': 8, 'top': 2}
+c.tabs.padding = {'bottom': 1, 'left': 5, 'right': 5, 'top': 1}
 
 # Position of the tab bar.
 # Type: Position
@@ -1106,7 +1106,7 @@ c.colors.webpage.bg = 'white'
 # font setting, it's replaced with the fonts listed here. If set to an
 # empty value, a system-specific monospace default is used.
 # Type: List of Font, or Font
-c.fonts.default_family = 'Efont Biwidth'
+c.fonts.default_family = 'UW Ttyp0'
 
 # Default font size to use. Whenever "default_size" is used in a font
 # setting, it's replaced with the size listed here. Valid values are
