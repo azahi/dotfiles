@@ -1,7 +1,7 @@
 ---
 library: ~/.local/var/beets/library.db
 directory: ~/music
-plugins: discogs edit mbsync fetchart info
+plugins: edit mbsync fetchart info
 format_item: $artist - $album - $title
 format_album: $albumartist - $album
 sort_item: artist+ album+ disc+ track+

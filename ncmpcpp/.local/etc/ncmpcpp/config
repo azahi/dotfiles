@@ -1,8 +1,9 @@
 ncmpcpp_directory   = "~/.local/var/ncmpcpp"
 lyrics_directory    = "~/.local/var/ncmpcpp/lyrics"
 
-mpd_host                = "localhost"
-mpd_port                = "6600"
+mpd_host                = "/var/lib/mpd/mpd.socket"
+#mpd_host                = "localhost"
+#mpd_port                = "6600"
 mpd_connection_timeout  = "10"
 mpd_music_dir           = "/media/marisa/music"
 mpd_crossfade_time      = "0"
