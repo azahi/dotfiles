@@ -325,6 +325,14 @@ c.content.local_content_can_access_file_urls = True
 # Type: Bool
 c.content.local_storage = True
 
+# Allow websites to record audio.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.media.audio_capture', True, 'https://web.skype.com')
+
 # Allow websites to record audio and video.
 # Type: BoolAsk
 # Valid values:
@@ -356,6 +364,14 @@ config.set('content.media.audio_video_capture', True, 'https://us01web.zoom.us')
 #   - false
 #   - ask
 config.set('content.media.audio_video_capture', True, 'https://us02web.zoom.us')
+
+# Allow websites to record video.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.media.video_capture', True, 'https://web.skype.com')
 
 # Allow websites to show notifications.
 # Type: BoolAsk

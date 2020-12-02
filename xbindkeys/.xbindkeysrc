@@ -17,6 +17,9 @@ keystate_scrolllock= disable
 "passmenu"
     Mod4 + Shift + p
 
+"otpmenu"
+    Mod4 + Control + p
+
 "wrapper-browser"
     Mod4 + w
 

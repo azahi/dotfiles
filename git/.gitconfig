@@ -50,19 +50,16 @@
 	cl = clone
 	clr = clone --recurse-submodules
 	cls = clone --depth=1
-	di = diff
-	dis = !"git diff-index --quiet HEAD -- || clear ; git diff --patch-with-stat"
-	e = "!exec"
+	di = !"git diff-index --quiet HEAD ; git diff --patch-with-stat"
+	dis = !"git diff-index --quiet HEAD ; git diff --patch-with-stat --staged"
 	fe = fetch
 	fer = fetch --all --recurse-submodules
 	gud = commit --message=\"git gud\"
 	lo = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	los = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
 	ls = ls-files
 	pl = pull
 	plr = pull --all --recurse-submodules
 	ps = push
-	psf = push --force
 	re = reset HEAD
 	ree = reset HEAD^
 	setup = !"git init && git commit --allow-empty -m Initial"
