@@ -19,14 +19,10 @@ max_line_length = 80
 
 # C#
 [*.{cs,fs}]
-charset = utf-8-bom
 end_of_line = crlf
-indent_style = space
 
 # Python
 [*.py]
-indent_size = 4
-indent_style = space
 insert_final_newline = true
 max_line_length = 80
 trim_trailing_whitespace = true
@@ -34,27 +30,22 @@ trim_trailing_whitespace = true
 # Haskell
 [*.{hs,lhs}]
 indent_size = 2
-indent_style = space
 
 # Emacs Lisp
 [*.el]
 indent_size = 2
-indent_style = space
 
 # Common Lisp
 [*.{lisp,lsp,l,cl}]
 indent_size = 2
-indent_style = space
 
 # Scheme
 [*.{scm,sps,sls,sld,ss,sc,sch}]
 indent_size = 2
-indent_style = space
 
 # Racket
 [*.rkt]
 indent_size = 2
-indent_style = space
 
 # Make
 [Makefile]
@@ -68,10 +59,9 @@ indent_style = tab
 # CMake
 [CMakeList.txt]
 indent_size = 8
-indent_style = space
 
 # Autotools
-[*.{ac,am,m4)]
+[*.{ac,am,m4}]
 indent_style = tab
 
 # Ebuild

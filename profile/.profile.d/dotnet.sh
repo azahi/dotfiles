@@ -2,7 +2,7 @@
 
 if command -v dotnet >/dev/null 2>&1
 then
-    path_prepend "${HOME}/.dotnet/tools"
+    path_append "${HOME}/.dotnet/tools"
 
     export DOTNET_CLI_TELEMETRY_OPTOUT=1
     export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
