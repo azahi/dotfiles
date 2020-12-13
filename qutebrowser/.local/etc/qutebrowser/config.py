@@ -10,8 +10,8 @@
 #   qute://help/configuring.html
 #   qute://help/settings.html
 
-# Change the argument to True to still load settings configured via autoconfig.yml
-config.load_autoconfig(False)
+# Uncomment this to still load settings configured via autoconfig.yml
+# config.load_autoconfig()
 
 # Require a confirmation before quitting the application.
 # Type: ConfirmQuit
@@ -76,7 +76,8 @@ c.qt.args = []
 # Type: Bool
 c.qt.highdpi = False
 
-# Automatically start playing `<video>` elements.
+# Automatically start playing `<video>` elements. Note: On Qt < 5.11,
+# this option needs a restart and does not support URL patterns.
 # Type: Bool
 c.content.autoplay = False
 
@@ -114,7 +115,8 @@ config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 #   - never: Don't accept cookies at all.
 config.set('content.cookies.accept', 'all', 'devtools://*')
 
-# Store cookies.
+# Store cookies. Note this option needs a restart with QtWebEngine on Qt
+# < 5.9.
 # Type: Bool
 c.content.cookies.store = True
 
@@ -123,7 +125,8 @@ c.content.cookies.store = True
 # Type: String
 c.content.default_encoding = 'utf-8'
 
-# Allow websites to share screen content.
+# Allow websites to share screen content. On Qt < 5.10, a dialog box is
+# always displayed, even if this is set to "true".
 # Type: BoolAsk
 # Valid values:
 #   - true
@@ -131,7 +134,8 @@ c.content.default_encoding = 'utf-8'
 #   - ask
 config.set('content.desktop_capture', True, 'https://discord.com')
 
-# Allow websites to share screen content.
+# Allow websites to share screen content. On Qt < 5.10, a dialog box is
+# always displayed, even if this is set to "true".
 # Type: BoolAsk
 # Valid values:
 #   - true
@@ -576,7 +580,7 @@ c.prompt.radius = 0
 #   - always: Always show the scrollbar.
 #   - never: Never show the scrollbar.
 #   - when-searching: Show the scrollbar when searching for text in the webpage. With the QtWebKit backend, this is equal to `never`.
-#   - overlay: Show an overlay scrollbar. On macOS, this is unavailable and equal to `when-searching`; with the QtWebKit backend, this is equal to `never`. Enabling/disabling overlay scrollbars requires a restart.
+#   - overlay: Show an overlay scrollbar. With Qt < 5.11 or on macOS, this is unavailable and equal to `when-searching`; with the QtWebKit backend, this is equal to `never`. Enabling/disabling overlay scrollbars requires a restart.
 c.scrolling.bar = 'never'
 
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
@@ -791,8 +795,7 @@ c.url.default_page = 'https://start.duckduckgo.com/'
 # * `{quoted}` quotes all characters (for `slash/and&amp` this
 # placeholder   expands to `slash%2Fand%26amp`). * `{unquoted}` quotes
 # nothing (for `slash/and&amp` this placeholder   expands to
-# `slash/and&amp`). * `{0}` means the same as `{}`, but can be used
-# multiple times.  The search engine named `DEFAULT` is used when
+# `slash/and&amp`).  The search engine named `DEFAULT` is used when
 # `url.auto_search` is turned on and something else than a URL was
 # entered to be opened. Other search engines can be used by prepending
 # the search engine name to the search term, e.g. `:open google

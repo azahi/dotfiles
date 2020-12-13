@@ -23,11 +23,20 @@ keystate_scrolllock= disable
 "otpmenu"
     Mod4 + Control + p
 
-"slock"
-    Mod4 + c
-
 "qutebrowser"
     Mod4 + w
+
+"slock"
+    XF86ScreenSaver
+
+"mon"
+    XF86Display
+
+"sus"
+    XF86Sleep
+
+"hib"
+    Shift + XF86Sleep
 
 "amixer sset Master toggle"
     XF86AudioMute
