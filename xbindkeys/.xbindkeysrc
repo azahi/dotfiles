@@ -2,13 +2,16 @@ keystate_numlock = disable
 keystate_capslock = disable
 keystate_scrolllock= disable
 
-"wrapper-terminal"
+"st -e tmux"
     Mod4 + Return
 
-"wrapper-terminal -e ncmpcpp"
+"st -e tmux attach"
+    Mod4 + Shift + Return
+
+"st -e ncmpcpp"
     Mod4 + Shift + m
 
-"wrapper-terminal -e htop"
+"st -e htop"
     Mod4 + Shift + t
 
 "dmenu_run"
@@ -20,7 +23,10 @@ keystate_scrolllock= disable
 "otpmenu"
     Mod4 + Control + p
 
-"wrapper-browser"
+"slock"
+    Mod4 + c
+
+"qutebrowser"
     Mod4 + w
 
 "amixer sset Master toggle"

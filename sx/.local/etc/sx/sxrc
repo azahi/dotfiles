@@ -40,7 +40,7 @@ fi
 if command -v setxkbmap >/dev/null 2>&1
 then
     setxkbmap \
-        -layout "us,ru" \
+        -layout "us,ru(phonetic)" \
         -option "grp:win_space_toggle,compose:menu,caps:escape,terminate:ctrl_alt_bksp" &
 fi
 
@@ -50,9 +50,9 @@ then
     xbindkeys &
 fi
 
-if command -v unclutter >/dev/null 2>&1
+if command -v xbanish >/dev/null 2>&1
 then
-    unclutter --timeout 3 --ignore-scrolling --fork &
+    xbanish &
 fi
 
 if command -v autocutsel >/dev/null 2>&1
