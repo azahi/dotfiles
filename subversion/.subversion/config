@@ -43,7 +43,7 @@
 ### Set diff-cmd to the absolute path of your 'diff' program.
 ###   This will override the compile-time default, which is to use
 ###   Subversion's internal diff implementation.
-# diff-cmd = diff_program (diff, gdiff, etc.)
+diff-cmd = colordiff
 ### Diff-extensions are arguments passed to an external diff
 ### program or to Subversion's internal diff implementation.
 ### Set diff-extensions to override the default arguments ('-u').
@@ -131,7 +131,7 @@ global-ignores = .vscode .idea cmake-build-* *.tmp *.temp *.bak .ccls-cache .gdb
 ### option) to employ an external differencing tool which is able
 ### to show meaningful differences for binary file formats.  [New
 ### in 1.9]
-# diff-ignore-content-type = no
+diff-ignore-content-type = no
 
 ### Section for configuring automatic properties.
 [auto-props]
