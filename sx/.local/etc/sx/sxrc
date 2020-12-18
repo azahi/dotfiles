@@ -10,8 +10,12 @@ fi
 
 if command -v xset >/dev/null 2>&1
 then
+    xset -b &
+    xset -dpms &
     xset m 3/2 3 &
     xset r rate 200 50 &
+    xset s noblank &
+    xset s noexpose &
 fi
 
 if command -v dbus-launch >/dev/null 2>&1 \

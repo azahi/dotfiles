@@ -26,7 +26,7 @@ keystate_scrolllock= disable
 "qutebrowser"
     Mod4 + w
 
-"slock"
+"xset dpms force suspend && slock"
     XF86ScreenSaver
 
 "mon"
