@@ -1,7 +1,5 @@
 #!/bin/sh
 
-cd || exit "$?"
-
 if [ -f "${HOME}/.profile" ]
 then
     # shellcheck disable=SC1090
@@ -10,12 +8,8 @@ fi
 
 if command -v xset >/dev/null 2>&1
 then
-    xset -b &
-    xset -dpms &
     xset m 3/2 3 &
     xset r rate 200 50 &
-    xset s noblank &
-    xset s noexpose &
 fi
 
 if command -v dbus-launch >/dev/null 2>&1 \
@@ -35,17 +29,15 @@ then
     xrdb "${HOME}/.xresources"
 fi
 
-if command -v hsetroot >/dev/null 2>&1 \
-&& command -v xgetres >/dev/null 2>&1
-then
-    hsetroot -solid "$(xgetres background)" &
-fi
-
 if command -v setxkbmap >/dev/null 2>&1
 then
     setxkbmap \
-        -layout "us,ru(phonetic)" \
-        -option "grp:win_space_toggle,compose:menu,caps:escape,terminate:ctrl_alt_bksp" &
+        -layout "us,ru" \
+        -variant ",phonetic" \
+        -option terminate:ctrl_alt_bksp \
+        -option caps:escape \
+        -option compose:menu \
+        -option grp:win_space_toggle &
 fi
 
 if command -v xbindkeys >/dev/null 2>&1 \
@@ -61,18 +53,24 @@ fi
 
 if command -v autocutsel >/dev/null 2>&1
 then
-    autocutsel -fork &
+    autocutsel -fork -selection CLIPBOARD &
     autocutsel -fork -selection PRIMARY &
+fi
+
+if command -v xgetres >/dev/null 2>&1
+then
+    if command -v hsetroot >/dev/null 2>&1
+    then
+        hsetroot -solid "$(xgetres background)" &
+    elif command -v xsetroot >/dev/null 2>&1
+    then
+        xsetroot -solid "$(xgetres background)" &
+    fi
 fi
 
 if command -v picom >/dev/null 2>&1
 then
     picom --daemon &
-fi
-
-if command -v urxvtd >/dev/null 2>&1
-then
-    urxvtd --quiet --opendisplay --fork &
 fi
 
 for WM in dwm emacs
@@ -85,6 +83,7 @@ do
             dwm-status &
         fi
 
+        export "WM"
         exec "${WM}"
     fi
 done
