@@ -222,10 +222,6 @@ Plug 'tpope/vim-unimpaired'
 " }}}
 
 " {{{
-Plug 'vim-scripts/ruscmd'
-" }}}
-
-" {{{
 Plug 'terryma/vim-expand-region'
 " }}}
 

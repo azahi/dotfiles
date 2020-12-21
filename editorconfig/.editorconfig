@@ -5,8 +5,8 @@ charset = utf-8
 end_of_line = lf
 indent_size = 4
 indent_style = space
-insert_final_newline = false
-trim_trailing_whitespace = false
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 # Assembly
 [*.{asm,s,S}]
@@ -16,16 +16,21 @@ indent_style = tab
 [*.{c,h,cc,hh,cpp,hpp,cxx,hxx}]
 indent_style = tab
 max_line_length = 80
+trim_trailing_whitespace = false
+insert_final_newline = false
 
 # C#
-[*.{cs,fs}]
-end_of_line = crlf
+[*.cs]
+indent_style = tab
+
+# Go
+[*.go]
+indent_style = tab
 
 # Python
 [*.py]
 insert_final_newline = true
 max_line_length = 80
-trim_trailing_whitespace = true
 
 # Haskell
 [*.{hs,lhs}]
@@ -36,41 +41,44 @@ indent_size = 2
 indent_size = 2
 
 # Common Lisp
-[*.{lisp,lsp,l,cl}]
+[*.{lisp,cl}]
 indent_size = 2
 
 # Scheme
-[*.{scm,sps,sls,sld,ss,sc,sch}]
-indent_size = 2
-
-# Racket
-[*.rkt]
+[*.scm]
 indent_size = 2
 
 # Make
-[Makefile]
-indent_style = tab
-max_line_length = 80
-
-# mk
-[*.mk]
+[Makefile,*.mk]
 indent_style = tab
 
 # CMake
 [CMakeList.txt]
-indent_size = 8
+indent_size = 2
 
 # Autotools
-[*.{ac,am,m4}]
+[*.{ac,am}]
 indent_style = tab
+
+# Shell
+[*.sh]
+insert_final_newline = false
+trim_trailing_whitespace = false
 
 # Ebuild
 [*.ebuild]
 indent_style = tab
 
+# RPM
+[*.spec]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
 # XML
 [*.xml]
 indent_style = tab
+insert_final_newline = false
+trim_trailing_whitespace = false
 
 # Git
 [*.git*]
