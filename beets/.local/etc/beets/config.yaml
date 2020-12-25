@@ -1,5 +1,5 @@
 ---
-library: ~/.local/var/beets/library.db
+library: ~/.local/var/lib/beets/library.db
 directory: ~/music
 plugins: edit mbsync fetchart info
 format_item: $artist - $album - $title
