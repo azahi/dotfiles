@@ -3,31 +3,11 @@ from tempfile import mkstemp
 import atexit
 import os
 import readline
-import rlcompleter  # noqa: F401
+import rlcompleter
 import sys
 
+
 readline.parse_and_bind("tab: complete")
-
-
-class Completer(object):
-    def __init__(self):
-        self.python_dir = os.path.expanduser(
-            "%s/python" % os.environ["XDG_DATA_HOME"])
-        if not os.path.exists(self.python_dir):
-            os.mkdir(self.python_dir)
-        self.python_histfile = os.path.expanduser(
-            "%s/history" % self.python_dir)
-        if os.path.exists(self.python_histfile):
-            readline.read_history_file(self.python_histfile)
-        readline.set_history_length(1000)
-        atexit.register(self.savehist)
-
-    def savehist(self):
-        import readline
-        readline.write_history_file(self.python_histfile)
-
-
-C = Completer()
 
 
 class TermColors(dict):
@@ -50,30 +30,37 @@ class TermColors(dict):
         ("LightCyan",   "1;36"),
         ("White",       "1;37")
     )
-    color_default = ''
     color_base = '\001\033[%sm\002'
 
     def __init__(self):
-        if os.environ.get('TERM') in ('rxvt', 'rxvt-256color',
-                                      'urxvt', 'urxvt-256color',
-                                      'screen', 'screen-256color',
-                                      'xterm', 'xterm-256color',
-                                      'st', 'st-256color'):
-            self.update(dict(
-                [(k, self.color_base % v) for k, v in self.color_templates]))
-        else:
-            self.update(dict(
-                [(k, self.color_default) for k, v in self.color_templates]))
+        self.update(dict(
+            [(k, self.color_base % v) for k, v in self.color_templates]))
 
 
-TC = TermColors()
-sys.ps1 = "%sλ%s %s>%s " % (TC['Blue'], TC['Normal'],
-                            TC['White'], TC['Normal'])
-sys.ps2 = "    %s…%s %s>%s " % (TC['Blue'], TC['Normal'],
-                                TC['White'], TC['Normal'])
+class Completer(object):
+    def save_history(self):
+        import readline
+
+        readline.write_history_file(self.python_histfile)
+
+    def __init__(self):
+        self.python_dir = os.path.expanduser(
+            "%s/python" % os.environ["XDG_DATA_HOME"])
+
+        if not os.path.exists(self.python_dir):
+            os.mkdir(self.python_dir)
+
+        self.python_histfile = os.path.expanduser(
+            "%s/history" % self.python_dir)
+
+        if os.path.exists(self.python_histfile):
+            readline.read_history_file(self.python_histfile)
+
+        readline.set_history_length(1000)
+        atexit.register(self.save_history)
 
 
-def display_hook(value):
+def DisplayHook(value):
     if value is not None:
         try:
             import __builtin__
@@ -82,15 +69,9 @@ def display_hook(value):
             __builtins__._ = value
 
         import pprint
+
         pprint.pprint(value)
         del pprint
-
-
-sys.displayhook = display_hook
-
-
-EDITOR = os.environ.get('EDITOR', 'vim')
-EDIT_CMD = ':e'
 
 
 class EditableBufferInteractiveConsole(InteractiveConsole):
@@ -104,21 +85,41 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
 
     def raw_input(self, *args):
         line = InteractiveConsole.raw_input(self, *args)
+
         if line == EDIT_CMD:
             tmp_fd, tmp_file = mkstemp('.py')
+
             os.write(tmp_fd, b'\n'.join(self.last_buffer))
             os.close(tmp_fd)
+
             os.system('%s %s' % (EDITOR, tmp_file))
+
             line = open(tmp_file).read()
+
             os.unlink(tmp_file)
             tmp_file = ''
+
             lines = line.split('\n')
+
             for i in range(len(lines) - 1):
                 self.push(lines[i])
+
             line = lines[-1]
         return line
 
 
+TC = TermColors()
+ps1 = "%sλ%s %s>%s "
+sys.ps1 = ps1 % (TC['Blue'],  TC['Normal'],
+                 TC['White'], TC['Normal'])
+ps2 = "    %s…%s %s>%s "
+sys.ps2 = ps2 % (TC['Blue'],  TC['Normal'],
+                 TC['White'], TC['Normal'])
+sys.displayhook = DisplayHook
+
+C = Completer()
+EDITOR = os.environ.get('EDITOR', 'vim')
+EDIT_CMD = ':e'
 C = EditableBufferInteractiveConsole(locals=locals())
 C.interact(banner="")
 

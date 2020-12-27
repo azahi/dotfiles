@@ -16,8 +16,6 @@ then
     source "${ZGEN_DIR}/zgen.zsh"
     if ! zgen saved
     then
-        zgen load azahi/zsh-lambda lambda.zsh-theme
-
         zgen load hlissner/zsh-autopair
 
         zgen load zsh-users/zsh-autosuggestions
@@ -28,10 +26,7 @@ then
 
         zgen load zsh-users/zsh-completions
 
-        if [[ "${ZSH_VERSION}" == "5.8" ]]
-        then
-            zgen load softmoth/zsh-vim-mode
-        fi
+        zgen load softmoth/zsh-vim-mode
 
         zgen save
     fi
@@ -40,8 +35,5 @@ then
     bindkey '^ ' autosuggest-accept
 
     # softmoth/zsh-vim-mode
-    if [[ "${ZSH_VERSION}" == "5.8" ]]
-    then
-        bindkey -rpM viins '^[^['
-    fi
+    bindkey -rpM viins '^[^['
 fi

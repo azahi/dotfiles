@@ -8,6 +8,7 @@ fi
 
 if command -v xset >/dev/null 2>&1
 then
+    xset -dpms &
     xset m 3/2 3 &
     xset r rate 200 50 &
 fi

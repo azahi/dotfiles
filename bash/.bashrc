@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#if command -v fish >/dev/null 2>&1 \
+#&& [[ "$(ps --no-header --pid=$PPID --format=cmd)" != "fish" ]]
+#then
+#    exec fish
+#fi
+
 set -o notify
 
 shopt -s extglob

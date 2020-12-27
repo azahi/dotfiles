@@ -3,6 +3,8 @@
 fields=0 48 6 17 18 38 39 40 2 46 47 49 1
 sort_key=47
 sort_direction=1
+tree_sort_key=0
+tree_sort_direction=1
 hide_kernel_threads=1
 hide_userland_threads=1
 shadow_other_users=1
@@ -17,6 +19,7 @@ find_comm_in_cmdline=0
 strip_exe_from_cmdline=0
 show_merged_command=0
 tree_view=1
+tree_view_always_by_pid=1
 header_margin=1
 detailed_cpu_time=1
 cpu_count_from_one=0
