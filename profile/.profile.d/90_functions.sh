@@ -26,18 +26,30 @@ hex2dec()
     printf "%d\n" "0x${1}"
 }
 
+sponge()
+{
+    local tmp
+
+    tmp="$(mktemp)" || return
+    cat > "${tmp}"
+    cat -- "${tmp}"
+    rm -f -- "${tmp}"
+}
+
 ff()
 {
     find . -type f -iname "${@}" -ls
 }
 
-mkcd() {
+mkcd()
+{
     mkdir -p "${1}" && \
         builtin cd "${1}" || \
         return
 }
 
-mvcd() {
+mvcd()
+{
     mv -i -- "${PWD}" "${1}" && \
         builtin cd . || \
         return
@@ -66,20 +78,12 @@ ubak()
     done
 }
 
-sponge()
+myip()
 {
-    local tmp
-
-    tmp="$(mktemp)" || return
-    cat > "${tmp}"
-    cat -- "${tmp}"
-    rm -f -- "${tmp}"
-}
-
-myip() {
     dig -4 +short @resolver1.opendns.com myip.opendns.com A
 }
 
-myip6() {
+myip6()
+{
     dig -6 +short @resolver1.opendns.com myip.opendns.com AAAA
 }
