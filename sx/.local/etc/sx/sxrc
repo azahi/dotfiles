@@ -8,6 +8,7 @@ fi
 
 if command -v xset >/dev/null 2>&1
 then
+    xset s off &
     xset -dpms &
     xset m 3/2 3 &
     xset r rate 200 50 &
@@ -16,12 +17,7 @@ fi
 if command -v dbus-launch >/dev/null 2>&1 \
 && [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]
 then
-    if [ "${HOST}" != "sava" ]
-    then
-        eval "$(dbus-launch --sh-syntax --exit-with-x11)"
-    else
-        eval "$(dbus-launch --sh-syntax --exit-with-session)"
-    fi
+    eval "$(dbus-launch --sh-syntax --exit-with-x11)"
 fi
 
 if command -v xrdb >/dev/null 2>&1 \
@@ -84,7 +80,7 @@ do
             dwm-status &
         fi
 
-        export "WM"
+        export WM
         exec "${WM}"
     fi
 done

@@ -2,10 +2,12 @@
 
 if [ -f "${HOME}"/.profile ]
 then
-    source ${HOME}/.profile
+    # shellcheck disable=SC1090
+    source "${HOME}/.profile"
 fi
 
 if [ -f "${HOME}/.bashrc" ]
 then
-    source ${HOME}/.bashrc
+    # shellcheck disable=SC1090
+    source "${HOME}/.bashrc"
 fi

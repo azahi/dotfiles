@@ -31,3 +31,9 @@ alias rmdir="rmdir -p"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
+
+alias cal="cal -m"
+
+alias du="du -h"
+
+alias df="df -h"

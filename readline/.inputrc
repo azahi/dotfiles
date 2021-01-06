@@ -2,6 +2,7 @@ $include /etc/inputrc
 
 set bell-style visible
 set bind-tty-special-chars off
+set blink-matching-paren on
 set colored-completion-prefix on
 set colored-stats on
 set completion-ignore-case on
@@ -26,7 +27,6 @@ $if mode=emacs
 	"\e[5C": forward-word
 	"\e[5D": backward-word
 	"\e[3~": delete-char
-	"\e[2~": quoted-insert
 	"\e[5~": history-search-backward
 	"\e[6~": history-search-forward
 	"\t": menu-complete
@@ -34,12 +34,17 @@ $endif
 
 $if mode=vi
 	set keymap vi-command
-	"gg": beginning-of-history
-	"G": end-of-history
+	"^": beginning-of-line
+	"$": end-of-line
+	"w": forward-word
+	"b": backward-word
+	"x": delete-char
 	"k": history-search-backward
 	"j": history-search-forward
 	"?": reverse-search-history
 	"/": forward-search-history
+	"gg": beginning-of-history
+	"G": end-of-history
 
 	set keymap vi-insert
 	"\C-l": clear-screen
@@ -48,6 +53,7 @@ $if mode=vi
 	"\C-e": end-of-line
 	"\C-p": history-search-backward
 	"\C-n": history-search-forward
+	"\t": menu-complete
 $endif
 
 $if term=linux
@@ -57,5 +63,3 @@ $else
 	set vi-ins-mode-string \1\e[6 q\2
 	set vi-cmd-mode-string \1\e[2 q\2
 $endif
-
-set keymap vi
