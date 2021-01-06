@@ -137,6 +137,14 @@ config.set('content.desktop_capture', True, 'https://discord.com')
 #   - true
 #   - false
 #   - ask
+config.set('content.desktop_capture', True, 'https://web.skype.com')
+
+# Allow websites to share screen content.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
 c.content.desktop_capture = 'ask'
 
 # Allow websites to request geolocations.
@@ -300,22 +308,6 @@ c.content.local_content_can_access_file_urls = True
 # Type: Bool
 c.content.local_storage = True
 
-# Allow websites to record audio.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-config.set('content.media.audio_capture', True, 'https://web.skype.com')
-
-# Allow websites to record audio and video.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-config.set('content.media.audio_video_capture', True, 'https://web.skype.com')
-
 # Allow websites to record audio and video.
 # Type: BoolAsk
 # Valid values:
@@ -330,23 +322,7 @@ config.set('content.media.audio_video_capture', True, 'https://discord.com')
 #   - true
 #   - false
 #   - ask
-config.set('content.media.audio_video_capture', True, 'https://us01web.zoom.us')
-
-# Allow websites to record audio and video.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-config.set('content.media.audio_video_capture', True, 'https://us02web.zoom.us')
-
-# Allow websites to record video.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-config.set('content.media.video_capture', True, 'https://web.skype.com')
+config.set('content.media.audio_video_capture', True, 'https://web.skype.com')
 
 # Allow websites to show notifications.
 # Type: BoolAsk
@@ -435,7 +411,7 @@ c.completion.timestamp_format = '%Y-%m-%d'
 
 # Minimum amount of characters needed to update completions.
 # Type: Int
-c.completion.min_chars = 1
+c.completion.min_chars = 3
 
 # Directory to save downloads to. If unset, a sensible OS-specific
 # default is used.
@@ -480,7 +456,7 @@ c.downloads.remove_finished = 0
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
-c.editor.command = ['wrapper-terminal', '-e', 'vim', '-f', '{}']
+c.editor.command = ['st', '-e', 'vim', '-f', '{}']
 
 # When a hint can be automatically followed without pressing Enter.
 # Type: String
@@ -643,7 +619,7 @@ c.tabs.favicons.scale = 1.0
 #   - always: Always show favicons.
 #   - never: Always hide favicons.
 #   - pinned: Show favicons only on pinned tabs.
-c.tabs.favicons.show = 'never'
+c.tabs.favicons.show = 'pinned'
 
 # Switch between tabs using the mouse wheel.
 # Type: Bool
@@ -752,7 +728,7 @@ c.tabs.pinned.frozen = False
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'https://start.duckduckgo.com/'
+c.url.default_page = 'about:blank'
 
 # Search engines which can be used via the address bar.  Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -777,7 +753,7 @@ c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'https://start.duckduckgo.com'
+c.url.start_pages = 'about:blank'
 
 # URL parameters to strip with `:yank url`.
 # Type: List of String
