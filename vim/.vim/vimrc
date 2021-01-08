@@ -3,84 +3,94 @@ if ! has('nvim')
     set viminfo+=~/.vim/viminfo
 endif
 
-set autoindent
 set autoread
 set backspace=indent,eol,start
-set breakindent
 set clipboard=unnamed,unnamedplus
-set cmdheight=1
-set cmdwinheight=10
-set complete+=i,d
-set completeopt=menuone,menu,longest
-set display+=lastline
-set encoding=utf-8
-set expandtab
-set exrc
-set fileformats=unix,dos
-set fillchars=vert:\│
-set foldcolumn=0
-set foldenable
-set foldmethod=manual
-set foldminlines=1
-set formatoptions-=tro
+set fillchars=vert:\ "
 set hidden
-set history=100
-set hlsearch
-set ignorecase
-set incsearch
 set lazyredraw
-set magic
 set modeline
 set mouse=
-set nobackup
-set nocursorline
-set noerrorbells
-set nolist
 set noshowmode
-set noswapfile
-set notitle
-set noundofile
-set novisualbell
-set nowrap
-set nowritebackup
-set number
 set path+=**
-set ruler
-set scrolloff=10
-set sessionoptions-=options
-set shiftround
-set shiftwidth=4
-set showcmd
-set sidescrolloff=10
-set smartcase
-set smartindent
-set smarttab
-set softtabstop=4
+
+set statusline=
+set statusline+=\ %m%r
+set statusline+=%f\ "
+set statusline+=%1*
+set statusline+=%*
+set statusline+=%=
+set statusline+=%1*
+set statusline+=\ %l:%c/%L\ %p%%\ "
+set statusline+=%*
+
+set noerrorbells
+set novisualbell
+
 set splitbelow
 set splitright
-set synmaxcol=500
-set t_Co=256
-set t_vb=
-set tabstop=4
-set timeoutlen=1000
-set ttimeoutlen=0
-set updatetime=300
-set viewoptions-=options
+
+set complete=
+set complete+=.
+set complete+=b
+set complete+=t
+set completeopt=
+set completeopt+=menu
+set completeopt+=longest
+
+set gdefault
+set hlsearch
+set inccommand=split
+set incsearch
+set iskeyword+=-
+set magic
+
+set foldmethod=marker
+set nofoldenable
+
+set shortmess=
+set shortmess+=I
+set shortmess+=T
+set shortmess+=a
+set shortmess+=c
+set shortmess+=t
+
+set nolist
+set nowrap
+set scrolloff=10
+set sidescrolloff=10
+
+set number
+set relativenumber
+
 set wildignorecase
 set wildmenu
+set wildignore=
 
-set statusline=\ 
-set statusline+=%f
-set statusline+=\ %1*\ 
-set statusline+=%y
-set statusline+=\ %2*\ 
-set statusline+=%=
-set statusline+=\ %3*\ 
-set statusline+=\ 
-set statusline+=%l
-set statusline+=\ %4*\ 
-set statusline+=%L
-set statusline+=\ 
+set nobackup
+set noswapfile
+set noundofile
+set nowritebackup
+
+set smartcase
+set ignorecase
+
+set autoindent
+set breakindent
+set smartindent
+
+set expandtab
+set shiftround
+set shiftwidth=4
+set smarttab
+set softtabstop=4
+set tabstop=4
+
+try
+    set encoding=utf-8
+    scriptencoding utf-8
+catch
+endtry
 
 if has('autocmd')
     filetype on
@@ -92,33 +102,39 @@ if has('syntax')
     syntax enable
 endif
 
-let mapleader = ','
-let maplocalleader = '\'
+let mapleader = ' '
 
-nnoremap        j           gj
-nnoremap        k           gk
+nnoremap <Expr> j           v:count ? 'j' : 'gj'
+nnoremap <Expr> k           v:count ? 'k' : 'gk'
+
+nnoremap        J           gt
+nnoremap        K           gT
+
+nnoremap        <C-a>       ^h
+vnoremap        <C-a>       ^h
+nnoremap        H           ^h
+vnoremap        H           ^h
+
+nnoremap        <C-e>       $
+vnoremap        <C-e>       $
+nnoremap        L           $
+vnoremap        L           $
 
 nnoremap        N           Nzzzv
 nnoremap        n           nzzzv
 
-map             0           ^
-
-nmap            <M-j>       mz:<C-u>m+<cr>`z
-nmap            <M-k>       mz:<C-u>m-2<cr>`z
-vmap            <M-j>       :<C-u>m'>+<cr>`<my`>mzgv`yo`z
-vmap            <M-k>       :<C-u>m'<-2<cr>`>my`<mzgv`yo`z
-
-nmap            <Leader>w   :<C-u>w!<CR>
-
-vmap            <Tab>       >
-vmap            <S-Tab>     <
 vnoremap        <           <gv
 vnoremap        >           >gv
 
 nnoremap        ]b          :<C-u>bnext<CR>
 nnoremap        [b          :<C-u>bprevious<CR>
 
-nnoremap        <Return>    :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR><C-l>
+nnoremap        <A-h>       <C-w>h
+nnoremap        <A-j>       <C-w>j
+nnoremap        <A-k>       <C-w>k
+nnoremap        <A-l>       <C-w>l
+
+nnoremap        <C-l>       :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR><C-l>
 
 cnoremap        ;/          <C-r>=expand('%:p:h').'/'<CR>
 cnoremap        ;;          <C-r>=expand('%:t')<CR>
@@ -127,65 +143,72 @@ cnoremap        ;.          <C-r>=expand('%:p:r')<CR>
 cnoremap        <C-a>       <Home>
 cnoremap        <C-e>       <End>
 
-map             <C-n>       <C-h>h
-map             <C-j>       <C-w>j
-map             <C-k>       <C-k>k
-map             <C-l>       <C-l>l
+nnoremap        gw          vapgw
 
-map             <Leader>ss  :<C-u>setlocal spell!<CR>
+nnoremap        Q           @q
+
+nnoremap        <Leader>c   ^v$h
+nnoremap        <Leader>v   ggVG
 
 map             <Leader>sn  ]s
 map             <Leader>sp  [s
 map             <Leader>sa  zg
 map             <Leader>s?  z=
 
-imap            <C-v>       <ESC>"+gpa
-nmap            <Leader>y   "+yE
-vmap            <Leader>y   "+y
+inoremap        <C-v>       <C-c>"+pi
+cnoremap        <C-v>       <C-r>+
+
+nmap            <Leader>w   :<C-u>w!<CR>
+nmap            <Leader>wq  :<C-u>wq!<CR>
 
 nnoremap        ZX          :<C-u>qa!<CR>
 
-function! FzyCommand(choice_command, vim_command)
-    try
-        let output = system(a:choice_command . ' | fzy ')
-    catch /Vim:Interrupt/
-    endtry
-    redraw!
-    if v:shell_error == 0 && !empty(output)
-        exec a:vim_command . ' ' . output
+function! SwitchCase()
+    normal! ~
+    if strlen(getline('.')) != virtcol('.')
+        normal! h
     endif
 endfunction
+nnoremap        ~           :<C-u>call SwitchCase()<CR>
 
-nnoremap        <Leader>e   :<C-u>call FzyCommand('find . -type f', ':e')<CR>
-nnoremap        <Leader>v   :<C-u>call FzyCommand('find . -type f', ':vs')<CR>
-nnoremap        <Leader>s   :<C-u>call FzyCommand('find . -type f', ':sp')<CR>
+function! MapGoToTab()
+    let s:i = 1
+    while s:i < 10
+        exe 'nnoremap <Leader>' . s:i . ' :<C-u>tabnext ' . s:i . '<CR>'
+        let s:i += 1
+    endwhile
+endfunction
+call MapGoToTab()
 
 if executable('doas')
-    command!    W           :execute ':silent w !doas tee % > /dev/null' | :edit!
+    command! W :execute ':silent w !doas tee % >/dev/null' | :edit!
 elseif executable('sudo')
-    command!    W           :execute ':silent w !sudo tee % > /dev/null' | :edit!
+    command! W :execute ':silent w !sudo tee % >/dev/null' | :edit!
 endif
 
 autocmd BufEnter * set noreadonly
 
-if !exists(':DiffOrig')
-    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
-endif
+autocmd BufNewFile * :exe ': !mkdir -p ' . escape(fnamemodify(bufname('%'),':p:h'),'#% \\')
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/.plug')
 
 " {{{
-Plug 'chriskempson/base16-vim'
+Plug 'vim-utils/vim-husk'
 " }}}
 
 " {{{
-Plug 'editorconfig/editorconfig-vim'
+Plug 'bronson/vim-visual-star-search'
+" }}}
+
+" {{{
+Plug 'google/vim-searchindex'
 " }}}
 
 " {{{
@@ -203,6 +226,19 @@ Plug 'romainl/vim-cool'
 " {{{
 Plug 'justinmk/vim-sneak'
 let g:sneak#label = 1
+
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+vmap f <Plug>Sneak_f
+vmap F <Plug>Sneak_F
+
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+vmap t <Plug>Sneak_t
+vmap T <Plug>Sneak_T
+
+nmap <Plug>(Go_away_Sneak_s) <Plug>Sneak_s
+nmap <Plug>(Go_away_Sneak_S) <Plug>Sneak_S
 " }}}
 
 " {{{
@@ -222,19 +258,90 @@ Plug 'tpope/vim-unimpaired'
 " }}}
 
 " {{{
+Plug 'tpope/vim-eunuch'
+" }}}
+
+" {{{
+Plug 'tpope/vim-commentary'
+" }}}
+
+" {{{
+Plug 'tpope/vim-fugitive'
+" }}}
+
+" {{{
+Plug 'tpope/vim-rhubarb'
+" }}}
+
+" {{{
+Plug 'tpope/vim-abolish'
+" }}}
+
+" {{{
+Plug 'tpope/vim-obsession'
+" }}}
+
+" {{{
+Plug 'RRethy/vim-illuminate'
+" }}}
+
+" {{{
 Plug 'terryma/vim-expand-region'
 " }}}
 
 " {{{
-Plug 'sheerun/vim-polyglot'
+Plug 'ervandew/supertab'
+
+let g:SuperTabDefaultCompletionType = '<C-n>'
+" }}}
+
+" {{{
+Plug 'chrisbra/Colorizer'
+" }}}
+
+" {{{
+Plug 'junegunn/rainbow_parentheses.vim'
+" }}}
+
+" {{{
+if executable('gpg')
+    Plug 'jamessan/vim-gnupg'
+endif
 " }}}
 
 " {{{
 if executable('clang-format')
     Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
+
     nnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
     vnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
 endif
+" }}}
+
+" {{{
+if executable('tmux')
+    Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
+    Plug 'tmux-plugins/vim-tmux-focus-events'
+endif
+" }}}
+
+" {{{
+if executable('ack') || executable('ag')
+    Plug 'mileszs/ack.vim'
+    if executable('ag')
+        let g:ackprg = 'ag --vimgrep'
+    endif
+endif
+" }}}
+
+" {{{
+if executable('wakatime')
+    Plug 'wakatime/vim-wakatime'
+endif
+" }}}
+
+" {{{
+Plug 'editorconfig/editorconfig-vim'
 " }}}
 
 " {{{
@@ -255,24 +362,24 @@ Plug 'gentoo/gentoo-syntax'
 " }}}
 
 " {{{
-if executable('tmux')
-    Plug 'ericpruitt/tmux.vim', { 'rtp': 'vim/' }
-endif
+Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 " }}}
 
 " {{{
-if executable('ack') || executable('ag')
-    Plug 'mileszs/ack.vim'
-    if executable('ag')
-        let g:ackprg = 'ag --vimgrep'
-    endif
-endif
+Plug 'elzr/vim-json', {'for': 'json'}
+let g:vim_json_syntax_conceal = 0
 " }}}
 
 " {{{
-if executable('wakatime')
-    Plug 'wakatime/vim-wakatime'
-endif
+Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+" }}}
+
+" {{{
+Plug 'chr4/nginx.vim', {'for': 'nginx'}
+" }}}
+
+" {{{
+Plug 'sheerun/vim-polyglot'
 " }}}
 
 " {{{
@@ -294,23 +401,22 @@ if has('nvim') && has('python3')
     nnoremap <Leader>lf :<C-u>call LanguageClient#textDocument_formatting()<CR>
     nnoremap <Leader>lh :<C-u>call LanguageClient#textDocument_hover()<CR>
     nnoremap <Leader>lr :<C-u>call LanguageClient#textDocument_rename()<CR>
-    nnoremap <Leader>ls :<C-u>call LanguageClient_textDocument_documentSymbol()<CR>
+    nnoremap <Leader>ls :<C-u>call LanguageClient#textDocument_documentSymbol()<CR>
     nnoremap <Leader>lt :<C-u>call LanguageClient#textDocument_typeDefinition()<CR>
 
     let g:LanguageClient_serverCommands = {}
+
     if executable('ccls')
         let g:LanguageClient_serverCommands[ 'c'   ] = [ 'ccls' ]
         let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'ccls' ]
-
-        func! C_init()
-            setlocal formatexpr=LanguageClient#textDocument_rangeFormatting()
-        endf
-        autocmd FileType c,cpp :call C_init()
 
         nnoremap <Leader>h :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'L'})<CR>
         nnoremap <Leader>j :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'D'})<CR>
         nnoremap <Leader>k :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'U'})<CR>
         nnoremap <Leader>l :<C-u>call LanguageClient#findLocations({'method':'$ccls/navigate','direction':'R'})<CR>
+    elseif executable('clangd')
+        let g:LanguageClient_serverCommands[ 'c'   ] = [ 'clangd', '-background-index' ]
+        let g:LanguageClient_serverCommands[ 'cpp' ] = [ 'clangd', '-background-index' ]
     endif
 
     if executable('gopls')
@@ -348,14 +454,10 @@ if has('nvim') && has('python3')
 
     " {{{
     Plug 'Shougo/echodoc.vim'
+
     let g:echodoc#enable_at_startup = 1
     let g:echodoc#type = 'signature'
     " }}}
 endif
 
 call plug#end()
-
-"try
-"    colorscheme base16-tomorrow-night
-"catch /^Vim\%((\a\+)\)\=:E185/
-"endtry
