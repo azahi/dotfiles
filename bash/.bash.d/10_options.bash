@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-stty -ixon
+[[ $- == *i* ]] && stty -ixon
 
 set -b +H
 
