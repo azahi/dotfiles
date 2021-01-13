@@ -36,4 +36,5 @@ left_meters=AllCPUs Memory Swap
 left_meter_modes=1 1 1
 right_meters=Hostname Clock Uptime Tasks LoadAverage Battery
 right_meter_modes=2 2 2 2 2 2
+hide_function_bar=0
 topology_affinity=1
