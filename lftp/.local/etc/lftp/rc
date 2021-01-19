@@ -9,3 +9,7 @@ set cmd:save-cwd-history false
 set cmd:save-rl-history false
 
 set color:use-color auto
+
+set ftp:ssl-allow true
+set ftp:ssl-force true
+set ssl:priority "NORMAL:-SSL3.0:+TLS1.0:+TLS1.1:+TLS1.2"
