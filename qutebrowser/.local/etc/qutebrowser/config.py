@@ -442,17 +442,18 @@ c.downloads.location.suggestion = 'path'
 #   - quickmarks
 #   - bookmarks
 #   - history
-c.completion.open_categories = ['quickmarks', 'bookmarks', 'history']
+#   - filesystem
+c.completion.open_categories = ['bookmarks', 'quickmarks', 'history']
 
 # Duration (in milliseconds) to wait before removing finished downloads.
 # If set to -1, downloads are never removed.
 # Type: Int
 c.downloads.remove_finished = 0
 
-# Editor (and arguments) to use for the `open-editor` command. The
-# following placeholders are defined:  * `{file}`: Filename of the file
-# to be edited. * `{line}`: Line in which the caret is found in the
-# text. * `{column}`: Column in which the caret is found in the text. *
+# Editor (and arguments) to use for the `edit-*` commands. The following
+# placeholders are defined:  * `{file}`: Filename of the file to be
+# edited. * `{line}`: Line in which the caret is found in the text. *
+# `{column}`: Column in which the caret is found in the text. *
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
@@ -613,7 +614,9 @@ c.tabs.close_mouse_button = 'middle'
 # Type: Float
 c.tabs.favicons.scale = 1.0
 
-# When to show favicons in the tab bar.
+# When to show favicons in the tab bar. When switching this from never
+# to always/pinned, note that favicons might not be loaded yet, thus
+# tabs might require a reload to display them.
 # Type: String
 # Valid values:
 #   - always: Always show favicons.
