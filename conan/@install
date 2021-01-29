@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "${HOME}/.conan" ] && \
+    mkdir -p "${HOME}/.conan"
+
+stow \
+    --target="${HOME}" \
+    --ignore="^@.*" \
+    --verbose \
+    conan

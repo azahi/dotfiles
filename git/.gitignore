@@ -15,7 +15,7 @@
 .idea/
 cmake-build-*/
 
-# Visual Studio Code
+# VSCode
 .vscode/
 
 # Tags
@@ -25,12 +25,9 @@ cmake-build-*/
 
 # Misc
 *.bak
-*.temp
 *.tmp
 .ccls-cache/
 .gdb_history
-.git/
-.ignore
 .svn/
 .wakatime-project
 compile_commands.json

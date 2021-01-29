@@ -9,9 +9,13 @@ do
 
         for j in pip pip3 pip2
         do
-            # shellcheck disable=SC2139
-            alias pip-update="${j} list --user --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 ${j} install --user -U"
-	        break
+            if command -v "${j}" >/dev/null 2>&1
+            then
+                # shellcheck disable=SC2139
+                alias pip-update="${j} list --user --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 ${j} install --user -U"
+
+                break
+            fi
         done
 
         break

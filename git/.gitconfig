@@ -24,6 +24,7 @@
 	prune = true
 [push]
 	default = current
+	followtags = true
 [pull]
 	ff = only
 	rebase = false
@@ -57,11 +58,16 @@
 	fe = fetch
 	fer = fetch --all --recurse-submodules
 	gud = commit --message=\"git gud\"
-	lo = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	hist = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lo = log
 	ls = ls-files
+	me = merge
+	mei = merge --interactive
 	pl = pull
 	plr = pull --all --recurse-submodules
 	ps = push
+	rb = rebase
+	rbi = rebase --interactive
 	re = reset HEAD
 	ree = reset HEAD^
 	setup = !"git init && git commit --allow-empty -m Initial"
