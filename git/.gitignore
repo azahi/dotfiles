@@ -27,6 +27,7 @@ cmake-build-*/
 *.bak
 *.tmp
 .ccls-cache/
+.clangd/
 .gdb_history
 .svn/
 .wakatime-project

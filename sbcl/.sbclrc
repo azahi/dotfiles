@@ -1,5 +1,9 @@
 ;;; -*- mode: Lisp -*-
 
+(setf (logical-pathname-translations "SYS")
+      '(("SYS:SRC;**;*.*.*" #p"/usr/lib64/sbcl/src/**/*.*")
+        ("SYS:CONTRIB;**;*.*.*" #p"/usr/lib64/sbcl/**/*.*")))
+
 (let ((gentoo-init "/etc/common-lisp/gentoo-init.lisp"))
   (when (probe-file gentoo-init)
     (load gentoo-init)))

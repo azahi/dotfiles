@@ -36,3 +36,8 @@ define fs
     finish
     step
 end
+
+define btc
+    backtrace
+    continue
+end

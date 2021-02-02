@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "${XDG_CONFIG_HOME}/fish" ] &&
+    mkdir -p "${XDG_CONFIG_HOME}/fish"
+
+stow \
+    --target="${HOME}" \
+    --ignore="^@.*" \
+    --verbose \
+    fish

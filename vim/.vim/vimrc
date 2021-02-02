@@ -1,6 +1,5 @@
 if ! has('nvim')
     set nocompatible
-    set viminfo+=~/.vim/viminfo
 endif
 
 set autoread
@@ -187,8 +186,6 @@ elseif executable('sudo')
 endif
 
 autocmd BufEnter * set noreadonly
-
-autocmd BufNewFile * :exe ': !mkdir -p ' . escape(fnamemodify(bufname('%'),':p:h'),'#% \\')
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs

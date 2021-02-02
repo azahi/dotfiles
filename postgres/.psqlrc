@@ -1,8 +1,18 @@
-\set PROMPT1 '%[%033[31;5m%]%M %[%033[32;1m%]%n@%/%R%[%033[0m%]%# '
-\set PROMPT2 '[more] %R > '
+\set QUIET 1
 \pset null '[NULL]'
+
+\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]% λ '
+\set PROMPT2 '    … > '
+
+\timing
+
 \x auto
-\set VERBOSITY verbose
-\set HISTFILE ~/.local/var/psql_history
+
 \set HISTCONTROL ignoredups
+\set HISTFILE ~/.local/var/lib/psql_history_ :DBNAME
+
+\set VERBOSITY verbose
+
 \set COMP_KEYWORD_CASE upper
+
+\unset QUIET

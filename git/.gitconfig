@@ -1,8 +1,9 @@
 [user]
 	name = Azat Bahawi
 	email = azahi@teknik.io
-	signingkey = B40FCB6608BBE3B6
+	signingkey = 0xB40FCB6608BBE3B6
 [core]
+	attributesfile = ~/.gitattributes
 	excludesfile = ~/.gitignore
 	whitespace = trailing-space
 [init]
@@ -14,12 +15,14 @@
 	renames = copies
 	submodule = log
 [branch]
-	autosetupmerge = true
+	autosetupmerge = always
+	autosetuprebase = always
 [merge]
 	conflictstyle = diff3
 	stat = true
 [rebase]
 	autosquash = true
+	autostash = true
 [fetch]
 	prune = true
 [push]
@@ -38,6 +41,11 @@
 	statushints = false
 [color]
 	ui = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [github]
 	user = azahi
 [alias]
@@ -53,6 +61,7 @@
 	cl = clone
 	clr = clone --recurse-submodules
 	cls = clone --depth=1
+	cp = cherry-pick
 	di = !"git diff-index --quiet HEAD ; git diff --patch-with-stat"
 	dis = !"git diff-index --quiet HEAD ; git diff --patch-with-stat --staged"
 	fe = fetch
@@ -70,6 +79,7 @@
 	rbi = rebase --interactive
 	re = reset HEAD
 	ree = reset HEAD^
+	reee = reset HEAD^^
 	setup = !"git init && git commit --allow-empty -m Initial"
 	st = status --short
 	ui = update-index --assume-unchanged
