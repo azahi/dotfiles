@@ -1,7 +1,6 @@
 #!/bin/sh
 
-if command -v nnn >/dev/null 2>&1
-then
+if command -v nnn >/dev/null 2>&1; then
     export NNN_BMS="h:~;s:~/src;d:~/downloads;e:/etc;u:/usr;p:/etc/portage;t:/tmp"
     export NNN_PLUG="j:autojump"
     export NNN_MULTISCRIPT=1

@@ -1,10 +1,22 @@
 #!/bin/sh
 
-for i in batdiff colordiff cwdiff wdiff diff
-do
+_diffs="
+    batdiff
+    colordiff
+    cwdiff
+    wdiff
+    diff
+"
+
+for _diff in ${_diffs}; do
     # shellcheck disable=SC2139
-    command -v "$i" >/dev/null 2>&1 && \
-        export DIFF="$i" && \
-        alias d="${DIFF}" && \
+    if command -v "${_diff}" >/dev/null 2>&1; then
+        export DIFF="${_diff}"
+
+        alias d="${DIFF}"
+
         break
+    fi
 done
+
+unset _diff _diffs

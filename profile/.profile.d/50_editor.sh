@@ -1,11 +1,23 @@
 #!/bin/sh
 
-for i in nvim vim vi emacs xemacs nano sam acme ed
-do
+_editors="
+    nvim
+    vim
+    vi
+    emacs
+    nano
+    ed
+"
+
+for _editor in ${_editors}; do
     # shellcheck disable=SC2139
-    command -v "$i" >/dev/null 2>&1 && \
-        export EDITOR="$i" VISUAL="$i" && \
-        alias e="${EDITOR}" && \
-        alias v="${VISUAL}" && \
+    if command -v "${_editor}" >/dev/null 2>&1; then
+        export EDITOR="${_editor}" VISUAL="${_editor}"
+
+        alias e="${EDITOR}"
+
         break
+    fi
 done
+
+unset _editor _editors

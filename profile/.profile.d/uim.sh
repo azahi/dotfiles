@@ -1,7 +1,6 @@
 #!/bin/sh
 
-if command -v uim-xim >/dev/null 2>&1
-then
+if command -v uim-xim >/dev/null 2>&1; then
     export GTK_IM_MODULE="uim"
     export QT_IM_MODULE="uim"
     export SHORT_DESC="UIM"
