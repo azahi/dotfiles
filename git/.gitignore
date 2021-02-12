@@ -31,6 +31,7 @@ cmake-build-*/
 .gdb_history
 .svn/
 .wakatime-project
+a.out
 compile_commands.json
 cscope.*
 vgcore.*
