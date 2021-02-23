@@ -50,6 +50,10 @@ cald() {
     printf "\t\t%s\n\n" "$(date)" && cal -m -3
 }
 
+cheat() {
+    curl "cheat.sh/${1}"
+}
+
 myip() {
     dig -4 +short @resolver1.opendns.com myip.opendns.com A
 }

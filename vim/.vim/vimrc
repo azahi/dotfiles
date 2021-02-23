@@ -39,7 +39,6 @@ set completeopt+=longest
 
 set gdefault
 set hlsearch
-set inccommand=split
 set incsearch
 set iskeyword+=-
 set magic

@@ -1,8 +1,6 @@
 #!/bin/sh
 
 _pagers="
-    bat
-    ccat
     less
     more
     cat
@@ -20,7 +18,3 @@ for _pager in ${_pagers}; do
 done
 
 unset _pager _pagers
-
-if [ "${MANPAGER}" = "bat" ]; then
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-fi
