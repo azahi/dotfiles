@@ -30,7 +30,7 @@
 	followtags = true
 [pull]
 	ff = only
-	rebase = false
+	rebase = true
 [status]
 	submodulesummary = true
 [rerere]
@@ -66,6 +66,7 @@
 	dis = !"git diff-index --quiet HEAD ; git diff --patch-with-stat --staged"
 	fe = fetch
 	fer = fetch --all --recurse-submodules
+	fuck = reset --hard
 	gud = commit --message=\"git gud\"
 	hist = log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	lo = log
