@@ -3,6 +3,15 @@
 [ ! -d "${XDG_CONFIG_HOME}/fish" ] &&
     mkdir -p "${XDG_CONFIG_HOME}/fish"
 
+[ ! -d "${XDG_CONFIG_HOME}/fish/completions" ] &&
+    mkdir -p "${XDG_CONFIG_HOME}/fish/completions"
+
+[ ! -d "${XDG_CONFIG_HOME}/fish/conf.d" ] &&
+    mkdir -p "${XDG_CONFIG_HOME}/fish/conf.d"
+
+[ ! -d "${XDG_CONFIG_HOME}/fish/functions" ] &&
+    mkdir -p "${XDG_CONFIG_HOME}/fish/functions"
+
 stow \
     --target="${HOME}" \
     --ignore="^@.*" \
