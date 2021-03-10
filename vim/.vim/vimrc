@@ -278,6 +278,10 @@ Plug 'tpope/vim-obsession'
 " }}}
 
 " {{{
+Plug 'tpope/vim-speeddating'
+" }}}
+
+" {{{
 Plug 'RRethy/vim-illuminate'
 " }}}
 

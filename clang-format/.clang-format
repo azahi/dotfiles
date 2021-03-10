@@ -108,4 +108,4 @@ TabWidth: 4
 UseCRLF: false
 UseTab: Always
 ...
-
+# vim: filetype=yaml
