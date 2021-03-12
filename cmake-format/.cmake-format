@@ -1,0 +1,18 @@
+---
+format:
+  disable: false
+  line_width: 80
+  tab_size: 4
+  use_tabchars: false
+  fractional_tab_policy: use-space
+  separate_ctrl_name_with_space: false
+  separate_fn_name_with_space: false
+  dangle_parens: false
+  dangle_align: prefix
+  line_ending: unix
+  command_case: lower
+  keyword_case: upper
+  enable_sort: true
+  autosort: false
+...
+# vim: filetype=yaml
