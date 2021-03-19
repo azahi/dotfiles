@@ -1,86 +1,70 @@
 #!/bin/sh
 
-if [ -f "${HOME}/.profile" ]
-then
+if [ -f "${HOME}/.profile" ]; then
     # shellcheck disable=SC1090
     . "${HOME}/.profile"
 fi
 
-if command -v xset >/dev/null 2>&1
-then
-    xset s off &
-    xset -dpms &
-    xset m 3/2 3 &
-    xset r rate 200 50 &
-fi
+(
+    if command -v xrdb >/dev/null 2>&1 &&
+        [ -f "${HOME}/.xresources" ]; then
+        xrdb "${HOME}/.xresources"
+    fi
 
-if command -v dbus-launch >/dev/null 2>&1 \
-&& [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]
-then
+    if command -v xset >/dev/null 2>&1; then
+        xset s off
+        xset -dpms
+        xset m 3/2 3
+        xset r rate 200 50
+    fi
+
+    if command -v setxkbmap >/dev/null 2>&1; then
+        setxkbmap \
+            -layout "us,ru" \
+            -variant ",phonetic" \
+            -option terminate:ctrl_alt_bksp \
+            -option caps:escape \
+            -option compose:menu \
+            -option grp:win_space_toggle
+    fi
+
+    if command -v xbindkeys >/dev/null 2>&1 &&
+        [ -f "${HOME}/.xbindkeysrc" ]; then
+        xbindkeys &
+    fi
+
+    if command -v xbanish >/dev/null 2>&1; then
+        xbanish &
+    fi
+
+    if command -v autocutsel >/dev/null 2>&1; then
+        autocutsel -fork -selection CLIPBOARD
+        autocutsel -fork -selection PRIMARY
+    fi
+
+    if command -v xgetres >/dev/null 2>&1; then
+        if command -v hsetroot >/dev/null 2>&1; then
+            hsetroot -solid "$(xgetres background)"
+        elif command -v xsetroot >/dev/null 2>&1; then
+            xsetroot -solid "$(xgetres background)"
+        fi
+    fi
+
+    if command -v picom >/dev/null 2>&1; then
+        picom --daemon
+    fi
+) &
+
+if command -v dbus-launch >/dev/null 2>&1 &&
+    [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
     eval "$(dbus-launch --sh-syntax --exit-with-x11)"
 fi
 
-if command -v xrdb >/dev/null 2>&1 \
-&& [ -f "${HOME}/.xresources" ]
-then
-    xrdb "${HOME}/.xresources"
-fi
-
-if command -v setxkbmap >/dev/null 2>&1
-then
-    setxkbmap \
-        -layout "us,ru" \
-        -variant ",phonetic" \
-        -option terminate:ctrl_alt_bksp \
-        -option caps:escape \
-        -option compose:menu \
-        -option grp:win_space_toggle &
-fi
-
-if command -v xbindkeys >/dev/null 2>&1 \
-&& [ -f "${HOME}/.xbindkeysrc" ]
-then
-    xbindkeys &
-fi
-
-if command -v xbanish >/dev/null 2>&1
-then
-    xbanish &
-fi
-
-if command -v autocutsel >/dev/null 2>&1
-then
-    autocutsel -fork -selection CLIPBOARD &
-    autocutsel -fork -selection PRIMARY &
-fi
-
-if command -v xgetres >/dev/null 2>&1
-then
-    if command -v hsetroot >/dev/null 2>&1
-    then
-        hsetroot -solid "$(xgetres background)" &
-    elif command -v xsetroot >/dev/null 2>&1
-    then
-        xsetroot -solid "$(xgetres background)" &
+WM="dwm"
+if command -v "${WM}" >/dev/null 2>&1; then
+    if command -v dwm-status >/dev/null 2>&1; then
+        dwm-status &
     fi
+
+    exec "${WM}"
 fi
-
-if command -v picom >/dev/null 2>&1
-then
-    picom --daemon &
-fi
-
-for WM in dwm emacs
-do
-    if command -v "${WM}" >/dev/null 2>&1
-    then
-        if [ "${WM}" = "dwm" ] \
-        && command -v dwm-status >/dev/null 2>&1
-        then
-            dwm-status &
-        fi
-
-        export WM
-        exec "${WM}"
-    fi
-done
