@@ -1,12 +1,7 @@
 ---
 library: ~/.local/var/lib/beets/library.db
 directory: ~/music
-plugins: edit mbsync fetchart info
-format_item: $artist - $album - $title
-format_album: $albumartist - $album
-sort_item: artist+ album+ disc+ track+
-sort_album: albumartist+ album+
-sort_case_insensitive: yes
+plugins: badfiles edit fetchart info mbsync scrub
 import:
     write: yes
     copy: no
@@ -14,16 +9,15 @@ import:
     bell: yes
 match:
     preferred:
-        countries: [ 'JP', 'US', 'GB|UK', 'RU' ]
-paths:
-    default: $albumartist/$album%aunique{}/$track $title
+        countries: [ 'JP', 'GB|UK', 'US', 'AU', 'RU', 'XE' ]
 edit:
     albumfields: album artist albumartist
-    itemfields: track title album artist albumartist day month year genre comment
+    itemfields: track title album artist albumartist day month year genre
 fetchart:
     auto: yes
     cautious: yes
-    cover_names: cover Cover folder Folder
-    enforce_ratio: no
-    sources: filesystem coverart itunes amazon albumart
-    store_source: no
+    cover_names: cover Cover folder Folder art Art album Album front Front
+    enforce_ratio: yes
+    sources: filesystem coverart itunes amazon albumart wikipedia
+scrub:
+    auto: yes

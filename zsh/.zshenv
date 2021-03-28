@@ -14,6 +14,5 @@ export ZSHRC="${ZDOTDIR}/.zshrc"
 
 if [[ "${SHLVL}" -eq 1 && ! -o LOGIN && -s "${ZPROFILE}" ]]
 then
-    # shellcheck disable=SC1090
     source "${ZPROFILE}"
 fi
