@@ -160,6 +160,11 @@ c.content.geolocation = False
 # Type: String
 c.content.headers.accept_language = 'en-US,en'
 
+# Value to send in the `Accept-Language` header. Note that the value
+# read from JavaScript is always the global value.
+# Type: String
+config.set('content.headers.accept_language', '', 'https://matchmaker.krunker.io/*')
+
 # Custom headers for qutebrowser HTTP requests.
 # Type: Dict
 c.content.headers.custom = {}
@@ -324,14 +329,6 @@ config.set('content.media.audio_video_capture', True, 'https://discord.com')
 #   - ask
 config.set('content.media.audio_video_capture', True, 'https://web.skype.com')
 
-# Allow websites to show notifications.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-c.content.notifications = True
-
 # Enable plugins in Web pages.
 # Type: Bool
 c.content.plugins = False
@@ -354,14 +351,6 @@ c.content.private_browsing = False
 #   - system: Use the system wide proxy.
 #   - none: Don't use any proxy
 c.content.proxy = 'system'
-
-# Validate SSL handshakes.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-c.content.ssl_strict = 'ask'
 
 # List of user stylesheet filenames to use.
 # Type: List of File, or File
@@ -1071,6 +1060,18 @@ c.colors.tabs.pinned.even.bg = '#2f2b2a'
 # color).
 # Type: QtColor
 c.colors.webpage.bg = 'white'
+
+# Value to use for `prefers-color-scheme:` for websites. The "light"
+# value is only available with QtWebEngine 5.15.2+. On older versions,
+# it is the same as "auto". The "auto" value is broken on QtWebEngine
+# 5.15.2 due to a Qt bug. There, it will fall back to "light"
+# unconditionally.
+# Type: String
+# Valid values:
+#   - auto: Use the system-wide color scheme setting.
+#   - light: Force a light theme.
+#   - dark: Force a dark theme.
+c.colors.webpage.preferred_color_scheme = 'dark'
 
 # Default font families to use. Whenever "default_family" is used in a
 # font setting, it's replaced with the fonts listed here. If set to an
