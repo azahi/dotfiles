@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 for i in "${HOME}"/.bash.d/*.bash
 do

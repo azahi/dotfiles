@@ -62,6 +62,10 @@ fi
 
 WM="dwm"
 if command -v "${WM}" >/dev/null 2>&1; then
+    if command -v wmname >/dev/null 2>&1; then
+        wmname "LG3D"
+    fi
+
     if command -v dwm-status >/dev/null 2>&1; then
         dwm-status &
     fi
