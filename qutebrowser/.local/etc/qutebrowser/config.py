@@ -337,6 +337,14 @@ config.set('content.media.audio_video_capture', True, 'https://web.skype.com')
 #   - ask
 config.set('content.notifications.enabled', True, 'https://web.skype.com')
 
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications.enabled', False, 'https://www.reddit.com')
+
 # Enable plugins in Web pages.
 # Type: Bool
 c.content.plugins = False
