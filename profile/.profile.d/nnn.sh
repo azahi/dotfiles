@@ -11,7 +11,7 @@ if command -v nnn >/dev/null 2>&1; then
     export NNN_TRASH=0
     export NNN_USE_EDITOR=1
 
-    alias n="nnn"
+    alias f="nnn"
 
     # shellcheck disable=SC2139
     alias ncp="cat ${NNN_TMPFILE}/.selection | tr '\0' '\n'"

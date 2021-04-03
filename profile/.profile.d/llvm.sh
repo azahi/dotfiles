@@ -9,4 +9,4 @@ if [ -d "${_llvm_root}" ]; then
     done
 fi
 
-unset _version
+unset _version _llvm_root

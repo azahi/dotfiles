@@ -1,9 +1,6 @@
 #!/bin/sh
 
 _pagers="
-    slit
-    moar
-    most
     less
     more
     cat

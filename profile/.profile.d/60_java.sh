@@ -7,7 +7,6 @@ if command -v java >/dev/null 2>&1; then
     if [ -n "${JAVA_HOME}" ]; then
         export JAVA_HOME="${HOME}/.gentoo/java-config-2/current-user-vm"
     fi
-
     path_append "${JAVA_HOME}/bin"
     manpath_append "${JAVA_HOME}/man"
 fi

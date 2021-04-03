@@ -8,6 +8,6 @@ if command -v wine >/dev/null 2>&1; then
     export WINEPREFIX="${HOME}/.wine"
 
     if command -v xrandr >/dev/null 2>&1; then
-        alias wine-vd="wine explorer.exe /desktop=default,$(xrandr | grep '\*' | cut -d' ' -f4)"
+        alias wine-run="wine explorer.exe /desktop=default,$(xrandr | grep '\*' | cut -d' ' -f4)"
     fi
 fi

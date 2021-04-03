@@ -2,12 +2,11 @@
 
 _browsers="
     qutebrowser
-    firefox
     chromium
     chromium-browser
-    surf
-    w3m
+    firefox
     lynx
+    w3m
     elinks
     links
 "

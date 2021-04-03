@@ -1,10 +1,7 @@
 #!/bin/sh
 
 _diffs="
-    batdiff
     colordiff
-    cwdiff
-    wdiff
     diff
 "
 
