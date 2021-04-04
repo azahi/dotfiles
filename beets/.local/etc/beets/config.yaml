@@ -9,7 +9,7 @@ import:
     bell: yes
 match:
     preferred:
-        countries: [ 'JP', 'GB|UK', 'US', 'AU', 'RU', 'XE' ]
+        countries: [ 'JP', 'GB|UK', 'AU', 'US', 'RU', 'XE' ]
 edit:
     albumfields: album artist albumartist
     itemfields: track title album artist albumartist day month year genre
@@ -17,7 +17,6 @@ fetchart:
     auto: yes
     cautious: yes
     cover_names: cover Cover folder Folder art Art album Album front Front
-    enforce_ratio: yes
     sources: filesystem coverart itunes amazon albumart wikipedia
 scrub:
     auto: yes
