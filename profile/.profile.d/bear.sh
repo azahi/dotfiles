@@ -14,11 +14,10 @@ if command -v bear >/dev/null 2>&1; then
             else
                 alias m="bear ${_implementation}"
             fi
-            alias mc="m clean"
+            alias mc="${_implementation} clean"
 
-            unset _implementation
             break
         fi
     done
-    unset _implementations
+    unset _implementation _implementations
 fi
