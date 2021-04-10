@@ -310,15 +310,6 @@ endif
 " }}}
 
 " {{{
-if executable('clang-format')
-    Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
-
-    nnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
-    vnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
-endif
-" }}}
-
-" {{{
 if executable('tmux')
     Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
     Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -362,24 +353,12 @@ Plug 'gentoo/gentoo-syntax'
 " }}}
 
 " {{{
-Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
-" }}}
-
-" {{{
 Plug 'elzr/vim-json', {'for': 'json'}
 let g:vim_json_syntax_conceal = 0
 " }}}
 
 " {{{
-Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-" }}}
-
-" {{{
 Plug 'chr4/nginx.vim', {'for': 'nginx'}
-" }}}
-
-" {{{
-Plug 'sheerun/vim-polyglot'
 " }}}
 
 " {{{
@@ -457,6 +436,23 @@ if has('nvim') && has('python3')
 
     let g:echodoc#enable_at_startup = 1
     let g:echodoc#type = 'signature'
+    " }}}
+
+    " {{{
+    Plug 'sheerun/vim-polyglot'
+    " }}}
+
+    " {{{
+    if executable('clang-format')
+        Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
+
+        nnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
+        vnoremap <Buffer><Leader>cf :<C-u>ClangFormat<CR>
+    endif
+    " }}}
+
+    " {{{
+    Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     " }}}
 endif
 

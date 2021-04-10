@@ -29,7 +29,6 @@ indent_style = tab
 
 # Python
 [*.py]
-insert_final_newline = true
 max_line_length = 80
 
 # Haskell
@@ -49,12 +48,12 @@ indent_size = 2
 indent_size = 2
 
 # Make
-[Makefile,*.mk]
+[{Makefile,*.mk}]
 indent_style = tab
 
 # CMake
-[CMakeList.txt]
-indent_size = 2
+[{CMakeLists.txt,*.cmake}]
+indent_style = tab
 
 # Autotools
 [*.{ac,am}]
@@ -65,11 +64,11 @@ indent_style = tab
 insert_final_newline = false
 trim_trailing_whitespace = false
 
-# Ebuild
+# Gentoo
 [*.ebuild]
 indent_style = tab
 
-# RPM
+# RPM Spec
 [*.spec]
 insert_final_newline = false
 trim_trailing_whitespace = false
