@@ -8,7 +8,7 @@ set modeline
 set mouse=
 set noshowmode
 set path+=**
-set viminfo=""
+set viminfo+=n~/.vim/viminfo
 
 set statusline=
 set statusline+=\ %m%r
@@ -338,6 +338,10 @@ Plug 'vim-scripts/SyntaxRange'
 
 " {{{
 Plug 'gentoo/gentoo-syntax'
+" }}}
+
+" {{{
+Plug 'LnL7/vim-nix'
 " }}}
 
 " {{{

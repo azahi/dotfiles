@@ -73,6 +73,10 @@ indent_style = tab
 insert_final_newline = false
 trim_trailing_whitespace = false
 
+# Nix
+[*.nix]
+indent_size = 2
+
 # XML
 [*.xml]
 indent_style = tab
