@@ -4,8 +4,8 @@ directory: ~/music
 plugins: badfiles edit fetchart info mbsync scrub
 import:
     write: yes
-    copy: no
-    move: yes
+    copy: yes
+    move: no
     bell: yes
 match:
     preferred:

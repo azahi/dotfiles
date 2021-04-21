@@ -1,5 +1,8 @@
 #!/bin/sh
 
+[ ! -d "${XDG_CONFIG_HOME}/nixpkgs" ] &&
+    mkdir -p "${XDG_CONFIG_HOME}/nixpkgs"
+
 stow \
     --target="${HOME}" \
     --ignore="^@.*" \
