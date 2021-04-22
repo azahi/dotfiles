@@ -1,3 +1,7 @@
+set nocompatible
+
+let $VIMFILES = expand('<sfile>:p:h')
+
 set autoread
 set backspace=indent,eol,start
 set clipboard=unnamed,unnamedplus
@@ -8,17 +12,6 @@ set modeline
 set mouse=
 set noshowmode
 set path+=**
-set viminfo+=n~/.vim/viminfo
-
-set statusline=
-set statusline+=\ %m%r
-set statusline+=%f\ "
-set statusline+=%1*
-set statusline+=%*
-set statusline+=%=
-set statusline+=%1*
-set statusline+=\ %l:%c/%L\ %p%%\ "
-set statusline+=%*
 
 set noerrorbells
 set novisualbell
@@ -120,20 +113,26 @@ nnoremap        n           nzzzv
 
 vnoremap        <           <gv
 vnoremap        >           >gv
+vnoremap        <Tab>       >gv
+vnoremap        <S-Tab>     <gv
+nnoremap        <Tab>       >>_
+nnoremap        <S-Tab>     <<_
 
 nnoremap        ]b          :<C-u>bnext<CR>
 nnoremap        [b          :<C-u>bprevious<CR>
 
-nnoremap        <A-h>       <C-w>h
-nnoremap        <A-j>       <C-w>j
-nnoremap        <A-k>       <C-w>k
-nnoremap        <A-l>       <C-w>l
+nnoremap        <C-h>       <C-w>h
+nnoremap        <C-j>       <C-w>j
+nnoremap        <C-k>       <C-w>k
+nnoremap        <C-l>       <C-w>l
 
 nnoremap        <C-l>       :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR><C-l>
 
 cnoremap        ;/          <C-r>=expand('%:p:h').'/'<CR>
 cnoremap        ;;          <C-r>=expand('%:t')<CR>
 cnoremap        ;.          <C-r>=expand('%:p:r')<CR>
+
+nnoremap        <Leader>.   :lcd %:p:h<CR>
 
 cnoremap        <C-a>       <Home>
 cnoremap        <C-e>       <End>
@@ -150,6 +149,12 @@ map             <Leader>sp  [s
 map             <Leader>sa  zg
 map             <Leader>s?  z=
 
+nnoremap        <Leader>y   "+y
+nnoremap        <Leader>Y   "+Y
+
+nnoremap        <Leader>p   "+p
+nnoremap        <Leader>P   "+P
+
 inoremap        <C-v>       <C-c>"+pi
 cnoremap        <C-v>       <C-r>+
 
@@ -157,6 +162,8 @@ nmap            <Leader>w   :<C-u>w!<CR>
 nmap            <Leader>wq  :<C-u>wq!<CR>
 
 nnoremap        ZX          :<C-u>qa!<CR>
+
+nnoremap        <Leader>q   :q<CR>
 
 function! SwitchCase()
     normal! ~
@@ -175,182 +182,4 @@ function! MapGoToTab()
 endfunction
 call MapGoToTab()
 
-if executable('doas')
-    command! W :execute ':silent w !doas tee % >/dev/null' | :edit!
-elseif executable('sudo')
-    command! W :execute ':silent w !sudo tee % >/dev/null' | :edit!
-endif
-
 autocmd BufEnter * set noreadonly
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/.plug')
-
-" {{{
-Plug 'vim-utils/vim-husk'
-" }}}
-
-" {{{
-Plug 'bronson/vim-visual-star-search'
-" }}}
-
-" {{{
-Plug 'google/vim-searchindex'
-" }}}
-
-" {{{
-Plug 'farmergreg/vim-lastplace'
-" }}}
-
-" {{{
-Plug 'jiangmiao/auto-pairs'
-" }}}
-
-" {{{
-Plug 'romainl/vim-cool'
-" }}}
-
-" {{{
-Plug 'justinmk/vim-sneak'
-let g:sneak#label = 1
-
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-vmap f <Plug>Sneak_f
-vmap F <Plug>Sneak_F
-
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
-vmap t <Plug>Sneak_t
-vmap T <Plug>Sneak_T
-
-nmap <Plug>(Go_away_Sneak_s) <Plug>Sneak_s
-nmap <Plug>(Go_away_Sneak_S) <Plug>Sneak_S
-" }}}
-
-" {{{
-Plug 'tpope/vim-repeat'
-" }}}
-
-" {{{
-Plug 'tpope/vim-surround'
-" }}}
-
-" {{{
-Plug 'tpope/vim-sleuth'
-" }}}
-
-" {{{
-Plug 'tpope/vim-unimpaired'
-" }}}
-
-" {{{
-Plug 'tpope/vim-eunuch'
-" }}}
-
-" {{{
-Plug 'tpope/vim-commentary'
-" }}}
-
-" {{{
-Plug 'tpope/vim-fugitive'
-" }}}
-
-" {{{
-Plug 'tpope/vim-rhubarb'
-" }}}
-
-" {{{
-Plug 'tpope/vim-abolish'
-" }}}
-
-" {{{
-Plug 'tpope/vim-obsession'
-" }}}
-
-" {{{
-Plug 'tpope/vim-speeddating'
-" }}}
-
-" {{{
-Plug 'RRethy/vim-illuminate'
-" }}}
-
-" {{{
-Plug 'terryma/vim-expand-region'
-" }}}
-
-" {{{
-Plug 'ervandew/supertab'
-
-let g:SuperTabDefaultCompletionType = '<C-n>'
-" }}}
-
-" {{{
-Plug 'chrisbra/Colorizer'
-" }}}
-
-" {{{
-Plug 'junegunn/rainbow_parentheses.vim'
-" }}}
-
-" {{{
-if executable('gpg')
-    Plug 'jamessan/vim-gnupg'
-endif
-" }}}
-
-" {{{
-if executable('tmux')
-    Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
-    Plug 'tmux-plugins/vim-tmux-focus-events'
-endif
-" }}}
-
-" {{{
-if executable('ack') || executable('ag')
-    Plug 'mileszs/ack.vim'
-    if executable('ag')
-        let g:ackprg = 'ag --vimgrep'
-    endif
-endif
-" }}}
-
-" {{{
-if executable('wakatime')
-    Plug 'wakatime/vim-wakatime'
-endif
-" }}}
-
-" {{{
-Plug 'editorconfig/editorconfig-vim'
-" }}}
-
-" {{{
-Plug 'vim-scripts/SyntaxRange'
-" }}}
-
-" {{{
-Plug 'gentoo/gentoo-syntax'
-" }}}
-
-" {{{
-Plug 'LnL7/vim-nix'
-" }}}
-
-" {{{
-Plug 'elzr/vim-json', {'for': 'json'}
-let g:vim_json_syntax_conceal = 0
-" }}}
-
-" {{{
-Plug 'chr4/nginx.vim', {'for': 'nginx'}
-" }}}
-
-call plug#end()

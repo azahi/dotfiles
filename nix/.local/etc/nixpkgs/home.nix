@@ -3,6 +3,26 @@ let
   username = "azahi";
   homeDirectory = "/home/${username}";
   localDirectory = "${homeDirectory}/.local";
+
+  xftFont1 = "UW Ttyp0:pixelsize=14:style=Regular:antialias=false";
+  xftFont2 = "Efont Biwidth:pixelsize=14:style=Regular:antialias=false";
+
+  colorBlack0 = "#161719";
+  colorBlack1 = "#969896";
+  colorRed0 = "#cc6666";
+  colorRed1 = "#cc6666";
+  colorGreen0 = "#b5bd68";
+  colorGreen1 = "#b5bd68";
+  colorYellow0 = "#f0c674";
+  colorYellow1 = "#f0c674";
+  colorBlue0 = "#81a2be";
+  colorBlue1 = "#81a2be";
+  colorMagenta0 = "#b294bb";
+  colorMagenta1 = "#b294bb";
+  colorCyan0 = "#8abeb7";
+  colorCyan1 = "#8abeb7";
+  colorWhite0 = "#c5c8c6";
+  colorWhite1 = "#ffffff";
 in {
   home = {
     username = username;
@@ -27,6 +47,19 @@ in {
     cacheHome = "${localDirectory}/var/cache";
     configHome = "${localDirectory}/etc";
     dataHome = "${localDirectory}/var/lib";
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+
+      desktop = "\$HOME/documents";
+      documents = "\$HOME/documents";
+      download = "\$HOME/downloads";
+      music = "\$HOME/music";
+      pictures = "\$HOME/pictures";
+      publicShare = "\$HOME/documents";
+      templates = "\$HOME/documents";
+      videos = "\$HOME/videos";
+    };
   };
 
   programs = {
@@ -40,8 +73,205 @@ in {
     };
 
     neovim = {
-      enable = false;
+      enable = true;
       # TODO Fix that error
+
+      extraConfig = ''
+        set autoread
+        set backspace=indent,eol,start
+        set clipboard=unnamed,unnamedplus
+        set fillchars=vert:\ "
+        set hidden
+        set lazyredraw
+        set modeline
+        set mouse=
+        set noshowmode
+        set path+=**
+
+        set statusline=
+        set statusline+=\ %m%r
+        set statusline+=%f\ "
+        set statusline+=%1*
+        set statusline+=%*
+        set statusline+=%=
+        set statusline+=%1*
+        set statusline+=\ %l:%c/%L\ %p%%\ "
+        set statusline+=%*
+
+        set noerrorbells
+        set novisualbell
+
+        set splitbelow
+        set splitright
+
+        set complete=
+        set complete+=.
+        set complete+=b
+        set complete+=t
+        set completeopt=
+        set completeopt+=menu
+        set completeopt+=longest
+
+        set gdefault
+        set hlsearch
+        set incsearch
+        set iskeyword+=-
+        set magic
+
+        set foldmethod=marker
+        set nofoldenable
+
+        set shortmess=
+        set shortmess+=I
+        set shortmess+=T
+        set shortmess+=a
+        set shortmess+=c
+        set shortmess+=t
+
+        set nolist
+        set nowrap
+        set scrolloff=10
+        set sidescrolloff=10
+
+        set number
+        set relativenumber
+
+        set wildignorecase
+        set wildmenu
+        set wildignore=
+
+        set nobackup
+        set noswapfile
+        set noundofile
+        set nowritebackup
+
+        set smartcase
+        set ignorecase
+
+        set autoindent
+        set breakindent
+        set smartindent
+
+        set expandtab
+        set shiftround
+        set shiftwidth=4
+        set smarttab
+        set softtabstop=4
+        set tabstop=4
+
+        try
+            set encoding=utf-8
+            scriptencoding utf-8
+        catch
+        endtry
+
+        if has('autocmd')
+            filetype on
+            filetype plugin on
+            filetype indent on
+        endif
+
+        if has('syntax')
+            syntax enable
+        endif
+
+        let mapleader = ' '
+
+        nnoremap <Expr> j           v:count ? 'j' : 'gj'
+        nnoremap <Expr> k           v:count ? 'k' : 'gk'
+
+        nnoremap        J           gt
+        nnoremap        K           gT
+
+        nnoremap        <C-a>       ^h
+        vnoremap        <C-a>       ^h
+        nnoremap        H           ^h
+        vnoremap        H           ^h
+
+        nnoremap        <C-e>       $
+        vnoremap        <C-e>       $
+        nnoremap        L           $
+        vnoremap        L           $
+
+        nnoremap        N           Nzzzv
+        nnoremap        n           nzzzv
+
+        vnoremap        <           <gv
+        vnoremap        >           >gv
+
+        nnoremap        ]b          :<C-u>bnext<CR>
+        nnoremap        [b          :<C-u>bprevious<CR>
+
+        nnoremap        <C-h>       <C-w>h
+        nnoremap        <C-j>       <C-w>j
+        nnoremap        <C-k>       <C-w>k
+        nnoremap        <C-l>       <C-w>l
+
+        nnoremap        <C-l>       :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR><C-l>
+
+        cnoremap        ;/          <C-r>=expand('%:p:h').'/'<CR>
+        cnoremap        ;;          <C-r>=expand('%:t')<CR>
+        cnoremap        ;.          <C-r>=expand('%:p:r')<CR>
+
+        nnoremap        <Leader>.   :lcd %:p:h<CR>
+
+        cnoremap        <C-a>       <Home>
+        cnoremap        <C-e>       <End>
+
+        nnoremap        gw          vapgw
+
+        nnoremap        Q           @q
+
+        nnoremap        <Leader>c   ^v$h
+        nnoremap        <Leader>v   ggVG
+
+        map             <Leader>sn  ]s
+        map             <Leader>sp  [s
+        map             <Leader>sa  zg
+        map             <Leader>s?  z=
+
+        nnoremap        <Leader>y   "+y
+        nnoremap        <Leader>Y   "+Y
+
+        nnoremap        <Leader>p   "+p
+        nnoremap        <Leader>P   "+P
+
+        inoremap        <C-v>       <C-c>"+pi
+        cnoremap        <C-v>       <C-r>+
+
+        nmap            <Leader>w   :<C-u>w!<CR>
+        nmap            <Leader>wq  :<C-u>wq!<CR>
+
+        nnoremap        ZX          :<C-u>qa!<CR>
+
+        nnoremap        <Leader>q   :q<CR>
+
+        function! SwitchCase()
+            normal! ~
+            if strlen(getline('.')) != virtcol('.')
+                normal! h
+            endif
+        endfunction
+        nnoremap        ~           :<C-u>call SwitchCase()<CR>
+
+        function! MapGoToTab()
+            let s:i = 1
+            while s:i < 10
+                exe 'nnoremap <Leader>' . s:i . ' :<C-u>tabnext ' . s:i . '<CR>'
+                let s:i += 1
+            endwhile
+        endfunction
+        call MapGoToTab()
+
+        autocmd BufEnter * set noreadonly
+
+        if empty(glob('~/.vim/autoload/plug.vim'))
+            silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                        \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+            autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+        endif
+      '';
 
       extraPackages = with pkgs; [
         ccls
@@ -57,6 +287,7 @@ in {
         texlab
         wakatime
       ];
+
       extraPython3Packages = (ps:
         with ps; [
           autopep8
@@ -74,13 +305,18 @@ in {
           setuptools
           virtualenv
         ]);
+
       plugins = with pkgs.vimPlugins; [
+        # TODO Add suda.vim
         SyntaxRange
+        ansible-vim
         auto-pairs
         calendar-vim
         csv-vim
         editorconfig-vim
         gentoo-syntax
+        neco-vim
+        neoinclude
         nginx-vim
         rainbow_parentheses
         vim-abolish
@@ -106,8 +342,6 @@ in {
         vim-tmux
         vim-tmux-focus-events
         vim-unimpaired
-        neco-vim
-        neoinclude
         vim-wakatime
         {
           plugin = vim-sneak;
@@ -383,6 +617,44 @@ in {
     mpd = {
       enable = false;
       # TODO
+    };
+  };
+
+  xresources = {
+    properties = {
+      "*.font" = "${xftFont1}";
+
+      "Xcursor.theme" = "core";
+      "Xcursor.theme_core" = "true";
+      "Xcursor.size" = 16;
+
+      "Xft.antialias" = 1;
+      "Xft.autohint" = 0;
+      "Xft.dpi" = 96;
+      "Xft.hinting" = 1;
+      "Xft.hintstyle" = "hintslight";
+      "Xft.lcdfilter" = "lcddefault";
+      "Xft.rgba" = "rgb";
+
+      "*.color0" = "${colorBlack0}";
+      "*.color8" = "${colorBlack1}";
+      "*.color1" = "${colorRed0}";
+      "*.color9" = "${colorRed1}";
+      "*.color2" = "${colorGreen0}";
+      "*.color10" = "${colorGreen1}";
+      "*.color3" = "${colorYellow0}";
+      "*.color11" = "${colorYellow1}";
+      "*.color4" = "${colorBlue0}";
+      "*.color12" = "${colorBlue1}";
+      "*.color5" = "${colorMagenta0}";
+      "*.color13" = "${colorMagenta1}";
+      "*.color6" = "${colorCyan0}";
+      "*.color14" = "${colorCyan1}";
+      "*.color7" = "${colorWhite0}";
+      "*.color15" = "${colorWhite1}";
+
+      "*.background" = "${colorBlack0}";
+      "*.foreground" = "${colorWhite0}";
     };
   };
 }

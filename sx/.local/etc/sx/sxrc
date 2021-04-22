@@ -7,8 +7,8 @@ fi
 
 (
     if command -v xrdb >/dev/null 2>&1 &&
-        [ -f "${HOME}/.xresources" ]; then
-        xrdb "${HOME}/.xresources"
+        [ -f "${HOME}/.Xresources" ]; then
+        xrdb "${HOME}/.Xresources"
     fi
 
     if command -v xset >/dev/null 2>&1; then
