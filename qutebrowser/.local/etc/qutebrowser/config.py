@@ -313,6 +313,14 @@ c.content.local_content_can_access_file_urls = True
 # Type: Bool
 c.content.local_storage = True
 
+# Allow websites to record audio.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.media.audio_capture', True, 'https://web.skype.com')
+
 # Allow websites to record audio and video.
 # Type: BoolAsk
 # Valid values:
@@ -352,6 +360,14 @@ config.set('content.notifications.enabled', False, 'https://www.reddit.com')
 #   - false
 #   - ask
 config.set('content.notifications.enabled', True, 'https://web.telegram.org')
+
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications.enabled', True, 'https://web.whatsapp.com')
 
 # Enable plugins in Web pages.
 # Type: Bool

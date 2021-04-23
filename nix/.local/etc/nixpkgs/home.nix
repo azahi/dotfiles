@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 let
   username = "azahi";
+  email = "azahi@teknik.io";
   homeDirectory = "/home/${username}";
   localDirectory = "${homeDirectory}/.local";
+  etcDirectory = "${localDirectory}/etc";
+  varLibDirectory = "${localDirectory}/var/lib";
+  varCacheDirectory = "${localDirectory}/var/cache";
 
   xftFont1 = "UW Ttyp0:pixelsize=14:style=Regular:antialias=false";
   xftFont2 = "Efont Biwidth:pixelsize=14:style=Regular:antialias=false";
@@ -29,24 +33,47 @@ in {
     homeDirectory = homeDirectory;
 
     packages = with pkgs; [
-      bat
       calibre
+      ccls
+      clang
+      editorconfig-core-c
       fd
       filezilla
+      gopls
+      haskell-language-server
       hledger
       jetbrains.clion
+      nixfmt
       pandoc
+      pipenv
+      poetry
       ripgrep
+      shellcheck
+      shfmt
+      texlab
       toilet
+      wakatime
     ];
+
+    keyboard = {
+      layout = "us,ru";
+      variant = ",phonetic";
+      options = [
+        "caps:escape_shifted_capslock"
+        "compose:menu"
+        "grp:win_space_toggle"
+        "terminate:ctrl_alt_bksp"
+      ];
+    };
 
     stateVersion = "21.05";
   };
 
   xdg = {
-    cacheHome = "${localDirectory}/var/cache";
-    configHome = "${localDirectory}/etc";
-    dataHome = "${localDirectory}/var/lib";
+    configHome = "${etcDirectory}";
+    dataHome = "${varLibDirectory}";
+    cacheHome = "${varCacheDirectory}";
+
     userDirs = {
       enable = true;
       createDirectories = true;
@@ -65,16 +92,460 @@ in {
   programs = {
     home-manager = { enable = true; };
 
+    aria2 = {
+      enable = true;
+
+      settings = {
+        bt-max-peers = 128;
+        bt-save-metadata = true;
+        continue = true;
+        disable-ipv6 = true;
+        enable-dht = true;
+        enable-peer-exchange = true;
+        enable-rpc = false;
+        follow-torrent = true;
+        log-level = "info";
+        max-connection-per-server = 16;
+        max-overall-upload-limit = "1K";
+        max-tries = 5;
+        max-upload-limit = "1K";
+        min-split-size = "1M";
+        seed-ratio = 0.1;
+        seed-time = 0.1;
+        stream-piece-selector = "default";
+        timeout = 60;
+      };
+    };
+
+    bash = {
+      enable = false;
+      enableVteIntegration = true;
+
+      shellOptions = [
+        "cdspell"
+        "checkjobs"
+        "checkwinsize"
+        "dirspell"
+        "extglob"
+        "globstar"
+        "histappend"
+        "histreedit"
+        "histverify"
+      ];
+
+      historyControl = [
+        "erasedups"
+        "ignoredups"
+        "ignorespace"
+      ];
+      historyFile = "${varLibDirectory}/bash/history";
+      historyFileSize = 100000;
+
+      logoutExtra = ''
+        if [ -f "\$HOME/.bin/logout-hook" ]
+        then
+            # shellcheck disable=SC1090
+            source "\$HOME/.bin/logout-hook"
+        fi
+      '';
+    };
+
+    bat = {
+      enable = true;
+
+      config = {
+        style = "plain";
+        tabs = "4";
+        theme = "base16";
+        wrap = "never";
+      };
+    };
+
+    beets = {
+      enable = true;
+
+      settings = {
+        library = "${varLibDirectory}/beets/library.db";
+        directory = "${homeDirectory}/music";
+        plugins = "badfiles edit fetchart info mbsync scrub";
+        import = {
+          write = true;
+          copy = true;
+          move = false;
+          bell = true;
+        };
+        match.preferred.countries = [ "JP" "GB|UK" "AU" "US" "RU" "XE" ];
+        edit = {
+          albumfields = "album artist albumartist";
+          itemfields = "track title album artist albumartist day month year genre";
+        };
+        fetchart = {
+          auto = true;
+          cautious = true;
+          cover_names = "cover Cover folder Folder art Art album Album front Front";
+          sources = "filesystem coverart itunes amazon albumart wikipedia";
+        };
+        scrub.auto = true;
+      };
+    };
+
+    browserpass = {
+      enable = false;
+
+      browsers = [
+        "chromium"
+        "firefox"
+      ];
+    };
+
+    chromium = {
+      enable = false;
+
+      extensions = [
+        {
+          id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
+        }
+      ];
+    };
+
     direnv = {
       enable = true;
-      # TODO Test
 
       enableNixDirenvIntegration = true;
     };
 
+    exa = {
+      enable = true;
+      enableAliases = true;
+    };
+
+    firefox = {
+      enable = false;
+
+      profiles = {
+        default = {
+          settings = {
+            "browser.fixup.alternate.enabled" = false;
+            "browser.newtabpage.activity-stream.feeds.section.highlights" = false;
+            "browser.newtabpage.activity-stream.feeds.snippets" = false;
+            "browser.newtabpage.activity-stream.showSearch" = false;
+            "browser.newtabpage.activity-stream.showTopSites" = false;
+            "browser.newtabpage.enhanced" = false;
+            "browser.onboarding.enabled" = false;
+            "browser.startup.homepage" = "about:home";
+            "browser.tabs.warnOnClose" = false;
+            "devtools.debugger.prompt-connection" = false;
+            "extensions.pocket.enabled" = false;
+            "general.warnOnAboutConfig" = false;
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          };
+        };
+      };
+    };
+
+    git = {
+      enable = true;
+
+      userName = "${username}";
+      userEmail = "${email}";
+
+      signing = {
+        key = "0xB40FCB6608BBE3B6";
+        signByDefault = true;
+      };
+
+      extraConfig = {
+        core = {
+          attributesFile = "${homeDirectory}/.gitattributes";
+          excludesFile = "${homeDirectory}/.gitignore";
+          whitespace = "trailing-space";
+        };
+        init.defaultBranch = "master";
+        diff = {
+          mnemonicPrefix = true;
+          renames = "copies";
+          submodule = "log";
+        };
+        branch = {
+          autoSetupMerge = "always";
+          autoSetupRebase = "always";
+        };
+        merge = {
+          conflictStyle = "diff3";
+          ff = "only";
+        };
+        rebase = {
+          autoSquash = true;
+          autoStash = true;
+        };
+        fetch = {
+          prune = true;
+        };
+        push = {
+          default = "current";
+          followTags = true;
+        };
+        pull = {
+          ff = "only";
+        };
+        status.submoduleSummary = true;
+        advice.detachedHead = false;
+        color.ui = true;
+      };
+
+      aliases = {
+        ad = "add";
+        ada = "add --all";
+        al = "config --get-regexp alias";
+        br = "branch --all";
+        ch = "checkout";
+        cho = "checkout --orphan";
+        ci = "commit";
+        cia = "commit --amend";
+        cias = "commit --amend --signoff";
+        cl = "clone";
+        clr = "clone --recurse-submodules";
+        cls = "clone --depth=1";
+        cp = "cherry-pick";
+        di = "!\"git diff-index --quiet HEAD ; git diff --patch-with-stat\"";
+        dis = "!\"git diff-index --quiet HEAD ; git diff --patch-with-stat --staged\"";
+        fe = "fetch";
+        fer = "fetch --all --recurse-submodules";
+        fuck = "reset --hard";
+        gud = "commit --message=\"git gud\"";
+        hist = "log --all --decorate --abbrev-commit --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
+        lo = "log";
+        ls = "ls-files";
+        me = "merge";
+        mei = "merge --interactive";
+        pl = "pull";
+        plr = "pull --all --recurse-submodules";
+        ps = "push";
+        rb = "rebase";
+        rbi = "rebase --interactive";
+        re = "reset HEAD";
+        ree = "reset HEAD^";
+        reee = "reset HEAD^^";
+        setup = "!\"git init && git commit --allow-empty -m Initial\"";
+        st = "status --short";
+        ui = "update-index --assume-unchanged";
+        uiu = "update-index --un-assume-unchanged";
+        wc = "whatchanged -p --abbrev-commit --pretty=medium";
+        wtc = "!\"curl -s whatthecommit.com/index.txt | git commit --file -\"";
+      };
+
+      ignores = [
+        "*.bak"
+        "*.tmp"
+        "*~"
+        ".ccls-cache/"
+        ".clangd/"
+        ".dir-locals.el"
+        ".gdb_history"
+        ".idea/"
+        ".netrwhist"
+        ".svn/"
+        ".vscode/"
+        ".wakatime-project"
+        "[._]*.s[a-v][a-z]"
+        "[._]*.sw[a-p]"
+        "[._]s[a-rt-v][a-z]"
+        "[._]ss[a-gi-z]"
+        "[._]sw[a-p]"
+        "\\#*\\#"
+        "a.out"
+        "cmake-build-*/"
+        "compile_commands.json"
+        "cscope.*"
+        "vgcore.*"
+      ];
+
+      delta = {
+        enable = true;
+      };
+
+      lfs = {
+        enable = true;
+      };
+    };
+
+    gpg = {
+      enable = true;
+
+      settings = {
+        armor = true;
+        cert-digest-algo = "SHA512";
+        default-preference-list = "SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES ZLIB BZIP2 ZIP Uncompressed";
+        digest-algo = "SHA512";
+        display-charset = "utf-8";
+        enable-progress-filter = true;
+        fixed-list-mode = true;
+        keyid-format = "0xlong";
+        keyserver = [ "hkps://hkps.pool.sks-keyservers.net" "hkps://keys.gnupg.net" "hkps://keys.openpgp.org" "hkps://pgp.mit.edu" ];
+        keyserver-options = [ "auto-key-retrieve" "no-honor-keyserver-url" "no-include-revoked" ];
+        list-options = "show-uid-validity show-usage";
+        no-comments = true;
+        no-emit-version = true;
+        no-greeting = true;
+        no-random-seed-file = true;
+        personal-cipher-preferences = "AES256 AES192 AES";
+        personal-compress-preferences = "ZLIB BZIP2 ZIP Uncompressed";
+        personal-digest-preferences = "SHA512 SHA384 SHA256 SHA224";
+        s2k-cipher-algo = "AES256";
+        s2k-digest-algo = "SHA512";
+        use-agent = true;
+        verify-options = "show-uid-validity";
+        with-fingerprint = true;
+      };
+    };
+
+    htop = {
+      enable = true;
+
+      accountGuestInCpuMeter = true;
+      cpuCountFromZero = true;
+      delay = 10;
+      detailedCpuTime = true;
+      enableMouse = false;
+      headerMargin = true;
+      hideKernelThreads = true;
+      hideThreads = true;
+      hideUserlandThreads = true;
+      highlightBaseName = true;
+      highlightMegabytes = true;
+      highlightThreads = true;
+      shadowOtherUsers = true;
+      showCpuFrequency = true;
+      showCpuUsage = true;
+      showProgramPath = false;
+      showThreadNames = false;
+      treeView = true;
+      updateProcessNames = true;
+    };
+
+    info.enable = false;
+
+    jq.enable = false;
+
+    lesspipe.enable = true;
+
+    man = {
+      enable = true;
+    };
+
+    mbsync = {
+      enable = false;
+    };
+
+    mpv = {
+      enable = false;
+
+      bindings = {
+        "RIGHT" = "seek  10";
+        "LEFT" = "seek -10";
+        "UP" = "seek 60";
+        "DOWN" = "seek -60";
+
+        "Shift+RIGHT" = "no-osd seek  1 exact";
+        "Shift+LEFT"  = "no-osd seek -1 exact";
+        "Shift+UP"    = "no-osd seek  5 exact";
+        "Shift+DOWN"  = "no-osd seek -5 exact";
+
+        "ALT+k" = "add sub-scale +0.1";
+        "ALT+j" = "add sub-scale -0.1";
+
+        "B" = "cycle-values background \"#000000\" \"#ffffff\"";
+      };
+
+      profiles = {
+        "protocol.http" = {
+          force-window = "immediate";
+        };
+        "protocol.https" = {
+          profile = "protocol.http";
+        };
+        "extension.webm" = {
+          cache = "no";
+          loop-file = "inf";
+        };
+        "extension.gif" = {
+          profile = "extension.gif";
+        };
+      };
+
+      config = {
+        # General
+        audio-display = "no";
+        autofit-larger = "100%x95%";
+        cursor-autohide = 1000;
+        force-seekable = "no";
+        fullscreen = true;
+        load-unsafe-playlists = true;
+        msg-color = true;
+        msg-module = true;
+        prefetch-playlist = true;
+        save-position-on-quit = false;
+        screenshot-format = "jpg";
+        screenshot-template = "%F [%p]";
+        stop-screensaver = true;
+        term-osd-bar = true;
+        use-filedir-conf = true;
+
+        # OSD
+        osd-bar-align-y = 0;
+        osd-bar-h = 2;
+        osd-bar-w = 60;
+        osd-border-color = "#FF262626";
+        osd-border-size = 2.5;
+        osd-color = "#FFFFFFFF";
+        osd-duration = 2500;
+        osd-font-size = 40;
+        osd-fractions = true;
+        osd-level = 1;
+        osd-shadow-color = "#33000000";
+        osd-status-msg = "\${time-pos} / \${duration}\${?percent-pos: (\${percent-pos}%)}\${?frame-drop-count:\${!frame-drop-count==0: Dropped: \${frame-drop-count}}}\\n\${?chapter:Chapter: \${chapter}}";
+
+        # OSC
+        osc = false;
+
+        # Subtitles
+        sub-auto = "fuzzy";
+        sub-file-paths-append = "srt";
+        sub-ass-force-margins = true;
+        sub-ass-force-style = "kerning=yes";
+        sub-fix-timing = true;
+        sub-use-margins = true;
+        sub-font-size = 40;
+        sub-color = "#FFFFFFFF";
+        sub-border-color = "#FF262626";
+        sub-border-size = 2.5;
+        sub-shadow-offset = 1;
+        sub-shadow-color = "#33000000";
+        sub-spacing = 0.5;
+
+        # Languages
+        alang = "japanese,jp,jpn,jaJP,ja-JP,english,en,eng,enUS,en-US,russian,ru,rus,ruRU,ru-RU";
+        slang = "japanese,jp,jpn,jaJP,ja-JP,english,en,eng,enUS,en-US,russian,ru,rus,ruRU,ru-RU";
+
+        # YTDL
+        ytdl = true;
+        ytdl-raw-options = "sub-lang=\"jp,jpn,jaJP,ja-JP,en,eng,enUS,en-US,ru,rus,ruRU,ru-RU\",write-sub=";
+        ytdl-format = "(bestvideo[height<=?1080][fps<=?30][protocol!=http_dash_segments])+(bestaudio[acodec=opus]/bestaudio)/best";
+
+        # Audio
+        audio-file-auto = "fuzzy";
+        volume = 100;
+        volume-max = 200;
+
+        # Video
+        blend-subtitles = true;
+      };
+
+      scripts = with pkgs.mpvScripts; [ autoload sponsorblock ];
+    };
+
     neovim = {
       enable = true;
-      # TODO Fix that error
 
       extraConfig = ''
         set autoread
@@ -307,7 +778,6 @@ in {
         ]);
 
       plugins = with pkgs.vimPlugins; [
-        # TODO Add suda.vim
         SyntaxRange
         ansible-vim
         auto-pairs
@@ -433,7 +903,6 @@ in {
 
     qutebrowser = {
       enable = false;
-      # TODO
 
       keyBindings = {
         normal = { "z" = "hint links spawn --detach mpv {hint-url}"; };
@@ -448,7 +917,6 @@ in {
 
     readline = {
       enable = false;
-      # TODO Test
 
       bindings = {
         "$" = "end-of-line";
@@ -514,7 +982,6 @@ in {
       serverAliveCountMax = 30;
       serverAliveInterval = 60;
       matchBlocks = {
-        # TODO Add masked work hosts?
         "github" = {
           hostname = "github.com";
           user = "git";
@@ -553,49 +1020,32 @@ in {
       resizeAmount = 10;
       shortcut = "b";
       terminal = "screen-256color";
-
-      # TODO
     };
 
     vscode = {
       enable = false;
-      # TODO
-
-      haskell = {
-        enable = true;
-        hie = {
-          enable = false;
-          # TODO
-        };
-      };
     };
 
     zathura = {
       enable = false;
-      # TODO
     };
   };
 
   services = {
-    # TODO Test on systemd
     dunst = {
       enable = false;
-      # TODO
     };
 
     dwm-status = {
       enable = false;
-      # TODO
     };
 
     emacs = {
       enable = false;
-      # TODO
     };
 
     gpg-agent = {
       enable = false;
-      # TODO Test
 
       enableSshSupport = true;
 
@@ -611,12 +1061,10 @@ in {
 
     mbsync = {
       enable = false;
-      # TODO
     };
 
     mpd = {
       enable = false;
-      # TODO
     };
   };
 
