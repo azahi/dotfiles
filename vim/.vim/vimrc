@@ -5,13 +5,22 @@ let $VIMFILES = expand('<sfile>:p:h')
 set autoread
 set backspace=indent,eol,start
 set clipboard=unnamed,unnamedplus
+set display+=lastline
 set fillchars=vert:\ "
 set hidden
+set history=1000
+set laststatus=2
 set lazyredraw
 set modeline
 set mouse=
 set noshowmode
 set path+=**
+set ruler
+set tabpagemax=50
+set viminfo^=!
+
+set sessionoptions-=options
+set viewoptions-=options
 
 set noerrorbells
 set novisualbell
@@ -45,6 +54,7 @@ set shortmess+=t
 
 set nolist
 set nowrap
+
 set scrolloff=10
 set sidescrolloff=10
 
@@ -74,6 +84,31 @@ set smarttab
 set softtabstop=4
 set tabstop=4
 
+if &t_Co == 8 && $TERM !~# '^Eterm'
+    set t_Co=16
+endif
+
+if &listchars ==# 'eol:$'
+    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+
+if v:version > 703 || v:version == 703 && has("patch541")
+    set formatoptions+=j
+endif
+
+if has('path_extra')
+    setglobal tags-=./tags tags-=./tags; tags^=./tags;
+endif
+
+if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+    set shell=/usr/bin/env\ bash
+endif
+
+if !has('nvim') && &ttimeoutlen == -1
+    set ttimeout
+    set ttimeoutlen=100
+endif
+
 try
     set encoding=utf-8
     scriptencoding utf-8
@@ -81,13 +116,15 @@ catch
 endtry
 
 if has('autocmd')
-    filetype on
-    filetype plugin on
-    filetype indent on
+    filetype plugin indent on
 endif
 
-if has('syntax')
+if has('syntax') && !exists('g:syntax_on')
     syntax enable
+endif
+
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+    runtime! macros/matchit.vim
 endif
 
 let mapleader = ' '
@@ -111,6 +148,9 @@ vnoremap        L           $
 nnoremap        N           Nzzzv
 nnoremap        n           nzzzv
 
+inoremap        <C-u>       <C-g>u<C-u>
+inoremap        <C-w>       <C-g>u<C-w>
+
 vnoremap        <           <gv
 vnoremap        >           >gv
 vnoremap        <Tab>       >gv
@@ -126,28 +166,24 @@ nnoremap        <C-j>       <C-w>j
 nnoremap        <C-k>       <C-w>k
 nnoremap        <C-l>       <C-w>l
 
-nnoremap        <C-l>       :<C-u>nohlsearch<Bar>redraw!<Bar>echo<CR><C-l>
+nnoremap        *           /\<<C-r>=expand('<cword>')<CR>\><CR>
+nnoremap        #           ?\<<C-r>=expand('<cword>')<CR>\><CR>
+
+nnoremap        <C-L>       :<C-u>nohlsearch<C-r>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-l>
 
 cnoremap        ;/          <C-r>=expand('%:p:h').'/'<CR>
 cnoremap        ;;          <C-r>=expand('%:t')<CR>
 cnoremap        ;.          <C-r>=expand('%:p:r')<CR>
 
-nnoremap        <Leader>.   :lcd %:p:h<CR>
+nnoremap        <Leader>.   :<C-u>lcd %:p:h<CR>
 
 cnoremap        <C-a>       <Home>
 cnoremap        <C-e>       <End>
-
-nnoremap        gw          vapgw
 
 nnoremap        Q           @q
 
 nnoremap        <Leader>c   ^v$h
 nnoremap        <Leader>v   ggVG
-
-map             <Leader>sn  ]s
-map             <Leader>sp  [s
-map             <Leader>sa  zg
-map             <Leader>s?  z=
 
 nnoremap        <Leader>y   "+y
 nnoremap        <Leader>Y   "+Y
@@ -165,6 +201,8 @@ nnoremap        ZX          :<C-u>qa!<CR>
 
 nnoremap        <Leader>q   :q<CR>
 
+command         W           w !sudo tee "%" > /dev/null
+
 function! SwitchCase()
     normal! ~
     if strlen(getline('.')) != virtcol('.')
@@ -173,13 +211,14 @@ function! SwitchCase()
 endfunction
 nnoremap        ~           :<C-u>call SwitchCase()<CR>
 
-function! MapGoToTab()
-    let s:i = 1
-    while s:i < 10
-        exe 'nnoremap <Leader>' . s:i . ' :<C-u>tabnext ' . s:i . '<CR>'
-        let s:i += 1
-    endwhile
+function! s:GM()
+    execute 'normal! ^'
+    let first_col = virtcol('.')
+    execute 'normal! g_'
+    let last_col  = virtcol('.')
+    execute 'normal! ' . (first_col + last_col) / 2 . '|'
 endfunction
-call MapGoToTab()
+nnoremap        gm          :<C-u>call <SID>GM()<CR>
+onoremap        gm          :<C-u>call <SID>GM()<CR>
 
 autocmd BufEnter * set noreadonly

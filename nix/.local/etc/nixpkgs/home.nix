@@ -34,32 +34,70 @@ in {
     homeDirectory = homeDirectory;
 
     packages = with pkgs; [
+      (pass.withExtensions (ext: with ext; [ pass-audit pass-import pass-otp pass-update ]))
+      abi-compliance-checker
+      abi-dumper
+      ag
+      bear
+      bloaty
+      bsdiff
       calibre
       ccls
-      clang-tools
+      cflow
+      cloc
+      colordiff
+      conan
+      convmv
+      cppcheck
+      cproto
+      creduce
+      cscope
+      ctags
+      cuetools
+      dos2unix
       doxygen
       editorconfig-core-c
       fd
       filezilla
+      fzy
+      glslang
       gnuplot
-      gopls
-      gore
       graphviz
       haskell-language-server
       hledger
       jetbrains.clion
+      ltrace
+      lynx
+      mediainfo
+      mktorrent
+      mp3val
       nixfmt
       pandoc
-      pipenv
-      poetry
+      patchelf
+      patchutils
+      pv
+      pwgen
       ripgrep
+      rlwrap
       sbcl
+      scanmem
       shellcheck
       shfmt
+      shntool
+      speedtest-cli
+      splint
+      split2flac
+      strace
+      surfraw
       texlab
       texlive.combined.scheme-small
       toilet
+      translate-shell
       tree
+      valgrind
+      vbindiff
+      vmtouch
+      vtable-dumper
       wakatime
     ];
 
@@ -432,7 +470,7 @@ in {
 
     info.enable = false;
 
-    jq.enable = false;
+    jq.enable = true;
 
     lesspipe.enable = true;
 
@@ -747,7 +785,11 @@ in {
       '';
 
       extraPackages = with pkgs; [
-        gopls
+        bear
+        ccls
+        cscope
+        ctags
+        editorconfig-core-c
         haskell-language-server
         nixfmt
         pipenv
@@ -768,8 +810,6 @@ in {
           pip
           pyflakes
           pylint
-          pyls-black
-          pyls-isort
           pytest
           python-language-server
           setuptools
@@ -889,10 +929,6 @@ in {
           '';
         }
       ];
-
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
 
       withNodeJs = false;
       withPython = false;
