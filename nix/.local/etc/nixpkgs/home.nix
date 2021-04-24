@@ -36,7 +36,7 @@ in {
     packages = with pkgs; [
       calibre
       ccls
-      clang
+      clang-tools
       doxygen
       editorconfig-core-c
       fd
@@ -213,7 +213,7 @@ in {
     };
 
     exa = {
-      enable = true;
+      enable = false;
       enableAliases = true;
     };
 
@@ -243,7 +243,7 @@ in {
     };
 
     git = {
-      enable = true;
+      enable = false;
 
       userName = "${name}";
       userEmail = "${email}";
@@ -355,9 +355,9 @@ in {
         "vgcore.*"
       ];
 
-      delta = { enable = true; };
+      delta = { enable = false; };
 
-      lfs = { enable = true; };
+      lfs = { enable = false; };
     };
 
     gpg = {
@@ -747,9 +747,6 @@ in {
       '';
 
       extraPackages = with pkgs; [
-        ccls
-        clang
-        editorconfig-core-c
         gopls
         haskell-language-server
         nixfmt
@@ -1057,7 +1054,7 @@ in {
     };
 
     vscode = {
-      enable = true;
+      enable = false;
       package = pkgs.vscodium;
 
       extensions = with pkgs.vscode-extensions; [
