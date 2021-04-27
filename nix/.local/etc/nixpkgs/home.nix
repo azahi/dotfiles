@@ -399,7 +399,7 @@ in {
     };
 
     gpg = {
-      enable = true;
+      enable = false;
 
       settings = {
         display-charset = "utf-8";
