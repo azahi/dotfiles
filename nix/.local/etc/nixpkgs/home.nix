@@ -2,15 +2,18 @@
 let
   name = "Azat Bahawi";
   username = "azahi";
-  email = "azahi@teknik.io";
+  email = "${username}@teknik.io";
   homeDirectory = "/home/${username}";
   localDirectory = "${homeDirectory}/.local";
   etcDirectory = "${localDirectory}/etc";
   varLibDirectory = "${localDirectory}/var/lib";
   varCacheDirectory = "${localDirectory}/var/cache";
 
-  xftFont1 = "UW Ttyp0:pixelsize=14:style=Regular:antialias=false";
-  xftFont2 = "Efont Biwidth:pixelsize=14:style=Regular:antialias=false";
+  font1 = "UW Ttyp0";
+  font2 = "Efont Biwidth";
+  xftBase = ":pixelsize=14:style=Regular:antialias=false";
+  xftFont1 = "${font1}${xftBase}";
+  xftFont2 = "${font2}${xftBase}";
 
   colorBlack0 = "#161719";
   colorBlack1 = "#969896";
@@ -34,7 +37,7 @@ in {
     homeDirectory = homeDirectory;
 
     packages = with pkgs; [
-      (pass.withExtensions (ext: with ext; [ pass-audit pass-import pass-otp pass-update ]))
+      (pass.withExtensions (ext: with ext; [ pass-audit pass-otp pass-update ]))
       abi-compliance-checker
       abi-dumper
       ag
@@ -46,7 +49,6 @@ in {
       cflow
       cloc
       colordiff
-      conan
       convmv
       cppcheck
       cproto
@@ -116,9 +118,9 @@ in {
   };
 
   xdg = {
-    configHome = "${etcDirectory}";
-    dataHome = "${varLibDirectory}";
-    cacheHome = "${varCacheDirectory}";
+    configHome = etcDirectory;
+    dataHome = varLibDirectory;
+    cacheHome = varCacheDirectory;
 
     userDirs = {
       enable = true;
@@ -283,11 +285,11 @@ in {
     git = {
       enable = false;
 
-      userName = "${name}";
-      userEmail = "${email}";
+      userName = name;
+      userEmail = email;
 
       signing = {
-        key = "${email}";
+        key = email;
         signByDefault = true;
       };
 
@@ -775,13 +777,6 @@ in {
         call MapGoToTab()
 
         autocmd BufEnter * set noreadonly
-
-        if empty(glob('~/.vim/autoload/plug.vim'))
-            silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                        \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-            autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-        endif
       '';
 
       extraPackages = with pkgs; [
@@ -1114,40 +1109,40 @@ in {
       enable = true;
 
       options = {
-        font = "Source Code Pro";
+        font = font1;
 
-        default-fg = "${colorWhite0}";
-        default-bg = "${colorBlack0}";
+        default-fg = colorWhite0;
+        default-bg = colorBlack0;
 
-        statusbar-fg = "${colorBlack0}";
-        statusbar-bg = "${colorWhite0}";
+        statusbar-fg = colorBlack0;
+        statusbar-bg = colorWhite0;
 
-        inputbar-fg = "${colorBlack0}";
-        inputbar-bg = "${colorGreen1}";
+        inputbar-fg = colorBlack0;
+        inputbar-bg = colorGreen1;
 
-        notification-fg = "${colorBlack0}";
-        notification-bg = "${colorBlue1}";
+        notification-fg = colorBlack0;
+        notification-bg = colorBlue1;
 
-        notification-error-fg = "${colorBlack0}";
-        notification-error-bg = "${colorRed1}";
+        notification-error-fg = colorBlack0;
+        notification-error-bg = colorRed1;
 
-        notification-warning-fg = "${colorBlack0}";
-        notification-warning-bg = "${colorYellow1}";
+        notification-warning-fg = colorBlack0;
+        notification-warning-bg = colorYellow1;
 
-        highlight-color = "${colorYellow1}";
-        highlight-active-color = "${colorYellow0}";
+        highlight-color = colorYellow1;
+        highlight-active-color = colorYellow0;
 
-        completion-fg = "${colorWhite1}";
-        completion-bg = "${colorBlack1}";
+        completion-fg = colorWhite1;
+        completion-bg = colorBlack1;
 
-        completion-highlight-fg = "${colorBlack0}";
-        completion-highlight-bg = "${colorRed1}";
+        completion-highlight-fg = colorBlack0;
+        completion-highlight-bg = colorRed1;
 
-        completion-group-fg = "${colorBlack0}";
-        completion-group-bg = "${colorRed1}";
+        completion-group-fg = colorBlack0;
+        completion-group-bg = colorRed1;
 
-        recolor-darkcolor = "${colorBlack0}";
-        recolor-lightcolor = "${colorWhite0}";
+        recolor-darkcolor = colorBlack0;
+        recolor-lightcolor = colorWhite0;
 
         recolor = true;
         recolor-keephue = false;
@@ -1237,7 +1232,7 @@ in {
 
   xresources = {
     properties = {
-      "*.font" = "${xftFont1}";
+      "*.font" = xftFont1;
 
       "Xcursor.theme" = "core";
       "Xcursor.theme_core" = "true";
@@ -1251,25 +1246,25 @@ in {
       "Xft.lcdfilter" = "lcddefault";
       "Xft.rgba" = "rgb";
 
-      "*.color0" = "${colorBlack0}";
-      "*.color8" = "${colorBlack1}";
-      "*.color1" = "${colorRed0}";
-      "*.color9" = "${colorRed1}";
-      "*.color2" = "${colorGreen0}";
-      "*.color10" = "${colorGreen1}";
-      "*.color3" = "${colorYellow0}";
-      "*.color11" = "${colorYellow1}";
-      "*.color4" = "${colorBlue0}";
-      "*.color12" = "${colorBlue1}";
-      "*.color5" = "${colorMagenta0}";
-      "*.color13" = "${colorMagenta1}";
-      "*.color6" = "${colorCyan0}";
-      "*.color14" = "${colorCyan1}";
-      "*.color7" = "${colorWhite0}";
-      "*.color15" = "${colorWhite1}";
+      "*.color0" = colorBlack0;
+      "*.color8" = colorBlack1;
+      "*.color1" = colorRed0;
+      "*.color9" = colorRed1;
+      "*.color2" = colorGreen0;
+      "*.color10" = colorGreen1;
+      "*.color3" = colorYellow0;
+      "*.color11" = colorYellow1;
+      "*.color4" = colorBlue0;
+      "*.color12" = colorBlue1;
+      "*.color5" = colorMagenta0;
+      "*.color13" = colorMagenta1;
+      "*.color6" = colorCyan0;
+      "*.color14" = colorCyan1;
+      "*.color7" = colorWhite0;
+      "*.color15" = colorWhite1;
 
-      "*.background" = "${colorBlack0}";
-      "*.foreground" = "${colorWhite0}";
+      "*.background" = colorBlack0;
+      "*.foreground" = colorWhite0;
     };
   };
 }

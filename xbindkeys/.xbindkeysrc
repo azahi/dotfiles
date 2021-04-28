@@ -17,7 +17,7 @@ keystate_scrolllock= disable
 "dmenu_run"
     Mod4 + x
 
-"passmenu"
+"gentoo-passmenu"
     Mod4 + Shift + p
 
 "otpmenu"
