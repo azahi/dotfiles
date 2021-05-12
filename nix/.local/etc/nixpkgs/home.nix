@@ -37,82 +37,33 @@ in {
     homeDirectory = homeDirectory;
 
     packages = with pkgs; [
-      (pass.withExtensions (ext: with ext; [ pass-audit pass-otp pass-update ]))
-      abi-compliance-checker
-      abi-dumper
-      ag
-      bear
-      bloaty
-      bsdiff
       calibre
-      ccls
-      cflow
-      cloc
-      colordiff
-      convmv
-      cppcheck
-      cproto
-      creduce
-      cscope
-      ctags
       cuetools
-      dos2unix
       doxygen
-      editorconfig-core-c
-      fd
       filezilla
-      fzy
-      glslang
       gnuplot
       graphviz
       haskell-language-server
       hledger
       jetbrains.clion
-      ltrace
-      lynx
       mediainfo
       mktorrent
       mp3val
       nixfmt
       pandoc
-      patchelf
-      patchutils
-      pv
-      pwgen
-      ripgrep
-      rlwrap
+      rappel
       sbcl
-      scanmem
       shellcheck
       shfmt
       shntool
       speedtest-cli
-      splint
       split2flac
-      strace
-      surfraw
       texlab
       texlive.combined.scheme-small
       toilet
       translate-shell
-      tree
-      valgrind
-      vbindiff
-      vmtouch
-      vtable-dumper
       wakatime
     ];
-
-    keyboard = {
-      layout = "us,ru";
-      variant = ",phonetic";
-      options = [
-        "caps:escape_shifted_capslock"
-        "compose:menu"
-        "grp:win_space_toggle"
-        "terminate:ctrl_alt_bksp"
-      ];
-    };
 
     stateVersion = "21.05";
   };
@@ -138,10 +89,10 @@ in {
   };
 
   programs = {
-    home-manager = { enable = true; };
+    home-manager.enable = true;
 
     aria2 = {
-      enable = true;
+      enable = false;
 
       settings = {
         bt-max-peers = 128;
@@ -163,35 +114,6 @@ in {
         stream-piece-selector = "default";
         timeout = 60;
       };
-    };
-
-    bash = {
-      enable = false;
-      enableVteIntegration = true;
-
-      shellOptions = [
-        "cdspell"
-        "checkjobs"
-        "checkwinsize"
-        "dirspell"
-        "extglob"
-        "globstar"
-        "histappend"
-        "histreedit"
-        "histverify"
-      ];
-
-      historyControl = [ "erasedups" "ignoredups" "ignorespace" ];
-      historyFile = "${varLibDirectory}/bash/history";
-      historyFileSize = 100000;
-
-      logoutExtra = ''
-        if [ -f "\$HOME/.bin/logout-hook" ]
-        then
-            # shellcheck disable=SC1090
-            source "\$HOME/.bin/logout-hook"
-        fi
-      '';
     };
 
     bat = {
@@ -235,356 +157,14 @@ in {
       };
     };
 
-    browserpass = {
-      enable = false;
-
-      browsers = [ "chromium" "firefox" ];
-    };
-
-    chromium = {
-      enable = false;
-
-      extensions = [{ id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }];
-    };
-
     direnv = {
       enable = true;
       enableNixDirenvIntegration = true;
     };
 
-    exa = {
-      enable = false;
-      enableAliases = true;
-    };
-
-    firefox = {
-      enable = false;
-
-      profiles = {
-        default = {
-          settings = {
-            "browser.fixup.alternate.enabled" = false;
-            "browser.newtabpage.activity-stream.feeds.section.highlights" =
-              false;
-            "browser.newtabpage.activity-stream.feeds.snippets" = false;
-            "browser.newtabpage.activity-stream.showSearch" = false;
-            "browser.newtabpage.activity-stream.showTopSites" = false;
-            "browser.newtabpage.enhanced" = false;
-            "browser.onboarding.enabled" = false;
-            "browser.startup.homepage" = "about:home";
-            "browser.tabs.warnOnClose" = false;
-            "devtools.debugger.prompt-connection" = false;
-            "extensions.pocket.enabled" = false;
-            "general.warnOnAboutConfig" = false;
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          };
-        };
-      };
-    };
-
-    git = {
-      enable = false;
-
-      userName = name;
-      userEmail = email;
-
-      signing = {
-        key = email;
-        signByDefault = true;
-      };
-
-      extraConfig = {
-        core = {
-          attributesFile = "${homeDirectory}/.gitattributes";
-          excludesFile = "${homeDirectory}/.gitignore";
-          whitespace = "trailing-space";
-        };
-        init.defaultBranch = "master";
-        diff = {
-          mnemonicPrefix = true;
-          renames = "copies";
-          submodule = "log";
-        };
-        branch = {
-          autoSetupMerge = "always";
-          autoSetupRebase = "always";
-        };
-        merge = {
-          conflictStyle = "diff3";
-          ff = "only";
-        };
-        rebase = {
-          autoSquash = true;
-          autoStash = true;
-        };
-        fetch = { prune = true; };
-        push = {
-          default = "current";
-          followTags = true;
-        };
-        pull = {
-          ff = "only";
-          rebase = true;
-        };
-        status.submoduleSummary = true;
-        advice.detachedHead = false;
-        color.ui = true;
-      };
-
-      aliases = {
-        ad = "add";
-        ada = "add --all";
-        al = "config --get-regexp alias";
-        br = "branch --all";
-        ch = "checkout";
-        cho = "checkout --orphan";
-        ci = "commit --edit";
-        cia = "commit --amend";
-        cias = "commit --amend --signoff";
-        cl = "clone";
-        clr = "clone --recurse-submodules";
-        cls = "clone --depth=1";
-        cp = "cherry-pick";
-        di = "!git diff-index --quiet HEAD && git diff --patch-with-stat";
-        fe = "fetch";
-        fer = "fetch --all --recurse-submodules";
-        fuck = "reset --hard";
-        gud = "commit --message=git gud";
-        lo = "log --all decorate --abbrev-commit --graph";
-        ls = "ls-files";
-        me = "merge";
-        pl = "pull";
-        plr = "pull --all --recurse-submodules";
-        ps = "push";
-        rb = "rebase";
-        re = "reset HEAD";
-        ree = "reset HEAD^";
-        reee = "reset HEAD^^";
-        setup = "!git init && git commit --allow-empty --message Initial";
-        st = "status --short";
-        sw = "switch";
-        ui = "update-index --assume-unchanged";
-        uiu = "update-index --un-assume-unchanged";
-        wc = "whatchanged -p --abbrev-commit --pretty=medium";
-        wtc = "!curl -s whatthecommit.com/index.txt | git commit --file -";
-      };
-
-      ignores = [
-        "*.bak"
-        "*.tmp"
-        "*~"
-        ".ccls-cache/"
-        ".clangd/"
-        ".dir-locals.el"
-        ".gdb_history"
-        ".idea/"
-        ".netrwhist"
-        ".svn/"
-        ".vscode/"
-        ".wakatime-project"
-        "[._]*.s[a-v][a-z]"
-        "[._]*.sw[a-p]"
-        "[._]s[a-rt-v][a-z]"
-        "[._]ss[a-gi-z]"
-        "[._]sw[a-p]"
-        "\\#*\\#"
-        "a.out"
-        "cmake-build-*/"
-        "compile_commands.json"
-        "cscope.*"
-        "vgcore.*"
-      ];
-
-      delta = { enable = false; };
-
-      lfs = { enable = false; };
-    };
-
-    gpg = {
-      enable = false;
-
-      settings = {
-        display-charset = "utf-8";
-        enable-progress-filter = true;
-        fixed-list-mode = true;
-        keyid-format = "0xlong";
-        no-comments = true;
-        no-emit-version = true;
-        no-greeting = true;
-        with-fingerprint = true;
-
-        armor = true;
-
-        use-agent = true;
-
-        list-options = "show-uid-validity show-usage";
-        verify-options = "show-uid-validity";
-
-        default-preference-list =
-          "SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES ZLIB BZIP2 ZIP Uncompressed";
-
-        personal-cipher-preferences = "AES256 AES192 AES";
-        personal-compress-preferences = "ZLIB BZIP2 ZIP Uncompressed";
-        personal-digest-preferences = "SHA512 SHA384 SHA256 SHA224";
-
-        s2k-cipher-algo = "AES256";
-        s2k-digest-algo = "SHA512";
-
-        digest-algo = "SHA512";
-        cert-digest-algo = "SHA512";
-
-        no-random-seed-file = true;
-
-        keyserver = [
-          "hkps://hkps.pool.sks-keyservers.net"
-          "hkps://keys.gnupg.net"
-          "hkps://keys.openpgp.org"
-          "hkps://pgp.mit.edu"
-        ];
-        keyserver-options =
-          [ "auto-key-retrieve" "no-honor-keyserver-url" "no-include-revoked" ];
-      };
-    };
-
-    htop = {
-      enable = true;
-
-      accountGuestInCpuMeter = true;
-      cpuCountFromZero = true;
-      delay = 10;
-      detailedCpuTime = true;
-      enableMouse = false;
-      headerMargin = true;
-      hideKernelThreads = true;
-      hideThreads = true;
-      hideUserlandThreads = true;
-      highlightBaseName = true;
-      highlightMegabytes = true;
-      highlightThreads = true;
-      shadowOtherUsers = true;
-      showCpuFrequency = true;
-      showCpuUsage = true;
-      showProgramPath = false;
-      showThreadNames = false;
-      treeView = true;
-      updateProcessNames = true;
-    };
-
-    info.enable = false;
-
-    jq.enable = true;
-
     lesspipe.enable = true;
 
-    man = { enable = true; };
-
-    mbsync = { enable = false; };
-
-    mpv = {
-      enable = false;
-
-      bindings = {
-        "RIGHT" = "seek  10";
-        "LEFT" = "seek -10";
-        "UP" = "seek 60";
-        "DOWN" = "seek -60";
-
-        "Shift+RIGHT" = "no-osd seek  1 exact";
-        "Shift+LEFT" = "no-osd seek -1 exact";
-        "Shift+UP" = "no-osd seek  5 exact";
-        "Shift+DOWN" = "no-osd seek -5 exact";
-
-        "ALT+k" = "add sub-scale +0.1";
-        "ALT+j" = "add sub-scale -0.1";
-
-        "B" = ''cycle-values background "#000000" "#ffffff"'';
-      };
-
-      profiles = {
-        "protocol.http" = { force-window = "immediate"; };
-        "protocol.https" = { profile = "protocol.http"; };
-        "extension.webm" = {
-          cache = "no";
-          loop-file = "inf";
-        };
-        "extension.gif" = { profile = "extension.gif"; };
-      };
-
-      config = {
-        # General
-        audio-display = "no";
-        autofit-larger = "100%x95%";
-        cursor-autohide = 1000;
-        force-seekable = "no";
-        fullscreen = true;
-        load-unsafe-playlists = true;
-        msg-color = true;
-        msg-module = true;
-        prefetch-playlist = true;
-        save-position-on-quit = false;
-        screenshot-format = "jpg";
-        screenshot-template = "%F [%p]";
-        stop-screensaver = true;
-        term-osd-bar = true;
-        use-filedir-conf = true;
-
-        # OSD
-        osd-bar-align-y = 0;
-        osd-bar-h = 2;
-        osd-bar-w = 60;
-        osd-border-color = "#FF262626";
-        osd-border-size = 2.5;
-        osd-color = "#FFFFFFFF";
-        osd-duration = 2500;
-        osd-font-size = 40;
-        osd-fractions = true;
-        osd-level = 1;
-        osd-shadow-color = "#33000000";
-        osd-status-msg =
-          "\${time-pos} / \${duration}\${?percent-pos: (\${percent-pos}%)}\${?frame-drop-count:\${!frame-drop-count==0: Dropped: \${frame-drop-count}}}\\n\${?chapter:Chapter: \${chapter}}";
-
-        # OSC
-        osc = false;
-
-        # Subtitles
-        sub-auto = "fuzzy";
-        sub-file-paths-append = "srt";
-        sub-ass-force-margins = true;
-        sub-ass-force-style = "kerning=yes";
-        sub-fix-timing = true;
-        sub-use-margins = true;
-        sub-font-size = 40;
-        sub-color = "#FFFFFFFF";
-        sub-border-color = "#FF262626";
-        sub-border-size = 2.5;
-        sub-shadow-offset = 1;
-        sub-shadow-color = "#33000000";
-        sub-spacing = 0.5;
-
-        # Languages
-        alang =
-          "japanese,jp,jpn,jaJP,ja-JP,english,en,eng,enUS,en-US,russian,ru,rus,ruRU,ru-RU";
-        slang =
-          "japanese,jp,jpn,jaJP,ja-JP,english,en,eng,enUS,en-US,russian,ru,rus,ruRU,ru-RU";
-
-        # YTDL
-        ytdl = true;
-        ytdl-raw-options = ''
-          sub-lang="jp,jpn,jaJP,ja-JP,en,eng,enUS,en-US,ru,rus,ruRU,ru-RU",write-sub='';
-        ytdl-format =
-          "(bestvideo[height<=?1080][fps<=?30][protocol!=http_dash_segments])+(bestaudio[acodec=opus]/bestaudio)/best";
-
-        # Audio
-        audio-file-auto = "fuzzy";
-        volume = 100;
-        volume-max = 200;
-
-        # Video
-        blend-subtitles = true;
-      };
-
-      scripts = with pkgs.mpvScripts; [ autoload ];
-    };
+    man.enable = true;
 
     neovim = {
       enable = true;
@@ -780,7 +360,6 @@ in {
       '';
 
       extraPackages = with pkgs; [
-        bear
         ccls
         cscope
         ctags
@@ -926,119 +505,12 @@ in {
       ];
 
       withNodeJs = false;
-      withPython = false;
       withPython3 = true;
       withRuby = false;
     };
 
-    qutebrowser = {
-      enable = false;
-
-      keyBindings = {
-        normal = { "z" = "hint links spawn --detach mpv {hint-url}"; };
-      };
-      searchEngines = {
-        d = "https://duckduckgo.com/?q={}'";
-        g = "https://www.google.com/search?q={}";
-        aw = "https://wiki.archlinux.org/?search={}";
-        nw = "https://nixos.wiki/index.php?search={}";
-      };
-    };
-
-    readline = {
-      enable = false;
-
-      bindings = {
-        "$" = "end-of-line";
-        "/" = "forward-search-history";
-        "?" = "reverse-search-history";
-        "G" = "end-of-history";
-        "\\C-a" = "beginning-of-line";
-        "\\C-e" = "end-of-line";
-        "\\C-l" = "clear-screen";
-        "\\C-n" = "history-search-forward";
-        "\\C-p" = "history-search-backward";
-        "\\C-w" = "backward-kill-word";
-        "\\t" = "menu-complete";
-        "^" = "beginning-of-line";
-        "b" = "backward-word";
-        "gg" = "beginning-of-history";
-        "j" = "history-search-forward";
-        "k" = "history-search-backward";
-        "w" = "forward-word";
-        "x" = "delete-char";
-      };
-      variables = {
-        bell-style = "visible";
-        bind-tty-special-chars = false;
-        blink-matching-paren = true;
-        colored-completitrue-prefix = true;
-        colored-stats = true;
-        completitrue-ignore-case = true;
-        ctruevert-meta = false;
-        echo-ctruetrol-characters = false;
-        editing-mode = "vi";
-        input-meta = true;
-        mark-symlinked-directories = true;
-        match-hidden-files = false;
-        menu-complete-display-prefix = true;
-        meta-flag = true;
-        output-meta = true;
-        page-completitrues = true;
-        show-all-if-ambiguous = true;
-        show-all-if-unmodified = true;
-        show-mode-in-prompt = true;
-        visible-stats = true;
-      };
-      extraConfig = ''
-        $if term=linux
-          set vi-ins-mode-string \1\e[?0c\2
-          set vi-cmd-mode-string \1\e[?8c\2
-        $else
-          set vi-ins-mode-string \1\e[6 q\2
-          set vi-cmd-mode-string \1\e[2 q\2
-        $endif
-      '';
-    };
-
-    ssh = {
-      enable = false;
-
-      compression = true;
-      controlMaster = "auto";
-      controlPath = "${homeDirectory}/.ssh/%r@%h:%p.sock";
-      controlPersist = "24H";
-      hashKnownHosts = true;
-      serverAliveCountMax = 30;
-      serverAliveInterval = 60;
-      matchBlocks = {
-        "github" = {
-          hostname = "github.com";
-          user = "git";
-        };
-        "gitlab" = {
-          hostname = "gitlab.com";
-          user = "git";
-        };
-        "bitbucket" = {
-          hostname = "bitbucket.com";
-          user = "git";
-        };
-        "azahi" = {
-          hostname = "azahi.cc";
-          user = "azahi";
-          port = 22022;
-        };
-        "yavanna" = {
-          hostname = "yavanna.azahi.cc";
-          user = "azahi";
-          port = 22022;
-        };
-      };
-    };
-
     tmux = {
-      enable = true;
+      enable = false;
 
       aggressiveResize = true;
       baseIndex = 1;
@@ -1208,25 +680,6 @@ in {
         selection-clipboard = "primary";
         selection-notification = false;
       };
-    };
-  };
-
-  qt = { enable = false; };
-
-  services = {
-    gpg-agent = {
-      enable = false;
-
-      enableSshSupport = true;
-
-      defaultCacheTtl = 999999;
-      defaultCacheTtlSsh = 999999;
-      maxCacheTtl = 999999;
-      maxCacheTtlSsh = 999999;
-
-      grabKeyboardAndMouse = true;
-
-      pinentryFlavor = "qt";
     };
   };
 

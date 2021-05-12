@@ -60,7 +60,8 @@ indent_style = tab
 indent_style = tab
 
 # Shell
-[*.sh]
+[*.{sh,bash}]
+indent_style = tab
 insert_final_newline = false
 trim_trailing_whitespace = false
 

@@ -9,7 +9,7 @@
 [init]
 	defaultbranch = master
 [commit]
-	gpgsign = false
+	gpgsign = true
 [diff]
 	mnemonicprefix = true
 	renames = copies

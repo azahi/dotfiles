@@ -17,6 +17,9 @@ for _browser in ${_browsers}; do
         export BROWSER="${_browser}"
 
         alias b="${BROWSER}"
+        if ! command -v br; then
+            alias br="${BROWSER}"
+        fi
 
         break
     fi
