@@ -10,17 +10,17 @@ _editors="
 "
 
 for _editor in ${_editors}; do
-    # shellcheck disable=SC2139
-    if command -v "${_editor}" >/dev/null 2>&1; then
-        export EDITOR="${_editor}" VISUAL="${_editor}"
+	# shellcheck disable=SC2139
+	if command -v "${_editor}" >/dev/null 2>&1; then
+		export EDITOR="${_editor}" VISUAL="${_editor}"
 
-        alias e="${EDITOR}"
-        if ! command -v ed; then
-            alias ed="${EDITOR}"
-        fi
+		alias e="${EDITOR}"
+		if ! command -v ed; then
+			alias ed="${EDITOR}"
+		fi
 
-        break
-    fi
+		break
+	fi
 done
 
 unset _editor _editors

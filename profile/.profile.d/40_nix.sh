@@ -1,18 +1,19 @@
 #!/bin/sh
 
-nixsh="${HOME}/.nix-profile/etc/profile.d/nix.sh"
+nix_sh="${HOME}/.nix-profile/etc/profile.d/nix.sh"
 
-if [ -e "${nixsh}" ]; then
-    # shellcheck disable=SC1090
-    . "${nixsh}"
+if [ -e "${nix_sh}" ]; then
+	# shellcheck disable=SC1090
+	. "${nix_sh}"
 
-    export NIXPKGS_ALLOW_UNFREE="1"
+	export NIXPKGS_ALLOW_UNFREE="1"
 
-    hm_vars="$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-    if [ -e "${hm_vars}" ]; then
-        . "${hm_vars}"
-    fi
-    unset hm_vars;
+	hm_session_vars="$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+	if [ -e "${hm_session_vars}" ]; then
+		# shellcheck disable=SC1090
+		. "${hm_session_vars}"
+	fi
+	unset hm_session_vars
 fi
 
-unset nixsh
+unset nix_sh

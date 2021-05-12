@@ -12,17 +12,17 @@ _browsers="
 "
 
 for _browser in ${_browsers}; do
-    # shellcheck disable=SC2139
-    if command -v "${_browser}" >/dev/null 2>&1; then
-        export BROWSER="${_browser}"
+	# shellcheck disable=SC2139
+	if command -v "${_browser}" >/dev/null 2>&1; then
+		export BROWSER="${_browser}"
 
-        alias b="${BROWSER}"
-        if ! command -v br; then
-            alias br="${BROWSER}"
-        fi
+		alias b="${BROWSER}"
+		if ! command -v br; then
+			alias br="${BROWSER}"
+		fi
 
-        break
-    fi
+		break
+	fi
 done
 
 unset _browser _browsers

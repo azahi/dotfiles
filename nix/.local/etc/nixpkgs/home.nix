@@ -425,7 +425,6 @@ in {
         vim-tmux
         vim-tmux-focus-events
         vim-unimpaired
-        vim-wakatime
         {
           plugin = vim-sneak;
           config = ''

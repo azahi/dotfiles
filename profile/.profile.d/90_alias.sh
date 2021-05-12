@@ -1,21 +1,21 @@
 #!/bin/sh
 
 if cp --help | grep -q "\--progress-bar"; then
-    alias cp="cp -i -r -g"
+	alias cp="cp -i -r -g"
 else
-    alias cp="cp -i -r"
+	alias cp="cp -i -r"
 fi
 
 if mv --help | grep -q "\--progress-bar"; then
-    alias mv="mv -i -g"
+	alias mv="mv -i -g"
 else
-    alias mv="mv -i"
+	alias mv="mv -i"
 fi
 
 if rm --help | grep -q "\--interactive\[=WHEN\]"; then
-    alias rm="rm -I"
+	alias rm="rm -I"
 else
-    alias rm="rm -i"
+	alias rm="rm -i"
 fi
 
 alias c="cd"

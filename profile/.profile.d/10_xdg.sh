@@ -33,7 +33,7 @@ _xdg_dirs="
 "
 
 for _xdg_dir in ${_xdg_dirs}; do
-    [ ! -d "${_xdg_dir}" ] && mkdir -p "${_xdg_dir}"
+	[ ! -d "${_xdg_dir}" ] && mkdir -p "${_xdg_dir}"
 done
 
 unset _xdg_dir _xdg_dirs

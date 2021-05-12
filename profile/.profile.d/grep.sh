@@ -1,17 +1,17 @@
 #!/bin/sh
 
 if command -v grep >/dev/null 2>&1; then
-    alias gr="grep"
+	alias gr="grep"
 
-    if command -v batgrep >/dev/null 2>&1; then
-        alias gr="batgrep"
-    fi
+	if command -v batgrep >/dev/null 2>&1; then
+		alias gr="batgrep"
+	fi
 fi
 
 if command -v egrep >/dev/null 2>&1; then
-    alias egr="egrep"
+	alias egr="egrep"
 fi
 
 if command -v pgrep >/dev/null 2>&1; then
-    alias pgr="pgrep"
+	alias pgr="pgrep"
 fi

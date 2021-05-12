@@ -22,7 +22,6 @@ then
 
         zgenom load zsh-users/zsh-completions
 
-        #zgenom load softmoth/zsh-vim-mode
         zgenom load jeffreytse/zsh-vi-mode
 
         zgenom save
