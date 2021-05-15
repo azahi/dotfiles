@@ -49,6 +49,8 @@ in {
       gomodifytags
       gore
       gotests
+      graphicsmagick
+      graphicsmagick-imagemagick-compat
       graphviz
       haskell-language-server
       hledger
@@ -151,13 +153,20 @@ in {
         library = "${varLibDirectory}/beets/library.db";
         directory = "${homeDirectory}/music";
         plugins = "badfiles edit fetchart info mbsync scrub";
+        original_date = true;
         import = {
           write = true;
           copy = true;
           move = false;
           bell = true;
+          from_scratch = true;
         };
-        match.preferred.countries = [ "JP" "GB|UK" "AU" "US" "RU" "XE" ];
+        match = {
+          preferred = {
+            countries = [ "JP" "KR" "TW" "HK" "CN" "RU" "GB|UK" "AU" "NZ" "US" ];
+            original_year = true;
+          };
+        };
         edit = {
           albumfields = "album artist albumartist";
           itemfields =

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ ! -d "${XDG_CONFIG_HOME}/imv" ] && \
+    mkdir -p "${XDG_CONFIG_HOME}/imv"
+
+stow \
+    --target="${HOME}" \
+    --ignore="^@.*" \
+    --verbose \
+    imv
