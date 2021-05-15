@@ -37,27 +37,44 @@ in {
     homeDirectory = homeDirectory;
 
     packages = with pkgs; [
+      bat
       calibre
       cuetools
+      delta
       doxygen
+      fd
       filezilla
       gnuplot
+      gocode
+      gomodifytags
+      gore
+      gotests
       graphviz
       haskell-language-server
       hledger
+      jdk
       jetbrains.clion
       mediainfo
       mktorrent
       mp3val
       nixfmt
       pandoc
+      plantuml
+      python38Packages.black
+      python38Packages.isort
+      python38Packages.nose
+      python38Packages.poetry
+      python38Packages.pyflakes
+      python38Packages.pytest
       rappel
-      sbcl
+      ripgrep
+      ripgrep-all
       shellcheck
       shfmt
       shntool
       speedtest-cli
       split2flac
+      stdman
       texlab
       texlive.combined.scheme-small
       toilet
@@ -161,10 +178,6 @@ in {
       enable = true;
       enableNixDirenvIntegration = true;
     };
-
-    lesspipe.enable = true;
-
-    man.enable = true;
 
     neovim = {
       enable = true;
@@ -366,7 +379,6 @@ in {
         editorconfig-core-c
         haskell-language-server
         nixfmt
-        pipenv
         poetry
         shellcheck
         shfmt
