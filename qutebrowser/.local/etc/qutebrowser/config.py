@@ -88,7 +88,14 @@ c.content.autoplay = False
 # unknown-3rdparty` per-domain on QtWebKit will have the same effect as
 # `all`. If this setting is used with URL patterns, the pattern gets
 # applied to the origin/first party URL of the page making the request,
-# not the request URL.
+# not the request URL. With QtWebEngine 5.15.0+, paths will be stripped
+# from URLs, so URL patterns using paths will not match. With
+# QtWebEngine 5.15.2+, subdomains are additionally stripped as well, so
+# you will typically need to set this setting for `example.com` when the
+# cookie is set on `somesubdomain.example.com` for it to work properly.
+# To debug issues with this setting, start qutebrowser with `--debug
+# --logfilter network --debug-flag log-cookies` which will show all
+# cookies being set.
 # Type: String
 # Valid values:
 #   - all: Accept all cookies.
@@ -105,7 +112,14 @@ config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 # unknown-3rdparty` per-domain on QtWebKit will have the same effect as
 # `all`. If this setting is used with URL patterns, the pattern gets
 # applied to the origin/first party URL of the page making the request,
-# not the request URL.
+# not the request URL. With QtWebEngine 5.15.0+, paths will be stripped
+# from URLs, so URL patterns using paths will not match. With
+# QtWebEngine 5.15.2+, subdomains are additionally stripped as well, so
+# you will typically need to set this setting for `example.com` when the
+# cookie is set on `somesubdomain.example.com` for it to work properly.
+# To debug issues with this setting, start qutebrowser with `--debug
+# --logfilter network --debug-flag log-cookies` which will show all
+# cookies being set.
 # Type: String
 # Valid values:
 #   - all: Accept all cookies.
