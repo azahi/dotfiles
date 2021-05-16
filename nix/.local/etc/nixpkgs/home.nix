@@ -42,7 +42,6 @@ in {
       calibre
       cmake-language-server
       cuetools
-      delta
       doxygen
       fd
       filezilla
