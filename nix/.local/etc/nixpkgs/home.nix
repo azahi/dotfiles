@@ -38,12 +38,15 @@ in {
 
     packages = with pkgs; [
       bat
+      cabal-install
       calibre
+      cmake-language-server
       cuetools
       delta
       doxygen
       fd
       filezilla
+      ghc
       gnuplot
       gocode
       gomodifytags
@@ -54,20 +57,19 @@ in {
       graphviz
       haskell-language-server
       hledger
-      jdk
       jetbrains.clion
+      jre
       mediainfo
       mktorrent
       mp3val
       nixfmt
       pandoc
       plantuml
+      python-language-server
+      python38Packages.adblock
       python38Packages.black
       python38Packages.isort
-      python38Packages.nose
-      python38Packages.poetry
       python38Packages.pyflakes
-      python38Packages.pytest
       rappel
       ripgrep
       ripgrep-all
@@ -76,12 +78,17 @@ in {
       shntool
       speedtest-cli
       split2flac
+      sqlitebrowser
+      stack
       stdman
       texlab
       texlive.combined.scheme-small
       toilet
       translate-shell
       wakatime
+      yaml-language-server
+      zig
+      zls
     ];
 
     stateVersion = "21.05";
@@ -381,36 +388,6 @@ in {
         autocmd BufEnter * set noreadonly
       '';
 
-      extraPackages = with pkgs; [
-        ccls
-        cscope
-        ctags
-        editorconfig-core-c
-        haskell-language-server
-        nixfmt
-        poetry
-        shellcheck
-        shfmt
-        texlab
-        wakatime
-      ];
-
-      extraPython3Packages = (ps:
-        with ps; [
-          autopep8
-          black
-          isort
-          mccabe
-          nose
-          pip
-          pyflakes
-          pylint
-          pytest
-          python-language-server
-          setuptools
-          virtualenv
-        ]);
-
       plugins = with pkgs.vimPlugins; [
         SyntaxRange
         ansible-vim
@@ -436,41 +413,16 @@ in {
         vim-nix
         vim-obsession
         vim-polyglot
-        vim-python-pep8-indent
         vim-repeat
         vim-rhubarb
         vim-shellcheck
         vim-sleuth
+        vim-sneak
         vim-speeddating
         vim-surround
         vim-tmux
         vim-tmux-focus-events
         vim-unimpaired
-        {
-          plugin = vim-sneak;
-          config = ''
-            let g:sneak#label = 1
-
-            nmap f <Plug>Sneak_f
-            nmap F <Plug>Sneak_F
-            vmap f <Plug>Sneak_f
-            vmap F <Plug>Sneak_F
-
-            nmap t <Plug>Sneak_t
-            nmap T <Plug>Sneak_T
-            vmap t <Plug>Sneak_t
-            vmap T <Plug>Sneak_T
-
-            nmap <Plug>(Go_away_Sneak_s) <Plug>Sneak_s
-            nmap <Plug>(Go_away_Sneak_S) <Plug>Sneak_S
-          '';
-        }
-        {
-          plugin = supertab;
-          config = ''
-            let g:SuperTabDefaultCompletionType = '<C-n>'
-          '';
-        }
         {
           plugin = vim-clang-format;
           config = ''
