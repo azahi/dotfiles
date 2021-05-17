@@ -5,7 +5,7 @@ if command -v bear >/dev/null 2>&1; then
 	_implementations="
 remake
 make
-	"
+"
 
 	for _implementation in ${_implementations}; do
 		if command -v "${_implementation}" >/dev/null 2>&1; then
