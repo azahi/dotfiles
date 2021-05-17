@@ -1,12 +1,12 @@
 #!/bin/sh
 
 _implementations="
-    sbcl
-    ccl
-    clasp
-    clisp
-    ecl
-    abcl
+sbcl
+ccl
+clasp
+clisp
+ecl
+abcl
 "
 
 for _implementation in ${_implementations}; do

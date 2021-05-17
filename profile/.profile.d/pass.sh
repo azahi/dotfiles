@@ -1,8 +1,8 @@
 #!/bin/sh
 
 _impls="
-    gopass
-    pass
+gopass
+pass
 "
 
 for _impl in ${_impls}; do

@@ -1,14 +1,14 @@
 #!/bin/sh
 
 _browsers="
-    qutebrowser
-    chromium
-    chromium-browser
-    firefox
-    lynx
-    w3m
-    elinks
-    links
+qutebrowser
+chromium
+chromium-browser
+firefox
+lynx
+w3m
+elinks
+links
 "
 
 for _browser in ${_browsers}; do

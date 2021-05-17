@@ -1,12 +1,12 @@
 #!/bin/sh
 
 _editors="
-    nvim
-    vim
-    vi
-    emacs
-    nano
-    ed
+nvim
+vim
+vi
+emacs
+nano
+ed
 "
 
 for _editor in ${_editors}; do

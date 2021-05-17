@@ -1,9 +1,9 @@
 #!/bin/sh
 
 _implementations="
-    python
-    python3
-    python2
+python
+python3
+python2
 "
 
 for _implementation in ${_implementations}; do

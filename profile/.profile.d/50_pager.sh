@@ -1,10 +1,10 @@
 #!/bin/sh
 
 _pagers="
-    bat
-    less
-    more
-    cat
+bat
+less
+more
+cat
 "
 
 for _pager in ${_pagers}; do

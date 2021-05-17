@@ -46,7 +46,7 @@ myip6() {
 
 if ! command -v sponge >/dev/null 2>&1; then
 	sponge() {
-		_tmp="$(mktemp)" || return
+		_tmp="$(mktemp)" || return 1
 
 		cat >"${_tmp}"
 		cat -- "${_tmp}"

@@ -1,14 +1,15 @@
 #!/bin/sh
 
 _implementations="
-    nvim
-    vim
-    vi
+nvim
+vim
+vi
 "
 
 for _implementation in ${_implementations}; do
 	# shellcheck disable=SC2139
 	command -v "${_implementation}" >/dev/null 2>&1 &&
+		alias nvim="${_implementation}" &&
 		alias vim="${_implementation}" &&
 		alias vi="${_implementation}" &&
 		alias v="${_implementation}" &&

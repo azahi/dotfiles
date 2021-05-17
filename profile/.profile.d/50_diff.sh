@@ -1,8 +1,8 @@
 #!/bin/sh
 
 _diffs="
-    colordiff
-    diff
+colordiff
+diff
 "
 
 for _diff in ${_diffs}; do

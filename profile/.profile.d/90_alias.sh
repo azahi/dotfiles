@@ -1,18 +1,18 @@
 #!/bin/sh
 
-if cp --help | grep -q "\--progress-bar"; then
+if cp --help | grep -q "\--progress-bar" 2>&1 >/dev/null; then
 	alias cp="cp -i -r -g"
 else
 	alias cp="cp -i -r"
 fi
 
-if mv --help | grep -q "\--progress-bar"; then
+if mv --help | grep -q "\--progress-bar" 2>&1 >/dev/null; then
 	alias mv="mv -i -g"
 else
 	alias mv="mv -i"
 fi
 
-if rm --help | grep -q "\--interactive\[=WHEN\]"; then
+if rm --help | grep -q "\--interactive\[=WHEN\]" 2>&1 >/dev/null; then
 	alias rm="rm -I"
 else
 	alias rm="rm -i"
