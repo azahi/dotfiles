@@ -63,6 +63,7 @@ in {
       mp3val
       nixfmt
       pandoc
+      plan9port
       plantuml
       python-language-server
       python38Packages.adblock
@@ -388,7 +389,6 @@ in {
       '';
 
       plugins = with pkgs.vimPlugins; [
-        SyntaxRange
         ansible-vim
         auto-pairs
         calendar-vim
@@ -396,9 +396,10 @@ in {
         editorconfig-vim
         gentoo-syntax
         neco-vim
-        neoinclude
+        neoinclude-vim
         nginx-vim
-        rainbow_parentheses
+        rainbow_parentheses-vim
+        vim-SyntaxRange
         vim-abolish
         vim-commentary
         vim-cool
