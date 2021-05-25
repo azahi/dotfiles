@@ -37,6 +37,7 @@ in {
     homeDirectory = homeDirectory;
 
     packages = with pkgs; [
+      ansible
       bat
       cabal-install
       calibre
