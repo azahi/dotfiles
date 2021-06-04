@@ -44,6 +44,7 @@ in {
       cmake-language-server
       cuetools
       doxygen
+      emscripten
       fd
       filezilla
       ghc

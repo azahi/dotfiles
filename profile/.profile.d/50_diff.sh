@@ -11,7 +11,7 @@ for _diff in ${_diffs}; do
 		export DIFF="${_diff}"
 
 		alias d="${DIFF}"
-		if ! command -v di; then
+		if ! command -v di >/dev/null 2>&1; then
 			alias di="${DIFF}"
 		fi
 

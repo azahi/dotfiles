@@ -15,7 +15,7 @@ for _editor in ${_editors}; do
 		export EDITOR="${_editor}" VISUAL="${_editor}"
 
 		alias e="${EDITOR}"
-		if ! command -v ed; then
+		if ! command -v ed >/dev/null 2>&1; then
 			alias ed="${EDITOR}"
 		fi
 

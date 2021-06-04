@@ -13,7 +13,7 @@ for _pager in ${_pagers}; do
 		export PAGER="${_pager}" MANPAGER="${_pager}"
 
 		alias p="${PAGER}"
-		if ! command -v pa; then
+		if ! command -v pa >/dev/null 2>&1; then
 			alias pa="${PAGER}"
 		fi
 
