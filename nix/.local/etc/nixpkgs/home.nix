@@ -92,11 +92,10 @@ in {
       texlive.combined.scheme-small
       toilet
       translate-shell
-      wakatime
       yaml-language-server
     ];
 
-    stateVersion = "21.05";
+    stateVersion = "21.11";
   };
 
   xdg = {
@@ -121,31 +120,6 @@ in {
 
   programs = {
     home-manager.enable = true;
-
-    aria2 = {
-      enable = false;
-
-      settings = {
-        bt-max-peers = 128;
-        bt-save-metadata = true;
-        continue = true;
-        disable-ipv6 = true;
-        enable-dht = true;
-        enable-peer-exchange = true;
-        enable-rpc = false;
-        follow-torrent = true;
-        log-level = "info";
-        max-connection-per-server = 16;
-        max-overall-upload-limit = "1K";
-        max-tries = 5;
-        max-upload-limit = "1K";
-        min-split-size = "1M";
-        seed-ratio = 0.1;
-        seed-time = 0.1;
-        stream-piece-selector = "default";
-        timeout = 60;
-      };
-    };
 
     bat = {
       enable = true;
@@ -484,74 +458,6 @@ in {
       withNodeJs = false;
       withPython3 = true;
       withRuby = false;
-    };
-
-    tmux = {
-      enable = false;
-
-      aggressiveResize = true;
-      baseIndex = 1;
-      clock24 = true;
-      disableConfirmationPrompt = true;
-      escapeTime = 0;
-      historyLimit = 50000;
-      newSession = true;
-      resizeAmount = 10;
-      terminal = "screen-256color";
-
-      extraConfig = ''
-        set -g set-titles on
-
-        set -g status-left  ""
-        set -g status-right ""
-
-        set -g detach-on-destroy off
-
-        set -g status-keys emacs
-        set -g mode-keys   vi
-
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
-
-        bind -r H resize-pane -L 10
-        bind -r J resize-pane -D 10
-        bind -r K resize-pane -U 10
-        bind -r L resize-pane -R 10
-
-        bind < swap-pane -D
-        bind > swap-pane -U
-
-        bind , swap-window -t -1
-        bind . swap-window -t +1
-
-        bind Tab last-window
-
-        bind _ split-window -v
-        bind | split-window -h
-      '';
-    };
-
-    vscode = {
-      enable = false;
-      package = pkgs.vscodium;
-
-      extensions = with pkgs.vscode-extensions; [
-        WakaTime.vscode-wakatime
-        file-icons.file-icons
-        haskell.haskell
-        llvm-org.lldb-vscode
-        ms-azuretools.vscode-docker
-        ms-dotnettools.csharp
-        ms-kubernetes-tools.vscode-kubernetes-tools
-        ms-python.python
-        ms-vscode-remote.remote-ssh
-        ms-vscode.Go
-        ms-vscode.cpptools
-        redhat.vscode-yaml
-        vscodevim.vim
-      ];
     };
 
     zathura = {
