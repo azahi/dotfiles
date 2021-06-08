@@ -39,8 +39,11 @@ in {
     packages = with pkgs; [
       ansible
       bat
+      bear
       cabal-install
       calibre
+      clang-tools
+      clang_11
       cmake-language-server
       cuetools
       doxygen
@@ -58,7 +61,9 @@ in {
       graphviz
       haskell-language-server
       hledger
+      include-what-you-use
       jetbrains.clion
+      jetbrains.datagrip
       jre
       mediainfo
       mktorrent
@@ -89,8 +94,6 @@ in {
       translate-shell
       wakatime
       yaml-language-server
-      zig
-      zls
     ];
 
     stateVersion = "21.05";
