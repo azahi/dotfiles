@@ -37,39 +37,23 @@ in {
     homeDirectory = homeDirectory;
 
     packages = with pkgs; [
-      ansible
       bat
       bear
-      cabal-install
-      calibre
       clang-tools
       clang_11
       cmake-language-server
-      cuetools
+      dbeaver
       doxygen
       emscripten
       fd
-      filezilla
-      ghc
-      gnuplot
-      gocode
-      gomodifytags
-      gore
-      gotests
-      graphicsmagick
-      graphicsmagick-imagemagick-compat
-      graphviz
-      haskell-language-server
       hledger
       include-what-you-use
       jetbrains.clion
-      jetbrains.datagrip
       jre
-      mediainfo
-      mktorrent
-      mp3val
       nixfmt
       pandoc
+      pgcli
+      pipenv
       plan9port
       plantuml
       python-language-server
@@ -82,15 +66,9 @@ in {
       ripgrep-all
       shellcheck
       shfmt
-      shntool
       speedtest-cli
-      split2flac
-      sqlitebrowser
-      stack
       stdman
       texlab
-      texlive.combined.scheme-small
-      toilet
       translate-shell
       yaml-language-server
     ];

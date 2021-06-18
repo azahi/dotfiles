@@ -13,6 +13,4 @@
 
 \set VERBOSITY verbose
 
-\set COMP_KEYWORD_CASE upper
-
 \unset QUIET
