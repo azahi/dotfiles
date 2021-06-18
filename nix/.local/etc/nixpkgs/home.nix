@@ -44,9 +44,7 @@ in {
       cmake-language-server
       dbeaver
       doxygen
-      emscripten
       fd
-      hledger
       include-what-you-use
       jetbrains.clion
       jre
