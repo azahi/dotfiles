@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, libs, ... }:
 let
   name = "Azat Bahawi";
-  username = "azahi";
+  username = builtins.getEnv "USER";
   email = "${username}@teknik.io";
-  homeDirectory = "/home/${username}";
+  homeDirectory = builtins.getEnv "HOME";
   localDirectory = "${homeDirectory}/.local";
   etcDirectory = "${localDirectory}/etc";
   varLibDirectory = "${localDirectory}/var/lib";
