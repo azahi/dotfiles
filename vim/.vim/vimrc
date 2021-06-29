@@ -194,9 +194,6 @@ cnoremap        ;.          <C-r>=expand('%:p:r')<CR>
 
 nnoremap        <Leader>.   :<C-u>lcd %:p:h<CR>
 
-cnoremap        <C-a>       <Home>
-cnoremap        <C-e>       <End>
-
 nnoremap        Q           @q
 
 nnoremap        <Leader>c   ^v$h
@@ -216,10 +213,9 @@ nmap            <Leader>wq  :<C-u>wq!<CR>
 
 nnoremap        ZX          :<C-u>qa!<CR>
 
-nnoremap        <Leader>q   :q<CR>
-nnoremap        <Leader>wq  :wq<CR>
+nnoremap        <Leader>q   :<C-u>q<CR>
 
-command         W           w !sudo tee "%" > /dev/null
+command         W           w !sudo tee "%" >/dev/null
 
 function! SwitchCase()
     normal! ~
