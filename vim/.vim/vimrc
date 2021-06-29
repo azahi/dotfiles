@@ -104,10 +104,6 @@ if has('path_extra')
     setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
-if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
-    set shell=/usr/bin/env\ bash
-endif
-
 if !has('nvim') && &ttimeoutlen == -1
     set ttimeout
     set ttimeoutlen=100
@@ -129,6 +125,15 @@ endtry
 
 if has('autocmd')
     filetype plugin indent on
+
+    if exists("+omnifunc")
+        autocmd Filetype *
+                    \ if &omnifunc == "" |
+                    \ setlocal omnifunc=syntaxcomplete#Complete |
+                    \ endif
+    endif
+
+    autocmd BufEnter * set noreadonly
 endif
 
 if has('syntax') && !exists('g:syntax_on')
@@ -137,13 +142,6 @@ endif
 
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
     runtime! macros/matchit.vim
-endif
-
-if has('autocmd') && exists("+omnifunc")
-    autocmd Filetype *
-                \ if &omnifunc == "" |
-                \ setlocal omnifunc=syntaxcomplete#Complete |
-                \ endif
 endif
 
 let mapleader = ' '
@@ -219,6 +217,7 @@ nmap            <Leader>wq  :<C-u>wq!<CR>
 nnoremap        ZX          :<C-u>qa!<CR>
 
 nnoremap        <Leader>q   :q<CR>
+nnoremap        <Leader>wq  :wq<CR>
 
 command         W           w !sudo tee "%" > /dev/null
 
@@ -239,5 +238,3 @@ function! s:GM()
 endfunction
 nnoremap        gm          :<C-u>call <SID>GM()<CR>
 onoremap        gm          :<C-u>call <SID>GM()<CR>
-
-autocmd BufEnter * set noreadonly
