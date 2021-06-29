@@ -1,5 +1,7 @@
 set nocompatible
 
+let g:skip_defaults_vim = 1
+
 let $VIMFILES = expand('<sfile>:p:h')
 
 set autoread
@@ -59,7 +61,9 @@ set scrolloff=10
 set sidescrolloff=10
 
 set number
-set relativenumber
+if v:version >= 700
+    set numberwidth=3
+endif
 
 set wildignorecase
 set wildmenu
@@ -115,6 +119,14 @@ try
 catch
 endtry
 
+try
+    if &fileencodings !~? "utf-8"
+        let g:added_fenc_utf8 = 1
+        set fileencodings+=utf-8
+    endif
+catch
+endtry
+
 if has('autocmd')
     filetype plugin indent on
 endif
@@ -125,6 +137,13 @@ endif
 
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
     runtime! macros/matchit.vim
+endif
+
+if has('autocmd') && exists("+omnifunc")
+    autocmd Filetype *
+                \ if &omnifunc == "" |
+                \ setlocal omnifunc=syntaxcomplete#Complete |
+                \ endif
 endif
 
 let mapleader = ' '
