@@ -161,6 +161,14 @@ config.set('content.desktop_capture', True, 'https://web.skype.com')
 #   - ask
 c.content.desktop_capture = 'ask'
 
+# Request websites to minimize non-essentials animations and motion.
+# This results in the `prefers-reduced-motion` CSS media query to
+# evaluate to `reduce` (rather than `no-preference`). On Windows, if
+# this setting is set to False, the system-wide animation setting is
+# considered.
+# Type: Bool
+c.content.prefers_reduced_motion = True
+
 # Allow websites to request geolocations.
 # Type: BoolAsk
 # Valid values:
