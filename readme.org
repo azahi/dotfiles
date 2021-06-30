@@ -1,5 +1,5 @@
 * dotfiles
 - Scripts and stuff is [[https://github.com/azahi/bin][here]].
 - System configuration files for my T420 running Gentoo are [[https://github.com/azahi/configuration-gentoo][here]].
-- "dotfiles-ng" or some sort of continuation of this repo including NixOS configuration is [[https://github.com/azahi/nixfiles][here]].
+- "dotfiles-ng" or some sort of a continuation of this repo including NixOS configuration is [[https://github.com/azahi/nixfiles][here]].
 - History of my desktop alterations is [[https://v.teknik.io/v/kqFNt][here]]. New screenshots can be found at the bottom of the page.
