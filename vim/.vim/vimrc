@@ -19,7 +19,7 @@ set noshowmode
 set path+=**
 set ruler
 set tabpagemax=50
-set viminfo^=!
+set viminfo=
 
 set sessionoptions-=options
 set viewoptions-=options
