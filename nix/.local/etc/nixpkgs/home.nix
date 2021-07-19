@@ -1,14 +1,5 @@
-{ config, pkgs, libs, ... }:
+{ config, pkgs, ... }:
 let
-  name = "Azat Bahawi";
-  username = builtins.getEnv "USER";
-  email = "${username}@teknik.io";
-  homeDirectory = builtins.getEnv "HOME";
-  localDirectory = "${homeDirectory}/.local";
-  etcDirectory = "${localDirectory}/etc";
-  varLibDirectory = "${localDirectory}/var/lib";
-  varCacheDirectory = "${localDirectory}/var/cache";
-
   font1 = "UW Ttyp0";
   font2 = "Efont Biwidth";
   xftBase = ":pixelsize=14:style=Regular:antialias=false";
@@ -33,27 +24,24 @@ let
   colorWhite1 = "#ffffff";
 in {
   home = {
-    username = username;
-    homeDirectory = homeDirectory;
+    username = builtins.getEnv "USER";
+    homeDirectory = builtins.getEnv "HOME";
 
     packages = with pkgs; [
       bat
       bear
       clang-tools
-      clang_11
+      clang_12
       cmake-language-server
-      dbeaver
       doxygen
       fd
       include-what-you-use
       jetbrains.clion
-      jre
       nixfmt
       pandoc
       pgcli
       pipenv
       plan9port
-      plantuml
       python-language-server
       python38Packages.adblock
       python38Packages.black
@@ -66,31 +54,33 @@ in {
       shfmt
       speedtest-cli
       stdman
-      texlab
       translate-shell
-      yaml-language-server
     ];
 
     stateVersion = "21.11";
   };
 
-  xdg = {
-    configHome = etcDirectory;
-    dataHome = varLibDirectory;
-    cacheHome = varCacheDirectory;
+  xdg = let localDirectory = "${config.home.homeDirectory}/.local";
+  in {
+    configHome = "${localDirectory}/etc";
+    dataHome = "${localDirectory}/var/lib";
+    cacheHome = "${localDirectory}/var/cache";
 
-    userDirs = {
+    userDirs = let
+      atHome = dir: config.home.homeDirectory + "/" + dir;
+      tmp = atHome "tmp";
+    in {
       enable = true;
       createDirectories = true;
 
-      desktop = "$HOME/documents";
-      documents = "$HOME/documents";
-      download = "$HOME/downloads";
-      music = "$HOME/music";
-      pictures = "$HOME/pictures";
-      publicShare = "$HOME/documents";
-      templates = "$HOME/documents";
-      videos = "$HOME/videos";
+      desktop = tmp;
+      documents = tmp;
+      download = tmp;
+      music = atHome "music";
+      pictures = tmp;
+      publicShare = tmp;
+      templates = tmp;
+      videos = tmp;
     };
   };
 
@@ -111,9 +101,9 @@ in {
     beets = {
       enable = true;
 
-      settings = {
-        library = "${varLibDirectory}/beets/library.db";
-        directory = "${homeDirectory}/music";
+      settings = with config.xdg; {
+        library = "${dataHome}/beets/library.db";
+        directory = userDirs.music;
         plugins = "badfiles edit fetchart info mbsync scrub";
         original_date = true;
         import = {
@@ -125,7 +115,8 @@ in {
         };
         match = {
           preferred = {
-            countries = [ "JP" "KR" "TW" "HK" "CN" "RU" "GB|UK" "AU" "NZ" "US" ];
+            countries =
+              [ "JP" "KR" "TW" "HK" "CN" "RU" "GB|UK" "AU" "NZ" "US" ];
             original_year = true;
           };
         };
