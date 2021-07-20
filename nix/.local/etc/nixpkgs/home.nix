@@ -30,23 +30,24 @@ in {
     packages = with pkgs; [
       bat
       bear
+      ccls
       clang-tools
-      clang_12
       cmake-language-server
       doxygen
       fd
       include-what-you-use
       jetbrains.clion
+      llvmPackages_12.clangUseLLVM
       nixfmt
       pandoc
       pgcli
       pipenv
       plan9port
       python-language-server
-      python38Packages.adblock
-      python38Packages.black
-      python38Packages.isort
-      python38Packages.pyflakes
+      python39Packages.adblock
+      python39Packages.black
+      python39Packages.isort
+      python39Packages.pyflakes
       rappel
       ripgrep
       ripgrep-all
